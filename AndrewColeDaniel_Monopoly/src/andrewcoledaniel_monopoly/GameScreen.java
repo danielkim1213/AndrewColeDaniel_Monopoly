@@ -47,6 +47,7 @@ public class GameScreen extends javax.swing.JFrame {
         lblTurn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTurn.setText("Turn 1");
 
+        txaProperties.setEditable(false);
         txaProperties.setColumns(20);
         txaProperties.setRows(5);
         txaProperties.setText("Boardwalk: \nPark place:\nWaterworks:");
@@ -70,16 +71,14 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(91, 91, 91))
             .addGroup(pnlStatusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProperties)
                     .addGroup(pnlStatusLayout.createSequentialGroup()
-                        .addComponent(lblProperties)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlStatusLayout.createSequentialGroup()
-                        .addComponent(btnBuyHouse, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSellHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSellHouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlStatusLayout.setVerticalGroup(
             pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
