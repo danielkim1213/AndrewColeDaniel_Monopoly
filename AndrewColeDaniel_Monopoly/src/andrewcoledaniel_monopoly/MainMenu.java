@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class MainMenu extends javax.swing.JFrame {
     private TutorialMenu tutorial;
     private GameScreen gameScreen;
+    private HighScoreMenu highScoreMenu;
     /**
      * Creates new form MainMenu
      */
@@ -135,7 +136,12 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTutorialActionPerformed
 
     private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
-        // TODO add your handling code here:
+        if(highScoreMenu == null)
+        {
+            highScoreMenu = new HighScoreMenu(this);
+        }
+        highScoreMenu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnHighScoresActionPerformed
 
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
