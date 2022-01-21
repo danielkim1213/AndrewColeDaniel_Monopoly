@@ -17,6 +17,7 @@ public class MainMenu extends javax.swing.JFrame {
     private TutorialMenu tutorial;
     private GameScreen gameScreen;
     private HighScoreMenu highScoreMenu;
+    
     /**
      * Creates new form MainMenu
      */

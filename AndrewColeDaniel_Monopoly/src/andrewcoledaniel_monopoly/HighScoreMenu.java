@@ -5,12 +5,19 @@
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author dakim0069
  */
 public class HighScoreMenu extends javax.swing.JFrame {
     private MainMenu mainMenu;
+    
+    
+    
     /**
      * Creates new form HighScoreMenu
      */
@@ -29,8 +36,16 @@ public class HighScoreMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        scrHighScores = new javax.swing.JScrollPane();
+        txaHighScores = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBack.setText("Back");
@@ -40,21 +55,48 @@ public class HighScoreMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("TOP 5");
+
+        scrHighScores.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrHighScores.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txaHighScores.setEditable(false);
+        txaHighScores.setColumns(20);
+        txaHighScores.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        txaHighScores.setRows(5);
+        txaHighScores.setAlignmentX(1.0F);
+        txaHighScores.setAlignmentY(1.0F);
+        scrHighScores.setViewportView(txaHighScores);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addGap(156, 156, 156))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(168, 168, 168))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(scrHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(256, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrHighScores, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBack)
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
 
         pack();
@@ -66,8 +108,31 @@ public class HighScoreMenu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        InputStream in = HighScoreMenu.class.getResourceAsStream("HighScores.txt");
+        Scanner scan = new Scanner(in);
+        int[] highscores = new int[5];
+        String date;
+        
+        for(int i=0; i<5; i++)
+        {
+            highscores[i] = scan.nextInt();
+            date = scan.nextLine();
+            txaHighScores.append("Top " + (i+1) + ":\n");
+            txaHighScores.append(date + " - " + highscores[i] + "\n");
+            if(i<4)
+            {
+                txaHighScores.append("\n");
+            }
+        }
+
+    }//GEN-LAST:event_formWindowActivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane scrHighScores;
+    private javax.swing.JTextArea txaHighScores;
     // End of variables declaration//GEN-END:variables
 }
