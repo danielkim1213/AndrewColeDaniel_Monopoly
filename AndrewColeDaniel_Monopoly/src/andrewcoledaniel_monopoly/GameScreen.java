@@ -5,12 +5,20 @@
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.InputStream;
+import java.util.Scanner;
+import andrewcoledaniel_monopoly.Card.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dakim0069
  */
 public class GameScreen extends javax.swing.JFrame {
     MainMenu mainMenu;
+    private static Card[] cards = new Card[32];
+    private final CardType[] cardTypes = CardType.values();
+    private final CardAction[] cardActions = CardAction.values();
     
     /**
      * Creates new form GameScreen
@@ -20,6 +28,29 @@ public class GameScreen extends javax.swing.JFrame {
     public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
+    }
+    
+    public void loadCards() {
+        int index = 0;
+        CardType type;
+        CardAction action;
+        int value;
+        String info;
+        
+        InputStream in = GameScreen.class.getResourceAsStream("cards.txt");
+        try {
+           Scanner s = new Scanner(in);
+        while (s.hasNextLine()) {
+            type = cardTypes[Integer.parseInt(s.nextLine())];
+            action = cardActions[Integer.parseInt(s.nextLine())];
+            value = Integer.parseInt(s.nextLine());
+            info = s.nextLine();
+            cards[index] = new Card(type, action, value, info);
+        } 
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Cards file not found");
+        }
+        
     }
 
     /**
@@ -46,8 +77,12 @@ public class GameScreen extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 525));
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -161,6 +196,10 @@ public class GameScreen extends javax.swing.JFrame {
         mainMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCards();
+    }//GEN-LAST:event_formComponentShown
 
    
 

@@ -5,16 +5,18 @@
  */
 package andrewcoledaniel_monopoly;
 
+import andrewcoledaniel_monopoly.Card.*;
+
 /**
  *
  * @author anfeh1812
  */
 public class CardSpace implements Space {
 
-    private int cardType;
+    private CardType cardType;
     private String name;
 
-    public CardSpace(String name, int type) {
+    public CardSpace(String name, CardType type) {
         this.name = name;
         cardType = type;
     }
@@ -23,7 +25,32 @@ public class CardSpace implements Space {
         return name;
     }
 
-    public int getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
+
+    public Card getCard(Card[] c, CardType t) {
+        for (Card card : c) {
+            if (card.getType() == t) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public String performCardAction(Card c, Player p) {
+        switch (c.getAction()) {
+            // TODO: Implement goto and get out of jail cards
+            // case ACTION_GOTO:
+            case ACTION_GET_MONEY:
+                p.addMoney(c.getValue());
+                break;
+            case ACTION_PAY_MONEY:
+                p.removeMoney(c.getValue());
+                break;
+        }
+        
+        return c.getInfo();
+    }
+
 }
