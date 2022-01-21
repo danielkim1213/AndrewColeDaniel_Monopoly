@@ -15,8 +15,9 @@ public class GameScreen extends javax.swing.JFrame {
     /**
      * Creates new form GameScreen
      * @param m - main menu
+     * @param gameMode - game mode
      */
-    public GameScreen(MainMenu m) {
+    public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
     }
@@ -157,7 +158,8 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        // TODO add your handling code here:
+        mainMenu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
    
