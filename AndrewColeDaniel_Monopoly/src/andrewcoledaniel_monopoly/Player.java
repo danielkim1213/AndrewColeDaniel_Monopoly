@@ -13,7 +13,7 @@ public class Player {
     int playerNumber;
     int money;
     boolean inJail;
-    ArrayList properties = new ArrayList();
+    ArrayList<Property> properties = new ArrayList();
     int turnsInJail;
     boolean bankrupt;
 
@@ -21,7 +21,7 @@ public class Player {
         this.playerNumber = playerNumber;
     }
 
-    public Player(int playerNumber, int money, ArrayList properties, boolean inJail, int turnsInJail, boolean bankrupt) {
+    public Player(int playerNumber, int money, ArrayList<Property> properties, boolean inJail, int turnsInJail, boolean bankrupt) {
         this(playerNumber);
         this.money = money;
         this.properties = properties;
@@ -44,26 +44,40 @@ public class Player {
 
     public void addMoney(int money) {
         this.money += money;
+        if(this.money > 0){
+            this.bankrupt = true;
+        }
     }
 
     public void removeMoney(int money) {
         this.money -= money;
+        if(this.money < 0){
+            this.bankrupt = true;
+        }
     }
 
     public ArrayList getProperties() {
         return properties;
     }
 
-    public void setProperties(ArrayList properties) {
+    public void setProperties(ArrayList<Property> properties) {
         this.properties = properties;
     }
 
-    public void buyProperty() {
-
+    public void buyProperty(Property property) {
+        this.removeMoney(property.getPrice());
+        this.properties.add(property);
+        property.setOwner(this.playerNumber);
     }
 
-    public void sellProperty() {
-
+    public void mortgageProperty(Property property) {
+        if(property.getMortgage() == false){
+        this.addMoney(property.mortgageValue);
+        property.setMortgage(true);
+        } else{
+            this.removeMoney(property.mortgageValue);
+            property.setMortgage(false);
+        }
     }
 
     public boolean getJail() {
@@ -86,7 +100,7 @@ public class Player {
         String output;
         output = ("Player " + playerNumber + ":\nMoney: " + money + "\nIn Jail: " + inJail + "\nBankrupt: " + bankrupt + "\nProperties: ");
         for (int i = 0; i < properties.size(); i++) {
-            output += ("\n" + properties);
+            output += ("\n" + properties.get(i).getName());
         }
         return output;
     }
