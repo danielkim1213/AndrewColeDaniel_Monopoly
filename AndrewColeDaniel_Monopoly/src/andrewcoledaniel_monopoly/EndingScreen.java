@@ -13,8 +13,9 @@ public class EndingScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form EndingScreen
+     * @param numPlayer
      */
-    public EndingScreen() {
+    public EndingScreen(int numPlayer) {
         initComponents();
     }
 
@@ -27,24 +28,81 @@ public class EndingScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblResult = new javax.swing.JLabel();
+        lblTotalScore = new javax.swing.JLabel();
+        lblPlayer1 = new javax.swing.JLabel();
+        lblPlayer2 = new javax.swing.JLabel();
+        lblPlayer3 = new javax.swing.JLabel();
+        lblPlayer4 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblResult.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblResult.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResult.setText("lblResult");
+
+        lblTotalScore.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        lblTotalScore.setText("Total Score:");
+
+        lblPlayer1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPlayer1.setText("Player 1 - $");
+
+        lblPlayer2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPlayer2.setText("Player 2 - $");
+
+        lblPlayer3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPlayer3.setText("Player 3 - $");
+
+        lblPlayer4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPlayer4.setText("Player 4 - $");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPlayer4)
+                    .addComponent(lblPlayer3)
+                    .addComponent(lblPlayer2)
+                    .addComponent(lblPlayer1)
+                    .addComponent(lblTotalScore))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotalScore)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPlayer1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPlayer2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPlayer3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPlayer4)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblPlayer1;
+    private javax.swing.JLabel lblPlayer2;
+    private javax.swing.JLabel lblPlayer3;
+    private javax.swing.JLabel lblPlayer4;
+    private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblTotalScore;
     // End of variables declaration//GEN-END:variables
 }

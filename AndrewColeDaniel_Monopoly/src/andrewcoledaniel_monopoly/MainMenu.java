@@ -5,6 +5,8 @@
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        
     }
 
     /**
@@ -145,7 +148,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHighScoresActionPerformed
 
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 
     /**
