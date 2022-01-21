@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  * @author dakim0069
  */
 public class MainMenu extends javax.swing.JFrame {
+    private TutorialMenu tutorial;
     private GameScreen gameScreen;
     /**
      * Creates new form MainMenu
@@ -30,13 +31,46 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnNewGame = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        btnTutorial = new javax.swing.JButton();
+        btnHighScores = new javax.swing.JButton();
+        btnLoadSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNewGame.setText("New Game");
         btnNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewGameActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblTitle.setText("Monopoly");
+
+        btnTutorial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnTutorial.setLabel("Tutorial");
+        btnTutorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTutorialActionPerformed(evt);
+            }
+        });
+
+        btnHighScores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnHighScores.setLabel("High Scores");
+        btnHighScores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHighScoresActionPerformed(evt);
+            }
+        });
+
+        btnLoadSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnLoadSave.setLabel("Load Save");
+        btnLoadSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadSaveActionPerformed(evt);
             }
         });
 
@@ -45,16 +79,33 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(btnNewGame)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(137, 137, 137))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(145, 145, 145))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(btnNewGame)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(lblTitle)
+                .addGap(25, 25, 25)
+                .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -68,14 +119,28 @@ public class MainMenu extends javax.swing.JFrame {
         
         if(gameMode != -1)
         {
-            if(gameScreen == null)
-            {
-                gameScreen = new GameScreen(this, gameMode);
-            }
+            gameScreen = new GameScreen(this, gameMode);
             gameScreen.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
+
+    private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
+        if(tutorial == null)
+        {
+            tutorial = new TutorialMenu(this);
+        }
+        tutorial.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTutorialActionPerformed
+
+    private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHighScoresActionPerformed
+
+    private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoadSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +178,10 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHighScores;
+    private javax.swing.JButton btnLoadSave;
     private javax.swing.JButton btnNewGame;
+    private javax.swing.JButton btnTutorial;
+    private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }
