@@ -28,8 +28,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="690" max="32767" attributes="0"/>
-              <Component id="pnlStatus" min="-2" pref="210" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="684" max="32767" attributes="0"/>
+              <Component id="pnlStatus" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,11 +50,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="lblTurn" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -69,14 +64,19 @@
                           <Component id="lblBank" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnMortgage" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnBuyHouse" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="btnBuyHouse" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnSellHouse" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="btnSellHouse" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane3" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lblTurn" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
