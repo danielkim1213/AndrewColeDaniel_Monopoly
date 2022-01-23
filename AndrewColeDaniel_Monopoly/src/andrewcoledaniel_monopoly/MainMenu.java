@@ -7,6 +7,7 @@ package andrewcoledaniel_monopoly;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +18,27 @@ public class MainMenu extends javax.swing.JFrame {
     private TutorialMenu tutorial;
     private GameScreen gameScreen;
     private HighScoreMenu highScoreMenu;
+    public int[] highscores = new int[5];
+    public String[] date = new String[5];
     
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
+        readHighScore();
+    }
+    
+    private void readHighScore()
+    {
+        InputStream inp = MainMenu.class.getResourceAsStream("HighScores.txt");
+        Scanner scan = new Scanner(inp);
         
+        for(int i=0; i<5; i++)
+        {
+            highscores[i] = scan.nextInt();
+            date[i] = scan.nextLine();
+        }
     }
 
     /**

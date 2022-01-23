@@ -5,9 +5,6 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -109,23 +106,15 @@ public class HighScoreMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        InputStream in = HighScoreMenu.class.getResourceAsStream("HighScores.txt");
-        Scanner scan = new Scanner(in);
-        int[] highscores = new int[5];
-        String date;
-        
         for(int i=0; i<5; i++)
         {
-            highscores[i] = scan.nextInt();
-            date = scan.nextLine();
             txaHighScores.append("Top " + (i+1) + ":\n");
-            txaHighScores.append(date + " - " + highscores[i] + "\n");
+            txaHighScores.append(mainMenu.date[i] + " - " + mainMenu.highscores[i] + "\n");
             if(i<4)
             {
                 txaHighScores.append("\n");
             }
         }
-
     }//GEN-LAST:event_formWindowActivated
 
 

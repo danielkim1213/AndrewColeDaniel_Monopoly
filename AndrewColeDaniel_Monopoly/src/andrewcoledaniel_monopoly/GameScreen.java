@@ -5,9 +5,10 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.io.InputStream;
+import java.io.*;
 import java.util.Scanner;
 import andrewcoledaniel_monopoly.Card.*;
+import javax.sound.sampled.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,8 @@ public class GameScreen extends javax.swing.JFrame {
     private static Card[] cards = new Card[32];
     private final CardType[] cardTypes = CardType.values();
     private final CardAction[] cardActions = CardAction.values();
+    private Music bgm;
+    private Thread t;
     
     /**
      * Creates new form GameScreen
@@ -28,6 +31,9 @@ public class GameScreen extends javax.swing.JFrame {
     public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
+        bgm = new Music();
+        t = new Thread(bgm);
+        playMusic(true);
     }
     
     public void loadCards() {
@@ -49,6 +55,19 @@ public class GameScreen extends javax.swing.JFrame {
         } 
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Cards file not found");
+        }
+        
+    }
+    
+    private void playMusic(boolean play)
+    {
+        if(play)
+        {
+            t.start();
+        }
+        else
+        {
+            t.interrupt();
         }
         
     }
@@ -195,6 +214,7 @@ public class GameScreen extends javax.swing.JFrame {
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         mainMenu.setVisible(true);
         this.setVisible(false);
+        playMusic(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
@@ -218,4 +238,19 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
     // End of variables declaration//GEN-END:variables
+}
+
+class Music implements Runnable {
+    @Override public void run()
+    {
+        try{
+            Clip clip = AudioSystem.getClip();
+            //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
+            AudioInputStream inputAud = AudioSystem.getAudioInputStream(this.class.getResourceAsStream(""))
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
 }
