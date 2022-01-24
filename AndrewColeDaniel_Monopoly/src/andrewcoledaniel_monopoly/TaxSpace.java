@@ -11,12 +11,14 @@ package andrewcoledaniel_monopoly;
  */
 public class TaxSpace implements Space {
 
+    private SpaceType type;
     private int taxAmount;
     private String name;
 
     public TaxSpace(String name, int amount) {
         this.name = name;
         taxAmount = amount;
+        type = SpaceType.SPACE_TAX;
     }
 
     public String getName() {
@@ -25,5 +27,9 @@ public class TaxSpace implements Space {
 
     public int getTaxAmount() {
         return taxAmount;
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 }

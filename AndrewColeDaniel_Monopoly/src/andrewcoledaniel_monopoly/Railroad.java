@@ -10,9 +10,12 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public class Railroad extends Property {
+    
+    private SpaceType type;
 
     public Railroad(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
+        type = SpaceType.SPACE_RAILROAD;
     }
     
     public void updateRent() {
@@ -22,5 +25,9 @@ public class Railroad extends Property {
     @Override
     public String toString() {
         return "";
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 }

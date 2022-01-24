@@ -10,15 +10,19 @@ import java.util.ArrayList;
 
 public class Player {
 
+    int currentPosition;
     int playerNumber;
     int money;
     boolean inJail;
     ArrayList<Property> properties = new ArrayList();
     int turnsInJail;
     boolean bankrupt;
+    int jailCards;
 
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
+        currentPosition = 0;
+        jailCards = 0;
     }
 
     public Player(int playerNumber, int money, ArrayList<Property> properties, boolean inJail, int turnsInJail, boolean bankrupt) {
@@ -94,6 +98,22 @@ public class Player {
 
     public void setTurnsInJail(int turnsInJail) {
         this.turnsInJail = turnsInJail;
+    }
+    
+    public int getPosition() {
+        return currentPosition;
+    }
+    
+    public void setPosition(int pos) {
+        currentPosition = pos;
+    }
+    
+    public int getJailCards() {
+        return jailCards;
+    }
+    
+    public void setJailCards(int n) {
+        jailCards = n;
     }
 
     public String toString() {

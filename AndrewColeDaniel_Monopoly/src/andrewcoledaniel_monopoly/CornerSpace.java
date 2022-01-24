@@ -5,25 +5,43 @@
  */
 package andrewcoledaniel_monopoly;
 
+import andrewcoledaniel_monopoly.Space.SpaceType;
+
 /**
  *
  * @author anfeh1812
  */
 public class CornerSpace implements Space {
 
-    private int spaceType;
+    private SpaceType type;
     private String name;
 
-    public CornerSpace(String name, int type) {
+    public CornerSpace(String name, SpaceType type) {
         this.name = name;
-        spaceType = type;
+        this.type = type;
     }
 
     public String getName() {
         return name;
     }
-
-    public int getSpaceType() {
-        return spaceType;
+    
+    public void performSpaceAction(Player p) {
+        switch (type) {
+            case SPACE_GO:
+                p.setMoney(p.getMoney() + 200);
+                break;
+            case SPACE_JAIL: // This is handled in the takeTurn method
+                break;
+            case SPACE_PARKING:
+                break;
+            case SPACE_GO_JAIL:
+                p.setPosition(10); // Position of Jail
+                p.setJail(true);
+                break;
+        }
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 }

@@ -13,12 +13,14 @@ import andrewcoledaniel_monopoly.Card.*;
  */
 public class CardSpace implements Space {
 
+    private SpaceType type;
     private CardType cardType;
     private String name;
 
     public CardSpace(String name, CardType type) {
         this.name = name;
         cardType = type;
+        this.type = SpaceType.SPACE_CARD;
     }
 
     public String getName() {
@@ -38,19 +40,27 @@ public class CardSpace implements Space {
         return null;
     }
 
-    public String performCardAction(Card c, Player p) {
+    public String performSpaceAction(Card c, Player p) {
         switch (c.getAction()) {
-            // TODO: Implement goto and get out of jail cards
-            // case ACTION_GOTO:
+            case ACTION_GOTO:
+                p.setPosition(c.getValue());
+                break;
             case ACTION_GET_MONEY:
                 p.addMoney(c.getValue());
                 break;
             case ACTION_PAY_MONEY:
                 p.removeMoney(c.getValue());
                 break;
+            case ACTION_GET_OUT_JAIL:
+                p.setJailCards(p.getJailCards() + 1);
+                break;
         }
         
         return c.getInfo();
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 
 }
