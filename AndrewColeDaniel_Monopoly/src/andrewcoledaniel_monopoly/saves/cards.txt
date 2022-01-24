@@ -32,9 +32,10 @@ ACTION_GET_MONEY
 Bank pays you dividend of $50
 CARD_CHANCE
 ACTION_GET_OUT_JAIL
+0
 Get Out of Jail Free
 CARD_CHANCE
-ACTION_GOTO_RELATIVE,
+ACTION_GOTO_RELATIVE
 -3
 Go Back 3 Spaces
 CARD_CHANCE
@@ -50,7 +51,7 @@ ACTION_PAY_MONEY
 15
 Speeding fine $15
 CARD_CHANCE
-ACTION_GOTO_RAILROAD,
+ACTION_GOTO_RAILROAD
 0
 Take a trip to Reading Railroad. If you pass Go, collect $200
 CARD_CHANCE

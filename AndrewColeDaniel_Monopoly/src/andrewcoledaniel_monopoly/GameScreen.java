@@ -26,8 +26,6 @@ public class GameScreen extends javax.swing.JFrame {
     MainMenu mainMenu;
     private EndingScreen endingScreen;
     private static Card[] cards = new Card[32];
-    private final CardType[] cardTypes = CardType.values();
-    private final CardAction[] cardActions = CardAction.values();
     private final GameMusic bgm;
     private Thread gameBgmThread;
     private int gameMode;
@@ -173,18 +171,18 @@ public class GameScreen extends javax.swing.JFrame {
         int value;
         String info;
         
-        InputStream in = GameScreen.class.getResourceAsStream("cards.txt");
+        InputStream in = GameScreen.class.getResourceAsStream("saves/cards.txt");
         try {
            Scanner s = new Scanner(in);
-        while (s.hasNextLine()) {
-            type = cardTypes[Integer.parseInt(s.nextLine())];
-            action = cardActions[Integer.parseInt(s.nextLine())];
-            value = Integer.parseInt(s.nextLine());
-            info = s.nextLine();
-            cards[index] = new Card(type, action, value, info);
-        } 
+            while (s.hasNextLine()) {
+                type = Card.CardType.valueOf(s.nextLine());
+                action = Card.CardAction.valueOf(s.nextLine());
+                value = Integer.parseInt(s.nextLine());
+                info = s.nextLine();
+                cards[index] = new Card(type, action, value, info);
+            } 
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Cards file not found");
+            JOptionPane.showMessageDialog(null, "Could not load cards from file");
         }
     }
    
