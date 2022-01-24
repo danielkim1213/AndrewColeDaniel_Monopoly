@@ -234,7 +234,7 @@
         <Property name="text" type="java.lang.String" value="lblDie2"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDie1">
@@ -242,7 +242,7 @@
         <Property name="text" type="java.lang.String" value="lblDie1"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
   </SubComponents>

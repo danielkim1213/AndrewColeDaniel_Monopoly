@@ -11,6 +11,8 @@ import andrewcoledaniel_monopoly.Card.*;
 import java.awt.Image;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -28,12 +30,14 @@ public class GameScreen extends javax.swing.JFrame {
     private final GameMusic bgm;
     private Thread gameBgmThread;
     private int gameMode;
-    public static ImageIcon[] Die = new ImageIcon[6];
-    public static boolean stopRoll = false;
-    private Dice dc = new Dice();
+    private ImageIcon[] Die = new ImageIcon[6];
+    public boolean stopRoll = false;
+    private Dice dc;
+    private Thread rolling;
     private long startTime;
     private int currentTurn;
     private int numPlayers;
+    private ArrayList propertyArray = new ArrayList();
     
     /**
      * Creates new form GameScreen
@@ -50,7 +54,9 @@ public class GameScreen extends javax.swing.JFrame {
         diceImage();
         startTime = System.currentTimeMillis() * 1000;
         currentTurn = 0;
+        dc = new Dice(this);
     }
+    
     
     private void diceImage()
     {
@@ -87,6 +93,49 @@ public class GameScreen extends javax.swing.JFrame {
         
         lblDie1.setIcon(Die[2]);
         lblDie2.setIcon(Die[3]);
+    }
+    
+    public void loadProperties() {
+        String name;
+        int price, mortgageValue, rent, houseCost;
+        int propertyNumber = 0;
+        try {
+            File propertiesFile = new File("src//andrewcoledaniel_monopoly//properties.txt");
+            Scanner s = new Scanner(propertiesFile);
+            while (s.hasNextLine()) {
+                if (propertyNumber == 2 || propertyNumber == 10 || propertyNumber == 17 || propertyNumber == 25) {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property railRoad = new Railroad(name, price, mortgageValue, propertyNumber);
+                    propertyArray.add(railRoad);
+                } else if (propertyNumber == 7 || propertyNumber == 20) {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property utilites = new Utility(name, price, mortgageValue, propertyNumber);
+                    propertyArray.add(utilites);
+                } else {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    houseCost = Integer.parseInt(s.nextLine());
+                    rent = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property deed = new Deed(name, price, mortgageValue, houseCost, rent, propertyNumber);
+                    propertyArray.add(deed);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Properties file not found");
+        }
+    }
+    
+    public ImageIcon getDiceImage(int index)
+    {
+        return Die[index];
     }
     
     public void checkGameMode() {
@@ -136,19 +185,20 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void turn(Player p)
     {
-        rollDice();
-        int moves = dc.getDice1() + dc.getDice2();
+        int moves = rollDice();
+        
+        System.out.println(moves);
     }
     
     
     
-    private void rollDice() 
+    private int rollDice() 
     {
-        Thread rolling = new Thread(dc); 
+        rolling = new Thread(dc); 
         
-        rolling.start();
+        rolling.start();     
         
-        stopRoll = false;
+        return dc.getDice1() + dc.getDice2();
     }
     
 
@@ -332,7 +382,8 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
-        rollDice();
+        Player p1 = new Player(1);
+        turn(p1);
     }//GEN-LAST:event_formComponentShown
 
     private void btnStopRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopRollActionPerformed
@@ -357,8 +408,8 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblBank;
-    public static javax.swing.JLabel lblDie1;
-    public static javax.swing.JLabel lblDie2;
+    public javax.swing.JLabel lblDie1;
+    public javax.swing.JLabel lblDie2;
     private javax.swing.JLabel lblProperties;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
@@ -391,21 +442,26 @@ class GameMusic implements Runnable {
 }
 
 class Dice implements Runnable {
+    GameScreen gs;
+    
+    public Dice(GameScreen gameScreen)
+    {
+        gs = gameScreen;
+    }
+    
     private int dice1;
     private int dice2;
 
     public void run(){
 
-        ImageIcon die = GameScreen.Die[5];
-        GameScreen.lblDie1.setIcon(die);
-        while(!GameScreen.stopRoll)
+        while(!gs.stopRoll)
         {
 
             dice1 = (int)(Math.random() * 6);
             dice2 = (int)(Math.random() * 6);
 
-            GameScreen.lblDie1.setIcon(GameScreen.Die[dice1]);
-            GameScreen.lblDie2.setIcon(GameScreen.Die[dice2]);
+            gs.lblDie1.setIcon(gs.getDiceImage(dice1));
+            gs.lblDie2.setIcon(gs.getDiceImage(dice2));
 
             try{
                 Thread.sleep(200);
