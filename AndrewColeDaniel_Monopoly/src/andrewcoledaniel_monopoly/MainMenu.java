@@ -5,9 +5,10 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.io.FileInputStream;
+
 import java.io.InputStream;
 import java.util.Scanner;
+import javax.sound.sampled.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,8 @@ public class MainMenu extends javax.swing.JFrame {
     private HighScoreMenu highScoreMenu;
     public int[] highscores = new int[5];
     public String[] date = new String[5];
+    public MainMusic mainBgm;
+    private Thread mainBgmThread;
     
     /**
      * Creates new form MainMenu
@@ -27,11 +30,13 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         readHighScore();
+        mainBgm = new MainMusic();
+        mainBgmThread = new Thread(mainBgm);
     }
     
     private void readHighScore()
     {
-        InputStream inp = MainMenu.class.getResourceAsStream("HighScores.txt");
+        InputStream inp = MainMenu.class.getResourceAsStream("saves/HighScores.txt");
         Scanner scan = new Scanner(inp);
         
         for(int i=0; i<5; i++)
@@ -58,6 +63,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNewGame.setText("New Game");
@@ -139,6 +149,7 @@ public class MainMenu extends javax.swing.JFrame {
         
         if(gameMode != -1)
         {
+            mainBgm.musicOff();
             gameScreen = new GameScreen(this, gameMode);
             gameScreen.setVisible(true);
             this.setVisible(false);
@@ -166,6 +177,10 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
         
     }//GEN-LAST:event_btnLoadSaveActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        mainBgmThread.start();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -209,4 +224,34 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnTutorial;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
+}
+
+class MainMusic implements Runnable {
+    private Clip mainSong;
+    
+    @Override
+    public void run() 
+    {
+        try{
+            mainSong = AudioSystem.getClip();
+            //Dubby Jinglefunk's Not So Silent Night by Speck (c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/speck/64503 Ft: Admiral Bob, Martijn de Boer, airtone, Carosone
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));   
+            mainSong.open(inputBgm);
+            mainSong.loop(Clip.LOOP_CONTINUOUSLY);
+            this.musicOn();
+            
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    public void musicOff()
+    {
+        mainSong.stop();
+    }
+    
+    public void musicOn()
+    {
+        mainSong.start();
+    }
 }

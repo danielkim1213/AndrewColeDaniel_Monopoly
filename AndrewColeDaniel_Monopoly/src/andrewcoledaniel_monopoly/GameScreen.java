@@ -20,8 +20,8 @@ public class GameScreen extends javax.swing.JFrame {
     private static Card[] cards = new Card[32];
     private final CardType[] cardTypes = CardType.values();
     private final CardAction[] cardActions = CardAction.values();
-    private Music bgm;
-    private Thread t;
+    private GameMusic bgm;
+    private Thread gameBgmThread;
     
     /**
      * Creates new form GameScreen
@@ -31,9 +31,8 @@ public class GameScreen extends javax.swing.JFrame {
     public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
-        bgm = new Music();
-        t = new Thread(bgm);
-        playMusic(true);
+        bgm = new GameMusic();
+        gameBgmThread = new Thread(bgm);
     }
     
     public void loadCards() {
@@ -59,17 +58,6 @@ public class GameScreen extends javax.swing.JFrame {
         
     }
     
-    private void playMusic(boolean play)
-    {
-        if(play)
-        {
-            t.start();
-        }
-        else
-        {
-           Music.clip.stop();
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,6 +87,11 @@ public class GameScreen extends javax.swing.JFrame {
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -211,14 +204,19 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        playMusic(false);
+        bgm.musicOff();
         mainMenu.setVisible(true);
+        mainMenu.mainBgm.musicOn();
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
     }//GEN-LAST:event_formComponentShown
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        gameBgmThread.start();
+    }//GEN-LAST:event_formWindowActivated
 
    
 
@@ -239,19 +237,27 @@ public class GameScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
-class Music implements Runnable {
-    public static Clip clip;
+class GameMusic implements Runnable {
+    private Clip gameSong;
+    
     @Override public void run() 
     {
         try{
-            clip = AudioSystem.getClip();
+            gameSong = AudioSystem.getClip();
             //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
-            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(Music.class.getResourceAsStream("Slow_Burn.wav"));
-            clip.open(inputBgm);
-            clip.start(); 
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
+            gameSong.open(inputBgm);
+            gameSong.loop(Clip.LOOP_CONTINUOUSLY);
+            gameSong.start(); 
+            
         } catch (Exception e)
         {
             System.out.println(e);
         }
+    }
+    
+    public void musicOff()
+    {
+        gameSong.stop();
     }
 }
