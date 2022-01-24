@@ -16,9 +16,11 @@ public class Deed extends Property {
     private int houseCost;
     private boolean hotel;
 
-    public Deed(String name, int price, int mortgageValue, int propertyNumber) {
+    public Deed(String name, int price, int mortgageValue, int houseCost, int rent, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
         type = SpaceType.SPACE_DEED;
+        this.houseCost = houseCost;
+        this.rent = rent;
     }
 
     public int getHouses() {

@@ -34,6 +34,7 @@ public class GameScreen extends javax.swing.JFrame {
     private long startTime;
     private int currentTurn;
     private int numPlayers;
+    private ArrayList propertyArray = new ArrayList();
     
     /**
      * Creates new form GameScreen
@@ -87,6 +88,44 @@ public class GameScreen extends javax.swing.JFrame {
         
         lblDie1.setIcon(Die[2]);
         lblDie2.setIcon(Die[3]);
+    }
+    
+        public void loadProperties() {
+        String name;
+        int price, mortgageValue, rent, houseCost;
+        int propertyNumber = 0;
+        try {
+            File propertiesFile = new File("src//andrewcoledaniel_monopoly//properties.txt");
+            Scanner s = new Scanner(propertiesFile);
+            while (s.hasNextLine()) {
+                if (propertyNumber == 2 || propertyNumber == 10 || propertyNumber == 17 || propertyNumber == 25) {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property railRoad = new Railroad(name, price, mortgageValue, propertyNumber);
+                    propertyArray.add(railRoad);
+                } else if (propertyNumber == 7 || propertyNumber == 20) {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property utilites = new Utility(name, price, mortgageValue, propertyNumber);
+                    propertyArray.add(utilites);
+                } else {
+                    name = s.nextLine();
+                    price = Integer.parseInt(s.nextLine());
+                    mortgageValue = Integer.parseInt(s.nextLine());
+                    houseCost = Integer.parseInt(s.nextLine());
+                    rent = Integer.parseInt(s.nextLine());
+                    propertyNumber = Integer.parseInt(s.nextLine());
+                    Property deed = new Deed(name, price, mortgageValue, houseCost, rent, propertyNumber);
+                    propertyArray.add(deed);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Properties file not found");
+        }
     }
     
     public void checkGameMode() {
