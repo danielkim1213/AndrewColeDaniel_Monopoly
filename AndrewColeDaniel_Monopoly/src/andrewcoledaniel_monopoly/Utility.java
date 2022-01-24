@@ -10,9 +10,12 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public class Utility extends Property {
+    
+    private SpaceType type;
 
     public Utility(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
+        type = SpaceType.SPACE_UTILITY;
     }
 
     public void updateRent() {
@@ -22,5 +25,9 @@ public class Utility extends Property {
     @Override
     public String toString() {
         return "";
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 }

@@ -11,12 +11,14 @@ package andrewcoledaniel_monopoly;
  */
 public class Deed extends Property {
 
+    private SpaceType type;
     private int houses;
     private int houseCost;
     private boolean hotel;
 
     public Deed(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
+        type = SpaceType.SPACE_DEED;
     }
 
     public int getHouses() {
@@ -62,5 +64,9 @@ public class Deed extends Property {
     @Override
     public String toString() {
         return "";
+    }
+    
+    public SpaceType getType() {
+        return type;
     }
 }
