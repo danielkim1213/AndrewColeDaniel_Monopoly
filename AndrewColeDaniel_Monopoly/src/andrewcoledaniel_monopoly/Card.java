@@ -10,10 +10,10 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public class Card {
-    private CardType type;
-    private CardAction action;
-    private int value;
-    private String info;
+    private final CardType type;
+    private final CardAction action;
+    private final int value;
+    private final String info;
     
     public Card(CardType type, CardAction action, int value, String info) {
         this.type = type;
@@ -28,9 +28,16 @@ public class Card {
     
     public enum CardAction {
         ACTION_GOTO,
+        ACTION_GOTO_RELATIVE,
         ACTION_GET_MONEY,
         ACTION_PAY_MONEY,
-        ACTION_GET_OUT_JAIL
+        ACTION_GET_MONEY_PLAYER,
+        ACTION_PAY_MONEY_PLAYER,
+        ACTION_GET_OUT_JAIL,
+        ACTION_GOTO_JAIL,
+        ACTION_GOTO_RAILROAD,
+        ACTION_GOTO_UTILITY,
+        ACTION_PAY_HOUSES
     }
     
     public CardType getType() {

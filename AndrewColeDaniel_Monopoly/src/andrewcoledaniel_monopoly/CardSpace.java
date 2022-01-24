@@ -45,14 +45,37 @@ public class CardSpace implements Space {
             case ACTION_GOTO:
                 p.setPosition(c.getValue());
                 break;
+            case ACTION_GOTO_RELATIVE:
+                p.setPosition(p.getPosition() + c.getValue());
             case ACTION_GET_MONEY:
                 p.addMoney(c.getValue());
                 break;
             case ACTION_PAY_MONEY:
                 p.removeMoney(c.getValue());
                 break;
+            case ACTION_GET_MONEY_PLAYER:
+                //p.addMoney(c.getValue() * playerNums);
+                // for each player, removeMoney c.getValue()
+                break;
+            case ACTION_PAY_MONEY_PLAYER:
+                //p.removeMoney(c.getValue() * playerNums);
+                // for each player, addMoney c.getValue()
+                break;
             case ACTION_GET_OUT_JAIL:
                 p.setJailCards(p.getJailCards() + 1);
+                break;
+            case ACTION_GOTO_JAIL:
+                p.setPosition(10);
+                p.setJail(true);
+                break;
+            case ACTION_GOTO_RAILROAD:
+                // p.setPosition(nextRailroad())
+                break;
+            case ACTION_GOTO_UTILITY:
+                // p.setPosition(nextUtility())
+                break;
+            case ACTION_PAY_HOUSES:
+                // p.payHouses()
                 break;
         }
         

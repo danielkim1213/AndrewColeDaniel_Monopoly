@@ -123,6 +123,16 @@ public class Player {
     public void setJailCards(int n) {
         jailCards = n;
     }
+    
+    public int getUtilities() {
+        int num = 0;
+        for (int i = 0; i < properties.size(); i++) {
+            if (properties.get(i).getType() == Space.SpaceType.SPACE_UTILITY) {
+                num++;
+            }
+        }
+        return num;
+    }
 
     public String toString() {
         String output;

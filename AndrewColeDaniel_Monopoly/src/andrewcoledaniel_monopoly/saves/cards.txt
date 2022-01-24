@@ -1,0 +1,123 @@
+CARD_CHANCE
+ACTION_GOTO
+40
+Advance to Boardwalk
+CARD_CHANCE
+ACTION_GOTO
+0
+Advance to Go (Collect $200)
+CARD_CHANCE
+ACTION_GOTO
+24
+Advance to Illinois Avenue. If you pass Go, collect $200
+CARD_CHANCE
+ACTION_GOTO
+11
+Advance to St. Charles Place. If you pass Go, collect $200
+CARD_CHANCE
+ACTION_GOTO_RAILROAD
+0
+Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay owner twice the rental to which they are otherwise entitled.
+CARD_CHANCE
+ACTION_GOTO_RAILROAD
+0
+Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay owner twice the rental to which they are otherwise entitled.
+CARD_CHANCE
+ACTION_GOTO_UTILITY
+0
+Advance to the nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times amount thrown.
+CARD_CHANCE
+ACTION_GET_MONEY
+50
+Bank pays you dividend of $50
+CARD_CHANCE
+ACTION_GET_OUT_JAIL
+Get Out of Jail Free
+CARD_CHANCE
+ACTION_GOTO_RELATIVE,
+-3
+Go Back 3 Spaces
+CARD_CHANCE
+ACTION_GOTO_JAIL
+0
+Go directly to Jail, do not pass Go, do not collect $200
+CARD_CHANCE
+ACTION_PAY_HOUSES
+0
+Make general repairs on all your property. For each house pay $25. For each hotel pay $100
+CARD_CHANCE
+ACTION_PAY_MONEY
+15
+Speeding fine $15
+CARD_CHANCE
+ACTION_GOTO_RAILROAD,
+0
+Take a trip to Reading Railroad. If you pass Go, collect $200
+CARD_CHANCE
+ACTION_PAY_MONEY_PLAYER
+50
+You have been elected Chairman of the Board. Pay each player $50
+CARD_CHANCE
+ACTION_GET_MONEY
+150
+Your building loan matures. Collect $150
+CARD_COMMUNITY_CHEST
+ACTION_GOTO
+0
+Advance to Go (Collect $200)
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+200
+Bank error in your favour. Collect $200
+CARD_COMMUNITY_CHEST
+ACTION_PAY_MONEY
+50
+Doctor's fee. Pay $50
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+50
+From sale of stock you get $50
+CARD_COMMUNITY_CHEST
+ACTION_GET_OUT_JAIL
+0
+Get out of Jail Free
+CARD_COMMUNITY_CHEST
+ACTION_GOTO_JAIL
+0
+Go directly to Jail, do not pass Go, do not collect $200
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+100
+Holiday fund matures. Recieve $100
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+20
+Income tax refund. Collect $20
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY_PLAYER
+10
+It is your birthday. Collect $10 from each player
+CARD_COMMUNITY_CHEST
+ACTION_PAY_MONEY
+100
+Pay hospital fees of $100
+CARD_COMMUNITY_CHEST
+ACTION_PAY_MONEY
+50
+Pay school fees of $50
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+25
+Receive $25 consultancy fee
+CARD_COMMUNITY_CHEST
+ACTION_PAY_HOUSES
+0
+You are assessed for street repair. $40 per house. $115 per hotel
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+10
+You have won second prize in a beauty contest. Collect $10
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+100
+You inherit $100
