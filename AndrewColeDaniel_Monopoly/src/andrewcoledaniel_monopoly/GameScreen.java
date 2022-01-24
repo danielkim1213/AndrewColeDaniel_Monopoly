@@ -199,8 +199,7 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void computerTurn(int computerIndex){
         Player computer = playerArray[computerIndex];
-        rollDice();
-        int moves = dc.getDice1() + dc.getDice2();
+        int moves = rollDice();
         
         if(computerIndex == playerArray.length - 1){
             turn(playerArray[0]);
