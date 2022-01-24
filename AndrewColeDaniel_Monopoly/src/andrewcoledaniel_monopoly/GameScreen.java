@@ -25,10 +25,12 @@ public class GameScreen extends javax.swing.JFrame {
     private static Card[] cards = new Card[32];
     private final CardType[] cardTypes = CardType.values();
     private final CardAction[] cardActions = CardAction.values();
-    private GameMusic bgm;
+    private final GameMusic bgm;
     private Thread gameBgmThread;
     private int gameMode;
-    private ImageIcon[] Die = new ImageIcon[6];
+    public static ImageIcon[] Die = new ImageIcon[6];
+    public static boolean stopRoll = false;
+    private Dice dc = new Dice();
     private long startTime;
     private int currentTurn;
     private int numPlayers;
@@ -41,7 +43,6 @@ public class GameScreen extends javax.swing.JFrame {
     public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
-        loadCards();
         bgm = new GameMusic();
         gameBgmThread = new Thread(bgm);
         gameBgmThread.start();
@@ -51,18 +52,6 @@ public class GameScreen extends javax.swing.JFrame {
         currentTurn = 0;
     }
     
-    private void saveGame() {
-        try {
-            FileWriter file = new FileWriter(System.getProperty("user.dir") + "/save.txt");
-            try (BufferedWriter writer = new BufferedWriter(file)) {
-                writer.write("test");
-                writer.flush();
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Could not write to save file");
-        }
-    }
-
     private void diceImage()
     {
         Image img;
@@ -96,66 +85,10 @@ public class GameScreen extends javax.swing.JFrame {
         img = Die[5].getImage();
         Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
         
-        lblDie1.setIcon(Die[0]);
-        lblDie2.setIcon(Die[0]);
+        lblDie1.setIcon(Die[2]);
+        lblDie2.setIcon(Die[3]);
     }
     
-    private void loadCards() {
-        int index = 0;
-        CardType type;
-        CardAction action;
-        int value;
-        String info;
-
-        InputStream in = GameScreen.class.getResourceAsStream("cards.txt");
-        try {
-            Scanner s = new Scanner(in);
-            while (s.hasNextLine()) {
-                type = cardTypes[Integer.parseInt(s.nextLine())];
-                action = cardActions[Integer.parseInt(s.nextLine())];
-                value = Integer.parseInt(s.nextLine());
-                info = s.nextLine();
-                cards[index] = new Card(type, action, value, info);
-            }
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Cards file not found");
-        }
-    }
-    /*
-    private void turn(Player p)
-    {
-        int moves = rollDice();
-    }
-    
-    private int rollDice() 
-    {
-        int dice1 = 1;
-        int dice2 = 1;
-        boolean roll = true;
-        btnStopRoll.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt){
-                GameScreen.roll = false;
-            }
-        });
-        while(roll)
-        {
-            dice1 = (int)(Math.random() * 6);
-            dice2 = (int)(Math.random() * 6);
-            
-            lblDie1.setIcon(Die[dice1]);
-            lblDie2.setIcon(Die[dice2]);
-            
-            try{
-                Thread.sleep(1000);
-            } catch(InterruptedException e)
-            {
-                System.out.println(e);
-            }
-        }
-        return (dice1+1) + (dice2+1);
-    }
-     */
-
     public void checkGameMode() {
         if (gameMode != 2) {
             if (gameMode == 0) {
@@ -179,6 +112,46 @@ public class GameScreen extends javax.swing.JFrame {
         endingScreen.setVisible(true);
     }
     
+    public void loadCards() {
+        int index = 0;
+        CardType type;
+        CardAction action;
+        int value;
+        String info;
+        
+        InputStream in = GameScreen.class.getResourceAsStream("cards.txt");
+        try {
+           Scanner s = new Scanner(in);
+        while (s.hasNextLine()) {
+            type = cardTypes[Integer.parseInt(s.nextLine())];
+            action = cardActions[Integer.parseInt(s.nextLine())];
+            value = Integer.parseInt(s.nextLine());
+            info = s.nextLine();
+            cards[index] = new Card(type, action, value, info);
+        } 
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Cards file not found");
+        }
+    }
+    
+    private void turn(Player p)
+    {
+        rollDice();
+        int moves = dc.getDice1() + dc.getDice2();
+    }
+    
+    
+    
+    private void rollDice() 
+    {
+        Thread rolling = new Thread(dc); 
+        
+        rolling.start();
+        
+        stopRoll = false;
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +167,7 @@ public class GameScreen extends javax.swing.JFrame {
         btnBuyHouse = new javax.swing.JButton();
         btnSellHouse = new javax.swing.JButton();
         btnMortgage = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
+        btnMortgage1 = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -207,6 +180,11 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -218,17 +196,17 @@ public class GameScreen extends javax.swing.JFrame {
         lblProperties.setText("Your Properties");
 
         btnBuyHouse.setText("Buy House");
+        btnBuyHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuyHouseActionPerformed(evt);
+            }
+        });
 
         btnSellHouse.setText("Sell House");
 
         btnMortgage.setText("Mortgage Property");
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
+        btnMortgage1.setText("Save");
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +240,7 @@ public class GameScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblProperties)
                         .addGroup(pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(lblBank)
@@ -299,12 +277,17 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
         btnStopRoll.setText("Stop");
+        btnStopRoll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopRollActionPerformed(evt);
+            }
+        });
 
         lblDie2.setText("lblDie2");
 
@@ -347,20 +330,26 @@ public class GameScreen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        saveGame();
-    }//GEN-LAST:event_btnSaveActionPerformed
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
+        rollDice();
     }//GEN-LAST:event_formComponentShown
 
+    private void btnStopRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopRollActionPerformed
+        stopRoll = true;
+    }//GEN-LAST:event_btnStopRollActionPerformed
 
-    
+    private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
+        
+    }//GEN-LAST:event_btnBuyHouseActionPerformed
+
+   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnMortgage1;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JButton btnStopRoll;
     private javax.swing.JScrollPane jScrollPane2;
@@ -368,8 +357,8 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblBank;
-    private javax.swing.JLabel lblDie1;
-    private javax.swing.JLabel lblDie2;
+    public static javax.swing.JLabel lblDie1;
+    public static javax.swing.JLabel lblDie2;
     private javax.swing.JLabel lblProperties;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
@@ -378,7 +367,7 @@ public class GameScreen extends javax.swing.JFrame {
 
 class GameMusic implements Runnable {
     private Clip gameSong;
-
+    
     @Override public void run() 
     {
         try{
@@ -387,16 +376,53 @@ class GameMusic implements Runnable {
             AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
             gameSong.open(inputBgm);
             gameSong.loop(Clip.LOOP_CONTINUOUSLY);
-            gameSong.start();
-
+            gameSong.start(); 
+            
         } catch (Exception e)
         {
             System.out.println(e);
         }
     }
-
+    
     public void musicOff()
     {
         gameSong.stop();
     }
+}
+
+class Dice implements Runnable {
+    private int dice1;
+    private int dice2;
+
+    public void run(){
+
+        ImageIcon die = GameScreen.Die[5];
+        GameScreen.lblDie1.setIcon(die);
+        while(!GameScreen.stopRoll)
+        {
+
+            dice1 = (int)(Math.random() * 6);
+            dice2 = (int)(Math.random() * 6);
+
+            GameScreen.lblDie1.setIcon(GameScreen.Die[dice1]);
+            GameScreen.lblDie2.setIcon(GameScreen.Die[dice2]);
+
+            try{
+                Thread.sleep(200);
+            } catch(InterruptedException e)
+            {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public int getDice1()
+        {
+            return dice1+1;
+        }
+
+    public int getDice2()
+        {
+            return dice2+1;
+        }
 }

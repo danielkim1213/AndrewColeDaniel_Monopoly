@@ -9,6 +9,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -69,7 +72,7 @@
                           <Component id="jScrollPane2" min="-2" pref="192" max="-2" attributes="0"/>
                           <Component id="lblProperties" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSave" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="btnMortgage1" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnMenu" max="32767" attributes="0"/>
                           </Group>
@@ -114,7 +117,7 @@
                   <Component id="jScrollPane3" min="-2" pref="141" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSave" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="btnMortgage1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="btnMenu" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -146,6 +149,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Buy House"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuyHouseActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSellHouse">
           <Properties>
@@ -157,13 +163,10 @@
             <Property name="text" type="java.lang.String" value="Mortgage Property"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSave">
+        <Component class="javax.swing.JButton" name="btnMortgage1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMenu">
           <Properties>
@@ -222,16 +225,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Stop"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopRollActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDie2">
       <Properties>
         <Property name="text" type="java.lang.String" value="lblDie2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDie1">
       <Properties>
         <Property name="text" type="java.lang.String" value="lblDie1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
