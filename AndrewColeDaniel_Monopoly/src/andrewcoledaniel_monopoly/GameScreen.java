@@ -6,9 +6,12 @@
 package andrewcoledaniel_monopoly;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 import andrewcoledaniel_monopoly.Card.*;
+import java.awt.event.*;
+import java.net.URL;
 import javax.sound.sampled.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,13 @@ public class GameScreen extends javax.swing.JFrame {
     private final CardAction[] cardActions = CardAction.values();
     private GameMusic bgm;
     private Thread gameBgmThread;
+    private int gameMode;
+    private Player p1;
+    private Player p2;
+    private Player p3;
+    private Player p4;
+    private ImageIcon[] Die = new ImageIcon[6];
+    private static boolean roll = false;
     
     /**
      * Creates new form GameScreen
@@ -33,6 +43,26 @@ public class GameScreen extends javax.swing.JFrame {
         mainMenu = m;
         bgm = new GameMusic();
         gameBgmThread = new Thread(bgm);
+        this.gameMode = gameMode;
+        diceImage();
+    }
+    
+    private void diceImage()
+    {
+        URL url0 = GameScreen.class.getResource("saves/dice1.jpg");
+        Die[0] = new ImageIcon(url0);
+        URL url1 = GameScreen.class.getResource("saves/dice2.jpg");
+        Die[1] = new ImageIcon(url1);
+        URL url2 = GameScreen.class.getResource("saves/dice3.jpg");
+        Die[2] = new ImageIcon(url2);
+        URL url3 = GameScreen.class.getResource("saves/dice4.jpg");
+        Die[3] = new ImageIcon(url3);
+        URL url4 = GameScreen.class.getResource("saves/dice5.jpg");
+        Die[4] = new ImageIcon(url4);
+        URL url5 = GameScreen.class.getResource("saves/dice6.jpg");
+        Die[5] = new ImageIcon(url5);
+        lblDie1.setIcon(Die[0]);
+        lblDie2.setIcon(Die[0]);
     }
     
     public void loadCards() {
@@ -55,7 +85,39 @@ public class GameScreen extends javax.swing.JFrame {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Cards file not found");
         }
-        
+    }
+    
+    private void turn(Player p)
+    {
+        int moves = rollDice();
+    }
+    
+    private int rollDice() 
+    {
+        int dice1 = 1;
+        int dice2 = 1;
+        boolean roll = true;
+        btnStopRoll.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                GameScreen.roll = false;
+            }
+        });
+        while(roll)
+        {
+            dice1 = (int)(Math.random() * 6);
+            dice2 = (int)(Math.random() * 6);
+            
+            lblDie1.setIcon(Die[dice1]);
+            lblDie2.setIcon(Die[dice2]);
+            
+            try{
+                Thread.sleep(1000);
+            } catch(InterruptedException e)
+            {
+                System.out.println(e);
+            }
+        }
+        return (dice1+1) + (dice2+1);
     }
     
 
@@ -81,14 +143,12 @@ public class GameScreen extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        btnStopRoll = new javax.swing.JButton();
+        lblDie2 = new javax.swing.JLabel();
+        lblDie1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -186,17 +246,43 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
+        btnStopRoll.setText("Stop");
+
+        lblDie2.setText("lblDie2");
+
+        lblDie1.setText("lblDie1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 684, Short.MAX_VALUE)
+                .addGap(249, 249, 249)
+                .addComponent(btnStopRoll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(167, 167, 167)
+                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(653, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnStopRoll)
+                    .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(200, 200, 200)
+                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(258, Short.MAX_VALUE)))
         );
 
         pack();
@@ -210,12 +296,23 @@ public class GameScreen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        loadCards();
-    }//GEN-LAST:event_formComponentShown
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         gameBgmThread.start();
+        loadCards();
+        int x = rollDice();
+        /*switch(gameMode)
+        {
+            case 0: 
+            {
+                for(int i=0; i<15; i++)
+                {
+                    turn(p1);
+                    turn(p2);
+                    turn(p3);
+                    turn(p4);
+                }
+            }
+        }*/
     }//GEN-LAST:event_formWindowActivated
 
    
@@ -226,11 +323,14 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnMortgage;
     private javax.swing.JButton btnMortgage1;
     private javax.swing.JButton btnSellHouse;
+    private javax.swing.JButton btnStopRoll;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblBank;
+    private javax.swing.JLabel lblDie1;
+    private javax.swing.JLabel lblDie2;
     private javax.swing.JLabel lblProperties;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
