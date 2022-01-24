@@ -213,7 +213,7 @@ public class GameScreen extends javax.swing.JFrame {
         TimerTask tsk = new Rolling(this);
         Timer timerRoll = new Timer(); 
         
-        timerRoll.scheduleAtFixedRate(tsk, 1000, 1000);
+        timerRoll.scheduleAtFixedRate(tsk, 200, 200);
         
         return ((Rolling)tsk).getSum();
     }
@@ -243,6 +243,7 @@ public class GameScreen extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         lblDie2 = new javax.swing.JLabel();
         lblDie1 = new javax.swing.JLabel();
+        btnStop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -352,6 +353,13 @@ public class GameScreen extends javax.swing.JFrame {
 
         lblDie1.setText("lblDie1");
 
+        btnStop.setText("Stop");
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -359,9 +367,11 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -371,7 +381,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(190, 190, 190)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStop))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -397,6 +408,10 @@ public class GameScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
+        stopRoll = true;
+    }//GEN-LAST:event_btnStopActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -405,6 +420,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnMortgage;
     private javax.swing.JButton btnMortgage1;
     private javax.swing.JButton btnSellHouse;
+    private javax.swing.JButton btnStop;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
@@ -455,6 +471,10 @@ class Rolling extends TimerTask {
     @Override
     public void run()
     {
+        if(gs.stopRoll)
+        {
+            return;
+        }
         int dice1 = (int)(Math.random() * 6);
         int dice2 = (int)(Math.random() * 6);
 
