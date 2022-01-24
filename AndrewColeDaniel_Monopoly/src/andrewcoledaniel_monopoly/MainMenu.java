@@ -6,6 +6,8 @@
 package andrewcoledaniel_monopoly;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 import javax.sound.sampled.*;
@@ -179,7 +181,12 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHighScoresActionPerformed
 
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
-        
+    try {
+            File file = new File(System.getProperty("user.dir") + "/save.txt");
+            Scanner s = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Could not load save file");
+        }
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 
     /**
