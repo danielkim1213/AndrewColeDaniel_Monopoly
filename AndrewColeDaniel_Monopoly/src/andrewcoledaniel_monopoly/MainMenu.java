@@ -23,6 +23,8 @@ public class MainMenu extends javax.swing.JFrame {
     public String[] date = new String[5];
     public MainMusic mainBgm;
     private Thread mainBgmThread;
+    public static int limitedTurns;
+    public static long limitedTime;
     
     /**
      * Creates new form MainMenu
@@ -142,6 +144,12 @@ public class MainMenu extends javax.swing.JFrame {
         String[] gameOptions = {"limited turn", "limited time", "infinite"};
 
         int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
+        
+        if(gameMode == 0){
+            limitedTurns = Integer.parseInt(JOptionPane.showInputDialog("How many turns would you like to play?"));
+        } else if(gameMode == 1){
+            limitedTime = Long.parseLong(JOptionPane.showInputDialog("How long would you like the game to be?"));
+        }
         
         if(gameMode != -1)
         {
