@@ -26,12 +26,7 @@ public class GameScreen extends javax.swing.JFrame {
     private GameMusic bgm;
     private Thread gameBgmThread;
     private int gameMode;
-    private Player p1;
-    private Player p2;
-    private Player p3;
-    private Player p4;
     private ImageIcon[] Die = new ImageIcon[6];
-    private static boolean roll = false;
     
     /**
      * Creates new form GameScreen
@@ -43,6 +38,7 @@ public class GameScreen extends javax.swing.JFrame {
         mainMenu = m;
         bgm = new GameMusic();
         gameBgmThread = new Thread(bgm);
+        gameBgmThread.start();
         this.gameMode = gameMode;
         diceImage();
     }
@@ -86,7 +82,7 @@ public class GameScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cards file not found");
         }
     }
-    
+    /*
     private void turn(Player p)
     {
         int moves = rollDice();
@@ -119,7 +115,7 @@ public class GameScreen extends javax.swing.JFrame {
         }
         return (dice1+1) + (dice2+1);
     }
-    
+    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,9 +145,9 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
 
@@ -257,17 +253,14 @@ public class GameScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(249, 249, 249)
+                .addGap(164, 164, 164)
+                .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnStopRoll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(167, 167, 167)
-                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(653, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,13 +269,9 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(190, 190, 190)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStopRoll)
-                    .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(200, 200, 200)
-                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(258, Short.MAX_VALUE)))
         );
 
         pack();
@@ -296,24 +285,9 @@ public class GameScreen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        gameBgmThread.start();
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
-        int x = rollDice();
-        /*switch(gameMode)
-        {
-            case 0: 
-            {
-                for(int i=0; i<15; i++)
-                {
-                    turn(p1);
-                    turn(p2);
-                    turn(p3);
-                    turn(p4);
-                }
-            }
-        }*/
-    }//GEN-LAST:event_formWindowActivated
+    }//GEN-LAST:event_formComponentShown
 
    
 

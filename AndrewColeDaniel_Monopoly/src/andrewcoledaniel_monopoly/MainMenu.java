@@ -32,6 +32,7 @@ public class MainMenu extends javax.swing.JFrame {
         readHighScore();
         mainBgm = new MainMusic();
         mainBgmThread = new Thread(mainBgm);
+        mainBgmThread.start();
     }
     
     private void readHighScore()
@@ -63,11 +64,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNewGame.setText("New Game");
@@ -177,10 +173,6 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
         
     }//GEN-LAST:event_btnLoadSaveActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        mainBgmThread.start();
-    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
