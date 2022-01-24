@@ -38,13 +38,14 @@ public class GameScreen extends javax.swing.JFrame {
     private int currentTurn;
     private int numPlayers;
     private ArrayList propertyArray = new ArrayList();
+    private Player[] playerArray = new Player[numPlayers];
     
     /**
      * Creates new form GameScreen
      * @param m - main menu
      * @param gameMode - game mode
      */
-    public GameScreen(MainMenu m, int gameMode) {
+    public GameScreen(MainMenu m, int gameMode, int numPlayers) {
         initComponents();
         mainMenu = m;
         bgm = new GameMusic();
@@ -52,6 +53,7 @@ public class GameScreen extends javax.swing.JFrame {
         gameBgmThread.start();
         this.gameMode = gameMode;
         diceImage();
+        this.numPlayers = numPlayers;
         startTime = System.currentTimeMillis() * 1000;
         currentTurn = 0;
         dc = new Dice(this);
@@ -100,7 +102,7 @@ public class GameScreen extends javax.swing.JFrame {
         int price, mortgageValue, rent, houseCost;
         int propertyNumber = 0;
         try {
-            File propertiesFile = new File("src//andrewcoledaniel_monopoly//properties.txt");
+            File propertiesFile = new File("src//andrewcoledaniel_monopoly//saves//properties.txt");
             Scanner s = new Scanner(propertiesFile);
             while (s.hasNextLine()) {
                 if (propertyNumber == 2 || propertyNumber == 10 || propertyNumber == 17 || propertyNumber == 25) {
@@ -184,6 +186,12 @@ public class GameScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cards file not found");
         }
     }
+   
+    private void generatePlayers(){
+        for(int i = 0; i < playerArray.length; i ++){
+            playerArray[i] = new Player(i + 1, 1500);
+        }
+    }
     
     private void turn(Player p)
     {
@@ -192,7 +200,17 @@ public class GameScreen extends javax.swing.JFrame {
         System.out.println(moves);
     }
     
-    
+    private void computerTurn(int computerIndex){
+        Player computer = playerArray[computerIndex];
+        rollDice();
+        int moves = dc.getDice1() + dc.getDice2();
+        
+        if(computerIndex == playerArray.length - 1){
+            turn(playerArray[0]);
+        } else{
+            computerTurn(computerIndex ++);
+        }
+    }
     
     private int rollDice() 
     {
@@ -384,6 +402,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
+        loadProperties();
         Player p1 = new Player(1);
         turn(p1);
     }//GEN-LAST:event_formComponentShown
