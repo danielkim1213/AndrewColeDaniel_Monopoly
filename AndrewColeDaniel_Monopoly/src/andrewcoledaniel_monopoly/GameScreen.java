@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class GameScreen extends javax.swing.JFrame {
     MainMenu mainMenu;
+    private EndingScreen endingScreen;
     private static Card[] cards = new Card[32];
     private final CardType[] cardTypes = CardType.values();
     private final CardAction[] cardActions = CardAction.values();
@@ -28,6 +29,9 @@ public class GameScreen extends javax.swing.JFrame {
     private Thread gameBgmThread;
     private int gameMode;
     private ImageIcon[] Die = new ImageIcon[6];
+    private long startTime;
+    private int currentTurn;
+    private int numPlayers;
     
     /**
      * Creates new form GameScreen
@@ -42,8 +46,10 @@ public class GameScreen extends javax.swing.JFrame {
         gameBgmThread.start();
         this.gameMode = gameMode;
         diceImage();
+        startTime = System.currentTimeMillis() * 1000;
+        currentTurn = 0;
     }
-    
+
     private void diceImage()
     {
         Image img;
@@ -80,24 +86,24 @@ public class GameScreen extends javax.swing.JFrame {
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
     }
-    
+
     public void loadCards() {
         int index = 0;
         CardType type;
         CardAction action;
         int value;
         String info;
-        
+
         InputStream in = GameScreen.class.getResourceAsStream("cards.txt");
         try {
-           Scanner s = new Scanner(in);
-        while (s.hasNextLine()) {
-            type = cardTypes[Integer.parseInt(s.nextLine())];
-            action = cardActions[Integer.parseInt(s.nextLine())];
-            value = Integer.parseInt(s.nextLine());
-            info = s.nextLine();
-            cards[index] = new Card(type, action, value, info);
-        } 
+            Scanner s = new Scanner(in);
+            while (s.hasNextLine()) {
+                type = cardTypes[Integer.parseInt(s.nextLine())];
+                action = cardActions[Integer.parseInt(s.nextLine())];
+                value = Integer.parseInt(s.nextLine());
+                info = s.nextLine();
+                cards[index] = new Card(type, action, value, info);
+            }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Cards file not found");
         }
@@ -135,8 +141,31 @@ public class GameScreen extends javax.swing.JFrame {
         }
         return (dice1+1) + (dice2+1);
     }
-    */
+     */
 
+    public void checkGameMode() {
+        if (gameMode != 2) {
+            if (gameMode == 0) {
+                if(currentTurn > MainMenu.limitedTurns){
+                    endGame();
+                }
+            } else{
+                long currentTime = System.currentTimeMillis() * 1000;
+                if(currentTime - startTime >= MainMenu.limitedTime){
+                    endGame();
+                }
+            }
+        }
+    }
+
+    private void endGame(){
+        if(endingScreen == null){
+            endingScreen = new EndingScreen(numPlayers);
+        }
+        this.setVisible(false);
+        endingScreen.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,8 +338,8 @@ public class GameScreen extends javax.swing.JFrame {
         loadCards();
     }//GEN-LAST:event_formComponentShown
 
-   
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
@@ -333,7 +362,7 @@ public class GameScreen extends javax.swing.JFrame {
 
 class GameMusic implements Runnable {
     private Clip gameSong;
-    
+
     @Override public void run() 
     {
         try{
@@ -342,14 +371,14 @@ class GameMusic implements Runnable {
             AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
             gameSong.open(inputBgm);
             gameSong.loop(Clip.LOOP_CONTINUOUSLY);
-            gameSong.start(); 
-            
+            gameSong.start();
+
         } catch (Exception e)
         {
             System.out.println(e);
         }
     }
-    
+
     public void musicOff()
     {
         gameSong.stop();
