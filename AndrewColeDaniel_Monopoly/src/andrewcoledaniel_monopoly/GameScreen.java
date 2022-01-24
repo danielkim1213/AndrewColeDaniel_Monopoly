@@ -8,6 +8,7 @@ package andrewcoledaniel_monopoly;
 import java.io.*;
 import java.util.*;
 import andrewcoledaniel_monopoly.Card.*;
+import java.awt.Image;
 import java.awt.event.*;
 import java.net.URL;
 import javax.sound.sampled.*;
@@ -45,18 +46,37 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void diceImage()
     {
+        Image img;
         URL url0 = GameScreen.class.getResource("saves/dice1.jpg");
         Die[0] = new ImageIcon(url0);
+        img = Die[0].getImage();
+        Die[0] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         URL url1 = GameScreen.class.getResource("saves/dice2.jpg");
         Die[1] = new ImageIcon(url1);
+        img = Die[1].getImage();
+        Die[1] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         URL url2 = GameScreen.class.getResource("saves/dice3.jpg");
         Die[2] = new ImageIcon(url2);
+        img = Die[2].getImage();
+        Die[2] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         URL url3 = GameScreen.class.getResource("saves/dice4.jpg");
         Die[3] = new ImageIcon(url3);
+        img = Die[3].getImage();
+        Die[3] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         URL url4 = GameScreen.class.getResource("saves/dice5.jpg");
         Die[4] = new ImageIcon(url4);
+        img = Die[4].getImage();
+        Die[4] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         URL url5 = GameScreen.class.getResource("saves/dice6.jpg");
         Die[5] = new ImageIcon(url5);
+        img = Die[5].getImage();
+        Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
     }
