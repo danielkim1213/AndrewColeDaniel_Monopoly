@@ -41,6 +41,7 @@ public class GameScreen extends javax.swing.JFrame {
     public GameScreen(MainMenu m, int gameMode) {
         initComponents();
         mainMenu = m;
+        loadCards();
         bgm = new GameMusic();
         gameBgmThread = new Thread(bgm);
         gameBgmThread.start();
@@ -48,6 +49,18 @@ public class GameScreen extends javax.swing.JFrame {
         diceImage();
         startTime = System.currentTimeMillis() * 1000;
         currentTurn = 0;
+    }
+    
+    private void saveGame() {
+        try {
+            FileWriter file = new FileWriter(System.getProperty("user.dir") + "/save.txt");
+            try (BufferedWriter writer = new BufferedWriter(file)) {
+                writer.write("test");
+                writer.flush();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not write to save file");
+        }
     }
 
     private void diceImage()
@@ -86,8 +99,8 @@ public class GameScreen extends javax.swing.JFrame {
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
     }
-
-    public void loadCards() {
+    
+    private void loadCards() {
         int index = 0;
         CardType type;
         CardAction action;
@@ -181,7 +194,7 @@ public class GameScreen extends javax.swing.JFrame {
         btnBuyHouse = new javax.swing.JButton();
         btnSellHouse = new javax.swing.JButton();
         btnMortgage = new javax.swing.JButton();
-        btnMortgage1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -194,11 +207,6 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -215,7 +223,12 @@ public class GameScreen extends javax.swing.JFrame {
 
         btnMortgage.setText("Mortgage Property");
 
-        btnMortgage1.setText("Save");
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +262,7 @@ public class GameScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblProperties)
                         .addGroup(pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(lblBank)
@@ -286,7 +299,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
@@ -334,6 +347,9 @@ public class GameScreen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        saveGame();
+    }//GEN-LAST:event_btnSaveActionPerformed
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
     }//GEN-LAST:event_formComponentShown
@@ -344,7 +360,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
-    private javax.swing.JButton btnMortgage1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JButton btnStopRoll;
     private javax.swing.JScrollPane jScrollPane2;
