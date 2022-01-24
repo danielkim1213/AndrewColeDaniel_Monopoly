@@ -110,9 +110,47 @@ Ventnor Avenue
 150
 22
 20
+Water Works
+150
+75
+21
 Marvin Gardens
 280
 140
 150
 24
-21
+22
+Pacific Avenue
+300
+150
+200
+26
+23
+North Carolina Avenue
+300
+150
+200
+26
+24
+Pennsylvania Avenue
+320
+160
+200
+28
+25
+Short Line
+200
+100
+26
+Park Place
+350
+175
+200
+35
+27
+Board Walk
+400
+200
+200
+50
+28
