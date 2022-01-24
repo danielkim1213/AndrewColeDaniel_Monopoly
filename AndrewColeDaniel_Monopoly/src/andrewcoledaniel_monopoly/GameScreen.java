@@ -32,8 +32,6 @@ public class GameScreen extends javax.swing.JFrame {
     private int gameMode;
     private ImageIcon[] Die = new ImageIcon[6];
     public boolean stopRoll = false;
-    private Dice dc;
-    private Thread rolling;
     private long startTime;
     private int currentTurn;
     private int numPlayers;
@@ -54,7 +52,6 @@ public class GameScreen extends javax.swing.JFrame {
         diceImage();
         startTime = System.currentTimeMillis() * 1000;
         currentTurn = 0;
-        dc = new Dice(this);
     }
     
     
@@ -196,11 +193,12 @@ public class GameScreen extends javax.swing.JFrame {
     
     private int rollDice() 
     {
-        rolling = new Thread(dc); 
+        TimerTask tsk = new Rolling(this);
+        Timer timerRoll = new Timer(); 
         
-        rolling.start();     
+        timerRoll.scheduleAtFixedRate(tsk, 1000, 1000);
         
-        return dc.getDice1() + dc.getDice2();
+        return ((Rolling)tsk).getSum();
     }
     
 
@@ -226,7 +224,6 @@ public class GameScreen extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        btnStopRoll = new javax.swing.JButton();
         lblDie2 = new javax.swing.JLabel();
         lblDie1 = new javax.swing.JLabel();
 
@@ -334,13 +331,6 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
-        btnStopRoll.setText("Stop");
-        btnStopRoll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStopRollActionPerformed(evt);
-            }
-        });
-
         lblDie2.setText("lblDie2");
 
         lblDie1.setText("lblDie1");
@@ -352,11 +342,9 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnStopRoll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -365,7 +353,6 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(190, 190, 190)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStopRoll)
                     .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -388,10 +375,6 @@ public class GameScreen extends javax.swing.JFrame {
         turn(p1);
     }//GEN-LAST:event_formComponentShown
 
-    private void btnStopRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopRollActionPerformed
-        stopRoll = true;
-    }//GEN-LAST:event_btnStopRollActionPerformed
-
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
         
     }//GEN-LAST:event_btnBuyHouseActionPerformed
@@ -404,7 +387,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnMortgage;
     private javax.swing.JButton btnMortgage1;
     private javax.swing.JButton btnSellHouse;
-    private javax.swing.JButton btnStopRoll;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
@@ -443,44 +425,29 @@ class GameMusic implements Runnable {
     }
 }
 
-class Dice implements Runnable {
+class Rolling extends TimerTask {
+    private int sum = 0;
     GameScreen gs;
     
-    public Dice(GameScreen gameScreen)
+    public Rolling(GameScreen gameScreen)
     {
         gs = gameScreen;
     }
     
-    private int dice1;
-    private int dice2;
+    @Override
+    public void run()
+    {
+        int dice1 = (int)(Math.random() * 6);
+        int dice2 = (int)(Math.random() * 6);
 
-    public void run(){
-
-        while(!gs.stopRoll)
-        {
-
-            dice1 = (int)(Math.random() * 6);
-            dice2 = (int)(Math.random() * 6);
-
-            gs.lblDie1.setIcon(gs.getDiceImage(dice1));
-            gs.lblDie2.setIcon(gs.getDiceImage(dice2));
-
-            try{
-                Thread.sleep(200);
-            } catch(InterruptedException e)
-            {
-                System.out.println(e);
-            }
-        }
+        gs.lblDie1.setIcon(gs.getDiceImage(dice1));
+        gs.lblDie2.setIcon(gs.getDiceImage(dice2));
+        sum = dice1 + dice2 + 2;
     }
-
-    public int getDice1()
+    
+    public int getSum()
         {
-            return dice1+1;
+            return sum;
         }
 
-    public int getDice2()
-        {
-            return dice2+1;
-        }
 }
