@@ -17,6 +17,7 @@ public class EndingScreen extends javax.swing.JFrame {
      */
     public EndingScreen(int numPlayer) {
         initComponents();
+        lblResult.setText("Player " + numPlayer + " won!");
     }
 
     /**

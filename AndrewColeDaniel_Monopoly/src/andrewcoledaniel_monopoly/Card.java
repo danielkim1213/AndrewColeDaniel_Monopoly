@@ -49,4 +49,7 @@ public class Card {
         return info;
     }
     
+    public String toString() {
+        return "Card:\nType: " + type + "\nAction: " + action + "\nValue: " + value + "\nInfo: " + info + "\n";
+    }   
 }
