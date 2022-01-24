@@ -25,6 +25,14 @@ public class Player {
         jailCards = 0;
     }
 
+    public Player(int playerNumber, int money) {
+        this(playerNumber);
+        this.money = money;
+        inJail = false;
+        turnsInJail = 0;
+        bankrupt = false;
+    }
+
     public Player(int playerNumber, int money, ArrayList<Property> properties, boolean inJail, int turnsInJail, boolean bankrupt) {
         this(playerNumber);
         this.money = money;
@@ -76,8 +84,8 @@ public class Player {
 
     public void mortgageProperty(Property property) {
         if(property.getMortgage() == false){
-        this.addMoney(property.mortgageValue);
-        property.setMortgage(true);
+            this.addMoney(property.mortgageValue);
+            property.setMortgage(true);
         } else{
             this.removeMoney(property.mortgageValue);
             property.setMortgage(false);
@@ -99,19 +107,19 @@ public class Player {
     public void setTurnsInJail(int turnsInJail) {
         this.turnsInJail = turnsInJail;
     }
-    
+
     public int getPosition() {
         return currentPosition;
     }
-    
+
     public void setPosition(int pos) {
         currentPosition = pos;
     }
-    
+
     public int getJailCards() {
         return jailCards;
     }
-    
+
     public void setJailCards(int n) {
         jailCards = n;
     }

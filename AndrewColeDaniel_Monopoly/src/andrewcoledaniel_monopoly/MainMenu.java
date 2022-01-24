@@ -144,7 +144,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         String[] gameOptions = {"limited turn", "limited time", "infinite"};
-
+        String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"};
         int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
         
         if(gameMode == 0){
@@ -153,10 +153,12 @@ public class MainMenu extends javax.swing.JFrame {
             limitedTime = Long.parseLong(JOptionPane.showInputDialog("How long would you like the game to be?"));
         }
         
-        if(gameMode != -1)
+        int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
+        
+        if(gameMode != -1);
         {
             mainBgm.musicOff();
-            gameScreen = new GameScreen(this, gameMode);
+            gameScreen = new GameScreen(this, gameMode, numPlayers);
             gameScreen.setVisible(true);
             this.setVisible(false);
         }
