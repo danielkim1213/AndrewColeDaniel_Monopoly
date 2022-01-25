@@ -31,16 +31,16 @@ public class Board {
             for (int i = 0; i < 40; i++) {
                 switch (i) {
                     case 0:
-                        board[i] = new CornerSpace("Go", SpaceType.SPACE_GO);
+                        board[i] = new CornerSpace("Go", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO);
                         break;
                     case 10:
-                        board[i] = new CornerSpace("Jail", SpaceType.SPACE_JAIL);
+                        board[i] = new CornerSpace("Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_JAIL);
                         break;
                     case 20:
-                        board[i] = new CornerSpace("Free Parking", SpaceType.SPACE_PARKING);
+                        board[i] = new CornerSpace("Free Parking", SpaceType.SPACE_CORNER, SpaceType.SPACE_PARKING);
                         break;
                     case 30:
-                        board[i] = new CornerSpace("Go To Jail", SpaceType.SPACE_GO_JAIL);
+                        board[i] = new CornerSpace("Go To Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO_JAIL);
                         break;
                     case 4:
                         board[i] = new TaxSpace("Income Tax", 200);
@@ -103,6 +103,10 @@ public class Board {
                 break;
         }
         return p;
+    }
+    
+    public Space getSpace(int s) {
+        return board[s];
     }
     
     public String toString() {

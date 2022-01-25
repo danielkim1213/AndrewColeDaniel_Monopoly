@@ -31,9 +31,9 @@ public class CardSpace implements Space {
         return cardType;
     }
 
-    public Card getCard(Card[] c, CardType t) {
+    public Card getCard(Card[] c) {
         for (Card card : c) {
-            if (card.getType() == t) {
+            if (card.getType() == cardType) {
                 return card;
             }
         }

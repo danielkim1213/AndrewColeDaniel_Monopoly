@@ -40,6 +40,7 @@ public class Deed extends Property {
             return false;
         }
         houses++;
+        updateRent();
         return true;
     }
 
@@ -48,6 +49,7 @@ public class Deed extends Property {
             return false;
         }
         hotel = true;
+        updateRent();
         return true;
     }
 
@@ -60,7 +62,12 @@ public class Deed extends Property {
         } else {
             houses--;
         }
+        updateRent();
         return true;
+    }
+    
+    public void updateRent() {
+        
     }
 
     @Override

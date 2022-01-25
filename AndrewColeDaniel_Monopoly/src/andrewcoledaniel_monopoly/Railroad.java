@@ -19,7 +19,20 @@ public class Railroad extends Property {
     }
     
     public void updateRent() {
-        ;
+        switch (this.getOwner().getRailroads()) {
+            case 1:
+                this.rent = 25;
+                break;
+            case 2:
+                this.rent = 50;
+                break;
+            case 3:
+                this.rent = 100;
+                break;
+            case 4:
+                this.rent = 200;
+                break;
+        }
     }
     
     @Override

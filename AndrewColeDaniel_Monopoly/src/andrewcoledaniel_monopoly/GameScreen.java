@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import andrewcoledaniel_monopoly.Space.SpaceType;
+import andrewcoledaniel_monopoly.Card.CardType;
 
 /**
  *
@@ -160,14 +162,27 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     private void playGame() {
-           playerTurn(playerArray[0]);
+           boolean again;
+           int turn = 0;
+           do {
+               again = playerTurn(playerArray[0], turn);
+               turn++;
+           } while (again);
+           
            for (int i = 1; i < numPlayers; i++) {
                computerTurn(i);
            }
     }
     
-    private void playerTurn(Player p) {
+    private boolean playerTurn(Player p, int turn) {
         int response;
+        int newPos;
+        
+        if (turn == 3) {
+            p.setPosition(10);
+            p.setJail(true);
+            return false;
+        }
         if (p.getJail()) {
             if (p.getJailCards() > 0) {
                 Object[] options = {"Roll for doubles", "Pay $50", "Use get out of jail free card"};
@@ -190,15 +205,22 @@ public class GameScreen extends javax.swing.JFrame {
             }
             
             if (p.getJail()) {
-                return;
+                return false;
             }
             
         }
         rollDice();
-        if (p.getPosition() + roll[0] + roll[1] > 40) {
+        newPos = p.getPosition() + roll[0] + roll[1];
+        if (newPos >= 40) {
             p.addMoney(200);
+            newPos -= 40;
         }
-
+        p.setPosition(newPos);
+        handleSpace(board.getSpace(newPos), p);
+        if (roll[0] == roll[1]) {
+            return true;
+        }
+        return false;
     }
     
     
@@ -221,6 +243,38 @@ public class GameScreen extends javax.swing.JFrame {
                 }, 
                 1500 
             );
+    }
+    
+    private void handleSpace(Space s, Player p) {
+        SpaceType st = s.getType();
+        switch (st) {
+            case SPACE_CORNER:
+                ((CornerSpace)s).performSpaceAction(p);
+                break;
+            case SPACE_PROPERTY:
+                handleProperty((Property)s, p);
+            case SPACE_CARD:
+                 Card c = ((CardSpace)s).getCard(cards);
+                 String out = ((CardSpace)s).performSpaceAction(c, p);
+                 JOptionPane.showMessageDialog(null, out);
+                 break;
+        }
+    }
+    
+    private void handleProperty(Property prop, Player p) {
+        int option;
+        if (prop.getOwner() == null) {
+            option = JOptionPane.showConfirmDialog(null, ((Space)p).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                p.buyProperty(prop);
+            } else {
+                // TODO: Auction
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
+            p.removeMoney(prop.getRent());
+            prop.getOwner().addMoney(prop.getRent());
+        }
     }
     
     private void rollDice() 

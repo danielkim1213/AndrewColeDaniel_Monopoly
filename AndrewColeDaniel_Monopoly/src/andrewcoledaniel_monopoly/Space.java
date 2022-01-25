@@ -12,10 +12,12 @@ package andrewcoledaniel_monopoly;
 public interface Space {
     
     public enum SpaceType {
+        SPACE_CORNER,
         SPACE_GO,
         SPACE_JAIL,
         SPACE_PARKING,
         SPACE_GO_JAIL,
+        SPACE_PROPERTY,
         SPACE_DEED,
         SPACE_TAX,
         SPACE_RAILROAD,

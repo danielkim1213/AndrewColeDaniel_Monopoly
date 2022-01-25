@@ -15,15 +15,18 @@ abstract public class Property implements Space {
     protected int price;
     protected int rent;
     protected int propertyNumber;
-    protected int ownerID;
+    protected Player owner;
     protected int mortgageValue;
     protected boolean mortgage;
+    protected boolean isOwned;
 
     public Property(String name, int price, int mortgageValue, int propertyNumber) {
         this.name = name;
         this.price = price;
         this.mortgageValue = mortgageValue;
         this.propertyNumber = propertyNumber;
+        owner = null;
+        isOwned = false;
     }
 
     @Override
@@ -42,13 +45,21 @@ abstract public class Property implements Space {
     public int getPropertyNumber() {
         return propertyNumber;
     }
-
-    public int getOwner() {
-        return ownerID;
+    
+    public boolean getOwned() {
+        return isOwned;
+    }
+    
+    public void setOwned(boolean b) {
+        isOwned = b;
     }
 
-    public void setOwner(int id) {
-        ownerID = id;
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player p) {
+        owner = p;
     }
 
     public int getMortgageValue() {
@@ -63,5 +74,7 @@ abstract public class Property implements Space {
         mortgage = m;
     }
 
+    public abstract void updateRent();
+    
     public abstract String toString();
 }

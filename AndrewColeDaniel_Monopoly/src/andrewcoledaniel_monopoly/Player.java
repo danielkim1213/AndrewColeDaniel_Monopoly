@@ -79,7 +79,7 @@ public class Player {
     public void buyProperty(Property property) {
         this.removeMoney(property.getPrice());
         this.properties.add(property);
-        property.setOwner(this.playerNumber);
+        property.setOwner(this);
     }
 
     public void mortgageProperty(Property property) {
@@ -128,6 +128,16 @@ public class Player {
         int num = 0;
         for (int i = 0; i < properties.size(); i++) {
             if (properties.get(i).getType() == Space.SpaceType.SPACE_UTILITY) {
+                num++;
+            }
+        }
+        return num;
+    }
+    
+    public int getRailroads() {
+        int num = 0;
+        for (int i = 0; i < properties.size(); i++) {
+            if (properties.get(i).getType() == Space.SpaceType.SPACE_RAILROAD) {
                 num++;
             }
         }

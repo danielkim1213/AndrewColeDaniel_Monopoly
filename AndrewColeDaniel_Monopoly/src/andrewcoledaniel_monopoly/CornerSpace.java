@@ -14,11 +14,13 @@ import andrewcoledaniel_monopoly.Space.SpaceType;
 public class CornerSpace implements Space {
 
     private SpaceType type;
+    private SpaceType cornerType;
     private String name;
 
-    public CornerSpace(String name, SpaceType type) {
+    public CornerSpace(String name, SpaceType type, SpaceType cornerType) {
         this.name = name;
         this.type = type;
+        this.cornerType = cornerType;
     }
 
     public String getName() {
@@ -43,5 +45,9 @@ public class CornerSpace implements Space {
     
     public SpaceType getType() {
         return type;
+    }
+    
+    public SpaceType getCornerType() {
+        return cornerType;
     }
 }
