@@ -23,14 +23,14 @@ public class Player {
         this.playerNumber = playerNumber;
         currentPosition = 0;
         jailCards = 0;
+        inJail = false;
+        turnsInJail = 0;
+        bankrupt = false;
     }
 
     public Player(int playerNumber, int money) {
         this(playerNumber);
         this.money = money;
-        inJail = false;
-        turnsInJail = 0;
-        bankrupt = false;
     }
 
     public Player(int playerNumber, int money, ArrayList<Property> properties, boolean inJail, int turnsInJail, boolean bankrupt) {

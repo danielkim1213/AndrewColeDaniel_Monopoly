@@ -227,6 +227,21 @@ public class GameScreen extends javax.swing.JFrame {
         
     }
     
+    private void updateProperties()
+    {
+        txaProperties.setText("");
+        for(int i=0; i<playerArray.length; i++)
+        {
+            txaProperties.append("Player " + (i+1) + ":\n");
+            try{
+                txaProperties.append(playerArray[i].getProperties().toString() + "\n");
+            } catch (NullPointerException e)
+            {
+                txaProperties.append("No Properties owned.\n");
+            }
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,9 +262,9 @@ public class GameScreen extends javax.swing.JFrame {
         btnMenu = new javax.swing.JButton();
         lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaProperties = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txaBankProperties = new javax.swing.JTextArea();
         lblDie2 = new javax.swing.JLabel();
         lblDie1 = new javax.swing.JLabel();
         btnStop = new javax.swing.JButton();
@@ -270,7 +285,7 @@ public class GameScreen extends javax.swing.JFrame {
 
         lblProperties.setBackground(new java.awt.Color(255, 255, 255));
         lblProperties.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblProperties.setText("Your Properties");
+        lblProperties.setText("Properties");
 
         btnBuyHouse.setText("Buy House");
         btnBuyHouse.addActionListener(new java.awt.event.ActionListener() {
@@ -296,15 +311,15 @@ public class GameScreen extends javax.swing.JFrame {
         lblBank.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblBank.setText("Bank Properties");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txaProperties.setEditable(false);
+        txaProperties.setColumns(20);
+        txaProperties.setRows(5);
+        jScrollPane2.setViewportView(txaProperties);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        txaBankProperties.setEditable(false);
+        txaBankProperties.setColumns(20);
+        txaBankProperties.setRows(5);
+        jScrollPane3.setViewportView(txaBankProperties);
 
         javax.swing.GroupLayout pnlStatusLayout = new javax.swing.GroupLayout(pnlStatus);
         pnlStatus.setLayout(pnlStatusLayout);
@@ -341,7 +356,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProperties)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,8 +365,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBank)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,8 +374,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
+        lblDie2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie2.setText("lblDie2");
 
+        lblDie1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie1.setText("lblDie1");
 
         btnStop.setText("Stop");
@@ -378,27 +395,24 @@ public class GameScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnStop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(lblDiceSum)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
+                    .addComponent(btnStop)
+                    .addComponent(lblDiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
+                .addGap(167, 167, 167)
                 .addComponent(lblDiceSum)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,6 +435,7 @@ public class GameScreen extends javax.swing.JFrame {
         loadCards();
         loadProperties();
         Player p1 = new Player(1);
+        updateProperties();
         computerTurn(1);
     }//GEN-LAST:event_formComponentShown
 
@@ -452,8 +467,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnStop;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblBank;
     private javax.swing.JLabel lblDiceSum;
     public javax.swing.JLabel lblDie1;
@@ -461,6 +474,8 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblProperties;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
+    private javax.swing.JTextArea txaBankProperties;
+    private javax.swing.JTextArea txaProperties;
     // End of variables declaration//GEN-END:variables
 }
 
