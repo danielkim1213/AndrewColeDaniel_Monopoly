@@ -164,6 +164,7 @@ public class MainMenu extends javax.swing.JFrame {
         if(gameMode != -1 && input != null)
         {
             int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
+            numPlayers += 2;
             if(numPlayers != -1)
             {
                 mainBgm.musicOff();

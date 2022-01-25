@@ -269,6 +269,55 @@ public class GameScreen extends javax.swing.JFrame {
         lblDie1 = new javax.swing.JLabel();
         btnStop = new javax.swing.JButton();
         lblDiceSum = new javax.swing.JLabel();
+        Tile1 = new javax.swing.JPanel();
+        txtGO = new javax.swing.JLabel();
+        txtGOArrow = new javax.swing.JLabel();
+        Tile2 = new javax.swing.JPanel();
+        Tile3 = new javax.swing.JPanel();
+        Tile4 = new javax.swing.JPanel();
+        Tile5 = new javax.swing.JPanel();
+        Tile6 = new javax.swing.JPanel();
+        Tile11 = new javax.swing.JPanel();
+        TileJail = new javax.swing.JPanel();
+        txtInJail = new javax.swing.JLabel();
+        txtVising1 = new javax.swing.JLabel();
+        Tile7 = new javax.swing.JPanel();
+        Tile8 = new javax.swing.JPanel();
+        Tile9 = new javax.swing.JPanel();
+        Tile10 = new javax.swing.JPanel();
+        Tile12 = new javax.swing.JPanel();
+        Tile13 = new javax.swing.JPanel();
+        Tile14 = new javax.swing.JPanel();
+        Tile15 = new javax.swing.JPanel();
+        Tile21 = new javax.swing.JPanel();
+        txtFreeParking1 = new javax.swing.JLabel();
+        txtFreeParking2 = new javax.swing.JLabel();
+        Tile16 = new javax.swing.JPanel();
+        Tile17 = new javax.swing.JPanel();
+        Tile18 = new javax.swing.JPanel();
+        Tile19 = new javax.swing.JPanel();
+        Tile20 = new javax.swing.JPanel();
+        Tile22 = new javax.swing.JPanel();
+        Tile31 = new javax.swing.JPanel();
+        txtGoToJail1 = new javax.swing.JLabel();
+        txtGoToJail2 = new javax.swing.JLabel();
+        Tile23 = new javax.swing.JPanel();
+        Tile24 = new javax.swing.JPanel();
+        Tile25 = new javax.swing.JPanel();
+        Tile26 = new javax.swing.JPanel();
+        Tile27 = new javax.swing.JPanel();
+        Tile28 = new javax.swing.JPanel();
+        Tile29 = new javax.swing.JPanel();
+        Tile30 = new javax.swing.JPanel();
+        Tile32 = new javax.swing.JPanel();
+        Tile33 = new javax.swing.JPanel();
+        Tile34 = new javax.swing.JPanel();
+        Tile35 = new javax.swing.JPanel();
+        Tile36 = new javax.swing.JPanel();
+        Tile37 = new javax.swing.JPanel();
+        Tile38 = new javax.swing.JPanel();
+        Tile39 = new javax.swing.JPanel();
+        Tile40 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -390,6 +439,706 @@ public class GameScreen extends javax.swing.JFrame {
         lblDiceSum.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDiceSum.setText("Moves: ");
 
+        Tile1.setBackground(new java.awt.Color(220, 240, 192));
+        Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile1.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        txtGO.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtGO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGO.setText("GO");
+
+        txtGOArrow.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtGOArrow.setForeground(new java.awt.Color(255, 0, 0));
+        txtGOArrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGOArrow.setText("<----");
+
+        javax.swing.GroupLayout Tile1Layout = new javax.swing.GroupLayout(Tile1);
+        Tile1.setLayout(Tile1Layout);
+        Tile1Layout.setHorizontalGroup(
+            Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(txtGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        Tile1Layout.setVerticalGroup(
+            Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(txtGO)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtGOArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        Tile2.setBackground(new java.awt.Color(220, 240, 192));
+        Tile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile2.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile2Layout = new javax.swing.GroupLayout(Tile2);
+        Tile2.setLayout(Tile2Layout);
+        Tile2Layout.setHorizontalGroup(
+            Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile2Layout.setVerticalGroup(
+            Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile3.setBackground(new java.awt.Color(220, 240, 192));
+        Tile3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile3.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile3Layout = new javax.swing.GroupLayout(Tile3);
+        Tile3.setLayout(Tile3Layout);
+        Tile3Layout.setHorizontalGroup(
+            Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile3Layout.setVerticalGroup(
+            Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile4.setBackground(new java.awt.Color(220, 240, 192));
+        Tile4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile4.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile4Layout = new javax.swing.GroupLayout(Tile4);
+        Tile4.setLayout(Tile4Layout);
+        Tile4Layout.setHorizontalGroup(
+            Tile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile4Layout.setVerticalGroup(
+            Tile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile5.setBackground(new java.awt.Color(220, 240, 192));
+        Tile5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile5.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile5Layout = new javax.swing.GroupLayout(Tile5);
+        Tile5.setLayout(Tile5Layout);
+        Tile5Layout.setHorizontalGroup(
+            Tile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile5Layout.setVerticalGroup(
+            Tile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile6.setBackground(new java.awt.Color(220, 240, 192));
+        Tile6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile6.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile6Layout = new javax.swing.GroupLayout(Tile6);
+        Tile6.setLayout(Tile6Layout);
+        Tile6Layout.setHorizontalGroup(
+            Tile6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile6Layout.setVerticalGroup(
+            Tile6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile11.setBackground(new java.awt.Color(220, 240, 192));
+        Tile11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile11.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        TileJail.setBackground(new java.awt.Color(255, 150, 0));
+        TileJail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TileJail.setPreferredSize(new java.awt.Dimension(70, 70));
+
+        txtInJail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtInJail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtInJail.setText("IN JAIL");
+        txtInJail.setPreferredSize(new java.awt.Dimension(30, 15));
+
+        javax.swing.GroupLayout TileJailLayout = new javax.swing.GroupLayout(TileJail);
+        TileJail.setLayout(TileJailLayout);
+        TileJailLayout.setHorizontalGroup(
+            TileJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TileJailLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtInJail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        TileJailLayout.setVerticalGroup(
+            TileJailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TileJailLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtInJail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        txtVising1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtVising1.setText("JUST VISITING");
+        txtVising1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        txtVising1.setPreferredSize(new java.awt.Dimension(70, 15));
+
+        javax.swing.GroupLayout Tile11Layout = new javax.swing.GroupLayout(Tile11);
+        Tile11.setLayout(Tile11Layout);
+        Tile11Layout.setHorizontalGroup(
+            Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile11Layout.createSequentialGroup()
+                .addGroup(Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Tile11Layout.createSequentialGroup()
+                        .addComponent(txtVising1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(Tile11Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(TileJail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        Tile11Layout.setVerticalGroup(
+            Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile11Layout.createSequentialGroup()
+                .addComponent(TileJail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtVising1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 7, Short.MAX_VALUE))
+        );
+
+        Tile7.setBackground(new java.awt.Color(220, 240, 192));
+        Tile7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile7.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile7Layout = new javax.swing.GroupLayout(Tile7);
+        Tile7.setLayout(Tile7Layout);
+        Tile7Layout.setHorizontalGroup(
+            Tile7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile7Layout.setVerticalGroup(
+            Tile7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile8.setBackground(new java.awt.Color(220, 240, 192));
+        Tile8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile8.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile8Layout = new javax.swing.GroupLayout(Tile8);
+        Tile8.setLayout(Tile8Layout);
+        Tile8Layout.setHorizontalGroup(
+            Tile8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile8Layout.setVerticalGroup(
+            Tile8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile9.setBackground(new java.awt.Color(220, 240, 192));
+        Tile9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile9.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile9Layout = new javax.swing.GroupLayout(Tile9);
+        Tile9.setLayout(Tile9Layout);
+        Tile9Layout.setHorizontalGroup(
+            Tile9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile9Layout.setVerticalGroup(
+            Tile9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile10.setBackground(new java.awt.Color(220, 240, 192));
+        Tile10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile10.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile10Layout = new javax.swing.GroupLayout(Tile10);
+        Tile10.setLayout(Tile10Layout);
+        Tile10Layout.setHorizontalGroup(
+            Tile10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile10Layout.setVerticalGroup(
+            Tile10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile12.setBackground(new java.awt.Color(220, 240, 192));
+        Tile12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile12.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile12Layout = new javax.swing.GroupLayout(Tile12);
+        Tile12.setLayout(Tile12Layout);
+        Tile12Layout.setHorizontalGroup(
+            Tile12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile12Layout.setVerticalGroup(
+            Tile12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile13.setBackground(new java.awt.Color(220, 240, 192));
+        Tile13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile13.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile13Layout = new javax.swing.GroupLayout(Tile13);
+        Tile13.setLayout(Tile13Layout);
+        Tile13Layout.setHorizontalGroup(
+            Tile13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile13Layout.setVerticalGroup(
+            Tile13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile14.setBackground(new java.awt.Color(220, 240, 192));
+        Tile14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile14.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile14Layout = new javax.swing.GroupLayout(Tile14);
+        Tile14.setLayout(Tile14Layout);
+        Tile14Layout.setHorizontalGroup(
+            Tile14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile14Layout.setVerticalGroup(
+            Tile14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile15.setBackground(new java.awt.Color(220, 240, 192));
+        Tile15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile15.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile15Layout = new javax.swing.GroupLayout(Tile15);
+        Tile15.setLayout(Tile15Layout);
+        Tile15Layout.setHorizontalGroup(
+            Tile15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile15Layout.setVerticalGroup(
+            Tile15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile21.setBackground(new java.awt.Color(220, 240, 192));
+        Tile21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile21.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        txtFreeParking1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtFreeParking1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtFreeParking1.setText("FREE");
+
+        txtFreeParking2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtFreeParking2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtFreeParking2.setText("PARKING");
+
+        javax.swing.GroupLayout Tile21Layout = new javax.swing.GroupLayout(Tile21);
+        Tile21.setLayout(Tile21Layout);
+        Tile21Layout.setHorizontalGroup(
+            Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile21Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(8, 8, 8))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtFreeParking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        Tile21Layout.setVerticalGroup(
+            Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile21Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtFreeParking1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFreeParking2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        Tile16.setBackground(new java.awt.Color(220, 240, 192));
+        Tile16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile16.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile16Layout = new javax.swing.GroupLayout(Tile16);
+        Tile16.setLayout(Tile16Layout);
+        Tile16Layout.setHorizontalGroup(
+            Tile16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile16Layout.setVerticalGroup(
+            Tile16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile17.setBackground(new java.awt.Color(220, 240, 192));
+        Tile17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile17.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile17Layout = new javax.swing.GroupLayout(Tile17);
+        Tile17.setLayout(Tile17Layout);
+        Tile17Layout.setHorizontalGroup(
+            Tile17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile17Layout.setVerticalGroup(
+            Tile17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile18.setBackground(new java.awt.Color(220, 240, 192));
+        Tile18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile18.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile18Layout = new javax.swing.GroupLayout(Tile18);
+        Tile18.setLayout(Tile18Layout);
+        Tile18Layout.setHorizontalGroup(
+            Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile18Layout.setVerticalGroup(
+            Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile19.setBackground(new java.awt.Color(220, 240, 192));
+        Tile19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile19.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile19Layout = new javax.swing.GroupLayout(Tile19);
+        Tile19.setLayout(Tile19Layout);
+        Tile19Layout.setHorizontalGroup(
+            Tile19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile19Layout.setVerticalGroup(
+            Tile19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile20.setBackground(new java.awt.Color(220, 240, 192));
+        Tile20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile20.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile20Layout = new javax.swing.GroupLayout(Tile20);
+        Tile20.setLayout(Tile20Layout);
+        Tile20Layout.setHorizontalGroup(
+            Tile20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile20Layout.setVerticalGroup(
+            Tile20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile22.setBackground(new java.awt.Color(220, 240, 192));
+        Tile22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile22.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile22Layout = new javax.swing.GroupLayout(Tile22);
+        Tile22.setLayout(Tile22Layout);
+        Tile22Layout.setHorizontalGroup(
+            Tile22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile22Layout.setVerticalGroup(
+            Tile22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile31.setBackground(new java.awt.Color(220, 240, 192));
+        Tile31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile31.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        txtGoToJail1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtGoToJail1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGoToJail1.setText("GO TO");
+
+        txtGoToJail2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtGoToJail2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGoToJail2.setText("JAIL");
+
+        javax.swing.GroupLayout Tile31Layout = new javax.swing.GroupLayout(Tile31);
+        Tile31.setLayout(Tile31Layout);
+        Tile31Layout.setHorizontalGroup(
+            Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGoToJail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGoToJail2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        Tile31Layout.setVerticalGroup(
+            Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Tile31Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(txtGoToJail1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtGoToJail2)
+                .addGap(18, 18, 18))
+        );
+
+        Tile23.setBackground(new java.awt.Color(220, 240, 192));
+        Tile23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile23.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile23Layout = new javax.swing.GroupLayout(Tile23);
+        Tile23.setLayout(Tile23Layout);
+        Tile23Layout.setHorizontalGroup(
+            Tile23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile23Layout.setVerticalGroup(
+            Tile23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile24.setBackground(new java.awt.Color(220, 240, 192));
+        Tile24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile24.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile24Layout = new javax.swing.GroupLayout(Tile24);
+        Tile24.setLayout(Tile24Layout);
+        Tile24Layout.setHorizontalGroup(
+            Tile24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile24Layout.setVerticalGroup(
+            Tile24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile25.setBackground(new java.awt.Color(220, 240, 192));
+        Tile25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile25.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile25Layout = new javax.swing.GroupLayout(Tile25);
+        Tile25.setLayout(Tile25Layout);
+        Tile25Layout.setHorizontalGroup(
+            Tile25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile25Layout.setVerticalGroup(
+            Tile25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile26.setBackground(new java.awt.Color(220, 240, 192));
+        Tile26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile26.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile26Layout = new javax.swing.GroupLayout(Tile26);
+        Tile26.setLayout(Tile26Layout);
+        Tile26Layout.setHorizontalGroup(
+            Tile26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile26Layout.setVerticalGroup(
+            Tile26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile27.setBackground(new java.awt.Color(220, 240, 192));
+        Tile27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile27.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile27Layout = new javax.swing.GroupLayout(Tile27);
+        Tile27.setLayout(Tile27Layout);
+        Tile27Layout.setHorizontalGroup(
+            Tile27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile27Layout.setVerticalGroup(
+            Tile27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile28.setBackground(new java.awt.Color(220, 240, 192));
+        Tile28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile28.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile28Layout = new javax.swing.GroupLayout(Tile28);
+        Tile28.setLayout(Tile28Layout);
+        Tile28Layout.setHorizontalGroup(
+            Tile28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile28Layout.setVerticalGroup(
+            Tile28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile29.setBackground(new java.awt.Color(220, 240, 192));
+        Tile29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile29.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile29Layout = new javax.swing.GroupLayout(Tile29);
+        Tile29.setLayout(Tile29Layout);
+        Tile29Layout.setHorizontalGroup(
+            Tile29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile29Layout.setVerticalGroup(
+            Tile29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile30.setBackground(new java.awt.Color(220, 240, 192));
+        Tile30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile30.setPreferredSize(new java.awt.Dimension(60, 100));
+
+        javax.swing.GroupLayout Tile30Layout = new javax.swing.GroupLayout(Tile30);
+        Tile30.setLayout(Tile30Layout);
+        Tile30Layout.setHorizontalGroup(
+            Tile30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+        Tile30Layout.setVerticalGroup(
+            Tile30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        Tile32.setBackground(new java.awt.Color(220, 240, 192));
+        Tile32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile32.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile32Layout = new javax.swing.GroupLayout(Tile32);
+        Tile32.setLayout(Tile32Layout);
+        Tile32Layout.setHorizontalGroup(
+            Tile32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile32Layout.setVerticalGroup(
+            Tile32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile33.setBackground(new java.awt.Color(220, 240, 192));
+        Tile33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile33.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile33Layout = new javax.swing.GroupLayout(Tile33);
+        Tile33.setLayout(Tile33Layout);
+        Tile33Layout.setHorizontalGroup(
+            Tile33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile33Layout.setVerticalGroup(
+            Tile33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile34.setBackground(new java.awt.Color(220, 240, 192));
+        Tile34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile34.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile34Layout = new javax.swing.GroupLayout(Tile34);
+        Tile34.setLayout(Tile34Layout);
+        Tile34Layout.setHorizontalGroup(
+            Tile34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile34Layout.setVerticalGroup(
+            Tile34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile35.setBackground(new java.awt.Color(220, 240, 192));
+        Tile35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile35.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile35Layout = new javax.swing.GroupLayout(Tile35);
+        Tile35.setLayout(Tile35Layout);
+        Tile35Layout.setHorizontalGroup(
+            Tile35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile35Layout.setVerticalGroup(
+            Tile35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile36.setBackground(new java.awt.Color(220, 240, 192));
+        Tile36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile36.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile36Layout = new javax.swing.GroupLayout(Tile36);
+        Tile36.setLayout(Tile36Layout);
+        Tile36Layout.setHorizontalGroup(
+            Tile36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile36Layout.setVerticalGroup(
+            Tile36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile37.setBackground(new java.awt.Color(220, 240, 192));
+        Tile37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile37.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile37Layout = new javax.swing.GroupLayout(Tile37);
+        Tile37.setLayout(Tile37Layout);
+        Tile37Layout.setHorizontalGroup(
+            Tile37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile37Layout.setVerticalGroup(
+            Tile37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile38.setBackground(new java.awt.Color(220, 240, 192));
+        Tile38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile38.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile38Layout = new javax.swing.GroupLayout(Tile38);
+        Tile38.setLayout(Tile38Layout);
+        Tile38Layout.setHorizontalGroup(
+            Tile38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile38Layout.setVerticalGroup(
+            Tile38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile39.setBackground(new java.awt.Color(220, 240, 192));
+        Tile39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile39.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile39Layout = new javax.swing.GroupLayout(Tile39);
+        Tile39.setLayout(Tile39Layout);
+        Tile39Layout.setHorizontalGroup(
+            Tile39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile39Layout.setVerticalGroup(
+            Tile39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        Tile40.setBackground(new java.awt.Color(220, 240, 192));
+        Tile40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tile40.setPreferredSize(new java.awt.Dimension(100, 60));
+
+        javax.swing.GroupLayout Tile40Layout = new javax.swing.GroupLayout(Tile40);
+        Tile40.setLayout(Tile40Layout);
+        Tile40Layout.setHorizontalGroup(
+            Tile40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+        Tile40Layout.setVerticalGroup(
+            Tile40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -399,16 +1148,115 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Upstream, based on origin/master
                     .addComponent(btnStop)
                     .addComponent(lblDiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+=======
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Tile21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Tile17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Tile11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Tile10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Tile5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Tile27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(240, 240, 240)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Tile18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tile19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tile14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tile16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tile15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnStop)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(95, 95, 95)
+                                        .addComponent(lblDiceSum)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Tile33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0)
+>>>>>>> 78ba119 Basic game board made and bug fix
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< Upstream, based on origin/master
             .addGroup(layout.createSequentialGroup()
                 .addGap(167, 167, 167)
                 .addComponent(lblDiceSum)
@@ -418,6 +1266,85 @@ public class GameScreen extends javax.swing.JFrame {
                     .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStop))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Tile40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Tile16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Tile31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Tile30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(lblDiceSum)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnStop)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Tile32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(Tile34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Tile35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(Tile39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, 0)
+                        .addComponent(Tile12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Tile2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tile6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+>>>>>>> 78ba119 Basic game board made and bug fix
         );
 
         pack();
@@ -459,6 +1386,47 @@ public class GameScreen extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Tile1;
+    private javax.swing.JPanel Tile10;
+    private javax.swing.JPanel Tile11;
+    private javax.swing.JPanel Tile12;
+    private javax.swing.JPanel Tile13;
+    private javax.swing.JPanel Tile14;
+    private javax.swing.JPanel Tile15;
+    private javax.swing.JPanel Tile16;
+    private javax.swing.JPanel Tile17;
+    private javax.swing.JPanel Tile18;
+    private javax.swing.JPanel Tile19;
+    private javax.swing.JPanel Tile2;
+    private javax.swing.JPanel Tile20;
+    private javax.swing.JPanel Tile21;
+    private javax.swing.JPanel Tile22;
+    private javax.swing.JPanel Tile23;
+    private javax.swing.JPanel Tile24;
+    private javax.swing.JPanel Tile25;
+    private javax.swing.JPanel Tile26;
+    private javax.swing.JPanel Tile27;
+    private javax.swing.JPanel Tile28;
+    private javax.swing.JPanel Tile29;
+    private javax.swing.JPanel Tile3;
+    private javax.swing.JPanel Tile30;
+    private javax.swing.JPanel Tile31;
+    private javax.swing.JPanel Tile32;
+    private javax.swing.JPanel Tile33;
+    private javax.swing.JPanel Tile34;
+    private javax.swing.JPanel Tile35;
+    private javax.swing.JPanel Tile36;
+    private javax.swing.JPanel Tile37;
+    private javax.swing.JPanel Tile38;
+    private javax.swing.JPanel Tile39;
+    private javax.swing.JPanel Tile4;
+    private javax.swing.JPanel Tile40;
+    private javax.swing.JPanel Tile5;
+    private javax.swing.JPanel Tile6;
+    private javax.swing.JPanel Tile7;
+    private javax.swing.JPanel Tile8;
+    private javax.swing.JPanel Tile9;
+    private javax.swing.JPanel TileJail;
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
@@ -474,8 +1442,19 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblProperties;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
+<<<<<<< Upstream, based on origin/master
     private javax.swing.JTextArea txaBankProperties;
     private javax.swing.JTextArea txaProperties;
+=======
+    private javax.swing.JLabel txtFreeParking1;
+    private javax.swing.JLabel txtFreeParking2;
+    private javax.swing.JLabel txtGO;
+    private javax.swing.JLabel txtGOArrow;
+    private javax.swing.JLabel txtGoToJail1;
+    private javax.swing.JLabel txtGoToJail2;
+    private javax.swing.JLabel txtInJail;
+    private javax.swing.JLabel txtVising1;
+>>>>>>> 78ba119 Basic game board made and bug fix
     // End of variables declaration//GEN-END:variables
 }
 
