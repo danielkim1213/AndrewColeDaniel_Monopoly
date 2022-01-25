@@ -147,20 +147,30 @@ public class MainMenu extends javax.swing.JFrame {
         String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"};
         int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
         
-        if(gameMode == 0){
-            limitedTurns = Integer.parseInt(JOptionPane.showInputDialog("How many turns would you like to play?"));
-        } else if(gameMode == 1){
-            limitedTime = Long.parseLong(JOptionPane.showInputDialog("How long would you like the game to be?"));
+        String input = "";
+        try { 
+            if(gameMode == 0){
+                input = JOptionPane.showInputDialog("How many turns would you like to play?");
+                limitedTurns = Integer.parseInt(input);
+            } else if(gameMode == 1){
+                input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)");
+                limitedTime = Long.parseLong(input);
+            }
+        }catch (NumberFormatException e) {
+            input = null;
         }
         
-        int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
         
-        if(gameMode != -1);
+        if(gameMode != -1 && input != null)
         {
-            mainBgm.musicOff();
-            gameScreen = new GameScreen(this, gameMode, numPlayers);
-            gameScreen.setVisible(true);
-            this.setVisible(false);
+            int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
+            if(numPlayers != -1)
+            {
+                mainBgm.musicOff();
+                gameScreen = new GameScreen(this, gameMode, numPlayers);
+                gameScreen.setVisible(true);
+                this.setVisible(false);
+            }
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
 
