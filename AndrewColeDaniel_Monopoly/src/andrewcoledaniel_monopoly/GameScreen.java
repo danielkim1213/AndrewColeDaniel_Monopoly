@@ -38,6 +38,8 @@ public class GameScreen extends javax.swing.JFrame {
     private Player[] playerArray;
     public Timer timerRoll;
     public int moves;
+    private Board board;
+    public static int[] roll = new int[2];
     
     /**
      * Creates new form GameScreen
@@ -56,6 +58,9 @@ public class GameScreen extends javax.swing.JFrame {
         playerArray = new Player[numPlayers];
         startTime = System.currentTimeMillis() * 1000;
         currentTurn = 0;
+        board = new Board();
+        loadCards();
+        generatePlayers();
     }
     
     
@@ -96,44 +101,6 @@ public class GameScreen extends javax.swing.JFrame {
         lblDie2.setIcon(Die[3]);
     }
     
-    public void loadProperties() {
-        String name;
-        int price, mortgageValue, rent, houseCost;
-        int propertyNumber = 0;
-        try {
-            File propertiesFile = new File("src//andrewcoledaniel_monopoly//saves//properties.txt");
-            Scanner s = new Scanner(propertiesFile);
-            while (s.hasNextLine()) {
-                if (propertyNumber == 2 || propertyNumber == 10 || propertyNumber == 17 || propertyNumber == 25) {
-                    name = s.nextLine();
-                    price = Integer.parseInt(s.nextLine());
-                    mortgageValue = Integer.parseInt(s.nextLine());
-                    propertyNumber = Integer.parseInt(s.nextLine());
-                    Property railRoad = new Railroad(name, price, mortgageValue, propertyNumber);
-                    propertyArray.add(railRoad);
-                } else if (propertyNumber == 7 || propertyNumber == 20) {
-                    name = s.nextLine();
-                    price = Integer.parseInt(s.nextLine());
-                    mortgageValue = Integer.parseInt(s.nextLine());
-                    propertyNumber = Integer.parseInt(s.nextLine());
-                    Property utilites = new Utility(name, price, mortgageValue, propertyNumber);
-                    propertyArray.add(utilites);
-                } else {
-                    name = s.nextLine();
-                    price = Integer.parseInt(s.nextLine());
-                    mortgageValue = Integer.parseInt(s.nextLine());
-                    houseCost = Integer.parseInt(s.nextLine());
-                    rent = Integer.parseInt(s.nextLine());
-                    propertyNumber = Integer.parseInt(s.nextLine());
-                    Property deed = new Deed(name, price, mortgageValue, houseCost, rent, propertyNumber);
-                    propertyArray.add(deed);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Properties file not found");
-        }
-    }
-    
     public ImageIcon getDiceImage(int index)
     {
         return Die[index];
@@ -164,7 +131,7 @@ public class GameScreen extends javax.swing.JFrame {
         endingScreen.setVisible(true);
     }
     
-    public void loadCards() {
+    private void loadCards() {
         int index = 0;
         CardType type;
         CardAction action;
@@ -192,9 +159,46 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
     
-    private void turn(Player p)
-    {
+    private void playGame() {
+           playerTurn(playerArray[0]);
+           for (int i = 1; i < numPlayers; i++) {
+               computerTurn(i);
+           }
+    }
+    
+    private void playerTurn(Player p) {
+        int response;
+        if (p.getJail()) {
+            if (p.getJailCards() > 0) {
+                Object[] options = {"Roll for doubles", "Pay $50", "Use get out of jail free card"};
+                response = JOptionPane.showOptionDialog(null, "You are in Jail. What would you like to do?", "In Jail", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+            } else {
+                Object[] options = {"Roll for doubles", "Pay $50"};
+                response = JOptionPane.showOptionDialog(null, "You are in Jail. What would you like to do?", "In Jail", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            }
+            switch (response) {
+                case 0:
+                    break; // roll for doubles
+                case 1:
+                    p.removeMoney(50);
+                    p.setJail(false);
+                    break;
+                case 2:
+                    p.setJailCards(p.getJailCards() - 1);
+                    p.setJail(false);
+                    break;
+            }
+            
+            if (p.getJail()) {
+                return;
+            }
+            
+        }
         rollDice();
+        if (p.getPosition() + roll[0] + roll[1] > 40) {
+            p.addMoney(200);
+        }
+
     }
     
     
@@ -1223,10 +1227,10 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCards();
-        loadProperties();
         Player p1 = new Player(1);
         updateProperties();
         computerTurn(1);
+        playGame();
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
@@ -1358,6 +1362,8 @@ class Rolling extends TimerTask {
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
         sum = dice1 + dice2 + 2;
+        gs.roll[0] = dice1 + 1;
+        gs.roll[1] = dice2 + 1;
     }
     
 

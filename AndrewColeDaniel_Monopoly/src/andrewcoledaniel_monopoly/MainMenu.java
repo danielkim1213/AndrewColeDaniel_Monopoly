@@ -168,7 +168,7 @@ public class MainMenu extends javax.swing.JFrame {
             if(numPlayers != -1)
             {
                 mainBgm.musicOff();
-                gameScreen = new GameScreen(this, gameMode, numPlayers+2);
+                gameScreen = new GameScreen(this, gameMode, numPlayers + 1);
                 gameScreen.setVisible(true);
                 this.setVisible(false);
             }
