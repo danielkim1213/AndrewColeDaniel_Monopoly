@@ -66,6 +66,8 @@ public class GameScreen extends javax.swing.JFrame {
         board = new Board();
         loadCards();
         generatePlayers();
+        updateProperties();
+        playGame();
     }
     
     
@@ -183,7 +185,7 @@ public class GameScreen extends javax.swing.JFrame {
         int response;
         int newPos;
         
-        if (turn == 3) {
+        if (turn > 3) {
             p.setPosition(10);
             p.setJail(true);
             return false;
@@ -210,8 +212,10 @@ public class GameScreen extends javax.swing.JFrame {
             }
             
             if (p.getJail()) {
+                p.setTurnsInJail(p.getTurnsInJail() + 1);
                 return false;
             }
+            p.setTurnsInJail(0);
             
         }
         JOptionPane.showMessageDialog(null, "Start Rolling Dice");
@@ -228,6 +232,8 @@ public class GameScreen extends javax.swing.JFrame {
         handleSpace(board.getSpace(newPos), p);
         updateProperties();
         return ((Rolling)tsk).isDoubleDice();
+        JOptionPane.showMessageDialog(null, "End Turn");
+        return roll[0] == roll[1];
     }
     
     
@@ -1283,9 +1289,6 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        loadCards();
-        Player p1 = new Player(1);
-        updateProperties();
         playGame();
     }//GEN-LAST:event_formComponentShown
 
