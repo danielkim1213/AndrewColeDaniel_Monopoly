@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -31,7 +32,7 @@ public class GameScreen extends javax.swing.JFrame {
     private final GameMusic bgm;
     private Thread gameBgmThread;
     private int gameMode;
-    private ImageIcon[] Die = new ImageIcon[6];
+    private final ImageIcon[] Die = new ImageIcon[6];
     public Boolean stopRoll = false;
     private long startTime;
     private int currentTurn;
@@ -400,6 +401,11 @@ public class GameScreen extends javax.swing.JFrame {
         btnMortgage.setText("Mortgage Property");
 
         btnMortgage1.setText("Save");
+        btnMortgage1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMortgage1ActionPerformed(evt);
+            }
+        });
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -1303,6 +1309,33 @@ public class GameScreen extends javax.swing.JFrame {
         stopRoll = false;
         lblDiceSum.setText("Moves: " + moves);
     }//GEN-LAST:event_btnStopActionPerformed
+
+    private void btnMortgage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgage1ActionPerformed
+        String path = "";
+        JFileChooser fileChooser = new JFileChooser();
+        try{
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int result = fileChooser.showSaveDialog(this);
+            if(result == JFileChooser.APPROVE_OPTION)
+            {
+                path = fileChooser.getSelectedFile().getAbsolutePath();
+            }
+            File file = new File(path + "MonopolySave.txt");
+            System.out.println(file.getAbsolutePath());
+            if(file.createNewFile())
+            {
+                FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath()));
+                ObjectOutput s = new ObjectOutputStream(saving);
+                s.writeInt(gameMode);
+                s.writeInt(currentTurn);
+                s.writeInt(numPlayers);
+                s.writeObject(playerArray);
+            }
+        } catch(Exception e)
+        {
+            System.out.print(e);
+        }
+    }//GEN-LAST:event_btnMortgage1ActionPerformed
 
    
 
