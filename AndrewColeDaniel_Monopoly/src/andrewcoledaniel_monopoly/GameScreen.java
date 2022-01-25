@@ -345,12 +345,17 @@ public class GameScreen extends javax.swing.JFrame {
         lblDie1 = new javax.swing.JLabel();
         lblDiceSum = new javax.swing.JLabel();
         Tile1 = new javax.swing.JPanel();
+        txtGO = new javax.swing.JLabel();
+        txtGOArrow = new javax.swing.JLabel();
         Tile2 = new javax.swing.JPanel();
+        txfProperty1 = new javax.swing.JTextField();
         Tile3 = new javax.swing.JPanel();
         Tile4 = new javax.swing.JPanel();
         Tile5 = new javax.swing.JPanel();
         Tile6 = new javax.swing.JPanel();
         Tile11 = new javax.swing.JPanel();
+        txfJail = new javax.swing.JTextField();
+        txtJustVisting = new javax.swing.JLabel();
         Tile7 = new javax.swing.JPanel();
         Tile8 = new javax.swing.JPanel();
         Tile9 = new javax.swing.JPanel();
@@ -365,9 +370,13 @@ public class GameScreen extends javax.swing.JFrame {
         Tile19 = new javax.swing.JPanel();
         Tile20 = new javax.swing.JPanel();
         Tile21 = new javax.swing.JPanel();
+        txtFreeParking2 = new javax.swing.JLabel();
+        txtFreeParking1 = new javax.swing.JLabel();
         Tile22 = new javax.swing.JPanel();
         Tile23 = new javax.swing.JPanel();
         Tile31 = new javax.swing.JPanel();
+        txtGoToJail1 = new javax.swing.JLabel();
+        txtGoToJail2 = new javax.swing.JLabel();
         Tile24 = new javax.swing.JPanel();
         Tile25 = new javax.swing.JPanel();
         Tile26 = new javax.swing.JPanel();
@@ -510,30 +519,55 @@ public class GameScreen extends javax.swing.JFrame {
         Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile1.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        txtGO.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtGO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGO.setText("GO");
+
+        txtGOArrow.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtGOArrow.setForeground(new java.awt.Color(255, 0, 0));
+        txtGOArrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGOArrow.setText("<-----");
+
         javax.swing.GroupLayout Tile1Layout = new javax.swing.GroupLayout(Tile1);
         Tile1.setLayout(Tile1Layout);
         Tile1Layout.setHorizontalGroup(
             Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addContainerGap())
         );
         Tile1Layout.setVerticalGroup(
             Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtGO)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtGOArrow)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         Tile2.setBackground(new java.awt.Color(220, 255, 196));
         Tile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile2.setPreferredSize(new java.awt.Dimension(75, 100));
 
+        txfProperty1.setBackground(new java.awt.Color(234, 221, 202));
+        txfProperty1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfProperty1.setText("Property 1");
+
         javax.swing.GroupLayout Tile2Layout = new javax.swing.GroupLayout(Tile2);
         Tile2.setLayout(Tile2Layout);
         Tile2Layout.setHorizontalGroup(
             Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 73, Short.MAX_VALUE)
+            .addComponent(txfProperty1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
         );
         Tile2Layout.setVerticalGroup(
             Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile2Layout.createSequentialGroup()
+                .addComponent(txfProperty1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 68, Short.MAX_VALUE))
         );
 
         Tile3.setBackground(new java.awt.Color(220, 255, 196));
@@ -600,15 +634,37 @@ public class GameScreen extends javax.swing.JFrame {
         Tile11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile11.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        txfJail.setEditable(false);
+        txfJail.setBackground(new java.awt.Color(255, 190, 0));
+        txfJail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txfJail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfJail.setText("IN JAIL");
+        txfJail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfJail.setPreferredSize(new java.awt.Dimension(70, 70));
+
+        txtJustVisting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtJustVisting.setText("JUST VISITING");
+
         javax.swing.GroupLayout Tile11Layout = new javax.swing.GroupLayout(Tile11);
         Tile11.setLayout(Tile11Layout);
         Tile11Layout.setHorizontalGroup(
             Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Tile11Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         Tile11Layout.setVerticalGroup(
             Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile11Layout.createSequentialGroup()
+                .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtJustVisting)
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         Tile7.setBackground(new java.awt.Color(220, 255, 196));
@@ -810,15 +866,33 @@ public class GameScreen extends javax.swing.JFrame {
         Tile21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile21.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        txtFreeParking2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtFreeParking2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtFreeParking2.setText("PARKING");
+
+        txtFreeParking1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtFreeParking1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtFreeParking1.setText("FREE");
+
         javax.swing.GroupLayout Tile21Layout = new javax.swing.GroupLayout(Tile21);
         Tile21.setLayout(Tile21Layout);
         Tile21Layout.setHorizontalGroup(
             Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(txtFreeParking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         Tile21Layout.setVerticalGroup(
             Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile21Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(txtFreeParking1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFreeParking2)
+                .addGap(27, 27, 27))
         );
 
         Tile22.setBackground(new java.awt.Color(220, 255, 196));
@@ -855,15 +929,33 @@ public class GameScreen extends javax.swing.JFrame {
         Tile31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile31.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        txtGoToJail1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtGoToJail1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGoToJail1.setText("GO TO");
+
+        txtGoToJail2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtGoToJail2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGoToJail2.setText("JAIL");
+
         javax.swing.GroupLayout Tile31Layout = new javax.swing.GroupLayout(Tile31);
         Tile31.setLayout(Tile31Layout);
         Tile31Layout.setHorizontalGroup(
             Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGoToJail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGoToJail2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addContainerGap())
         );
         Tile31Layout.setVerticalGroup(
             Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(Tile31Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(txtGoToJail1)
+                .addGap(18, 18, 18)
+                .addComponent(txtGoToJail2)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         Tile24.setBackground(new java.awt.Color(220, 255, 196));
@@ -1389,6 +1481,15 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlStatus;
     private javax.swing.JTextArea txaBankProperties;
     private javax.swing.JTextArea txaProperties;
+    private javax.swing.JTextField txfJail;
+    private javax.swing.JTextField txfProperty1;
+    private javax.swing.JLabel txtFreeParking1;
+    private javax.swing.JLabel txtFreeParking2;
+    private javax.swing.JLabel txtGO;
+    private javax.swing.JLabel txtGOArrow;
+    private javax.swing.JLabel txtGoToJail1;
+    private javax.swing.JLabel txtGoToJail2;
+    private javax.swing.JLabel txtJustVisting;
     // End of variables declaration//GEN-END:variables
 }
 
