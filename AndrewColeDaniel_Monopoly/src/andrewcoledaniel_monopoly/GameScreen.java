@@ -1329,7 +1329,7 @@ public class GameScreen extends javax.swing.JFrame {
                 s.writeInt(gameMode);
                 s.writeInt(currentTurn);
                 s.writeInt(numPlayers);
-                s.writeObject(playerArray);
+                s.writeObject(playerArray); 
             }
         } catch(Exception e)
         {
