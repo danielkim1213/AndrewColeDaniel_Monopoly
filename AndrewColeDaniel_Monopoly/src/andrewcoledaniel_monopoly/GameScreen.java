@@ -11,6 +11,7 @@ import andrewcoledaniel_monopoly.Card.*;
 import java.awt.Image;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.*;
@@ -195,37 +196,36 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void turn(Player p)
     {
-        rollDice(false);
+        rollDice();
     }
+    
     
     private void computerTurn(int computerIndex){
         Player computer = playerArray[computerIndex];
-        rollDice(true);
+        rollDice();
         
-        if(computerIndex == playerArray.length - 1){
-            turn(playerArray[0]);
-        } else{
-            computerTurn(computerIndex ++);
-        }
+        new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            stopRoll = true;
+                            Thread.sleep(160);
+                            stopRoll = false;
+                            lblDiceSum.setText("Moves: " + moves);
+                        } catch (InterruptedException ex) {
+                            System.out.println(ex);
+                        }
+                    }
+                }, 
+                1500 
+            );
     }
     
-    private void rollDice(Boolean auto) 
+    private void rollDice() 
     {
         TimerTask tsk = new Rolling(this);
         timerRoll = new Timer(); 
         timerRoll.scheduleAtFixedRate(tsk, 125, 150);
-        
-        if(auto)
-        {
-            try {
-                Thread.sleep(2000);
-                stopRoll = true;
-                Thread.sleep(200);
-                stopRoll = false;
-            } catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
-        }
         
     }
     
@@ -423,7 +423,7 @@ public class GameScreen extends javax.swing.JFrame {
         loadCards();
         loadProperties();
         Player p1 = new Player(1);
-        turn(playerArray[0]);
+        computerTurn(1);
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
