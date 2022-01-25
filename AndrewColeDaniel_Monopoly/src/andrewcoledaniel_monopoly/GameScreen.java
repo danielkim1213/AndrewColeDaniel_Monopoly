@@ -19,6 +19,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFileChooser;
 
 /**
@@ -170,10 +172,10 @@ public class GameScreen extends javax.swing.JFrame {
                turn++;
            } while (again);
            
-           
+           /*
            for (int i = 1; i < numPlayers; i++) {
                computerTurn(i);
-           }
+           }*/
            
     }
     
@@ -212,7 +214,11 @@ public class GameScreen extends javax.swing.JFrame {
             }
             
         }
+        JOptionPane.showMessageDialog(null, "Start Rolling Dice");
         rollDice();
+        JOptionPane.showMessageDialog(null, "Click to stop");
+        stopRolling();
+        
         newPos = p.getPosition() + moves;
         if (newPos >= 40) {
             p.addMoney(200);
@@ -220,10 +226,8 @@ public class GameScreen extends javax.swing.JFrame {
         }
         p.setPosition(newPos);
         handleSpace(board.getSpace(newPos), p);
-        if (((Rolling)tsk).isDoubleDice()) {
-            return true;
-        }
-        return false;
+        updateProperties();
+        return ((Rolling)tsk).isDoubleDice();
     }
     
     
@@ -234,14 +238,7 @@ public class GameScreen extends javax.swing.JFrame {
         new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        try {
-                            stopRoll = true;
-                            Thread.sleep(160);
-                            stopRoll = false;
-                            lblDiceSum.setText("Moves: " + moves);
-                        } catch (InterruptedException ex) {
-                            System.out.println(ex);
-                        }
+                        stopRolling();
                     }
                 }, 
                 1500 
@@ -282,21 +279,23 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void rollDice() 
     {
-        JOptionPane.showMessageDialog(null, "Start Rolling Dice");
         tsk = new Rolling(this);
         timerRoll = new Timer(); 
-        timerRoll.scheduleAtFixedRate(tsk, 125, 150);
-        JOptionPane.showMessageDialog(null, "Click to stop");
+        timerRoll.scheduleAtFixedRate(tsk, 125, 145);
+    }
+    
+    public void stopRolling()
+    {
         stopRoll = true;
         
         try {
-            Thread.sleep(160);
+            Thread.sleep(200);
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Thread.sleep method error");
         }
         
-        stopRoll = false;
         lblDiceSum.setText("Moves: " + moves);
+        stopRoll = false;
     }
     
     private void updateProperties()
@@ -1426,9 +1425,9 @@ class Rolling extends TimerTask {
         if(gs.stopRoll)
         {
             sum = dice1 + dice2 + 2;
-            
-            gs.timerRoll.cancel();
             gs.moves = sum;
+            gs.timerRoll.cancel();
+            
             return;
         }
         dice1 = (int)(Math.random() * 6);
