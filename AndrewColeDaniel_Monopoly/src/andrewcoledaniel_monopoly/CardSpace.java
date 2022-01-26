@@ -6,6 +6,7 @@
 package andrewcoledaniel_monopoly;
 
 import andrewcoledaniel_monopoly.Card.*;
+import java.util.Random;
 
 /**
  *
@@ -37,7 +38,19 @@ public class CardSpace implements Space {
                 return card;
             }
         }
-        return null;
+        return new Card(CardType.CARD_CHANCE, CardAction.ACTION_GOTO, 0, "Something messed up");
+    }
+    
+    public void shuffleCards(Card[] c) {
+        Random rd = new Random();
+        Card temp;
+        int rNum;
+        for (int i = 0; i < c.length; i++) {
+            rNum = rd.nextInt(c.length);
+            temp = c[i];
+            c[i] = c[rNum];
+            c[rNum] = temp;
+        }
     }
 
     public String performSpaceAction(Card c, Player p) {

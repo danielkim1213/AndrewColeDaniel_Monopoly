@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 
 /**
@@ -269,13 +270,94 @@ public class GameScreen extends javax.swing.JFrame {
             if (option == 0) {
                 p.buyProperty(prop);
             } else {
-                // TODO: Auction
+                auction(prop);
             }
         } else {
             JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
             p.removeMoney(prop.getRent());
             prop.getOwner().addMoney(prop.getRent());
         }
+    }
+    
+    private void auction(Property p) {
+        boolean bought = false;
+        int currentBid = 0;
+        int response = -1;
+        int lastBidder = -1;
+        double leavePer = 1;
+        DecimalFormat curr = new DecimalFormat("#,##0.00");
+        ArrayList<Player> players = new ArrayList();
+        
+        for (int i = 0; i < numPlayers; i++) {
+            players.add(playerArray[i]);
+        }
+        
+        while (!bought) {
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i).getMoney() <= currentBid) {
+                    players.remove(i);
+                }
+                
+                if (players.size() == 1) {
+                    bought = true;
+                    break;
+                }
+                response = -1;
+                if (i == 0) {
+                    while (response < 0) {
+                        try {
+                            response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid?"));
+                            if (response <= currentBid) {
+                                JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
+                                response = -1;
+                            } else if (response > players.get(i).getMoney()) {
+                                JOptionPane.showMessageDialog(null, "Please bid an amount of money that you have.");
+                                response = -1;
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid amount");
+                        }
+                    }
+                    currentBid = response;
+                    lastBidder = players.get(i).getPlayerNumber();
+                } else {
+                    while (response < 0) {
+                        if (currentBid - p.getPrice() > 100) {
+                            leavePer = 0.5;
+                            response = (int) ((Math.random() * 9) + 1);
+                        } else if (currentBid >= p.getPrice()) {
+                            leavePer = 0.1;
+                            response = (int) ((Math.random() * 50) + 1);
+                        } else if (p.getPrice() - currentBid <= 50) {
+                            response = (int) ((Math.random() * 70) + 1);
+                        } else {
+                            response = (int) ((Math.random() * 100) + 1);
+                        }
+                        
+                        if (currentBid + response > players.get(i).getMoney()) {
+                            response = -1;
+                        } 
+                    }
+                    
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        JOptionPane.showMessageDialog(null, "Thread.sleep method error");
+                    }
+                    
+                    if (Math.random() > leavePer) {
+                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + "left the auction");
+                        players.remove(i);
+                    } else {
+                        currentBid += response;
+                        lastBidder = players.get(i).getPlayerNumber();
+                    }
+                }
+            }
+        }
+        
+        JOptionPane.showMessageDialog(null, "Player " + lastBidder + "purchased the property for $" + curr.format(currentBid));
+        playerArray[lastBidder].buyProperty(p);
     }
     
     private void rollDice() 
