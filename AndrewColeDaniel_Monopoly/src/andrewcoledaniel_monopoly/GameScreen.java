@@ -43,6 +43,7 @@ public class GameScreen extends javax.swing.JFrame {
     public Timer timerRoll;
     public int moves;
     private Board board;
+    private TimerTask tsk;
     public static int[] roll = new int[2];
     
     /**
@@ -67,6 +68,12 @@ public class GameScreen extends javax.swing.JFrame {
         generatePlayers();
     }
     
+    public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray)
+    {
+        this(m, gameMode, numPlayers);
+        this.currentTurn = currentTurn;
+        this.playerArray = playerArray;
+    }
     
     private void diceImage()
     {
@@ -101,8 +108,8 @@ public class GameScreen extends javax.swing.JFrame {
         img = Die[5].getImage();
         Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
         
-        lblDie1.setIcon(Die[2]);
-        lblDie2.setIcon(Die[3]);
+        lblDie1.setIcon(Die[0]);
+        lblDie2.setIcon(Die[0]);
     }
     
     public ImageIcon getDiceImage(int index)
@@ -173,6 +180,8 @@ public class GameScreen extends javax.swing.JFrame {
                again = playerTurn(playerArray[0], turn);
                turn++;
            } while (again);
+           JOptionPane.showMessageDialog(null, "End Turn");
+
            
            for (int i = 1; i < numPlayers; i++) {
                computerTurn(playerArray[i], 1);
@@ -186,7 +195,7 @@ public class GameScreen extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "Your Turn");
         
-        if (turn == 3) {
+        if (turn > 3) {
             p.setPosition(10);
             p.setJail(true);
             return false;
@@ -213,11 +222,18 @@ public class GameScreen extends javax.swing.JFrame {
             }
             
             if (p.getJail()) {
+                p.setTurnsInJail(p.getTurnsInJail() + 1);
                 return false;
             }
+            p.setTurnsInJail(0);
             
         }
+        JOptionPane.showMessageDialog(null, "Start Rolling Dice");
         rollDice();
+        JOptionPane.showMessageDialog(null, "Click to stop");
+        stopRolling();
+
+        newPos = p.getPosition() + moves;
         newPos = p.getPosition() + roll[0] + roll[1];
         if (newPos >= 40) {
             p.addMoney(200);
@@ -225,10 +241,8 @@ public class GameScreen extends javax.swing.JFrame {
         }
         p.setPosition(newPos);
         handleSpace(board.getSpace(newPos), p);
-        if (roll[0] == roll[1]) {
-            return true;
-        }
-        return false;
+        updateProperties();
+        return ((Rolling)tsk).isDoubleDice();
     }
     
     
@@ -237,14 +251,7 @@ public class GameScreen extends javax.swing.JFrame {
         new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        try {
-                            stopRoll = true;
-                            Thread.sleep(160);
-                            stopRoll = false;
-                            lblDiceSum.setText("Moves: " + moves);
-                        } catch (InterruptedException ex) {
-                            System.out.println(ex);
-                        }
+                        stopRolling();
                     }
                 }, 
                 1500 
@@ -336,7 +343,7 @@ public class GameScreen extends javax.swing.JFrame {
     private void auction(Property p) {
         boolean bought = false;
         int currentBid = 0;
-        int response = -1;
+        int response;
         int lastBidder = -1;
         double leavePer = 1;
         DecimalFormat curr = new DecimalFormat("#,##0.00");
@@ -416,10 +423,23 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void rollDice() 
     {
-        TimerTask tsk = new Rolling(this);
+        tsk = new Rolling(this);
         timerRoll = new Timer(); 
-        timerRoll.scheduleAtFixedRate(tsk, 125, 150);
+        timerRoll.scheduleAtFixedRate(tsk, 125, 145);
+    }
+
+    public void stopRolling()
+    {
+        stopRoll = true;
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException ex) {
+            JOptionPane.showMessageDialog(null, "Thread.sleep method error");
+        }
         
+        lblDiceSum.setText("Moves: " + moves);
+        stopRoll = false;
     }
     
     private void updateProperties()
@@ -483,7 +503,7 @@ public class GameScreen extends javax.swing.JFrame {
         btnBuyHouse = new javax.swing.JButton();
         btnSellHouse = new javax.swing.JButton();
         btnMortgage = new javax.swing.JButton();
-        btnMortgage1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -618,10 +638,10 @@ public class GameScreen extends javax.swing.JFrame {
         btnMortgage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnMortgage.setText("Mortgage Property");
 
-        btnMortgage1.setText("Save");
-        btnMortgage1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMortgage1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -657,7 +677,7 @@ public class GameScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblProperties)
                         .addGroup(pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -694,7 +714,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
@@ -1991,7 +2011,7 @@ public class GameScreen extends javax.swing.JFrame {
         lblDiceSum.setText("Moves: " + moves);
     }//GEN-LAST:event_btnStopActionPerformed
 
-    private void btnMortgage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgage1ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String path = "";
         JFileChooser fileChooser = new JFileChooser();
         try{
@@ -2001,7 +2021,7 @@ public class GameScreen extends javax.swing.JFrame {
             {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
             }
-            File file = new File(path + "MonopolySave.txt");
+            File file = new File(path + "/MonopolySave.txt");
             System.out.println(file.getAbsolutePath());
             if(file.createNewFile())
             {
@@ -2016,7 +2036,7 @@ public class GameScreen extends javax.swing.JFrame {
         {
             System.out.print(e);
         }
-    }//GEN-LAST:event_btnMortgage1ActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
    
 
@@ -2064,7 +2084,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
-    private javax.swing.JButton btnMortgage1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JButton btnStop;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2161,6 +2181,8 @@ class GameMusic implements Runnable {
 class Rolling extends TimerTask {
     private int sum = 0;
     GameScreen gs;
+    int dice1;
+    int dice2;
     
     public Rolling(GameScreen gameScreen)
     {
@@ -2172,18 +2194,28 @@ class Rolling extends TimerTask {
     {
         if(gs.stopRoll)
         {
-            gs.timerRoll.cancel();
+            sum = dice1 + dice2 + 2;
             gs.moves = sum;
+            gs.timerRoll.cancel();
             return;
         }
-        int dice1 = (int)(Math.random() * 6);
-        int dice2 = (int)(Math.random() * 6);
+        dice1 = (int)(Math.random() * 6);
+        dice2 = (int)(Math.random() * 6);
 
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
-        sum = dice1 + dice2 + 2;
-        gs.roll[0] = dice1 + 1;
-        gs.roll[1] = dice2 + 1;
+    }
+    
+    public boolean isDoubleDice()
+    {
+        if(dice1 == dice2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
 
