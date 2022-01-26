@@ -267,7 +267,7 @@ public class MainMenu extends javax.swing.JFrame {
             int numPlayers = s.readInt();
             Player[] playerArray = (Player[]) s.readObject();
             mainBgm.musicOff();
-            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
+            //gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
             gameScreen.setVisible(true);
             this.setVisible(false);
         } catch (NullPointerException | IOException | ClassNotFoundException ex) {
