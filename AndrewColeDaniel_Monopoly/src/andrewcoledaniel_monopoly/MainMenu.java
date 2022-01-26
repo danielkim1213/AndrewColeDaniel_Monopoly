@@ -6,16 +6,21 @@
 package andrewcoledaniel_monopoly;
 
 
+import java.awt.Color;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -39,6 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        monopolyImage();
         readHighScore();
         mainBgm = new MainMusic();
         mainBgmThread = new Thread(mainBgm);
@@ -56,6 +62,38 @@ public class MainMenu extends javax.swing.JFrame {
             date[i] = scan.nextLine();
         }
     }
+    
+    private void monopolyImage()
+    {
+        Image img;
+        
+        //Title image
+        URL urlMonopoly = GameScreen.class.getResource("saves/MonoPoly.png");
+        ImageIcon mply = new ImageIcon(urlMonopoly);
+        img = mply.getImage();
+        mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_FAST));
+        lblTitle.setIcon(mply);
+        
+        //highscore button image
+        btnHighScores.setOpaque(false);
+        btnHighScores.setFocusPainted(false);
+        btnHighScores.setBorderPainted(false);
+        btnHighScores.setContentAreaFilled(false);
+        btnHighScores.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg");
+        ImageIcon scores = new ImageIcon(urlHighScore);
+        img = scores.getImage();
+        scores = new ImageIcon(img.getScaledInstance(btnHighScores.getWidth(), btnHighScores.getHeight(), Image.SCALE_FAST));
+        btnHighScores.setIcon(scores);
+        
+        //new game button image
+        btnHighScores.setBorder(null);
+        URL urlNewGame = GameScreen.class.getResource("saves/newGame.png");
+        ImageIcon newGame = new ImageIcon(urlNewGame);
+        img = newGame.getImage();
+        newGame = new ImageIcon(img.getScaledInstance(btnNewGame.getWidth(), btnNewGame.getHeight(), Image.SCALE_FAST));
+        btnNewGame.setIcon(newGame);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,26 +105,26 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnNewGame = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
         btnTutorial = new javax.swing.JButton();
         btnHighScores = new javax.swing.JButton();
         btnLoadSave = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Monopoly Menu");
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnNewGame.setText("New Game");
+        btnNewGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewGameActionPerformed(evt);
             }
         });
 
-        lblTitle.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        lblTitle.setText("Monopoly");
-
         btnTutorial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnTutorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTutorial.setLabel("Tutorial");
         btnTutorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +133,8 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnHighScores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnHighScores.setLabel("High Scores");
+        btnHighScores.setText("");
+        btnHighScores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHighScores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHighScoresActionPerformed(evt);
@@ -103,6 +142,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnLoadSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnLoadSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLoadSave.setLabel("Load Save");
         btnLoadSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,38 +150,47 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Monopoly");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(137, 137, 137))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(145, 145, 145))))
+                    .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(lblTitle)
-                .addGap(25, 25, 25)
-                .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
