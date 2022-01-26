@@ -16,8 +16,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -267,7 +265,7 @@ public class MainMenu extends javax.swing.JFrame {
             int numPlayers = s.readInt();
             Player[] playerArray = (Player[]) s.readObject();
             mainBgm.musicOff();
-            //gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
+            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
             gameScreen.setVisible(true);
             this.setVisible(false);
         } catch (NullPointerException | IOException | ClassNotFoundException ex) {
