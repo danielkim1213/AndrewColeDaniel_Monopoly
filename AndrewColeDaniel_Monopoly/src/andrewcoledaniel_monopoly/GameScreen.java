@@ -9,18 +9,12 @@ import java.io.*;
 import java.util.*;
 import andrewcoledaniel_monopoly.Card.*;
 import java.awt.Image;
-import java.awt.event.*;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JFileChooser;
 
 /**
@@ -179,6 +173,7 @@ public class GameScreen extends javax.swing.JFrame {
                again = playerTurn(playerArray[0], turn);
                turn++;
            } while (again);
+           JOptionPane.showMessageDialog(null, "End Turn");
            
            /*
            for (int i = 1; i < numPlayers; i++) {
@@ -191,7 +186,7 @@ public class GameScreen extends javax.swing.JFrame {
         int response;
         int newPos;
         
-        if (turn == 3) {
+        if (turn > 3) {
             p.setPosition(10);
             p.setJail(true);
             return false;
@@ -218,8 +213,10 @@ public class GameScreen extends javax.swing.JFrame {
             }
             
             if (p.getJail()) {
+                p.setTurnsInJail(p.getTurnsInJail() + 1);
                 return false;
             }
+            p.setTurnsInJail(0);
             
         }
         JOptionPane.showMessageDialog(null, "Start Rolling Dice");

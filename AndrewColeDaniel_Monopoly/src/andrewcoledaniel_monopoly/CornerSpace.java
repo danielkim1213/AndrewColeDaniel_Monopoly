@@ -32,7 +32,7 @@ public class CornerSpace implements Space {
             case SPACE_GO:
                 p.setMoney(p.getMoney() + 200);
                 break;
-            case SPACE_JAIL: // This is handled in the takeTurn method
+            case SPACE_JAIL: // This is handled in the playerTurn method
                 break;
             case SPACE_PARKING:
                 break;
