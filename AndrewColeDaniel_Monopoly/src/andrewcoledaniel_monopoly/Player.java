@@ -6,9 +6,10 @@ and if they are in jail or not and if they are how long have they been in there 
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable {
 
     int currentPosition;
     int playerNumber;

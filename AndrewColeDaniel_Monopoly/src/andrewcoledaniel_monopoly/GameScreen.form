@@ -240,7 +240,7 @@
                           <Component id="jScrollPane2" min="-2" pref="192" max="-2" attributes="0"/>
                           <Component id="lblProperties" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnMortgage1" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="btnSave" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnMenu" max="32767" attributes="0"/>
                           </Group>
@@ -285,7 +285,7 @@
                   <Component id="jScrollPane3" min="-2" pref="250" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnMortgage1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btnSave" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="btnMenu" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -340,12 +340,12 @@
             <Property name="text" type="java.lang.String" value="Mortgage Property"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMortgage1">
+        <Component class="javax.swing.JButton" name="btnSave">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMortgage1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMenu">

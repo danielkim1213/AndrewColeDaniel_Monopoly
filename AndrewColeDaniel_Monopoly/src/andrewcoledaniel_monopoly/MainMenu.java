@@ -7,10 +7,16 @@ package andrewcoledaniel_monopoly;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -168,7 +174,7 @@ public class MainMenu extends javax.swing.JFrame {
             if(numPlayers != -1)
             {
                 mainBgm.musicOff();
-                gameScreen = new GameScreen(this, gameMode, numPlayers + 1);
+                gameScreen = new GameScreen(this, gameMode, numPlayers);
                 gameScreen.setVisible(true);
                 this.setVisible(false);
             }
@@ -194,11 +200,29 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHighScoresActionPerformed
 
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
-    try {
-            File file = new File(System.getProperty("user.dir") + "/save.txt");
-            Scanner s = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Could not load save file");
+        String saveFilePath = null;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fileChooser.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION)
+        {
+            saveFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+        File saveFile = new File(saveFilePath + "/MonopolySave.txt");
+        
+        try {
+            FileInputStream in = new FileInputStream(saveFile);
+            ObjectInputStream s = new ObjectInputStream(in);
+            int gameMode = s.readInt();
+            int currentTurn = s.readInt();
+            int numPlayers = s.readInt();
+            Player[] playerArray = (Player[]) s.readObject();
+            mainBgm.musicOff();
+            gameScreen = new GameScreen(this, gameMode, numPlayers);
+            gameScreen.setVisible(true);
+            this.setVisible(false);
+        } catch (NullPointerException | IOException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex, "File selection error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 

@@ -50,6 +50,7 @@ public class GameScreen extends javax.swing.JFrame {
      * Creates new form GameScreen
      * @param m - main menu
      * @param gameMode - game mode
+     * @param numPlayers - number of players including the user
      */
     public GameScreen(MainMenu m, int gameMode, int numPlayers) {
         initComponents();
@@ -66,6 +67,13 @@ public class GameScreen extends javax.swing.JFrame {
         board = new Board();
         loadCards();
         generatePlayers();
+    }
+    
+    public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray)
+    {
+        this(m, gameMode, numPlayers);
+        this.currentTurn = currentTurn;
+        this.playerArray = playerArray;
     }
     
     
@@ -329,7 +337,7 @@ public class GameScreen extends javax.swing.JFrame {
         btnBuyHouse = new javax.swing.JButton();
         btnSellHouse = new javax.swing.JButton();
         btnMortgage = new javax.swing.JButton();
-        btnMortgage1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -411,10 +419,10 @@ public class GameScreen extends javax.swing.JFrame {
         btnMortgage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnMortgage.setText("Mortgage Property");
 
-        btnMortgage1.setText("Save");
-        btnMortgage1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMortgage1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -450,7 +458,7 @@ public class GameScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblProperties)
                         .addGroup(pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,7 +495,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMortgage1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
@@ -1293,7 +1301,7 @@ public class GameScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
-    private void btnMortgage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgage1ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String path = "";
         JFileChooser fileChooser = new JFileChooser();
         try{
@@ -1303,22 +1311,27 @@ public class GameScreen extends javax.swing.JFrame {
             {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
             }
-            File file = new File(path + "MonopolySave.txt");
+            File file = new File(path + "/MonopolySave.txt");
             System.out.println(file.getAbsolutePath());
-            if(file.createNewFile())
+            if(!file.exists())
             {
-                FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath()));
-                ObjectOutput s = new ObjectOutputStream(saving);
-                s.writeInt(gameMode);
-                s.writeInt(currentTurn);
-                s.writeInt(numPlayers);
-                s.writeObject(playerArray); 
+                if(file.createNewFile())
+                {
+                    System.out.println("file created at");
+                }
             }
+            FileOutputStream saving = new FileOutputStream(file);
+            ObjectOutput s = new ObjectOutputStream(saving);
+            s.writeInt(gameMode);
+            s.writeInt(currentTurn);
+            s.writeInt(numPlayers);
+            s.writeObject(playerArray); 
+
         } catch(Exception e)
         {
             System.out.print(e);
         }
-    }//GEN-LAST:event_btnMortgage1ActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
    
 
@@ -1366,7 +1379,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnBuyHouse;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
-    private javax.swing.JButton btnMortgage1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
