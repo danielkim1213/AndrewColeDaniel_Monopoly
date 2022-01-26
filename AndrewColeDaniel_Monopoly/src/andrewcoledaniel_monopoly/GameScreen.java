@@ -67,7 +67,6 @@ public class GameScreen extends javax.swing.JFrame {
         loadCards();
         generatePlayers();
         updateProperties();
-        playGame();
     }
     
     
@@ -173,6 +172,7 @@ public class GameScreen extends javax.swing.JFrame {
                again = playerTurn(playerArray[0], turn);
                turn++;
            } while (again);
+           JOptionPane.showMessageDialog(null, "End Turn");
            
            /*
            for (int i = 1; i < numPlayers; i++) {
@@ -232,8 +232,6 @@ public class GameScreen extends javax.swing.JFrame {
         handleSpace(board.getSpace(newPos), p);
         updateProperties();
         return ((Rolling)tsk).isDoubleDice();
-        JOptionPane.showMessageDialog(null, "End Turn");
-        return roll[0] == roll[1];
     }
     
     
@@ -1289,6 +1287,9 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCards();
+        Player p1 = new Player(1);
+        updateProperties();
         playGame();
     }//GEN-LAST:event_formComponentShown
 
