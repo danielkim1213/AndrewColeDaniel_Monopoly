@@ -112,19 +112,22 @@ public class GameScreen extends javax.swing.JFrame {
     
         
     
-    public void checkGameMode() {
+    private boolean checkGameMode() {
         if (gameMode != 2) {
             if (gameMode == 0) {
                 if(currentTurn > MainMenu.limitedTurns){
                     endGame();
+                    return false;
                 }
             } else{
                 long currentTime = System.currentTimeMillis() * 1000;
                 if(currentTime - startTime >= MainMenu.limitedTime){
                     endGame();
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     private void endGame(){
@@ -172,13 +175,16 @@ public class GameScreen extends javax.swing.JFrame {
            } while (again);
            
            for (int i = 1; i < numPlayers; i++) {
-               computerTurn(i);
+               computerTurn(playerArray[i], 1);
            }
+           JOptionPane.showMessageDialog(null, "All players have played starting next turn");
     }
     
     private boolean playerTurn(Player p, int turn) {
         int response;
         int newPos;
+        
+        JOptionPane.showMessageDialog(null, "Your Turn");
         
         if (turn == 3) {
             p.setPosition(10);
@@ -226,10 +232,8 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     
-    private void computerTurn(int computerIndex){
-        Player computer = playerArray[computerIndex];
-        rollDice();
-        
+    private void computerTurn(Player p, int turn) {
+        /*
         new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -244,7 +248,40 @@ public class GameScreen extends javax.swing.JFrame {
                     }
                 }, 
                 1500 
-            );
+            ); */
+        
+        JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn");
+        if (p.getJail()) {
+            if (p.getJailCards() < 0) {
+                int randomNumber = (int) (Math.random() * 10);
+                if (randomNumber > 5 && p.getMoney() > 50) {
+                    p.removeMoney(50);
+                    p.setJail(false);
+                } else {
+                    int roll1 = (int) (Math.random() * 6) + 1;
+                    int roll2 = (int) (Math.random() * 6) + 1;
+                    if (roll1 == roll2) {
+                        p.setJail(false);
+                    }
+                }
+            }
+        } else {
+            int newPos;
+            rollDice();
+            newPos = p.getPosition() + roll[0] + roll[1];
+            if (newPos >= 40) {
+                p.addMoney(200);
+                newPos -= 40;
+            }
+           p.setPosition(newPos);
+            handleSpace(board.getSpace(newPos), p);
+            if (roll[0] == roll[1]) {
+                JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has rolled a double");
+                turn++;
+                computerTurn(p, turn);
+            }
+        }
+
     }
     
     private void handleSpace(Space s, Player p) {
@@ -265,17 +302,34 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void handleProperty(Property prop, Player p) {
         int option;
-        if (prop.getOwner() == null) {
-            option = JOptionPane.showConfirmDialog(null, ((Space)p).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
-            if (option == 0) {
-                p.buyProperty(prop);
+        if (p.getPlayerNumber() == 1) {
+            if (prop.getOwner() == null) {
+                option = JOptionPane.showConfirmDialog(null, ((Space) p).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    p.buyProperty(prop);
+                } else {
+                    // TODO: Auction
+                }
             } else {
                 auction(prop);
+                JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
+                p.removeMoney(prop.getRent());
+                prop.getOwner().addMoney(prop.getRent());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
-            p.removeMoney(prop.getRent());
-            prop.getOwner().addMoney(prop.getRent());
+            if (prop.getOwner() == null) {
+                int randomNumber = (int) (Math.random() * 10);
+                if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
+                    p.buyProperty(prop);
+                    updateProperties();
+                } else {
+                    // auction
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
+                p.removeMoney(prop.getRent());
+                prop.getOwner().addMoney(prop.getRent());
+            }
         }
     }
     
@@ -1909,12 +1963,15 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        loadCards();
-        Player p1 = new Player(1);
         updateProperties();
-        computerTurn(1);
-        playGame();
         generateProperties();
+        currentTurn = 0;
+        boolean continueGame = true;
+        while(continueGame == true){
+            continueGame = checkGameMode();
+            playGame();
+            currentTurn++;
+        }
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
