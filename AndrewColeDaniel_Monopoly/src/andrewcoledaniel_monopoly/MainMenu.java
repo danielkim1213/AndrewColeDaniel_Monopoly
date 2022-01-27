@@ -139,6 +139,7 @@ public class MainMenu extends javax.swing.JFrame {
         btnTutorial = new javax.swing.JButton();
         btnHighScores = new javax.swing.JButton();
         btnLoadSave = new javax.swing.JButton();
+        btnCredit = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,7 +162,6 @@ public class MainMenu extends javax.swing.JFrame {
         pnlMain.add(btnNewGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 125, 40));
 
         btnTutorial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnTutorial.setText("");
         btnTutorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTutorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +169,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         pnlMain.add(btnTutorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 75, 75));
-        btnTutorial.getAccessibleContext().setAccessibleName("");
 
         btnHighScores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnHighScores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -181,7 +180,6 @@ public class MainMenu extends javax.swing.JFrame {
         pnlMain.add(btnHighScores, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 249, 75, 75));
 
         btnLoadSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnLoadSave.setText("");
         btnLoadSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLoadSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,6 +187,14 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         pnlMain.add(btnLoadSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 125, 40));
+
+        btnCredit.setText("credit");
+        btnCredit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreditActionPerformed(evt);
+            }
+        });
+        pnlMain.add(btnCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 70, 20));
         pnlMain.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +239,7 @@ public class MainMenu extends javax.swing.JFrame {
             gameScreen.setVisible(true); //make the game screen visible
             this.setVisible(false); //make this screen invisible
         } catch (NullPointerException | IOException | ClassNotFoundException ex) { //error reporter
-            JOptionPane.showMessageDialog(null, ex, "File selection error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Couldn't find the file.", "File selection error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 
@@ -304,9 +310,23 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
 
+    private void btnCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditActionPerformed
+        String credit = "This program is made by Andrew, Cole, and Daniel."
+                + "\nEnjoy playing Monopoly with computer players!"
+                + "\n\nMain menu music: Dubby Jinglefunk's Not So Silent Night by Speck "
+                + "\n(c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  "
+                + "\n(3.0) license. http://dig.ccmixter.org/files/speck/64503 "
+                + "\nFt: Admiral Bob, Martijn de Boer, airtone, Carosone"
+                + "\nIn-Game music: Slow Burn by spinningmerkaba "
+                + "\n(c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. "
+                + "\nhttp://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob";
+        JOptionPane.showMessageDialog(null, credit, "credit" , JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnCreditActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCredit;
     private javax.swing.JButton btnHighScores;
     private javax.swing.JButton btnLoadSave;
     private javax.swing.JButton btnNewGame;
