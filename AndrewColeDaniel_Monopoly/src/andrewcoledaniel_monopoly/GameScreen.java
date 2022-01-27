@@ -124,8 +124,11 @@ public class GameScreen extends javax.swing.JFrame {
                     return false;
                 }
             } else {
-                long currentTime = System.currentTimeMillis() * 1000;
-                if (currentTime - startTime >= MainMenu.limitedTime) {
+                long currentTime = System.currentTimeMillis();
+                currentTime -= startTime;
+                currentTime /= 1000;
+                currentTime /= 60;
+                if (currentTime > MainMenu.limitedTime) {
                     endGame();
                     return false;
                 }
