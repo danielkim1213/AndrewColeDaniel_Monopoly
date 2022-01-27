@@ -1417,6 +1417,7 @@ public class GameScreen extends javax.swing.JFrame {
         }
         Deed d = (Deed)p;
         if (d.getHouses() == 4) {
+            if(d.getHotel() == false){
             if (JOptionPane.showConfirmDialog(null, "You already have 4 houses on this property. Would you like to buy a hotel instead?", "Buy Hotel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (playerArray[0].getMoney() < d.getHouseCost()) {
                     JOptionPane.showMessageDialog(null, "You don't have enough money.");
@@ -1425,6 +1426,7 @@ public class GameScreen extends javax.swing.JFrame {
                     playerArray[0].removeMoney(d.getHouseCost());
                 }
                 return;
+                }
             }
         }
         int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
@@ -1467,7 +1469,33 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSellHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellHouseActionPerformed
-        // TODO add your handling code here:
+        if (playerArray[0].getProperties().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "You do not own any properties.");
+            return;
+        }
+        String prop = JOptionPane.showInputDialog("Which property would you like to sell a house from?");
+        int propNum = playerArray[0].findProperty(prop);
+        if (propNum == -1) {
+            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+            return;
+        }
+        Property p = ((Property)playerArray[0].getProperties().get(propNum));
+        if (p.getPropType() != SpaceType.SPACE_DEED) {
+            JOptionPane.showMessageDialog(null, "This property cannot have houses property.");
+            return;
+        }
+        Deed d = (Deed)p;
+        if(d.getHouses() == 0){
+            JOptionPane.showMessageDialog(null, "This property has no houses.");
+            return;
+        } else{
+            if(d.getHotel() == true){
+                String input = JOptionPane.showInputDialog("This property has a hotel would you like to sell it? Y or N");
+                if(input.equalsIgnoreCase("Y")){
+                    
+                }
+            }
+        }
     }//GEN-LAST:event_btnSellHouseActionPerformed
 
    
