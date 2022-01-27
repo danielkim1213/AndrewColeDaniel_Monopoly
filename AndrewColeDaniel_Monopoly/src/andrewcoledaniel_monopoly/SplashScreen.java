@@ -66,9 +66,10 @@ public class SplashScreen extends javax.swing.JFrame {
             }
         });
 
-        lblTitle.setFont(new java.awt.Font("Monotype Corsiva", 1, 27)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 51, 204));
-        lblTitle.setText("Welcome to play Monopoly!");
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Welcome to Monopoly!");
 
         lblOpening.setText("Opening Monopoly...");
 
