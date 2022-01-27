@@ -7,6 +7,8 @@ package andrewcoledaniel_monopoly;
 
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +22,9 @@ import javax.sound.sampled.*;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -63,13 +67,14 @@ public class MainMenu extends javax.swing.JFrame {
     
     private void monopolyImage()
     {
+        
         Image img;
         
         //Title image
         URL urlMonopoly = GameScreen.class.getResource("saves/MonoPoly.png");
         ImageIcon mply = new ImageIcon(urlMonopoly);
         img = mply.getImage();
-        mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_FAST));
+        mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_SMOOTH));
         lblTitle.setIcon(mply);
         
         //highscore button image
@@ -81,7 +86,7 @@ public class MainMenu extends javax.swing.JFrame {
         URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg");
         ImageIcon scores = new ImageIcon(urlHighScore);
         img = scores.getImage();
-        scores = new ImageIcon(img.getScaledInstance(btnHighScores.getWidth(), btnHighScores.getHeight(), Image.SCALE_FAST));
+        scores = new ImageIcon(img.getScaledInstance(btnHighScores.getWidth(), btnHighScores.getHeight(), Image.SCALE_SMOOTH));
         btnHighScores.setIcon(scores);
         
         //new game button image
@@ -89,9 +94,34 @@ public class MainMenu extends javax.swing.JFrame {
         URL urlNewGame = GameScreen.class.getResource("saves/newGame.png");
         ImageIcon newGame = new ImageIcon(urlNewGame);
         img = newGame.getImage();
-        newGame = new ImageIcon(img.getScaledInstance(btnNewGame.getWidth(), btnNewGame.getHeight(), Image.SCALE_FAST));
+        newGame = new ImageIcon(img.getScaledInstance(btnNewGame.getWidth(), btnNewGame.getHeight(), Image.SCALE_SMOOTH));
         btnNewGame.setIcon(newGame);
+        
+        btnLoadSave.setBorder(null);
+        URL urlLoadSave = GameScreen.class.getResource("saves/loadSave.jpg");
+        ImageIcon loadSave = new ImageIcon(urlLoadSave);
+        img = loadSave.getImage();
+        loadSave = new ImageIcon(img.getScaledInstance(btnLoadSave.getWidth(), btnLoadSave.getHeight(), Image.SCALE_SMOOTH));
+        btnLoadSave.setIcon(loadSave);
+        
+        URL urlMoney = GameScreen.class.getResource("saves/street.jpg");
+        ImageIcon money = new ImageIcon(urlMoney);
+        img = money.getImage();
+        money = new ImageIcon(img.getScaledInstance(lblBackground.getWidth(), lblBackground.getHeight(), Image.SCALE_SMOOTH));
+        lblBackground.setIcon(money);
+               
+        btnTutorial.setOpaque(false);
+        btnTutorial.setFocusPainted(false);
+        btnTutorial.setBorderPainted(false);
+        btnTutorial.setContentAreaFilled(false);
+        btnTutorial.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        URL urlHelp = GameScreen.class.getResource("saves/tutorial.png");
+        ImageIcon tutorial = new ImageIcon(urlHelp);
+        img = tutorial.getImage();
+        tutorial = new ImageIcon(img.getScaledInstance(btnTutorial.getWidth(), btnTutorial.getHeight(), Image.SCALE_SMOOTH));
+        btnTutorial.setIcon(tutorial);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,16 +132,23 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlMain = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
         btnNewGame = new javax.swing.JButton();
         btnTutorial = new javax.swing.JButton();
         btnHighScores = new javax.swing.JButton();
         btnLoadSave = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly Menu");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+
+        pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnlMain.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, 373, 100));
 
         btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNewGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -120,88 +157,106 @@ public class MainMenu extends javax.swing.JFrame {
                 btnNewGameActionPerformed(evt);
             }
         });
+        pnlMain.add(btnNewGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 125, 40));
 
         btnTutorial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnTutorial.setText("");
         btnTutorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTutorial.setLabel("Tutorial");
         btnTutorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTutorialActionPerformed(evt);
             }
         });
+        pnlMain.add(btnTutorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 75, 75));
+        btnTutorial.getAccessibleContext().setAccessibleName("");
 
         btnHighScores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnHighScores.setText("");
         btnHighScores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHighScores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHighScoresActionPerformed(evt);
             }
         });
+        pnlMain.add(btnHighScores, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 249, 75, 75));
 
         btnLoadSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnLoadSave.setText("");
         btnLoadSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLoadSave.setLabel("Load Save");
         btnLoadSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadSaveActionPerformed(evt);
             }
         });
-
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Monopoly");
+        pnlMain.add(btnLoadSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 125, 40));
+        pnlMain.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(128, 128, 128))
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(btnHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLoadSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
+        String saveFilePath = null;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fileChooser.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION)
+        {
+            saveFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+        File saveFile = new File(saveFilePath + "/MonopolySave.txt");
+
+        try {
+            FileInputStream in = new FileInputStream(saveFile);
+            ObjectInputStream s = new ObjectInputStream(in);
+            int gameMode = s.readInt();
+            int currentTurn = s.readInt();
+            int numPlayers = s.readInt();
+            Player[] playerArray = (Player[]) s.readObject();
+            mainBgm.musicOff();
+            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
+            gameScreen.setVisible(true);
+            this.setVisible(false);
+        } catch (NullPointerException | IOException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex, "File selection error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnLoadSaveActionPerformed
+
+    private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
+        if(highScoreMenu == null)
+        {
+            highScoreMenu = new HighScoreMenu(this);
+        }
+        highScoreMenu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHighScoresActionPerformed
+
+    private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
+        if(tutorial == null)
+        {
+            tutorial = new TutorialMenu(this);
+        }
+        tutorial.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTutorialActionPerformed
+
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         String[] gameOptions = {"limited turn", "limited time", "infinite"};
         String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"};
         int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
-        
+
         String input = "";
-        try { 
+        try {
             if(gameMode == 0){
                 input = JOptionPane.showInputDialog("How many turns would you like to play?");
                 limitedTurns = Integer.parseInt(input);
@@ -212,8 +267,7 @@ public class MainMenu extends javax.swing.JFrame {
         }catch (NumberFormatException e) {
             input = null;
         }
-        
-        
+
         if(gameMode != -1 && input != null)
         {
             int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
@@ -227,51 +281,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
-
-    private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
-        if(tutorial == null)
-        {
-            tutorial = new TutorialMenu(this);
-        }
-        tutorial.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnTutorialActionPerformed
-
-    private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
-        if(highScoreMenu == null)
-        {
-            highScoreMenu = new HighScoreMenu(this);
-        }
-        highScoreMenu.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnHighScoresActionPerformed
-
-    private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
-        String saveFilePath = null;
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = fileChooser.showOpenDialog(this);
-        if(result == JFileChooser.APPROVE_OPTION)
-        {
-            saveFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-        }
-        File saveFile = new File(saveFilePath + "/MonopolySave.txt");
-        
-        try {
-            FileInputStream in = new FileInputStream(saveFile);
-            ObjectInputStream s = new ObjectInputStream(in);
-            int gameMode = s.readInt();
-            int currentTurn = s.readInt();
-            int numPlayers = s.readInt();
-            Player[] playerArray = (Player[]) s.readObject();
-            mainBgm.musicOff();
-            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
-            gameScreen.setVisible(true);
-            this.setVisible(false);
-        } catch (NullPointerException | IOException | ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, ex, "File selection error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnLoadSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,7 +322,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnLoadSave;
     private javax.swing.JButton btnNewGame;
     private javax.swing.JButton btnTutorial;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
 }
 
