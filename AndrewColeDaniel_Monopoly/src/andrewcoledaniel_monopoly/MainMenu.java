@@ -281,24 +281,25 @@ public class MainMenu extends javax.swing.JFrame {
                 limitedTurns = Integer.parseInt(input); //save the user input
             } else if(gameMode == 1){ //if the user choose to play limited time mode
                 input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)"); //prompt the user to choose time limit
-                limitedTime = Long.parseLong(input); 
-                limitedTime *= 1000;
-                limitedTime *= 60;
+                limitedTime = Long.parseLong(input);  //the user can set the time for the game
+                limitedTime *= 60; //convert min to sec
+                limitedTime *= 1000; //convert sec to ms
             }
-        }catch (NumberFormatException e) {
-            input = null;
+        }catch (NumberFormatException e) { //if the user did not enter an integer
+            input = null; 
         }
 
-        if(gameMode != -1 && input != null)
+        if(gameMode != -1 && input != null) //if the user entered reasonable input
         {
+            //prompt the user to select how many CPU players to play with 
             int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
-            numPlayers += 2;
-            if(numPlayers != -1)
+            numPlayers += 2; 
+            if(numPlayers != -1) //if the user did not choose to close the window
             {
-                mainBgm.musicOff();
-                gameScreen = new GameScreen(this, gameMode, numPlayers);
-                gameScreen.setVisible(true);
-                this.setVisible(false);
+                mainBgm.musicOff(); //music off
+                gameScreen = new GameScreen(this, gameMode, numPlayers); //make a new game screen
+                gameScreen.setVisible(true); //set the game screen visible
+                this.setVisible(false); //set this game screen invisible
             }
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
@@ -316,30 +317,41 @@ public class MainMenu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * This is a class for the background music. 
+ */
 class MainMusic implements Runnable {
     private Clip mainSong;
     
+    /**
+     * this runs when instantiated 
+     */
     @Override
     public void run() 
     {
         try{
             mainSong = AudioSystem.getClip();
             //Dubby Jinglefunk's Not So Silent Night by Speck (c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/speck/64503 Ft: Admiral Bob, Martijn de Boer, airtone, Carosone
-            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));   
-            mainSong.open(inputBgm);
-            mainSong.loop(Clip.LOOP_CONTINUOUSLY);
-            this.musicOn();
-            
-        } catch (Exception e)
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));   //get music from the file
+            mainSong.open(inputBgm);  //set mainSong as the music saved in the file
+            mainSong.loop(Clip.LOOP_CONTINUOUSLY); //loop the music infinitely
+            this.musicOn(); //turn on the music
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) //exceptions
         {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
+    /**
+     * a behaviour method that turns off the music
+     */
     public void musicOff()
     {
         mainSong.stop();
     }
     
+    /**
+     * a behaviour method that turns on the music
+     */
     public void musicOn()
     {
         mainSong.start();
