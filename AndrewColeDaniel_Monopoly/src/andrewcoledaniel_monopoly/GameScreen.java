@@ -65,11 +65,13 @@ public class GameScreen extends javax.swing.JFrame {
         diceImage();
         this.numPlayers = numPlayers;
         playerArray = new Player[numPlayers];
-        startTime = System.currentTimeMillis() * 1000;
+        startTime = System.currentTimeMillis();
         currentTurn = 1;
         board = new Board();
         loadCards();
         generatePlayers();
+        updateProperties();
+        generateProperties();
     }
 
     public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray) {
@@ -128,20 +130,36 @@ public class GameScreen extends javax.swing.JFrame {
             } else {
                 long currentTime = System.currentTimeMillis();
                 currentTime -= startTime;
-                currentTime /= 1000;
-                currentTime /= 60;
+                System.out.println(currentTime);
                 if (currentTime > MainMenu.limitedTime) {
                     endGame();
                     return false;
                 }
+            }
+        } else{
+            int bankruptPlayers = 0;
+            for(int i = 0; i < playerArray.length; i ++){
+                if(playerArray[i].bankrupt == false){
+                    bankruptPlayers ++;
+                }
+            }
+            if(bankruptPlayers >= 3){
+                endGame();
+                return false;
             }
         }
         return true;
     }
 
     private void endGame() {
+        Player winner = new Player(1);
+        for (int i = 0; i < playerArray.length; i++) {
+            if (playerArray[i].getMoney() > winner.getMoney()) {
+                winner = playerArray[i];
+            }
+        }
         if (endingScreen == null) {
-            endingScreen = new EndingScreen(numPlayers);
+            endingScreen = new EndingScreen(winner.getPlayerNumber(), playerArray);
         }
         this.setVisible(false);
         endingScreen.setVisible(true);
@@ -1898,8 +1916,7 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        updateProperties();
-        generateProperties();
+
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed

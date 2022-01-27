@@ -263,6 +263,8 @@ public class MainMenu extends javax.swing.JFrame {
             } else if(gameMode == 1){
                 input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)");
                 limitedTime = Long.parseLong(input);
+                limitedTime *= 60;
+                limitedTime *= 1000;
             }
         }catch (NumberFormatException e) {
             input = null;

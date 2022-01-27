@@ -15,9 +15,25 @@ public class EndingScreen extends javax.swing.JFrame {
      * Creates new form EndingScreen
      * @param numPlayer
      */
-    public EndingScreen(int numPlayer) {
+    public EndingScreen(int numPlayer, Player[] players) {
         initComponents();
         lblResult.setText("Player " + numPlayer + " won!");
+        if(players.length == 2){
+            lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
+            lblPlayer2.setText("Player 2: $" + players[1].getMoney());
+            lblPlayer3.setVisible(false);
+            lblPlayer4.setVisible(false);
+        } else if (players.length == 3){
+            lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
+            lblPlayer2.setText(("Player 2: $" + players[1].getMoney()));
+            lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
+            lblPlayer4.setVisible(false);
+        } else{
+            lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
+            lblPlayer2.setText(("Player 2: $" + players[1].getMoney()));
+            lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
+            lblPlayer4.setText(("Player 4: $" + players[3].getMoney()));
+        }
     }
 
     /**
