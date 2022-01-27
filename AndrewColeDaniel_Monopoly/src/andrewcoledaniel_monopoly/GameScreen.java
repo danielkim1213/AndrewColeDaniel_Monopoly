@@ -313,6 +313,7 @@ public class GameScreen extends javax.swing.JFrame {
                      handleProperty((Property)board.getSpace(p.getPosition()), p);
                  }
         }
+    }
 
     private void handleProperty(Property prop, Player p) {
         int option;
