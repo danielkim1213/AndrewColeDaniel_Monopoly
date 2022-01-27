@@ -1532,6 +1532,7 @@ public class GameScreen extends javax.swing.JFrame {
             d.buyHouse(houses);
             JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
         }
+        updateProperties();
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -1605,6 +1606,7 @@ public class GameScreen extends javax.swing.JFrame {
         if(playerArray[0].bankrupt == false){
             btnRollDice.setEnabled(true);
         }
+        updateProperties();
     }//GEN-LAST:event_btnSellHouseActionPerformed
 
 
@@ -1613,12 +1615,16 @@ public class GameScreen extends javax.swing.JFrame {
         ArrayList<Property> bankruptP = c.getProperties();
         for(int i = 0; i < bankruptP.size(); i ++){
             bankruptP.get(i).setOwned(false);
+            c.removeProperties();
         }
     }
     
     private void buyHouseComputer(Player c){
         ArrayList<Property> buyHouse = c.getProperties();
-        int randomProp = (int) (Math.random() * buyHouse.size()) + 1;
+        int randomProp = (int) (Math.random() * buyHouse.size());
+        if(randomProp > 1){
+            randomProp -= 1;
+        }
         if(buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED){
             Deed d = (Deed)buyHouse.get(randomProp);
             d.buyHouse(1);
@@ -1692,6 +1698,7 @@ public class GameScreen extends javax.swing.JFrame {
         if(playerArray[0].bankrupt == false){
             btnRollDice.setEnabled(true);
         }
+        updateProperties();
     }//GEN-LAST:event_btnMortgageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

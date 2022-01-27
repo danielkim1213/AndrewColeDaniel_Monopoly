@@ -101,6 +101,7 @@ public class Board {
                 rent = Integer.parseInt(s.nextLine());
                 propertyNumber = Integer.parseInt(s.nextLine());
                 p = new Deed(name, price, mortgageValue, houseCost, rent, propertyNumber);
+                p.updateRent();
                 break;
         }
         return p;

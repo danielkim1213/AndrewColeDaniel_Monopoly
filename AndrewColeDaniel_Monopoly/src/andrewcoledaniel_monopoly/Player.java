@@ -133,6 +133,10 @@ public class Player implements Serializable {
         jailCards = n;
     }
     
+    public void removeProperties(){
+        properties.removeAll(properties);
+    }
+    
     public int getUtilities() {
         int num = 0;
         for (int i = 0; i < properties.size(); i++) {
