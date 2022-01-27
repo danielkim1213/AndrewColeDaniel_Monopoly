@@ -72,6 +72,14 @@ public class Player implements Serializable {
     public ArrayList getProperties() {
         return properties;
     }
+    
+    public String propertyNames(){
+        String output = "";
+        for(int i =0; i < properties.size(); i ++){
+            output += (properties.get(i).getName() + "\n");
+        }
+        return output;
+    }
 
     public void setProperties(ArrayList<Property> properties) {
         this.properties = properties;
