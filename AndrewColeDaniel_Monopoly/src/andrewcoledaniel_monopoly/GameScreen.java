@@ -769,160 +769,87 @@ public class GameScreen extends javax.swing.JFrame {
         Tile1.setBackground(new java.awt.Color(220, 255, 196));
         Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile1.setPreferredSize(new java.awt.Dimension(100, 100));
+        Tile1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtGO.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGO.setText("GO");
+        Tile1.add(txtGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 19, 78, -1));
 
         txtGOArrow.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGOArrow.setForeground(new java.awt.Color(255, 0, 0));
         txtGOArrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGOArrow.setText("<-----");
-
-        javax.swing.GroupLayout Tile1Layout = new javax.swing.GroupLayout(Tile1);
-        Tile1.setLayout(Tile1Layout);
-        Tile1Layout.setHorizontalGroup(
-            Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile1Layout.setVerticalGroup(
-            Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(txtGO)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtGOArrow)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        Tile1.add(txtGOArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 47, 78, -1));
 
         getContentPane().add(Tile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 775, -1, -1));
 
         Tile2.setBackground(new java.awt.Color(220, 255, 196));
         Tile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile2.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty1.setEditable(false);
         txfProperty1.setBackground(new java.awt.Color(234, 221, 202));
         txfProperty1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty1.setText("Property 1");
         txfProperty1.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile2Layout = new javax.swing.GroupLayout(Tile2);
-        Tile2.setLayout(Tile2Layout);
-        Tile2Layout.setHorizontalGroup(
-            Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile2Layout.setVerticalGroup(
-            Tile2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile2Layout.createSequentialGroup()
-                .addComponent(txfProperty1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile2.add(txfProperty1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 775, -1, -1));
 
         Tile3.setBackground(new java.awt.Color(220, 255, 196));
         Tile3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile3.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile3label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile3label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile3label1.setText("Community");
+        Tile3.add(txtTile3label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 21, 73, -1));
 
         txtTile3label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile3label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile3label2.setText("Chest");
-
-        javax.swing.GroupLayout Tile3Layout = new javax.swing.GroupLayout(Tile3);
-        Tile3.setLayout(Tile3Layout);
-        Tile3Layout.setHorizontalGroup(
-            Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile3label1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-            .addGroup(Tile3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTile3label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        Tile3Layout.setVerticalGroup(
-            Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtTile3label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile3label2)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        Tile3.add(txtTile3label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 48, 53, -1));
 
         getContentPane().add(Tile3, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 775, -1, -1));
 
         Tile4.setBackground(new java.awt.Color(220, 255, 196));
         Tile4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile4.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty2.setEditable(false);
         txfProperty2.setBackground(new java.awt.Color(234, 221, 202));
         txfProperty2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty2.setText("Property 2");
         txfProperty2.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile4Layout = new javax.swing.GroupLayout(Tile4);
-        Tile4.setLayout(Tile4Layout);
-        Tile4Layout.setHorizontalGroup(
-            Tile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile4Layout.setVerticalGroup(
-            Tile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile4Layout.createSequentialGroup()
-                .addComponent(txfProperty2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile4.add(txfProperty2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 775, -1, -1));
 
         Tile5.setBackground(new java.awt.Color(220, 255, 196));
         Tile5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile5.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile5label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile5label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile5label1.setText("Income");
+        Tile5.add(txtTile5label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 21, 73, -1));
 
         txtTile5label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile5label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile5label2.setText("Tax");
-
-        javax.swing.GroupLayout Tile5Layout = new javax.swing.GroupLayout(Tile5);
-        Tile5.setLayout(Tile5Layout);
-        Tile5Layout.setHorizontalGroup(
-            Tile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile5label1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-            .addGroup(Tile5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTile5label2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        Tile5Layout.setVerticalGroup(
-            Tile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtTile5label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile5label2)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        Tile5.add(txtTile5label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 48, 53, -1));
 
         getContentPane().add(Tile5, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 775, -1, -1));
 
         Tile6.setBackground(new java.awt.Color(220, 255, 196));
         Tile6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile6.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty3.setEditable(false);
         txfProperty3.setBackground(new java.awt.Color(0, 0, 0));
@@ -930,25 +857,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty3.setText("Railroad 1");
         txfProperty3.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile6Layout = new javax.swing.GroupLayout(Tile6);
-        Tile6.setLayout(Tile6Layout);
-        Tile6Layout.setHorizontalGroup(
-            Tile6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty3, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile6Layout.setVerticalGroup(
-            Tile6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile6Layout.createSequentialGroup()
-                .addComponent(txfProperty3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile6.add(txfProperty3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 775, -1, -1));
 
         Tile11.setBackground(new java.awt.Color(220, 255, 196));
         Tile11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile11.setPreferredSize(new java.awt.Dimension(100, 100));
+        Tile11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfJail.setEditable(false);
         txfJail.setBackground(new java.awt.Color(255, 190, 0));
@@ -957,247 +873,133 @@ public class GameScreen extends javax.swing.JFrame {
         txfJail.setText("IN JAIL");
         txfJail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfJail.setPreferredSize(new java.awt.Dimension(70, 70));
+        Tile11.add(txfJail, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 1, -1, -1));
 
         txtJustVisting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtJustVisting.setText("JUST VISITING");
-
-        javax.swing.GroupLayout Tile11Layout = new javax.swing.GroupLayout(Tile11);
-        Tile11.setLayout(Tile11Layout);
-        Tile11Layout.setHorizontalGroup(
-            Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Tile11Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
-        Tile11Layout.setVerticalGroup(
-            Tile11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile11Layout.createSequentialGroup()
-                .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtJustVisting)
-                .addGap(0, 7, Short.MAX_VALUE))
-        );
+        Tile11.add(txtJustVisting, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 88, -1));
 
         getContentPane().add(Tile11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 775, -1, -1));
 
         Tile7.setBackground(new java.awt.Color(220, 255, 196));
         Tile7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile7.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty4.setEditable(false);
         txfProperty4.setBackground(new java.awt.Color(150, 210, 255));
         txfProperty4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty4.setText("Property 4");
         txfProperty4.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile7Layout = new javax.swing.GroupLayout(Tile7);
-        Tile7.setLayout(Tile7Layout);
-        Tile7Layout.setHorizontalGroup(
-            Tile7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty4, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile7Layout.setVerticalGroup(
-            Tile7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile7Layout.createSequentialGroup()
-                .addComponent(txfProperty4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile7.add(txfProperty4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile7, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 775, -1, -1));
 
         Tile8.setBackground(new java.awt.Color(220, 255, 196));
         Tile8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile8.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile8label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile8label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile8label1.setText("Chance");
+        Tile8.add(txtTile8label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 21, 53, -1));
 
         txtTile8label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile8label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile8label2.setText("Card");
-
-        javax.swing.GroupLayout Tile8Layout = new javax.swing.GroupLayout(Tile8);
-        Tile8.setLayout(Tile8Layout);
-        Tile8Layout.setHorizontalGroup(
-            Tile8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile8label1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(txtTile8label2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile8Layout.setVerticalGroup(
-            Tile8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile8Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtTile8label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile8label2)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        Tile8.add(txtTile8label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 48, 53, -1));
 
         getContentPane().add(Tile8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 775, -1, -1));
 
         Tile9.setBackground(new java.awt.Color(220, 255, 196));
         Tile9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile9.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty5.setEditable(false);
         txfProperty5.setBackground(new java.awt.Color(150, 210, 255));
         txfProperty5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty5.setText("Property 5");
         txfProperty5.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile9Layout = new javax.swing.GroupLayout(Tile9);
-        Tile9.setLayout(Tile9Layout);
-        Tile9Layout.setHorizontalGroup(
-            Tile9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty5, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile9Layout.setVerticalGroup(
-            Tile9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile9Layout.createSequentialGroup()
-                .addComponent(txfProperty5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile9.add(txfProperty5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile9, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 775, -1, -1));
 
         Tile10.setBackground(new java.awt.Color(220, 255, 196));
         Tile10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile10.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty6.setEditable(false);
         txfProperty6.setBackground(new java.awt.Color(150, 210, 255));
         txfProperty6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty6.setText("Property 6");
         txfProperty6.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile10Layout = new javax.swing.GroupLayout(Tile10);
-        Tile10.setLayout(Tile10Layout);
-        Tile10Layout.setHorizontalGroup(
-            Tile10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty6, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile10Layout.setVerticalGroup(
-            Tile10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile10Layout.createSequentialGroup()
-                .addComponent(txfProperty6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile10.add(txfProperty6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 775, -1, -1));
 
         Tile12.setBackground(new java.awt.Color(220, 255, 196));
         Tile12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile12.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty7.setEditable(false);
         txfProperty7.setBackground(new java.awt.Color(253, 185, 200));
         txfProperty7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty7.setText("Property 7");
         txfProperty7.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile12Layout = new javax.swing.GroupLayout(Tile12);
-        Tile12.setLayout(Tile12Layout);
-        Tile12Layout.setHorizontalGroup(
-            Tile12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty7, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile12Layout.setVerticalGroup(
-            Tile12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile12Layout.createSequentialGroup()
-                .addComponent(txfProperty7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile12.add(txfProperty7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 700, -1, -1));
 
         Tile13.setBackground(new java.awt.Color(220, 255, 196));
         Tile13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile13.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty8.setEditable(false);
         txfProperty8.setBackground(new java.awt.Color(255, 255, 255));
         txfProperty8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty8.setText("Utilities 1");
         txfProperty8.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile13Layout = new javax.swing.GroupLayout(Tile13);
-        Tile13.setLayout(Tile13Layout);
-        Tile13Layout.setHorizontalGroup(
-            Tile13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty8, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile13Layout.setVerticalGroup(
-            Tile13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile13Layout.createSequentialGroup()
-                .addComponent(txfProperty8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile13.add(txfProperty8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 625, -1, -1));
 
         Tile14.setBackground(new java.awt.Color(220, 255, 196));
         Tile14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile14.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty9.setEditable(false);
         txfProperty9.setBackground(new java.awt.Color(253, 185, 200));
         txfProperty9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty9.setText("Property 9");
         txfProperty9.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile14Layout = new javax.swing.GroupLayout(Tile14);
-        Tile14.setLayout(Tile14Layout);
-        Tile14Layout.setHorizontalGroup(
-            Tile14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty9, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile14Layout.setVerticalGroup(
-            Tile14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile14Layout.createSequentialGroup()
-                .addComponent(txfProperty9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile14.add(txfProperty9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, -1, -1));
 
         Tile15.setBackground(new java.awt.Color(220, 255, 196));
         Tile15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile15.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty10.setEditable(false);
         txfProperty10.setBackground(new java.awt.Color(253, 185, 200));
         txfProperty10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty10.setText("Property 10");
         txfProperty10.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile15Layout = new javax.swing.GroupLayout(Tile15);
-        Tile15.setLayout(Tile15Layout);
-        Tile15Layout.setHorizontalGroup(
-            Tile15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty10, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile15Layout.setVerticalGroup(
-            Tile15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile15Layout.createSequentialGroup()
-                .addComponent(txfProperty10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile15.add(txfProperty10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 475, -1, -1));
 
         Tile16.setBackground(new java.awt.Color(220, 255, 196));
         Tile16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile16.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty11.setEditable(false);
         txfProperty11.setBackground(new java.awt.Color(0, 0, 0));
@@ -1205,25 +1007,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty11.setText("Railroad 2");
         txfProperty11.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile16Layout = new javax.swing.GroupLayout(Tile16);
-        Tile16.setLayout(Tile16Layout);
-        Tile16Layout.setHorizontalGroup(
-            Tile16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty11, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile16Layout.setVerticalGroup(
-            Tile16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile16Layout.createSequentialGroup()
-                .addComponent(txfProperty11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile16.add(txfProperty11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, -1));
 
         Tile17.setBackground(new java.awt.Color(220, 255, 196));
         Tile17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile17.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty12.setEditable(false);
         txfProperty12.setBackground(new java.awt.Color(255, 160, 0));
@@ -1231,60 +1022,31 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty12.setText("Property 12");
         txfProperty12.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile17Layout = new javax.swing.GroupLayout(Tile17);
-        Tile17.setLayout(Tile17Layout);
-        Tile17Layout.setHorizontalGroup(
-            Tile17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty12, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile17Layout.setVerticalGroup(
-            Tile17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile17Layout.createSequentialGroup()
-                .addComponent(txfProperty12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile17.add(txfProperty12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 325, -1, -1));
 
         Tile18.setBackground(new java.awt.Color(220, 255, 196));
         Tile18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile18.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile18label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile18label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile18label1.setText("Community");
+        Tile18.add(txtTile18label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 16, 78, -1));
 
         txtTile18label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile18label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile18label2.setText("Chest");
-
-        javax.swing.GroupLayout Tile18Layout = new javax.swing.GroupLayout(Tile18);
-        Tile18.setLayout(Tile18Layout);
-        Tile18Layout.setHorizontalGroup(
-            Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile18label1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(txtTile18label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile18Layout.setVerticalGroup(
-            Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile18Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtTile18label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile18label2)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        Tile18.add(txtTile18label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 43, 78, -1));
 
         getContentPane().add(Tile18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, -1));
 
         Tile19.setBackground(new java.awt.Color(220, 255, 196));
         Tile19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile19.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty13.setEditable(false);
         txfProperty13.setBackground(new java.awt.Color(255, 160, 0));
@@ -1292,25 +1054,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty13.setText("Property 13");
         txfProperty13.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile19Layout = new javax.swing.GroupLayout(Tile19);
-        Tile19.setLayout(Tile19Layout);
-        Tile19Layout.setHorizontalGroup(
-            Tile19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty13, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile19Layout.setVerticalGroup(
-            Tile19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile19Layout.createSequentialGroup()
-                .addComponent(txfProperty13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile19.add(txfProperty13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 175, -1, -1));
 
         Tile20.setBackground(new java.awt.Color(220, 255, 196));
         Tile20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile20.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty14.setEditable(false);
         txfProperty14.setBackground(new java.awt.Color(255, 160, 0));
@@ -1318,60 +1069,31 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty14.setText("Property 14");
         txfProperty14.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile20Layout = new javax.swing.GroupLayout(Tile20);
-        Tile20.setLayout(Tile20Layout);
-        Tile20Layout.setHorizontalGroup(
-            Tile20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty14, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile20Layout.setVerticalGroup(
-            Tile20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile20Layout.createSequentialGroup()
-                .addComponent(txfProperty14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile20.add(txfProperty14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
         Tile21.setBackground(new java.awt.Color(220, 255, 196));
         Tile21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile21.setPreferredSize(new java.awt.Dimension(100, 100));
+        Tile21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtFreeParking2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtFreeParking2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtFreeParking2.setText("PARKING");
+        Tile21.add(txtFreeParking2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 50, 78, -1));
 
         txtFreeParking1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtFreeParking1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtFreeParking1.setText("FREE");
-
-        javax.swing.GroupLayout Tile21Layout = new javax.swing.GroupLayout(Tile21);
-        Tile21.setLayout(Tile21Layout);
-        Tile21Layout.setHorizontalGroup(
-            Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(txtFreeParking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile21Layout.setVerticalGroup(
-            Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile21Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(txtFreeParking1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFreeParking2)
-                .addGap(27, 27, 27))
-        );
+        Tile21.add(txtFreeParking1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 22, 78, -1));
 
         getContentPane().add(Tile21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Tile22.setBackground(new java.awt.Color(220, 255, 196));
         Tile22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile22.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty15.setEditable(false);
         txfProperty15.setBackground(new java.awt.Color(255, 0, 0));
@@ -1379,95 +1101,48 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty15.setText("Property 15");
         txfProperty15.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile22Layout = new javax.swing.GroupLayout(Tile22);
-        Tile22.setLayout(Tile22Layout);
-        Tile22Layout.setHorizontalGroup(
-            Tile22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty15, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile22Layout.setVerticalGroup(
-            Tile22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile22Layout.createSequentialGroup()
-                .addComponent(txfProperty15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile22.add(txfProperty15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
 
         Tile23.setBackground(new java.awt.Color(220, 255, 196));
         Tile23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile23.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile23label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile23label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile23label1.setText("Chance");
+        Tile23.add(txtTile23label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 21, 53, -1));
 
         txtTile23label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile23label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile23label2.setText("Card");
-
-        javax.swing.GroupLayout Tile23Layout = new javax.swing.GroupLayout(Tile23);
-        Tile23.setLayout(Tile23Layout);
-        Tile23Layout.setHorizontalGroup(
-            Tile23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile23label1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(txtTile23label2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile23Layout.setVerticalGroup(
-            Tile23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile23Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtTile23label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile23label2)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        Tile23.add(txtTile23label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 48, 53, -1));
 
         getContentPane().add(Tile23, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 0, -1, -1));
 
         Tile31.setBackground(new java.awt.Color(220, 255, 196));
         Tile31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile31.setPreferredSize(new java.awt.Dimension(100, 100));
+        Tile31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtGoToJail1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGoToJail1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGoToJail1.setText("GO TO");
+        Tile31.add(txtGoToJail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 23, 78, -1));
 
         txtGoToJail2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGoToJail2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtGoToJail2.setText("JAIL");
-
-        javax.swing.GroupLayout Tile31Layout = new javax.swing.GroupLayout(Tile31);
-        Tile31.setLayout(Tile31Layout);
-        Tile31Layout.setHorizontalGroup(
-            Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile31Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtGoToJail1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                    .addComponent(txtGoToJail2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile31Layout.setVerticalGroup(
-            Tile31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile31Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(txtGoToJail1)
-                .addGap(18, 18, 18)
-                .addComponent(txtGoToJail2)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
+        Tile31.add(txtGoToJail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 63, 78, -1));
 
         getContentPane().add(Tile31, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 0, -1, -1));
 
         Tile24.setBackground(new java.awt.Color(220, 255, 196));
         Tile24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile24.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty16.setEditable(false);
         txfProperty16.setBackground(new java.awt.Color(255, 0, 0));
@@ -1475,25 +1150,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty16.setText("Property 16");
         txfProperty16.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile24Layout = new javax.swing.GroupLayout(Tile24);
-        Tile24.setLayout(Tile24Layout);
-        Tile24Layout.setHorizontalGroup(
-            Tile24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty16, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile24Layout.setVerticalGroup(
-            Tile24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile24Layout.createSequentialGroup()
-                .addComponent(txfProperty16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile24.add(txfProperty16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile24, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, -1));
 
         Tile25.setBackground(new java.awt.Color(220, 255, 196));
         Tile25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile25.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty17.setEditable(false);
         txfProperty17.setBackground(new java.awt.Color(255, 0, 0));
@@ -1501,25 +1165,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty17.setText("Property 17");
         txfProperty17.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile25Layout = new javax.swing.GroupLayout(Tile25);
-        Tile25.setLayout(Tile25Layout);
-        Tile25Layout.setHorizontalGroup(
-            Tile25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty17, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile25Layout.setVerticalGroup(
-            Tile25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile25Layout.createSequentialGroup()
-                .addComponent(txfProperty17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile25.add(txfProperty17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile25, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 0, -1, -1));
 
         Tile26.setBackground(new java.awt.Color(220, 255, 196));
         Tile26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile26.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty18.setEditable(false);
         txfProperty18.setBackground(new java.awt.Color(0, 0, 0));
@@ -1527,25 +1180,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty18.setText("Railroad 3");
         txfProperty18.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile26Layout = new javax.swing.GroupLayout(Tile26);
-        Tile26.setLayout(Tile26Layout);
-        Tile26Layout.setHorizontalGroup(
-            Tile26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile26Layout.setVerticalGroup(
-            Tile26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile26Layout.createSequentialGroup()
-                .addComponent(txfProperty18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile26.add(txfProperty18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
 
         Tile27.setBackground(new java.awt.Color(220, 255, 196));
         Tile27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile27.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty19.setEditable(false);
         txfProperty19.setBackground(new java.awt.Color(255, 211, 0));
@@ -1553,25 +1195,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty19.setText("Property 19");
         txfProperty19.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile27Layout = new javax.swing.GroupLayout(Tile27);
-        Tile27.setLayout(Tile27Layout);
-        Tile27Layout.setHorizontalGroup(
-            Tile27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty19, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile27Layout.setVerticalGroup(
-            Tile27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile27Layout.createSequentialGroup()
-                .addComponent(txfProperty19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile27.add(txfProperty19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile27, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 0, -1, -1));
 
         Tile28.setBackground(new java.awt.Color(220, 255, 196));
         Tile28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile28.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty20.setEditable(false);
         txfProperty20.setBackground(new java.awt.Color(255, 211, 0));
@@ -1579,50 +1210,28 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty20.setText("Property 20");
         txfProperty20.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile28Layout = new javax.swing.GroupLayout(Tile28);
-        Tile28.setLayout(Tile28Layout);
-        Tile28Layout.setHorizontalGroup(
-            Tile28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty20, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile28Layout.setVerticalGroup(
-            Tile28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile28Layout.createSequentialGroup()
-                .addComponent(txfProperty20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile28.add(txfProperty20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile28, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, -1, -1));
 
         Tile29.setBackground(new java.awt.Color(220, 255, 196));
         Tile29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile29.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty21.setEditable(false);
         txfProperty21.setBackground(new java.awt.Color(255, 255, 255));
         txfProperty21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty21.setText("Utilities 2");
         txfProperty21.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile29Layout = new javax.swing.GroupLayout(Tile29);
-        Tile29.setLayout(Tile29Layout);
-        Tile29Layout.setHorizontalGroup(
-            Tile29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty21, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile29Layout.setVerticalGroup(
-            Tile29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile29Layout.createSequentialGroup()
-                .addComponent(txfProperty21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile29.add(txfProperty21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile29, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 0, -1, -1));
 
         Tile30.setBackground(new java.awt.Color(220, 255, 196));
         Tile30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile30.setPreferredSize(new java.awt.Dimension(75, 100));
+        Tile30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty22.setEditable(false);
         txfProperty22.setBackground(new java.awt.Color(255, 211, 0));
@@ -1630,25 +1239,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty22.setText("Property 22");
         txfProperty22.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile30Layout = new javax.swing.GroupLayout(Tile30);
-        Tile30.setLayout(Tile30Layout);
-        Tile30Layout.setHorizontalGroup(
-            Tile30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty22, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-        );
-        Tile30Layout.setVerticalGroup(
-            Tile30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile30Layout.createSequentialGroup()
-                .addComponent(txfProperty22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
-        );
+        Tile30.add(txfProperty22, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 73, -1));
 
         getContentPane().add(Tile30, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
 
         Tile32.setBackground(new java.awt.Color(220, 255, 196));
         Tile32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile32.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty23.setEditable(false);
         txfProperty23.setBackground(new java.awt.Color(0, 100, 0));
@@ -1656,25 +1254,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty23.setText("Property 23");
         txfProperty23.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile32Layout = new javax.swing.GroupLayout(Tile32);
-        Tile32.setLayout(Tile32Layout);
-        Tile32Layout.setHorizontalGroup(
-            Tile32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty23, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile32Layout.setVerticalGroup(
-            Tile32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile32Layout.createSequentialGroup()
-                .addComponent(txfProperty23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile32.add(txfProperty23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile32, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 100, -1, -1));
 
         Tile33.setBackground(new java.awt.Color(220, 255, 196));
         Tile33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile33.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile33.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty24.setEditable(false);
         txfProperty24.setBackground(new java.awt.Color(0, 100, 0));
@@ -1682,59 +1269,31 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty24.setText("Property 24");
         txfProperty24.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile33Layout = new javax.swing.GroupLayout(Tile33);
-        Tile33.setLayout(Tile33Layout);
-        Tile33Layout.setHorizontalGroup(
-            Tile33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty24, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile33Layout.setVerticalGroup(
-            Tile33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile33Layout.createSequentialGroup()
-                .addComponent(txfProperty24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile33.add(txfProperty24, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile33, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 175, -1, -1));
 
         Tile34.setBackground(new java.awt.Color(220, 255, 196));
         Tile34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile34.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile34.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile34label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile34label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile34label1.setText("Community");
+        Tile34.add(txtTile34label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 16, 98, -1));
 
         txtTile34label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile34label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile34label2.setText("Chest");
-
-        javax.swing.GroupLayout Tile34Layout = new javax.swing.GroupLayout(Tile34);
-        Tile34.setLayout(Tile34Layout);
-        Tile34Layout.setHorizontalGroup(
-            Tile34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile34label1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-            .addGroup(Tile34Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTile34label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        Tile34Layout.setVerticalGroup(
-            Tile34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile34Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtTile34label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile34label2)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        Tile34.add(txtTile34label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 43, 78, -1));
 
         getContentPane().add(Tile34, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 250, -1, -1));
 
         Tile35.setBackground(new java.awt.Color(220, 255, 196));
         Tile35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile35.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile35.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty25.setEditable(false);
         txfProperty25.setBackground(new java.awt.Color(0, 100, 0));
@@ -1742,25 +1301,14 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty25.setText("Property 25");
         txfProperty25.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile35Layout = new javax.swing.GroupLayout(Tile35);
-        Tile35.setLayout(Tile35Layout);
-        Tile35Layout.setHorizontalGroup(
-            Tile35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty25, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile35Layout.setVerticalGroup(
-            Tile35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile35Layout.createSequentialGroup()
-                .addComponent(txfProperty25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile35.add(txfProperty25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile35, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 325, -1, -1));
 
         Tile36.setBackground(new java.awt.Color(220, 255, 196));
         Tile36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile36.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile36.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty26.setEditable(false);
         txfProperty26.setBackground(new java.awt.Color(0, 0, 0));
@@ -1768,59 +1316,31 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty26.setText("Railroad 4");
         txfProperty26.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile36Layout = new javax.swing.GroupLayout(Tile36);
-        Tile36.setLayout(Tile36Layout);
-        Tile36Layout.setHorizontalGroup(
-            Tile36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty26, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile36Layout.setVerticalGroup(
-            Tile36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile36Layout.createSequentialGroup()
-                .addComponent(txfProperty26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile36.add(txfProperty26, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile36, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 400, -1, -1));
 
         Tile37.setBackground(new java.awt.Color(220, 255, 196));
         Tile37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile37.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile37label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile37label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile37label1.setText("Chance");
+        Tile37.add(txtTile37label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 16, 98, -1));
 
         txtTile37label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile37label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile37label2.setText("Card");
-
-        javax.swing.GroupLayout Tile37Layout = new javax.swing.GroupLayout(Tile37);
-        Tile37.setLayout(Tile37Layout);
-        Tile37Layout.setHorizontalGroup(
-            Tile37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile37label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile37Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTile37label2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        Tile37Layout.setVerticalGroup(
-            Tile37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile37Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtTile37label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile37label2)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        Tile37.add(txtTile37label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 43, 78, -1));
 
         getContentPane().add(Tile37, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 475, -1, -1));
 
         Tile38.setBackground(new java.awt.Color(220, 255, 196));
         Tile38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile38.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty27.setEditable(false);
         txfProperty27.setBackground(new java.awt.Color(0, 0, 205));
@@ -1828,60 +1348,31 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty27.setText("Property 27");
         txfProperty27.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile38Layout = new javax.swing.GroupLayout(Tile38);
-        Tile38.setLayout(Tile38Layout);
-        Tile38Layout.setHorizontalGroup(
-            Tile38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty27, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile38Layout.setVerticalGroup(
-            Tile38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile38Layout.createSequentialGroup()
-                .addComponent(txfProperty27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile38.add(txfProperty27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile38, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 550, -1, -1));
 
         Tile39.setBackground(new java.awt.Color(220, 255, 196));
         Tile39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile39.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTile39label1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile39label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile39label1.setText("Luxury");
+        Tile39.add(txtTile39label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 16, 78, -1));
 
         txtTile39label2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTile39label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTile39label2.setText("Tax");
-
-        javax.swing.GroupLayout Tile39Layout = new javax.swing.GroupLayout(Tile39);
-        Tile39.setLayout(Tile39Layout);
-        Tile39Layout.setHorizontalGroup(
-            Tile39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile39Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Tile39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile39label1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                    .addComponent(txtTile39label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Tile39Layout.setVerticalGroup(
-            Tile39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile39Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtTile39label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTile39label2)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        Tile39.add(txtTile39label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 43, 78, -1));
 
         getContentPane().add(Tile39, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 625, -1, -1));
 
         Tile40.setBackground(new java.awt.Color(220, 255, 196));
         Tile40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile40.setPreferredSize(new java.awt.Dimension(100, 75));
+        Tile40.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txfProperty28.setEditable(false);
         txfProperty28.setBackground(new java.awt.Color(0, 0, 205));
@@ -1889,19 +1380,7 @@ public class GameScreen extends javax.swing.JFrame {
         txfProperty28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfProperty28.setText("Property 28");
         txfProperty28.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        javax.swing.GroupLayout Tile40Layout = new javax.swing.GroupLayout(Tile40);
-        Tile40.setLayout(Tile40Layout);
-        Tile40Layout.setHorizontalGroup(
-            Tile40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txfProperty28, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-        );
-        Tile40Layout.setVerticalGroup(
-            Tile40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Tile40Layout.createSequentialGroup()
-                .addComponent(txfProperty28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+        Tile40.add(txfProperty28, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 98, -1));
 
         getContentPane().add(Tile40, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 700, -1, -1));
 

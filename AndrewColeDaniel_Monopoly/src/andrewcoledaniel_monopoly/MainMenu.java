@@ -6,25 +6,18 @@
 package andrewcoledaniel_monopoly;
 
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Scanner;
 import javax.sound.sampled.*;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -36,8 +29,8 @@ public class MainMenu extends javax.swing.JFrame {
     private HighScoreMenu highScoreMenu;
     public int[] highscores = new int[5];
     public String[] date = new String[5];
-    public MainMusic mainBgm;
-    private Thread mainBgmThread;
+    public final MainMusic mainBgm;
+    private final Thread mainBgmThread;
     public static int limitedTurns;
     public static long limitedTime;
     
@@ -65,31 +58,32 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * This is a void method that brings images from the files and set them as a button or label icons
+     */
     private void monopolyImage()
     {
-        
         Image img;
         
         //Title image
-        URL urlMonopoly = GameScreen.class.getResource("saves/MonoPoly.png");
-        ImageIcon mply = new ImageIcon(urlMonopoly);
-        img = mply.getImage();
-        mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_SMOOTH));
-        lblTitle.setIcon(mply);
+        URL urlMonopoly = GameScreen.class.getResource("saves/MonoPoly.png"); //load from file
+        ImageIcon mply = new ImageIcon(urlMonopoly); //make an image icon
+        img = mply.getImage(); //change to image
+        mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_SMOOTH)); //modify image size to make it fit in the component
+        lblTitle.setIcon(mply); //change the component icon
         
         //highscore button image
-        btnHighScores.setOpaque(false);
-        btnHighScores.setFocusPainted(false);
-        btnHighScores.setBorderPainted(false);
-        btnHighScores.setContentAreaFilled(false);
-        btnHighScores.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg");
+        btnHighScores.setBorderPainted(false); //erase the border
+        btnHighScores.setContentAreaFilled(false); //erase the content area filled
+        //same process with title image
+        URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg"); 
         ImageIcon scores = new ImageIcon(urlHighScore);
         img = scores.getImage();
         scores = new ImageIcon(img.getScaledInstance(btnHighScores.getWidth(), btnHighScores.getHeight(), Image.SCALE_SMOOTH));
         btnHighScores.setIcon(scores);
         
         //new game button image
+        //same process with title image
         btnHighScores.setBorder(null);
         URL urlNewGame = GameScreen.class.getResource("saves/newGame.png");
         ImageIcon newGame = new ImageIcon(urlNewGame);
@@ -97,24 +91,27 @@ public class MainMenu extends javax.swing.JFrame {
         newGame = new ImageIcon(img.getScaledInstance(btnNewGame.getWidth(), btnNewGame.getHeight(), Image.SCALE_SMOOTH));
         btnNewGame.setIcon(newGame);
         
-        btnLoadSave.setBorder(null);
+        //loadSave button image
+        btnLoadSave.setBorder(null); //erase the border
+        //same process with title image
         URL urlLoadSave = GameScreen.class.getResource("saves/loadSave.jpg");
         ImageIcon loadSave = new ImageIcon(urlLoadSave);
         img = loadSave.getImage();
         loadSave = new ImageIcon(img.getScaledInstance(btnLoadSave.getWidth(), btnLoadSave.getHeight(), Image.SCALE_SMOOTH));
         btnLoadSave.setIcon(loadSave);
         
+        //background image
+        //same process with title image
         URL urlMoney = GameScreen.class.getResource("saves/street.jpg");
         ImageIcon money = new ImageIcon(urlMoney);
         img = money.getImage();
         money = new ImageIcon(img.getScaledInstance(lblBackground.getWidth(), lblBackground.getHeight(), Image.SCALE_SMOOTH));
         lblBackground.setIcon(money);
                
-        btnTutorial.setOpaque(false);
-        btnTutorial.setFocusPainted(false);
-        btnTutorial.setBorderPainted(false);
-        btnTutorial.setContentAreaFilled(false);
-        btnTutorial.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        //tutorial button image
+        btnTutorial.setBorderPainted(false); //erase the border
+        btnTutorial.setContentAreaFilled(false); //erase the painting
+        //same process with title image
         URL urlHelp = GameScreen.class.getResource("saves/tutorial.png");
         ImageIcon tutorial = new ImageIcon(urlHelp);
         img = tutorial.getImage();
@@ -205,44 +202,56 @@ public class MainMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This button event is to load the previous game saved in the user's directory
+     * @param evt - when the user clicks loadSave button
+     */
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
-        String saveFilePath = null;
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = fileChooser.showOpenDialog(this);
-        if(result == JFileChooser.APPROVE_OPTION)
+        String saveFilePath = null; //initialilze file path
+        JFileChooser fileChooser = new JFileChooser(); //instantiate JFileChooser
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //set the chooser mode  
+        int result = fileChooser.showOpenDialog(this); //show a dialog that let the user to find a file and click "open" button.
+        if(result == JFileChooser.APPROVE_OPTION) 
         {
-            saveFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+            saveFilePath = fileChooser.getSelectedFile().getAbsolutePath(); //get the file path of the file the user choose
         }
-        File saveFile = new File(saveFilePath + "/MonopolySave.txt");
+        File saveFile = new File(saveFilePath + "/MonopolySave.txt"); //instantiate file by using the path
 
         try {
-            FileInputStream in = new FileInputStream(saveFile);
-            ObjectInputStream s = new ObjectInputStream(in);
-            int gameMode = s.readInt();
-            int currentTurn = s.readInt();
-            int numPlayers = s.readInt();
-            Player[] playerArray = (Player[]) s.readObject();
-            mainBgm.musicOff();
-            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray);
-            gameScreen.setVisible(true);
-            this.setVisible(false);
-        } catch (NullPointerException | IOException | ClassNotFoundException ex) {
+            FileInputStream in = new FileInputStream(saveFile); //instantiate FileInputStream to the saveFile
+            ObjectInputStream s = new ObjectInputStream(in); //instantiate ObjectInputStream in order to read the file in Object form directly instead of scanning it in text
+            int gameMode = s.readInt(); //read gameMode 
+            int currentTurn = s.readInt(); //read current Turn
+            int numPlayers = s.readInt(); //read the number of players
+            Player[] playerArray = (Player[]) s.readObject(); //read the Player objects
+            mainBgm.musicOff(); //turn off the music
+            gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray); //instantiate GameScreen with the values read
+            gameScreen.setVisible(true); //make the game screen visible
+            this.setVisible(false); //make this screen invisible
+        } catch (NullPointerException | IOException | ClassNotFoundException ex) { //error reporter
             JOptionPane.showMessageDialog(null, ex, "File selection error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 
+    /**
+     * This button opens the high score menu
+     * @param evt - when the user clicks the trophy image at the left bottom
+     */
     private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
-        if(highScoreMenu == null)
+        if(highScoreMenu == null) //if there is no highscore menu existing
         {
-            highScoreMenu = new HighScoreMenu(this);
+            highScoreMenu = new HighScoreMenu(this); //create a highscore menu
         }
-        highScoreMenu.setVisible(true);
-        this.setVisible(false);
+        highScoreMenu.setVisible(true); //set the highscore menu visible
+        this.setVisible(false); //set this screen invisible
     }//GEN-LAST:event_btnHighScoresActionPerformed
 
+    /**
+     * This button opens the tutorial menu
+     * @param evt - when the user clicks the question mark image at the right bottom
+     */
     private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
-        if(tutorial == null)
+        if(tutorial == null) //if there is no tutorial menu existing
         {
             tutorial = new TutorialMenu(this);
         }
@@ -284,40 +293,7 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenu().setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHighScores;
