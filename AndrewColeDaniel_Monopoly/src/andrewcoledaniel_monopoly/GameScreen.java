@@ -368,27 +368,33 @@ public class GameScreen extends javax.swing.JFrame {
                 option = JOptionPane.showConfirmDialog(null, ((Space) prop).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     p.buyProperty(prop);
+                    prop.setOwned(true);
                 } else {
                     auction(prop);
                 }
             } else {
+                if(!prop.mortgage){
                 JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
+                }
             }
         } else {
             if (!prop.getOwned()) {
                 int randomNumber = (int) (Math.random() * 10);
                 if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
                     p.buyProperty(prop);
+                    prop.setOwned(true);
                     updateProperties();
                 } else {
                     auction(prop);
                 }
             } else {
+                if(!prop.mortgage){
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
+                }
             }
         }
     }
@@ -476,6 +482,7 @@ public class GameScreen extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "Player " + lastBidder + " purchased the property for $" + curr.format(currentBid));
         playerArray[lastBidder].buyProperty(p);
+        p.setOwned(true);
     }
 
     private void rollDice() {
@@ -514,8 +521,12 @@ public class GameScreen extends javax.swing.JFrame {
     private void updateLocations() {
         lblPlayer1.setText("Player " + 1 + ": " + board.getSpace(playerArray[0].getPosition()).getName());
         lblPlayer2.setText("Player " + 2 + ": " + board.getSpace(playerArray[1].getPosition()).getName());
+        if(numPlayers >= 3){
         lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName());
+        }
+        if (numPlayers == 4){
         lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName());
+        }
     }
 
     private void generateProperties() {
