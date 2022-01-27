@@ -44,7 +44,6 @@ public class GameScreen extends javax.swing.JFrame {
     public int moves;
     private Board board;
     private TimerTask tsk;
-    public static int[] roll = new int[2];
     
     /**
      * Creates new form GameScreen
@@ -152,9 +151,10 @@ public class GameScreen extends javax.swing.JFrame {
         int value;
         String info;
         
-        InputStream in = GameScreen.class.getResourceAsStream("saves/cards.txt");
+        
         try {
-           Scanner s = new Scanner(in);
+            InputStream in = GameScreen.class.getResourceAsStream("saves/cards.txt");
+            Scanner s = new Scanner(in);
             while (s.hasNextLine()) {
                 type = Card.CardType.valueOf(s.nextLine());
                 action = Card.CardAction.valueOf(s.nextLine());
@@ -162,7 +162,7 @@ public class GameScreen extends javax.swing.JFrame {
                 info = s.nextLine();
                 cards[index] = new Card(type, action, value, info);
             } 
-        } catch(Exception e) {
+        } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
         }
     }
@@ -234,7 +234,6 @@ public class GameScreen extends javax.swing.JFrame {
         stopRolling();
 
         newPos = p.getPosition() + moves;
-        newPos = p.getPosition() + roll[0] + roll[1];
         if (newPos >= 40) {
             p.addMoney(200);
             newPos -= 40;
@@ -247,7 +246,7 @@ public class GameScreen extends javax.swing.JFrame {
     
     
     private void computerTurn(Player p, int turn) {
-        /*
+        
         new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -255,7 +254,7 @@ public class GameScreen extends javax.swing.JFrame {
                     }
                 }, 
                 1500 
-            ); */
+            ); 
         
         JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn");
         if (p.getJail()) {
@@ -275,14 +274,14 @@ public class GameScreen extends javax.swing.JFrame {
         } else {
             int newPos;
             rollDice();
-            newPos = p.getPosition() + roll[0] + roll[1];
+            newPos = p.getPosition() + moves;
             if (newPos >= 40) {
                 p.addMoney(200);
                 newPos -= 40;
             }
            p.setPosition(newPos);
             handleSpace(board.getSpace(newPos), p);
-            if (roll[0] == roll[1]) {
+            if (((Rolling)tsk).isDoubleDice()) {
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has rolled a double");
                 turn++;
                 computerTurn(p, turn);
@@ -614,6 +613,7 @@ public class GameScreen extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -719,14 +719,19 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
+        getContentPane().add(pnlStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(875, 0, -1, 875));
+
         lblDie2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie2.setText("lblDie2");
+        getContentPane().add(lblDie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 222, 80, 80));
 
         lblDie1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie1.setText("lblDie1");
+        getContentPane().add(lblDie1, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 222, 80, 80));
 
         lblDiceSum.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDiceSum.setText("Moves: ");
+        getContentPane().add(lblDiceSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 187, 66, -1));
 
         Tile1.setBackground(new java.awt.Color(220, 255, 196));
         Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -749,7 +754,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Tile1Layout.setVerticalGroup(
@@ -759,8 +764,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtGO)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGOArrow)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 775, -1, -1));
 
         Tile2.setBackground(new java.awt.Color(220, 255, 196));
         Tile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -785,6 +792,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 775, -1, -1));
+
         Tile3.setBackground(new java.awt.Color(220, 255, 196));
         Tile3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile3.setPreferredSize(new java.awt.Dimension(75, 100));
@@ -801,7 +810,7 @@ public class GameScreen extends javax.swing.JFrame {
         Tile3.setLayout(Tile3Layout);
         Tile3Layout.setHorizontalGroup(
             Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile3label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtTile3label1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
             .addGroup(Tile3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtTile3label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -814,8 +823,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile3label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile3label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile3, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 775, -1, -1));
 
         Tile4.setBackground(new java.awt.Color(220, 255, 196));
         Tile4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -839,6 +850,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 775, -1, -1));
 
         Tile5.setBackground(new java.awt.Color(220, 255, 196));
         Tile5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -869,8 +882,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile5label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile5label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile5, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 775, -1, -1));
 
         Tile6.setBackground(new java.awt.Color(220, 255, 196));
         Tile6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -895,6 +910,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 775, -1, -1));
 
         Tile11.setBackground(new java.awt.Color(220, 255, 196));
         Tile11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -921,7 +938,7 @@ public class GameScreen extends javax.swing.JFrame {
                     .addGroup(Tile11Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         Tile11Layout.setVerticalGroup(
@@ -930,8 +947,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtJustVisting)
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 775, -1, -1));
 
         Tile7.setBackground(new java.awt.Color(220, 255, 196));
         Tile7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -955,6 +974,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile7, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 775, -1, -1));
 
         Tile8.setBackground(new java.awt.Color(220, 255, 196));
         Tile8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -986,8 +1007,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile8label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile8label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 775, -1, -1));
 
         Tile9.setBackground(new java.awt.Color(220, 255, 196));
         Tile9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1012,6 +1035,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile9, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 775, -1, -1));
+
         Tile10.setBackground(new java.awt.Color(220, 255, 196));
         Tile10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile10.setPreferredSize(new java.awt.Dimension(75, 100));
@@ -1034,6 +1059,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 775, -1, -1));
 
         Tile12.setBackground(new java.awt.Color(220, 255, 196));
         Tile12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1058,6 +1085,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 700, -1, -1));
+
         Tile13.setBackground(new java.awt.Color(220, 255, 196));
         Tile13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile13.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1080,6 +1109,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 43, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 625, -1, -1));
 
         Tile14.setBackground(new java.awt.Color(220, 255, 196));
         Tile14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1104,6 +1135,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, -1, -1));
+
         Tile15.setBackground(new java.awt.Color(220, 255, 196));
         Tile15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile15.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1126,6 +1159,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 43, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 475, -1, -1));
 
         Tile16.setBackground(new java.awt.Color(220, 255, 196));
         Tile16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1151,6 +1186,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, -1));
+
         Tile17.setBackground(new java.awt.Color(220, 255, 196));
         Tile17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile17.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1175,6 +1212,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 325, -1, -1));
+
         Tile18.setBackground(new java.awt.Color(220, 255, 196));
         Tile18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile18.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1194,7 +1233,7 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(Tile18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile18label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTile18label1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                     .addComponent(txtTile18label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1205,8 +1244,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile18label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile18label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, -1));
 
         Tile19.setBackground(new java.awt.Color(220, 255, 196));
         Tile19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1232,6 +1273,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 175, -1, -1));
+
         Tile20.setBackground(new java.awt.Color(220, 255, 196));
         Tile20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile20.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1256,6 +1299,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
+
         Tile21.setBackground(new java.awt.Color(220, 255, 196));
         Tile21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile21.setPreferredSize(new java.awt.Dimension(100, 100));
@@ -1275,19 +1320,21 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(Tile21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                     .addComponent(txtFreeParking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Tile21Layout.setVerticalGroup(
             Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile21Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(txtFreeParking1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFreeParking2)
                 .addGap(27, 27, 27))
         );
+
+        getContentPane().add(Tile21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Tile22.setBackground(new java.awt.Color(220, 255, 196));
         Tile22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1312,6 +1359,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
 
         Tile23.setBackground(new java.awt.Color(220, 255, 196));
         Tile23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1343,8 +1392,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile23label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile23label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile23, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 0, -1, -1));
 
         Tile31.setBackground(new java.awt.Color(220, 255, 196));
         Tile31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1376,8 +1427,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtGoToJail1)
                 .addGap(18, 18, 18)
                 .addComponent(txtGoToJail2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile31, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 0, -1, -1));
 
         Tile24.setBackground(new java.awt.Color(220, 255, 196));
         Tile24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1403,6 +1456,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile24, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, -1));
+
         Tile25.setBackground(new java.awt.Color(220, 255, 196));
         Tile25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile25.setPreferredSize(new java.awt.Dimension(75, 100));
@@ -1426,6 +1481,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile25, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 0, -1, -1));
 
         Tile26.setBackground(new java.awt.Color(220, 255, 196));
         Tile26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1451,6 +1508,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
+
         Tile27.setBackground(new java.awt.Color(220, 255, 196));
         Tile27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile27.setPreferredSize(new java.awt.Dimension(75, 100));
@@ -1474,6 +1533,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile27, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 0, -1, -1));
 
         Tile28.setBackground(new java.awt.Color(220, 255, 196));
         Tile28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1499,6 +1560,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile28, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, -1, -1));
+
         Tile29.setBackground(new java.awt.Color(220, 255, 196));
         Tile29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile29.setPreferredSize(new java.awt.Dimension(75, 100));
@@ -1521,6 +1584,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 68, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile29, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 0, -1, -1));
 
         Tile30.setBackground(new java.awt.Color(220, 255, 196));
         Tile30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1546,6 +1611,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile30, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
+
         Tile32.setBackground(new java.awt.Color(220, 255, 196));
         Tile32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile32.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1570,6 +1637,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile32, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 100, -1, -1));
+
         Tile33.setBackground(new java.awt.Color(220, 255, 196));
         Tile33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile33.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1593,6 +1662,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 43, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile33, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 175, -1, -1));
 
         Tile34.setBackground(new java.awt.Color(220, 255, 196));
         Tile34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1623,8 +1694,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile34label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile34label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile34, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 250, -1, -1));
 
         Tile35.setBackground(new java.awt.Color(220, 255, 196));
         Tile35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1650,6 +1723,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile35, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 325, -1, -1));
+
         Tile36.setBackground(new java.awt.Color(220, 255, 196));
         Tile36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile36.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1674,6 +1749,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
+        getContentPane().add(Tile36, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 400, -1, -1));
+
         Tile37.setBackground(new java.awt.Color(220, 255, 196));
         Tile37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tile37.setPreferredSize(new java.awt.Dimension(100, 75));
@@ -1693,7 +1770,7 @@ public class GameScreen extends javax.swing.JFrame {
             .addComponent(txtTile37label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile37Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTile37label2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(txtTile37label2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
         Tile37Layout.setVerticalGroup(
@@ -1703,8 +1780,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile37label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile37label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile37, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 475, -1, -1));
 
         Tile38.setBackground(new java.awt.Color(220, 255, 196));
         Tile38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1729,6 +1808,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfProperty27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 43, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile38, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 550, -1, -1));
 
         Tile39.setBackground(new java.awt.Color(220, 255, 196));
         Tile39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1760,8 +1841,10 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile39label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile39label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        getContentPane().add(Tile39, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 625, -1, -1));
 
         Tile40.setBackground(new java.awt.Color(220, 255, 196));
         Tile40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1787,175 +1870,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Tile11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Tile7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Tile21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Tile30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Tile17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Tile34, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Tile12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Tile16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Tile20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Tile19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(288, 288, 288)
-                                .addComponent(lblDiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Tile13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Tile14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Tile15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Tile18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(146, 146, 146)
-                                .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Tile32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Tile33, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Tile36, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Tile37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Tile38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Tile40, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile39, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Tile21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Tile20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Tile12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Tile23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tile30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Tile32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(Tile39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Tile40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addComponent(lblDiceSum)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblDie1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDie2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Tile2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tile6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        getContentPane().add(Tile40, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 700, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -1976,7 +1891,6 @@ public class GameScreen extends javax.swing.JFrame {
         while(continueGame == true){
             continueGame = checkGameMode();
             playGame();
-            currentTurn++;
         }
     }//GEN-LAST:event_formComponentShown
 
@@ -2158,8 +2072,8 @@ class GameMusic implements Runnable {
 class Rolling extends TimerTask {
     private int sum = 0;
     GameScreen gs;
-    int dice1;
-    int dice2;
+    private int dice1;
+    private int dice2;
     
     public Rolling(GameScreen gameScreen)
     {
