@@ -126,7 +126,7 @@ public class GameScreen extends javax.swing.JFrame {
     private boolean checkGameMode() {
         if (gameMode != 2) {
             if (gameMode == 0) {
-                if (currentTurn > MainMenu.limitedTurns) {
+                if (currentTurn > mainMenu.limitedTurns) {
                     endGame();
                     return false;
                 }
@@ -134,7 +134,7 @@ public class GameScreen extends javax.swing.JFrame {
                 long currentTime = System.currentTimeMillis();
                 currentTime -= startTime;
                 System.out.println(currentTime);
-                if (currentTime > MainMenu.limitedTime) {
+                if (currentTime > mainMenu.limitedTime) {
                     endGame();
                     return false;
                 }
