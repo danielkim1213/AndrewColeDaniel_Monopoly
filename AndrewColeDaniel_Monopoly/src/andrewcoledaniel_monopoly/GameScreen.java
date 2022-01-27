@@ -27,6 +27,7 @@ import javax.swing.JFileChooser;
  * @author dakim0069
  */
 public class GameScreen extends javax.swing.JFrame {
+
     MainMenu mainMenu;
     private EndingScreen endingScreen;
     private static Card[] cards = new Card[32];
@@ -45,9 +46,10 @@ public class GameScreen extends javax.swing.JFrame {
     private Board board;
     private TimerTask tsk;
     public static int[] roll = new int[2];
-    
+
     /**
      * Creates new form GameScreen
+     *
      * @param m - main menu
      * @param gameMode - game mode
      */
@@ -62,73 +64,68 @@ public class GameScreen extends javax.swing.JFrame {
         this.numPlayers = numPlayers;
         playerArray = new Player[numPlayers];
         startTime = System.currentTimeMillis() * 1000;
-        currentTurn = 0;
+        currentTurn = 1;
         board = new Board();
         loadCards();
         generatePlayers();
     }
-    
-    public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray)
-    {
+
+    public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray) {
         this(m, gameMode, numPlayers);
         this.currentTurn = currentTurn;
         this.playerArray = playerArray;
     }
-    
-    private void diceImage()
-    {
+
+    private void diceImage() {
         Image img;
         URL url0 = GameScreen.class.getResource("saves/dice1.jpg");
         Die[0] = new ImageIcon(url0);
         img = Die[0].getImage();
         Die[0] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         URL url1 = GameScreen.class.getResource("saves/dice2.jpg");
         Die[1] = new ImageIcon(url1);
         img = Die[1].getImage();
         Die[1] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         URL url2 = GameScreen.class.getResource("saves/dice3.jpg");
         Die[2] = new ImageIcon(url2);
         img = Die[2].getImage();
         Die[2] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         URL url3 = GameScreen.class.getResource("saves/dice4.jpg");
         Die[3] = new ImageIcon(url3);
         img = Die[3].getImage();
         Die[3] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         URL url4 = GameScreen.class.getResource("saves/dice5.jpg");
         Die[4] = new ImageIcon(url4);
         img = Die[4].getImage();
         Die[4] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         URL url5 = GameScreen.class.getResource("saves/dice6.jpg");
         Die[5] = new ImageIcon(url5);
         img = Die[5].getImage();
         Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
     }
-    
-    public ImageIcon getDiceImage(int index)
-    {
+
+    public ImageIcon getDiceImage(int index) {
         return Die[index];
     }
-    
-        
-    
+
     private boolean checkGameMode() {
         if (gameMode != 2) {
             if (gameMode == 0) {
-                if(currentTurn > MainMenu.limitedTurns){
+                if (currentTurn > MainMenu.limitedTurns) {
                     endGame();
                     return false;
                 }
-            } else{
+            } else {
                 long currentTime = System.currentTimeMillis() * 1000;
-                if(currentTime - startTime >= MainMenu.limitedTime){
+                if (currentTime - startTime >= MainMenu.limitedTime) {
                     endGame();
                     return false;
                 }
@@ -137,64 +134,46 @@ public class GameScreen extends javax.swing.JFrame {
         return true;
     }
 
-    private void endGame(){
-        if(endingScreen == null){
+    private void endGame() {
+        if (endingScreen == null) {
             endingScreen = new EndingScreen(numPlayers);
         }
         this.setVisible(false);
         endingScreen.setVisible(true);
     }
-    
+
     private void loadCards() {
         int index = 0;
         CardType type;
         CardAction action;
         int value;
         String info;
-        
+
         InputStream in = GameScreen.class.getResourceAsStream("saves/cards.txt");
         try {
-           Scanner s = new Scanner(in);
+            Scanner s = new Scanner(in);
             while (s.hasNextLine()) {
                 type = Card.CardType.valueOf(s.nextLine());
                 action = Card.CardAction.valueOf(s.nextLine());
                 value = Integer.parseInt(s.nextLine());
                 info = s.nextLine();
                 cards[index] = new Card(type, action, value, info);
-            } 
-        } catch(Exception e) {
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
         }
     }
-   
-    private void generatePlayers(){
-        for(int i = 0; i < playerArray.length; i ++){
+
+    private void generatePlayers() {
+        for (int i = 0; i < playerArray.length; i++) {
             playerArray[i] = new Player(i + 1, 1500);
         }
     }
-    
-    private void playGame() {
-           boolean again;
-           int turn = 0;
-           do {
-               again = playerTurn(playerArray[0], turn);
-               turn++;
-           } while (again);
-           JOptionPane.showMessageDialog(null, "End Turn");
 
-           
-           for (int i = 1; i < numPlayers; i++) {
-               computerTurn(playerArray[i], 1);
-           }
-           JOptionPane.showMessageDialog(null, "All players have played starting next turn");
-    }
-    
     private boolean playerTurn(Player p, int turn) {
         int response;
         int newPos;
-        
-        JOptionPane.showMessageDialog(null, "Your Turn");
-        
+
         if (turn > 3) {
             p.setPosition(10);
             p.setJail(true);
@@ -220,15 +199,14 @@ public class GameScreen extends javax.swing.JFrame {
                     p.setJail(false);
                     break;
             }
-            
+
             if (p.getJail()) {
                 p.setTurnsInJail(p.getTurnsInJail() + 1);
                 return false;
             }
             p.setTurnsInJail(0);
-            
+
         }
-        JOptionPane.showMessageDialog(null, "Start Rolling Dice");
         rollDice();
         JOptionPane.showMessageDialog(null, "Click to stop");
         stopRolling();
@@ -242,21 +220,16 @@ public class GameScreen extends javax.swing.JFrame {
         p.setPosition(newPos);
         handleSpace(board.getSpace(newPos), p);
         updateProperties();
-        return ((Rolling)tsk).isDoubleDice();
+        return ((Rolling) tsk).isDoubleDice();
     }
-    
-    
+
     private void computerTurn(Player p, int turn) {
-        /*
-        new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        stopRolling();
-                    }
-                }, 
-                1500 
-            ); */
-        
+
+        if (turn >= 3) {
+            p.setJail(true);
+            return;
+        }
+
         JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn");
         if (p.getJail()) {
             if (p.getJailCards() < 0) {
@@ -274,39 +247,39 @@ public class GameScreen extends javax.swing.JFrame {
             }
         } else {
             int newPos;
-            rollDice();
-            newPos = p.getPosition() + roll[0] + roll[1];
+            int diceRoll = (int) (Math.random() * 6) + 1;
+            int diceRoll2 = (int) (Math.random() * 6) + 1;
+            newPos = p.getPosition() + diceRoll + diceRoll2;
             if (newPos >= 40) {
                 p.addMoney(200);
                 newPos -= 40;
             }
-           p.setPosition(newPos);
+            p.setPosition(newPos);
             handleSpace(board.getSpace(newPos), p);
-            if (roll[0] == roll[1]) {
+            if (diceRoll == diceRoll2) {
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has rolled a double");
                 turn++;
                 computerTurn(p, turn);
             }
         }
-
     }
-    
+
     private void handleSpace(Space s, Player p) {
         SpaceType st = s.getType();
         switch (st) {
             case SPACE_CORNER:
-                ((CornerSpace)s).performSpaceAction(p);
+                ((CornerSpace) s).performSpaceAction(p);
                 break;
             case SPACE_PROPERTY:
-                handleProperty((Property)s, p);
+                handleProperty((Property) s, p);
             case SPACE_CARD:
-                 Card c = ((CardSpace)s).getCard(cards);
-                 String out = ((CardSpace)s).performSpaceAction(c, p);
-                 JOptionPane.showMessageDialog(null, out);
-                 break;
+                Card c = ((CardSpace) s).getCard(cards);
+                String out = ((CardSpace) s).performSpaceAction(c, p);
+                JOptionPane.showMessageDialog(null, out);
+                break;
         }
     }
-    
+
     private void handleProperty(Property prop, Player p) {
         int option;
         if (p.getPlayerNumber() == 1) {
@@ -339,7 +312,7 @@ public class GameScreen extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void auction(Property p) {
         boolean bought = false;
         int currentBid = 0;
@@ -348,17 +321,17 @@ public class GameScreen extends javax.swing.JFrame {
         double leavePer = 1;
         DecimalFormat curr = new DecimalFormat("#,##0.00");
         ArrayList<Player> players = new ArrayList();
-        
+
         for (int i = 0; i < numPlayers; i++) {
             players.add(playerArray[i]);
         }
-        
+
         while (!bought) {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getMoney() <= currentBid) {
                     players.remove(i);
                 }
-                
+
                 if (players.size() == 1) {
                     bought = true;
                     break;
@@ -394,18 +367,18 @@ public class GameScreen extends javax.swing.JFrame {
                         } else {
                             response = (int) ((Math.random() * 100) + 1);
                         }
-                        
+
                         if (currentBid + response > players.get(i).getMoney()) {
                             response = -1;
-                        } 
+                        }
                     }
-                    
+
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         JOptionPane.showMessageDialog(null, "Thread.sleep method error");
                     }
-                    
+
                     if (Math.random() > leavePer) {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + "left the auction");
                         players.remove(i);
@@ -416,21 +389,19 @@ public class GameScreen extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         JOptionPane.showMessageDialog(null, "Player " + lastBidder + "purchased the property for $" + curr.format(currentBid));
         playerArray[lastBidder].buyProperty(p);
     }
-    
-    private void rollDice() 
-    {
+
+    private void rollDice() {
         tsk = new Rolling(this);
-        timerRoll = new Timer(); 
+        timerRoll = new Timer();
         timerRoll.scheduleAtFixedRate(tsk, 125, 145);
     }
 
-    public void stopRolling()
-    {
-        
+    public void stopRolling() {
+
         stopRoll = true;
 
         try {
@@ -438,27 +409,24 @@ public class GameScreen extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Thread.sleep method error");
         }
-        
+
         lblDiceSum.setText("Moves: " + moves);
         stopRoll = false;
     }
-    
-    private void updateProperties()
-    {
+
+    private void updateProperties() {
         txaProperties.setText("");
-        for(int i=0; i<playerArray.length; i++)
-        {
-            txaProperties.append("Player " + (i+1) + ":\n");
-            try{
+        for (int i = 0; i < playerArray.length; i++) {
+            txaProperties.append("Player " + (i + 1) + ":\n");
+            try {
                 txaProperties.append(playerArray[i].getProperties().toString() + "\n");
-            } catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 txaProperties.append("No Properties owned.\n");
             }
         }
     }
-    
-        private void generateProperties(){
+
+    private void generateProperties() {
         txfProperty1.setText(board.getSpace(1).getName());
         txfProperty2.setText(board.getSpace(3).getName());
         txfProperty3.setText(board.getSpace(5).getName());
@@ -511,6 +479,8 @@ public class GameScreen extends javax.swing.JFrame {
         txaProperties = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txaBankProperties = new javax.swing.JTextArea();
+        btnRollDice = new javax.swing.JButton();
+        btnEndTurn = new javax.swing.JButton();
         lblDie2 = new javax.swing.JLabel();
         lblDie1 = new javax.swing.JLabel();
         lblDiceSum = new javax.swing.JLabel();
@@ -666,32 +636,50 @@ public class GameScreen extends javax.swing.JFrame {
         txaBankProperties.setRows(5);
         jScrollPane3.setViewportView(txaBankProperties);
 
+        btnRollDice.setText("Roll Dice");
+        btnRollDice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRollDiceActionPerformed(evt);
+            }
+        });
+
+        btnEndTurn.setText("EndTurn");
+        btnEndTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndTurnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlStatusLayout = new javax.swing.GroupLayout(pnlStatus);
         pnlStatus.setLayout(pnlStatusLayout);
         pnlStatusLayout.setHorizontalGroup(
             pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStatusLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTurn)
+                .addGap(79, 79, 79))
             .addGroup(pnlStatusLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblProperties)
-                        .addGroup(pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStatusLayout.createSequentialGroup()
                             .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSellHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblBank))
+                    .addGroup(pnlStatusLayout.createSequentialGroup()
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlStatusLayout.createSequentialGroup()
+                        .addComponent(btnRollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStatusLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTurn)
-                .addGap(79, 79, 79))
         );
         pnlStatusLayout.setVerticalGroup(
             pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,11 +700,15 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(lblBank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEndTurn, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnRollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         lblDie2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -749,7 +741,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Tile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                    .addComponent(txtGOArrow, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Tile1Layout.setVerticalGroup(
@@ -759,7 +751,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtGO)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGOArrow)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         Tile2.setBackground(new java.awt.Color(220, 255, 196));
@@ -801,7 +793,7 @@ public class GameScreen extends javax.swing.JFrame {
         Tile3.setLayout(Tile3Layout);
         Tile3Layout.setHorizontalGroup(
             Tile3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtTile3label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtTile3label1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
             .addGroup(Tile3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtTile3label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -814,7 +806,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile3label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile3label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         Tile4.setBackground(new java.awt.Color(220, 255, 196));
@@ -869,7 +861,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile5label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile5label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         Tile6.setBackground(new java.awt.Color(220, 255, 196));
@@ -921,7 +913,7 @@ public class GameScreen extends javax.swing.JFrame {
                     .addGroup(Tile11Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                    .addComponent(txtJustVisting, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         Tile11Layout.setVerticalGroup(
@@ -930,7 +922,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txfJail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtJustVisting)
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         Tile7.setBackground(new java.awt.Color(220, 255, 196));
@@ -986,7 +978,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile8label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile8label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         Tile9.setBackground(new java.awt.Color(220, 255, 196));
@@ -1194,7 +1186,7 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(Tile18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Tile18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTile18label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTile18label1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                     .addComponent(txtTile18label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1205,7 +1197,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile18label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile18label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         Tile19.setBackground(new java.awt.Color(220, 255, 196));
@@ -1275,14 +1267,14 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(Tile21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(txtFreeParking2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                     .addComponent(txtFreeParking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Tile21Layout.setVerticalGroup(
             Tile21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile21Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(txtFreeParking1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFreeParking2)
@@ -1343,7 +1335,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile23label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile23label2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         Tile31.setBackground(new java.awt.Color(220, 255, 196));
@@ -1376,7 +1368,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtGoToJail1)
                 .addGap(18, 18, 18)
                 .addComponent(txtGoToJail2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         Tile24.setBackground(new java.awt.Color(220, 255, 196));
@@ -1623,7 +1615,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile34label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile34label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         Tile35.setBackground(new java.awt.Color(220, 255, 196));
@@ -1693,7 +1685,7 @@ public class GameScreen extends javax.swing.JFrame {
             .addComponent(txtTile37label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Tile37Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTile37label2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(txtTile37label2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
         Tile37Layout.setVerticalGroup(
@@ -1703,7 +1695,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile37label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile37label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         Tile38.setBackground(new java.awt.Color(220, 255, 196));
@@ -1760,7 +1752,7 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(txtTile39label1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTile39label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         Tile40.setBackground(new java.awt.Color(220, 255, 196));
@@ -1971,52 +1963,63 @@ public class GameScreen extends javax.swing.JFrame {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         updateProperties();
         generateProperties();
-        currentTurn = 0;
-        boolean continueGame = true;
-        while(continueGame == true){
-            continueGame = checkGameMode();
-            playGame();
-            currentTurn++;
-        }
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
-        
+
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String path = "";
         JFileChooser fileChooser = new JFileChooser();
-        try{
+        try {
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int result = fileChooser.showSaveDialog(this);
-            if(result == JFileChooser.APPROVE_OPTION)
-            {
+            if (result == JFileChooser.APPROVE_OPTION) {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
             }
             File file = new File(path + "/MonopolySave.txt");
             System.out.println(file.getAbsolutePath());
-            if(!file.exists())
-            {
-                if(file.createNewFile())
-                {
+            if (!file.exists()) {
+                if (file.createNewFile()) {
                     JOptionPane.showMessageDialog(null, "File created and saved");
                 }
             }
-            
+
             FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath()));
             ObjectOutput s = new ObjectOutputStream(saving);
             s.writeInt(gameMode);
             s.writeInt(currentTurn);
             s.writeInt(numPlayers);
-            s.writeObject(playerArray); 
-        } catch(Exception e)
-        {
+            s.writeObject(playerArray);
+        } catch (Exception e) {
             System.out.print(e);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-   
+    private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
+        btnRollDice.setEnabled(false);
+        btnEndTurn.setEnabled(true);
+        boolean rollAgain = true;
+        int i = 0;
+        while (rollAgain == true) {
+            rollAgain = playerTurn(playerArray[0], i);
+            i++;
+        }
+    }//GEN-LAST:event_btnRollDiceActionPerformed
+
+    private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
+
+        btnEndTurn.setEnabled(false);
+        for (int i = 1; i < numPlayers; i++) {
+            computerTurn(playerArray[i], 0);
+        }
+        JOptionPane.showMessageDialog(null, "All players have played starting next turn");
+        btnRollDice.setEnabled(true);
+        currentTurn++;
+        checkGameMode();
+    }//GEN-LAST:event_btnEndTurnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Tile1;
@@ -2060,8 +2063,10 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JPanel Tile8;
     private javax.swing.JPanel Tile9;
     private javax.swing.JButton btnBuyHouse;
+    private javax.swing.JButton btnEndTurn;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMortgage;
+    private javax.swing.JButton btnRollDice;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2131,69 +2136,61 @@ public class GameScreen extends javax.swing.JFrame {
 }
 
 class GameMusic implements Runnable {
+
     private Clip gameSong;
-    
-    @Override public void run() 
-    {
-        try{
+
+    @Override
+    public void run() {
+        try {
             gameSong = AudioSystem.getClip();
             //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
             AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
             gameSong.open(inputBgm);
             gameSong.loop(Clip.LOOP_CONTINUOUSLY);
-            gameSong.start(); 
-            
-        } catch (Exception e)
-        {
+            gameSong.start();
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
-    public void musicOff()
-    {
+
+    public void musicOff() {
         gameSong.stop();
     }
 }
 
 class Rolling extends TimerTask {
+
     private int sum = 0;
     GameScreen gs;
     int dice1;
     int dice2;
-    
-    public Rolling(GameScreen gameScreen)
-    {
+
+    public Rolling(GameScreen gameScreen) {
         gs = gameScreen;
     }
-    
+
     @Override
-    public void run()
-    {
-        if(gs.stopRoll)
-        {
+    public void run() {
+        if (gs.stopRoll) {
             sum = dice1 + dice2 + 2;
             gs.moves = sum;
             gs.timerRoll.cancel();
             return;
         }
-        dice1 = (int)(Math.random() * 6);
-        dice2 = (int)(Math.random() * 6);
+        dice1 = (int) (Math.random() * 6);
+        dice2 = (int) (Math.random() * 6);
 
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
     }
-    
-    public boolean isDoubleDice()
-    {
-        if(dice1 == dice2)
-        {
+
+    public boolean isDoubleDice() {
+        if (dice1 == dice2) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
-    
 
 }
