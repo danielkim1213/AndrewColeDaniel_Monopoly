@@ -1,0 +1,11 @@
+Welcome, a new player.
+
+In the highscore menu, you can see your top 5 score.
+To start the game, you have two options: creating a new game and loading the previous game.
+
+If you select the new game button, you can choose the mode of the game.
+This monopoly program supports three modes: limited turn, limited time and infinite.
+
+If you completed setting the mode, you can determine how many CPU player do you want to play with.
+After selecting it, you are all ready to play a monopoly game!
+

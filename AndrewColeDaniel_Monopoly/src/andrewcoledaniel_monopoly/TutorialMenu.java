@@ -7,7 +7,9 @@ package andrewcoledaniel_monopoly;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Scanner;
 import javax.swing.ImageIcon;
 
 /**
@@ -23,6 +25,7 @@ public class TutorialMenu extends javax.swing.JFrame {
         initComponents();
         background();
         mainMenu = m;
+        programDescription();
     }
     
     private void background()
@@ -42,6 +45,19 @@ public class TutorialMenu extends javax.swing.JFrame {
         lblTutorial.setIcon(tutorialText);
     }
 
+    private void programDescription()
+    {
+        txaDescription.setText("");
+        InputStream textIn = TutorialMenu.class.getResourceAsStream("saves/Monopoly Description.txt");
+        Scanner scan = new Scanner(textIn);
+        
+        String str;
+        while(scan.hasNextLine())
+        {
+            str = scan.nextLine();
+            txaDescription.append(str + "\n");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +69,7 @@ public class TutorialMenu extends javax.swing.JFrame {
 
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaDescription = new javax.swing.JTextArea();
         lblTutorial = new javax.swing.JLabel();
         lblBackgroundImage = new javax.swing.JLabel();
 
@@ -69,10 +85,10 @@ public class TutorialMenu extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 264, -1, -1));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txaDescription.setEditable(false);
+        txaDescription.setColumns(20);
+        txaDescription.setRows(5);
+        jScrollPane1.setViewportView(txaDescription);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 56, 343, 200));
 
@@ -94,8 +110,8 @@ public class TutorialMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBackgroundImage;
     private javax.swing.JLabel lblTutorial;
+    private javax.swing.JTextArea txaDescription;
     // End of variables declaration//GEN-END:variables
 }

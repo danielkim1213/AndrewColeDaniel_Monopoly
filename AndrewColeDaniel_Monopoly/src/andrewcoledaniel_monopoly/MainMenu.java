@@ -113,10 +113,10 @@ public class MainMenu extends javax.swing.JFrame {
         btnTutorial.setContentAreaFilled(false); //erase the painting
         //same process with title image
         URL urlHelp = GameScreen.class.getResource("saves/tutorial.png");
-        ImageIcon tutorial = new ImageIcon(urlHelp);
-        img = tutorial.getImage();
-        tutorial = new ImageIcon(img.getScaledInstance(btnTutorial.getWidth(), btnTutorial.getHeight(), Image.SCALE_SMOOTH));
-        btnTutorial.setIcon(tutorial);
+        ImageIcon tutorialIcon = new ImageIcon(urlHelp);
+        img = tutorialIcon.getImage();
+        tutorialIcon = new ImageIcon(img.getScaledInstance(btnTutorial.getWidth(), btnTutorial.getHeight(), Image.SCALE_SMOOTH));
+        btnTutorial.setIcon(tutorialIcon);
     }
     
 
@@ -253,27 +253,33 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
         if(tutorial == null) //if there is no tutorial menu existing
         {
-            tutorial = new TutorialMenu(this);
+            tutorial = new TutorialMenu(this); //create new one
         }
-        tutorial.setVisible(true);
-        this.setVisible(false);
+        tutorial.setVisible(true); //set the tutorial menu visible
+        this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnTutorialActionPerformed
-
+    
+    /**
+     * if the user click the new game button
+     * @param evt - clicking new game button
+     */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
-        String[] gameOptions = {"limited turn", "limited time", "infinite"};
-        String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"};
+        String[] gameOptions = {"limited turn", "limited time", "infinite"};  //game options for a new game
+        String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"}; //options for the number of Computer players
+        //prompt user to choose the mode of the game
         int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
 
         String input = "";
         try {
+            //if the user choose to play limited turn mode
             if(gameMode == 0){
-                input = JOptionPane.showInputDialog("How many turns would you like to play?");
-                limitedTurns = Integer.parseInt(input);
-            } else if(gameMode == 1){
-                input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)");
-                limitedTime = Long.parseLong(input);
-                limitedTime *= 60;
+                input = JOptionPane.showInputDialog("How many turns would you like to play?"); //prompt the user to choose the number of turns
+                limitedTurns = Integer.parseInt(input); //save the user input
+            } else if(gameMode == 1){ //if the user choose to play limited time mode
+                input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)"); //prompt the user to choose time limit
+                limitedTime = Long.parseLong(input); 
                 limitedTime *= 1000;
+                limitedTime *= 60;
             }
         }catch (NumberFormatException e) {
             input = null;
