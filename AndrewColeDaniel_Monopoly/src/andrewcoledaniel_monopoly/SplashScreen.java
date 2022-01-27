@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class SplashScreen extends javax.swing.JFrame {
 
-    Timer timer;
+    public Timer timer; 
             
     /**
      * Creates new form SplashScreen
@@ -27,12 +27,15 @@ public class SplashScreen extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * This method is to set a timer that executes a task every interval
+     */
     private void progressing()
     {
-        timer = new Timer();
-        Progressing prg = new Progressing(this);
+        timer = new Timer(); //instantiate timer
+        Progressing prg = new Progressing(this); //instantiate Progressing (extends TimerTask)
         
-        timer.scheduleAtFixedRate(prg, 50, 50);
+        timer.scheduleAtFixedRate(prg, 30, 30); //every 0.05 sec, do prg
     }
     
 
@@ -126,8 +129,12 @@ public class SplashScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * when the form is activated
+     * @param evt - form activated
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        progressing();
+        progressing(); 
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -175,27 +182,38 @@ public class SplashScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * This class is for the task that increases the value of progress bar 
+ */
 class Progressing extends TimerTask {
     private SplashScreen ss;
     
+    /**
+     * primary constructor
+     * @param ss - the splash screen
+     */
     public Progressing(SplashScreen ss)
     {
         this.ss = ss;
     }
+    
+    /**
+     * this method contains the task for every interval
+     */
     @Override
     public void run() 
     {
-        ss.prgOpening.setValue(ss.prgOpening.getValue()+1);
-        ss.lblPercentage.setText(ss.prgOpening.getValue() + "%");
-        if(ss.prgOpening.getValue() == 100)
+        ss.prgOpening.setValue(ss.prgOpening.getValue()+1); //add 1 to the value of progress bar in the screen
+        ss.lblPercentage.setText(ss.prgOpening.getValue() + "%"); //change the text of the label that shows the percentage
+        if(ss.prgOpening.getValue() == 100) //if the progress finished
         {
             try {
-                Thread.sleep(300);
-                MainMenu m = new MainMenu();
-                m.setVisible(true);
-                ss.timer.cancel();
-                ss.setVisible(false);
-            } catch (InterruptedException ex) {
+                Thread.sleep(300); //wait for 0.3 sec
+                MainMenu m = new MainMenu(); //instantiate the main menu
+                m.setVisible(true); //set the main menu visible
+                ss.timer.cancel(); //stop the timer
+                ss.setVisible(false); //set splash screeen invisible
+            } catch (InterruptedException ex) { //if the error occurs by the Thread.sleep method
                 JOptionPane.showMessageDialog(null, "Error");
             }
         }
