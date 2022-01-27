@@ -11,6 +11,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import java.util.Random;
 
 /**
  *
@@ -108,6 +109,38 @@ public class Board {
     public Space getSpace(int s) {
         return board[s];
     }
+    
+    public int findNextProperty(int x, SpaceType t) {
+        for (int i = x; i < board.length; i++) {
+            if (board[i].getType() == SpaceType.SPACE_PROPERTY) {
+                if (((Property)board[i]).getPropType() == t) {
+                    return i;
+                }
+            }
+        }
+        
+        for (int i = 0; i < board.length; i++) {
+            if (board[i].getType() == SpaceType.SPACE_PROPERTY) {
+                if (((Property)board[i]).getPropType() == t) {
+                    return i;
+                }
+            }
+        }
+        return 100;
+    }
+    
+    public void shuffleCards(Card[] c) {
+        Random rd = new Random();
+        Card temp;
+        int rNum;
+        for (int i = 0; i < c.length; i++) {
+            rNum = rd.nextInt(c.length);
+            temp = c[i];
+            c[i] = c[rNum];
+            c[rNum] = temp;
+        }
+    }
+
     
     public String toString() {
         String s = "Board:\n";

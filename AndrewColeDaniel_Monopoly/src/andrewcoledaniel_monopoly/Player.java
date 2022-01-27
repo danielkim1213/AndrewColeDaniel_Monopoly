@@ -152,6 +152,15 @@ public class Player implements Serializable {
         }
         return num;
     }
+    
+    public int findProperty(String name) {
+        for (int i = 0; i < properties.size(); i++) {
+            if (properties.get(i).getName().equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public String toString() {
         String output;

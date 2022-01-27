@@ -45,6 +45,8 @@ public class GameScreen extends javax.swing.JFrame {
     public int moves;
     private Board board;
     private TimerTask tsk;
+    DecimalFormat curr = new DecimalFormat("#,##0.00");
+    
     public static int[] roll = new int[2];
 
     /**
@@ -165,6 +167,7 @@ public class GameScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
         }
+        board.shuffleCards(cards);
     }
     private void generatePlayers() {
         for (int i = 0; i < playerArray.length; i++) {
@@ -271,6 +274,7 @@ public class GameScreen extends javax.swing.JFrame {
                 computerTurn(p, turn);
             }
         }
+        updateProperties();
     }
 
     private void handleSpace(Space s, Player p) {
@@ -285,7 +289,7 @@ public class GameScreen extends javax.swing.JFrame {
                 break;
             case SPACE_CARD:
                  Card c = ((CardSpace)s).getCard(cards);
-                 String out = ((CardSpace)s).performSpaceAction(c, p);
+                 String out = ((CardSpace)s).performSpaceAction(c, p, board, playerArray);
                  JOptionPane.showMessageDialog(null, out);
                  if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
                      handleProperty((Property)board.getSpace(p.getPosition()), p);
@@ -330,7 +334,6 @@ public class GameScreen extends javax.swing.JFrame {
         int response;
         int lastBidder = -1;
         double leavePer = 1;
-        DecimalFormat curr = new DecimalFormat("#,##0.00");
         ArrayList<Player> players = new ArrayList();
 
         for (int i = 0; i < numPlayers; i++) {
@@ -351,7 +354,7 @@ public class GameScreen extends javax.swing.JFrame {
                 if (i == 0) {
                     while (response < 0) {
                         try {
-                            response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid?"));
+                            response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid?", "Auction"));
                             if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
                                 response = -1;
@@ -394,15 +397,15 @@ public class GameScreen extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " left the auction");
                         players.remove(i);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(currentBid));
+                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(currentBid + response));
                         currentBid += response;
                         lastBidder = players.get(i).getPlayerNumber();
                     }
                 }
             }
         }
-
-        JOptionPane.showMessageDialog(null, "Player " + lastBidder + "purchased the property for $" + curr.format(currentBid));
+        
+        JOptionPane.showMessageDialog(null, "Player " + lastBidder + " purchased the property for $" + curr.format(currentBid));
         playerArray[lastBidder].buyProperty(p);
     }
 
@@ -425,7 +428,7 @@ public class GameScreen extends javax.swing.JFrame {
         lblDiceSum.setText("Moves: " + moves);
         stopRoll = false;
     }
-
+    
     private void updateProperties() {
         txaProperties.setText("");
         for (int i = 0; i < playerArray.length; i++) {
@@ -618,6 +621,11 @@ public class GameScreen extends javax.swing.JFrame {
 
         btnSellHouse.setText("Sell House");
         btnSellHouse.setPreferredSize(new java.awt.Dimension(90, 50));
+        btnSellHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSellHouseActionPerformed(evt);
+            }
+        });
 
         btnMortgage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnMortgage.setText("Mortgage Property");
@@ -1895,7 +1903,42 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
-
+        if (playerArray[0].getProperties().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "You do not own any properties.");
+            return;
+        }
+        String prop = JOptionPane.showInputDialog("Which property would you like to buy a house on?");
+        int propNum = playerArray[0].findProperty(prop);
+        if (propNum == -1) {
+            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+            return;
+        }
+        Property p = ((Property)playerArray[0].getProperties().get(propNum));
+        if (p.getPropType() != SpaceType.SPACE_DEED) {
+            JOptionPane.showMessageDialog(null, "You cannot purchase a house on this property.");
+            return;
+        }
+        Deed d = (Deed)p;
+        if (d.getHouses() == 4) {
+            if (JOptionPane.showConfirmDialog(null, "You already have 4 houses on this property. Would you like to buy a hotel instead?", "Buy Hotel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (playerArray[0].getMoney() < d.getHouseCost()) {
+                    JOptionPane.showMessageDialog(null, "You don't have enough money.");
+                } else {
+                    d.getHotel();
+                    playerArray[0].removeMoney(d.getHouseCost());
+                }
+                return;
+            }
+        }
+        int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
+        if (houses + d.getHouses() > 4) {
+            JOptionPane.showMessageDialog(null, "You can not have more than four houses on a property.");
+        } else if (houses * d.getHouseCost() > playerArray[0].getMoney()) {
+            JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses.");
+        } else {
+            d.buyHouse(houses);
+            JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
+        }
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -1926,6 +1969,11 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnSellHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellHouseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSellHouseActionPerformed
+
+   
     private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
         btnRollDice.setEnabled(false);
         btnEndTurn.setEnabled(true);

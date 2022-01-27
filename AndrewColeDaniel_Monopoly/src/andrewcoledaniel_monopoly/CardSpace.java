@@ -41,19 +41,7 @@ public class CardSpace implements Space {
         return new Card(CardType.CARD_CHANCE, CardAction.ACTION_GOTO, 0, "Something messed up");
     }
     
-    public void shuffleCards(Card[] c) {
-        Random rd = new Random();
-        Card temp;
-        int rNum;
-        for (int i = 0; i < c.length; i++) {
-            rNum = rd.nextInt(c.length);
-            temp = c[i];
-            c[i] = c[rNum];
-            c[rNum] = temp;
-        }
-    }
-
-    public String performSpaceAction(Card c, Player p) {
+    public String performSpaceAction(Card c, Player p, Board b, Player[] players) {
         switch (c.getAction()) {
             case ACTION_GOTO:
                 p.setPosition(c.getValue());
@@ -67,12 +55,20 @@ public class CardSpace implements Space {
                 p.removeMoney(c.getValue());
                 break;
             case ACTION_GET_MONEY_PLAYER:
-                //p.addMoney(c.getValue() * playerNums);
-                // for each player, removeMoney c.getValue()
+                for (Player player : players) {
+                    if (!player.equals(p)) {
+                        player.removeMoney(c.getValue());
+                    }
+                }
+                p.addMoney(c.getValue() * players.length);
                 break;
             case ACTION_PAY_MONEY_PLAYER:
-                //p.removeMoney(c.getValue() * playerNums);
-                // for each player, addMoney c.getValue()
+                p.removeMoney(c.getValue() * players.length);
+                for (Player player : players) {
+                    if (!player.equals(p)) {
+                        player.addMoney(c.getValue());
+                    }
+                }
                 break;
             case ACTION_GET_OUT_JAIL:
                 p.setJailCards(p.getJailCards() + 1);
@@ -82,10 +78,10 @@ public class CardSpace implements Space {
                 p.setJail(true);
                 break;
             case ACTION_GOTO_RAILROAD:
-                // p.setPosition(nextRailroad())
+                p.setPosition(b.findNextProperty(p.getPosition(), SpaceType.SPACE_RAILROAD));
                 break;
             case ACTION_GOTO_UTILITY:
-                // p.setPosition(nextUtility())
+                p.setPosition(b.findNextProperty(p.getPosition(), SpaceType.SPACE_UTILITY));
                 break;
             case ACTION_PAY_HOUSES:
                 // p.payHouses()

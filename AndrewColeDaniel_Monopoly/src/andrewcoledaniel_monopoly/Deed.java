@@ -34,11 +34,12 @@ public class Deed extends Property {
         return houseCost;
     }
 
-    public boolean buyHouse() {
+    public boolean buyHouse(int h) {
         if (houses == 4) {
             return false;
         }
-        houses++;
+        houses += h;
+        owner.removeMoney(houses * houseCost);
         updateRent();
         return true;
     }
@@ -48,6 +49,7 @@ public class Deed extends Property {
             return false;
         }
         hotel = true;
+        owner.removeMoney(houseCost);
         updateRent();
         return true;
     }
