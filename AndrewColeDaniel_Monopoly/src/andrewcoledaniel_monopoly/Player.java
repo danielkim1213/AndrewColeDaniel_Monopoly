@@ -155,7 +155,7 @@ public class Player implements Serializable {
     
     public int findProperty(String name) {
         for (int i = 0; i < properties.size(); i++) {
-            if (properties.get(i).getName().equals(name)) {
+            if (properties.get(i).getName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
