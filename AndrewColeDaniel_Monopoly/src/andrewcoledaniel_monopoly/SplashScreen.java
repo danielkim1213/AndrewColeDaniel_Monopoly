@@ -19,12 +19,14 @@ import javax.swing.JOptionPane;
 public class SplashScreen extends javax.swing.JFrame {
 
     public Timer timer; 
+    public MainMenu m; 
             
     /**
      * Creates new form SplashScreen
      */
     public SplashScreen() {
         initComponents();
+        m =  new MainMenu();
     }
     
     /**
@@ -35,7 +37,8 @@ public class SplashScreen extends javax.swing.JFrame {
         timer = new Timer(); //instantiate timer
         Progressing prg = new Progressing(this); //instantiate Progressing (extends TimerTask)
         
-        timer.scheduleAtFixedRate(prg, 30, 30); //every 0.05 sec, do prg
+        timer.scheduleAtFixedRate(prg, 10, 40); //every 0.05 sec, do prg - delay 0.1, period 0.4
+        
     }
     
 
@@ -58,8 +61,8 @@ public class SplashScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -129,13 +132,9 @@ public class SplashScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * when the form is activated
-     * @param evt - form activated
-     */
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        progressing(); 
-    }//GEN-LAST:event_formWindowActivated
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        progressing();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -205,12 +204,11 @@ class Progressing extends TimerTask {
     {
         ss.prgOpening.setValue(ss.prgOpening.getValue()+1); //add 1 to the value of progress bar in the screen
         ss.lblPercentage.setText(ss.prgOpening.getValue() + "%"); //change the text of the label that shows the percentage
-        if(ss.prgOpening.getValue() == 100) //if the progress finished
+        if(ss.prgOpening.getValue() >= 100) //if the progress finished
         {
             try {
                 Thread.sleep(300); //wait for 0.3 sec
-                MainMenu m = new MainMenu(); //instantiate the main menu
-                m.setVisible(true); //set the main menu visible
+                ss.m.setVisible(true); //set the main menu visible
                 ss.timer.cancel(); //stop the timer
                 ss.setVisible(false); //set splash screeen invisible
             } catch (InterruptedException ex) { //if the error occurs by the Thread.sleep method
