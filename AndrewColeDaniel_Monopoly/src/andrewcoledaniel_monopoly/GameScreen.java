@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 
@@ -54,6 +55,7 @@ public class GameScreen extends javax.swing.JFrame {
      *
      * @param m - main menu
      * @param gameMode - game mode
+     * @param numPlayers
      */
     public GameScreen(MainMenu m, int gameMode, int numPlayers) {
         initComponents();
@@ -72,6 +74,7 @@ public class GameScreen extends javax.swing.JFrame {
         generatePlayers();
         updateProperties();
         generateProperties();
+        updateLocations();
     }
 
     public GameScreen(MainMenu m, int gameMode, int currentTurn, int numPlayers, Player[] playerArray) {
@@ -199,6 +202,7 @@ public class GameScreen extends javax.swing.JFrame {
 
         if (turn > 3) {
             p.setPosition(10);
+            updateLocations();
             p.setJail(true);
             return false;
         }
@@ -212,7 +216,18 @@ public class GameScreen extends javax.swing.JFrame {
             }
             switch (response) {
                 case 0:
-                    break; // roll for doubles
+                    rollDice();
+                    JOptionPane.showMessageDialog(null, "Click to stop");
+                    stopRolling();
+                    if (((Rolling) tsk).isDoubleDice()) {
+                        JOptionPane.showMessageDialog(null, "You rolled doubles. Get out of jail.");
+                        p.setJail(false);
+                        p.setPosition(10 + moves);
+                        updateLocations();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You didn't roll doubles. Stay in jail");
+                    }
+                    break;
                 case 1:
                     p.removeMoney(50);
                     p.setJail(false);
@@ -240,6 +255,7 @@ public class GameScreen extends javax.swing.JFrame {
             newPos -= 40;
         }
         p.setPosition(newPos);
+        updateLocations();
         handleSpace(board.getSpace(newPos), p);
         updateProperties();
         return ((Rolling) tsk).isDoubleDice();
@@ -285,6 +301,7 @@ public class GameScreen extends javax.swing.JFrame {
                 newPos -= 40;
             }
             p.setPosition(newPos);
+            updateLocations();
             handleSpace(board.getSpace(newPos), p);
             if (diceRoll == diceRoll2) {
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has rolled a double");
@@ -301,6 +318,7 @@ public class GameScreen extends javax.swing.JFrame {
         switch (st) {
             case SPACE_CORNER:
                 ((CornerSpace) s).performSpaceAction(p);
+                updateLocations();
                 break;
             case SPACE_PROPERTY:
                 handleProperty((Property)s, p);
@@ -308,6 +326,7 @@ public class GameScreen extends javax.swing.JFrame {
             case SPACE_CARD:
                  Card c = ((CardSpace)s).getCard(cards);
                  String out = ((CardSpace)s).performSpaceAction(c, p, board, playerArray);
+                 updateLocations();
                  JOptionPane.showMessageDialog(null, out);
                  if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
                      handleProperty((Property)board.getSpace(p.getPosition()), p);
@@ -373,7 +392,11 @@ public class GameScreen extends javax.swing.JFrame {
                 if (i == 0) {
                     while (response < 0) {
                         try {
-                            response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid?", "Auction"));
+                            response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid? (Type 0 to cancel)"));
+                            if (response == 0) {
+                                players.remove(i);
+                                JOptionPane.showMessageDialog(null, "Player 1 left the auction");
+                            }
                             if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
                                 response = -1;
@@ -459,6 +482,13 @@ public class GameScreen extends javax.swing.JFrame {
                 txaProperties.append("No Properties owned.\n");
             }
         }
+    }
+    
+    private void updateLocations() {
+        lblPlayer1.setText("Player " + 1 + ": " + board.getSpace(playerArray[0].getPosition()).getName());
+        lblPlayer2.setText("Player " + 2 + ": " + board.getSpace(playerArray[1].getPosition()).getName());
+        lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName());
+        lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName());
     }
 
     private void generateProperties() {
@@ -611,6 +641,11 @@ public class GameScreen extends javax.swing.JFrame {
         txtTile39label2 = new javax.swing.JLabel();
         Tile40 = new javax.swing.JPanel();
         txfProperty28 = new javax.swing.JTextField();
+        lblPlayerLocations = new javax.swing.JLabel();
+        lblPlayer1 = new javax.swing.JLabel();
+        lblPlayer2 = new javax.swing.JLabel();
+        lblPlayer3 = new javax.swing.JLabel();
+        lblPlayer4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -764,7 +799,7 @@ public class GameScreen extends javax.swing.JFrame {
 
         lblDiceSum.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDiceSum.setText("Moves: ");
-        getContentPane().add(lblDiceSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 187, 66, -1));
+        getContentPane().add(lblDiceSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 66, -1));
 
         Tile1.setBackground(new java.awt.Color(220, 255, 196));
         Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1384,6 +1419,22 @@ public class GameScreen extends javax.swing.JFrame {
 
         getContentPane().add(Tile40, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 700, -1, -1));
 
+        lblPlayerLocations.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblPlayerLocations.setText("Player Locations:");
+        getContentPane().add(lblPlayerLocations, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 140, -1));
+
+        lblPlayer1.setText("jLabel1");
+        getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 120, -1));
+
+        lblPlayer2.setText("jLabel1");
+        getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 120, -1));
+
+        lblPlayer3.setText("jLabel1");
+        getContentPane().add(lblPlayer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 120, -1));
+
+        lblPlayer4.setText("jLabel1");
+        getContentPane().add(lblPlayer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 130, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1579,6 +1630,11 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblDiceSum;
     public javax.swing.JLabel lblDie1;
     public javax.swing.JLabel lblDie2;
+    private javax.swing.JLabel lblPlayer1;
+    private javax.swing.JLabel lblPlayer2;
+    private javax.swing.JLabel lblPlayer3;
+    private javax.swing.JLabel lblPlayer4;
+    private javax.swing.JLabel lblPlayerLocations;
     private javax.swing.JLabel lblPlayerStatistics;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
