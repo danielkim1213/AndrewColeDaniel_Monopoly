@@ -56,6 +56,7 @@ abstract public class Property implements Space {
     
     public void setOwned(boolean b) {
         isOwned = b;
+        updateRent();
     }
 
     public Player getOwner() {

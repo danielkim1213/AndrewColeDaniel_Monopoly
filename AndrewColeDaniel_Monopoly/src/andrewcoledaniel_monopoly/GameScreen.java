@@ -710,6 +710,11 @@ public class GameScreen extends javax.swing.JFrame {
 
         btnMortgage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnMortgage.setText("Mortgage Property");
+        btnMortgage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMortgageActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -1557,26 +1562,58 @@ public class GameScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You do not own " + prop);
             return;
         }
-        Property p = ((Property)playerArray[0].getProperties().get(propNum));
+        Property p = ((Property) playerArray[0].getProperties().get(propNum));
         if (p.getPropType() != SpaceType.SPACE_DEED) {
             JOptionPane.showMessageDialog(null, "This property cannot have houses property.");
             return;
         }
-        Deed d = (Deed)p;
-        if(d.getHouses() == 0){
+        Deed d = (Deed) p;
+        if (d.getHouses() == 0) {
             JOptionPane.showMessageDialog(null, "This property has no houses.");
             return;
-        } else{
-            if(d.getHotel() == true){
+        } else {
+            if (d.getHotel() == true) {
                 String input = JOptionPane.showInputDialog("This property has a hotel would you like to sell it? Y or N");
-                if(input.equalsIgnoreCase("Y")){
-                    
+                if (input.equalsIgnoreCase("Y")) {
+                    d.sellHouse();
+                    playerArray[0].addMoney(d.getHouseCost() / 2);
+                }
+            } else {
+                String input = JOptionPane.showInputDialog("How many houses would you like to sell. This property has " + d.getHouses() + " houses");
+                int amountToSell = Integer.parseInt(input);
+                if (amountToSell > d.getHouseCost()) {
+                    JOptionPane.showMessageDialog(null, "You don't have that many houses");
+                } else {
+                    for (int i = 0; i < amountToSell; i++) {
+                        d.sellHouse();
+                        playerArray[0].addMoney(d.getHouseCost() / 2);
+                    }
                 }
             }
         }
+        if(playerArray[0].bankrupt == false){
+            btnRollDice.setEnabled(true);
+        }
     }//GEN-LAST:event_btnSellHouseActionPerformed
 
-   
+
+    private void bankruptComputer(Player c){
+        c.setMoney(0);
+        ArrayList<Property> bankruptP = c.getProperties();
+        for(int i = 0; i < bankruptP.size(); i ++){
+            bankruptP.get(i).setOwned(false);
+        }
+    }
+    
+    private void buyHouseComputer(Player c){
+        ArrayList<Property> buyHouse = c.getProperties();
+        int randomProp = (int) (Math.random() * buyHouse.size()) + 1;
+        if(buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED){
+            Deed d = (Deed)buyHouse.get(randomProp);
+            d.buyHouse(1);
+        }
+    }
+    
     private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
         btnRollDice.setEnabled(false);
         btnEndTurn.setEnabled(true);
@@ -1592,16 +1629,59 @@ public class GameScreen extends javax.swing.JFrame {
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
         btnEndTurn.setEnabled(false);
         for (int i = 1; i < numPlayers; i++) {
-            computerTurn(playerArray[i], 0);
-            updateProperties();
+            if (playerArray[i].bankrupt == false) {
+                computerTurn(playerArray[i], 0);
+                updateProperties();
+                int random = (int) (Math.random() * 10);
+                if(random < 5 && playerArray[i].getMoney() > 300){
+                    buyHouseComputer(playerArray[i]);
+                }
+                if (playerArray[i].bankrupt == true) {
+                    bankruptComputer(playerArray[i]);
+                }
+            }
         }
         JOptionPane.showMessageDialog(null, "All players have played starting next turn");
         btnRollDice.setEnabled(true);
         currentTurn++;
         checkGameMode();
         lblTurn.setText("Turn " + currentTurn);
+        if (playerArray[0].bankrupt == true) {
+            btnRollDice.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "You are bankrupt sell your houses or mortage your properties to continue playing");
+        }
     }//GEN-LAST:event_btnEndTurnActionPerformed
 
+    private void btnMortgageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgageActionPerformed
+        if (playerArray[0].getProperties().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "You do not own any properties.");
+            return;
+        }
+        String prop = JOptionPane.showInputDialog("Which property would you like to mortage?");
+        int propNum = playerArray[0].findProperty(prop);
+        if (propNum == -1) {
+            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+            return;
+        }
+        Property p = ((Property) playerArray[0].getProperties().get(propNum));
+        Deed d = (Deed) p;
+        if(d.getMortgage() == true){
+            String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgage() + " Y or N");
+            if(input.equalsIgnoreCase("Y")){
+                d.setMortgage(false);
+                playerArray[0].removeMoney(d.getMortgageValue());
+            }
+        } else{
+            String input = JOptionPane.showInputDialog("Would you like to mortgage this property worth $" + d.getMortgageValue() + " Y or N");
+            if(input.equalsIgnoreCase("Y")){
+                d.setMortgage(true);
+                playerArray[0].addMoney(d.getMortgageValue());
+            }
+        }
+        if(playerArray[0].bankrupt == false){
+            btnRollDice.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnMortgageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Tile1;

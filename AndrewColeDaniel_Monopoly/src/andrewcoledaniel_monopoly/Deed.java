@@ -14,11 +14,12 @@ public class Deed extends Property {
     private int houses;
     private int houseCost;
     private boolean hotel;
+    private int originalRent;
 
     public Deed(String name, int price, int mortgageValue, int houseCost, int rent, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
         this.houseCost = houseCost;
-        this.rent = rent;
+        this.originalRent = rent;
         propType = SpaceType.SPACE_DEED;
     }
 
@@ -67,15 +68,36 @@ public class Deed extends Property {
         return true;
     }
     
+    public void setHouses(int h){
+        houses = h;
+    }
+    
+    @Override
+    public void setOwned(boolean b){
+        if(b == false){
+            houses = 0;
+            hotel = false;
+            isOwned = false;
+            mortgage = false;
+            updateRent();
+        } else{
+            isOwned = true;
+        }
+    }
+    
     public void updateRent() {
-        
+        if (hotel == true) {
+            rent = originalRent * houses * 50;
+        } else {
+            rent = originalRent * houses;
+        }
     }
 
     @Override
     public String toString() {
         return "";
     }
-    
+
     public SpaceType getType() {
         return type;
     }
