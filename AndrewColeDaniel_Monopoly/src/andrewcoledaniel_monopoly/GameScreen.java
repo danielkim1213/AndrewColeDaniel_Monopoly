@@ -281,16 +281,14 @@ public class GameScreen extends javax.swing.JFrame {
                 ((CornerSpace) s).performSpaceAction(p);
                 break;
             case SPACE_PROPERTY:
-                handleProperty((Property) s, p);
-
-            case SPACE_DEED:
                 handleProperty((Property)s, p);
                 break;
             case SPACE_CARD:
-                Card c = ((CardSpace) s).getCard(cards);
-                String out = ((CardSpace) s).performSpaceAction(c, p);
-                JOptionPane.showMessageDialog(null, out);
-                break;
+                 Card c = ((CardSpace)s).getCard(cards);
+                 String out = ((CardSpace)s).performSpaceAction(c, p);
+                 JOptionPane.showMessageDialog(null, out);
+                 if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
+                     handleProperty((Property)board.getSpace(p.getPosition()), p);
                  }
         }
 
@@ -393,9 +391,10 @@ public class GameScreen extends javax.swing.JFrame {
                     }
 
                     if (Math.random() > leavePer) {
-                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + "left the auction");
+                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " left the auction");
                         players.remove(i);
                     } else {
+                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(currentBid));
                         currentBid += response;
                         lastBidder = players.get(i).getPlayerNumber();
                     }

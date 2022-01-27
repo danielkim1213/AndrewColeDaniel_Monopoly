@@ -11,11 +11,9 @@ package andrewcoledaniel_monopoly;
  */
 public class Utility extends Property {
     
-    private SpaceType type;
-
     public Utility(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
-        type = SpaceType.SPACE_UTILITY;
+        propType = SpaceType.SPACE_UTILITY;
     }
 
     public void updateRent() {

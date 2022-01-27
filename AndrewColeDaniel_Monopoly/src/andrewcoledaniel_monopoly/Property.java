@@ -4,6 +4,7 @@
  * Class that represents a property space on the board
  */
 package andrewcoledaniel_monopoly;
+import andrewcoledaniel_monopoly.Space.SpaceType;
 
 /**
  *
@@ -19,12 +20,15 @@ abstract public class Property implements Space {
     protected int mortgageValue;
     protected boolean mortgage;
     protected boolean isOwned;
+    protected SpaceType type;
+    protected SpaceType propType;
 
     public Property(String name, int price, int mortgageValue, int propertyNumber) {
         this.name = name;
         this.price = price;
         this.mortgageValue = mortgageValue;
         this.propertyNumber = propertyNumber;
+        type = SpaceType.SPACE_PROPERTY;
         owner = null;
         isOwned = false;
     }
@@ -73,8 +77,12 @@ abstract public class Property implements Space {
     public void setMortgage(boolean m) {
         mortgage = m;
     }
+    
+    public SpaceType getPropType() {
+        return propType;
+    }
 
     public abstract void updateRent();
-    
+        
     public abstract String toString();
 }

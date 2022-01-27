@@ -11,11 +11,9 @@ package andrewcoledaniel_monopoly;
  */
 public class Railroad extends Property {
     
-    private SpaceType type;
-
     public Railroad(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
-        type = SpaceType.SPACE_RAILROAD;
+        propType = SpaceType.SPACE_RAILROAD;
     }
     
     public void updateRent() {

@@ -11,16 +11,15 @@ package andrewcoledaniel_monopoly;
  */
 public class Deed extends Property {
 
-    private SpaceType type;
     private int houses;
     private int houseCost;
     private boolean hotel;
 
     public Deed(String name, int price, int mortgageValue, int houseCost, int rent, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
-        type = SpaceType.SPACE_DEED;
         this.houseCost = houseCost;
         this.rent = rent;
+        propType = SpaceType.SPACE_DEED;
     }
 
     public int getHouses() {
