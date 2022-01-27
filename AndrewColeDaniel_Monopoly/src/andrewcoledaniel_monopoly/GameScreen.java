@@ -161,6 +161,7 @@ public class GameScreen extends javax.swing.JFrame {
                 value = Integer.parseInt(s.nextLine());
                 info = s.nextLine();
                 cards[index] = new Card(type, action, value, info);
+                index++;
             } 
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
@@ -292,16 +293,21 @@ public class GameScreen extends javax.swing.JFrame {
     
     private void handleSpace(Space s, Player p) {
         SpaceType st = s.getType();
+        JOptionPane.showMessageDialog(null, s.getName());
         switch (st) {
             case SPACE_CORNER:
                 ((CornerSpace)s).performSpaceAction(p);
                 break;
-            case SPACE_PROPERTY:
+            case SPACE_DEED:
                 handleProperty((Property)s, p);
+                break;
             case SPACE_CARD:
                  Card c = ((CardSpace)s).getCard(cards);
                  String out = ((CardSpace)s).performSpaceAction(c, p);
                  JOptionPane.showMessageDialog(null, out);
+                 if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_DEED) {
+                     handleProperty((Property)board.getSpace(p.getPosition()), p);
+                 }
                  break;
         }
     }
@@ -309,27 +315,26 @@ public class GameScreen extends javax.swing.JFrame {
     private void handleProperty(Property prop, Player p) {
         int option;
         if (p.getPlayerNumber() == 1) {
-            if (prop.getOwner() == null) {
-                option = JOptionPane.showConfirmDialog(null, ((Space) p).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
+            if (!prop.getOwned()) {
+                option = JOptionPane.showConfirmDialog(null, ((Space) prop).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     p.buyProperty(prop);
                 } else {
-                    // TODO: Auction
+                    auction(prop);
                 }
             } else {
-                auction(prop);
                 JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
             }
         } else {
-            if (prop.getOwner() == null) {
+            if (!prop.getOwned()) {
                 int randomNumber = (int) (Math.random() * 10);
                 if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
                     p.buyProperty(prop);
                     updateProperties();
                 } else {
-                    // auction
+                    auction(prop);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
@@ -2092,6 +2097,9 @@ class Rolling extends TimerTask {
         }
         dice1 = (int)(Math.random() * 6);
         dice2 = (int)(Math.random() * 6);
+        
+        GameScreen.roll[0] = dice1;
+        GameScreen.roll[1] = dice1;
 
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
@@ -2099,14 +2107,7 @@ class Rolling extends TimerTask {
     
     public boolean isDoubleDice()
     {
-        if(dice1 == dice2)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return dice1 == dice2;
     }
     
 

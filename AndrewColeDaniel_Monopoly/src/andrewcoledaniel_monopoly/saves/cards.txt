@@ -89,7 +89,7 @@ Go directly to Jail, do not pass Go, do not collect $200
 CARD_COMMUNITY_CHEST
 ACTION_GET_MONEY
 100
-Holiday fund matures. Recieve $100
+Holiday fund matures. Receive $100
 CARD_COMMUNITY_CHEST
 ACTION_GET_MONEY
 20
@@ -98,6 +98,10 @@ CARD_COMMUNITY_CHEST
 ACTION_GET_MONEY_PLAYER
 10
 It is your birthday. Collect $10 from each player
+CARD_COMMUNITY_CHEST
+ACTION_GET_MONEY
+100
+Life insurance matures. Collect $100
 CARD_COMMUNITY_CHEST
 ACTION_PAY_MONEY
 100

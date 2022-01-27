@@ -59,7 +59,12 @@ public class CardSpace implements Space {
                 p.setPosition(c.getValue());
                 break;
             case ACTION_GOTO_RELATIVE:
-                p.setPosition(p.getPosition() + c.getValue());
+                int newPos = p.getPosition() + c.getValue();
+                if (newPos >= 40) {
+                    p.addMoney(200);
+                    newPos -= 40;
+                    p.setPosition(newPos);
+                }
             case ACTION_GET_MONEY:
                 p.addMoney(c.getValue());
                 break;
