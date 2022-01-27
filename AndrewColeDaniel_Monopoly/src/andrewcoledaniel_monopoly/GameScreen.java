@@ -161,11 +161,38 @@ public class GameScreen extends javax.swing.JFrame {
                 winner = playerArray[i];
             }
         }
+        
+        if(winner == playerArray[0]) //if the user is the winner
+        {
+            boolean isHighScore = checkHighscore(winner.getMoney()); //check if it is the highscore
+        }
         if (endingScreen == null) {
             endingScreen = new EndingScreen(winner.getPlayerNumber(), playerArray);
         }
         this.setVisible(false);
         endingScreen.setVisible(true);
+    }
+    
+    private boolean checkHighscore(int score)
+    {
+        if(score < mainMenu.highscores[4])
+        {
+            return false;
+        }
+        int index = 0;
+        for(int i=4; i>=0; i--)
+        {
+            if(score > mainMenu.highscores[i])
+            {
+                index = i;
+            }
+        }
+        for(int k=4; k>index; k--)
+        {
+            mainMenu.highscores[k] = mainMenu.highscores[k-1];
+        }
+        mainMenu.highscores[index] = score;
+        return true;
     }
 
     private void loadCards() {

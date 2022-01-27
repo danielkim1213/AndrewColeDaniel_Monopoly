@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  * @author dakim0069
  */
 public class MainMenu extends javax.swing.JFrame {
+    //variables
     private TutorialMenu tutorial;
     private GameScreen gameScreen;
     private HighScoreMenu highScoreMenu;
@@ -31,21 +32,24 @@ public class MainMenu extends javax.swing.JFrame {
     public String[] date = new String[5];
     public final MainMusic mainBgm;
     private final Thread mainBgmThread;
-    public static int limitedTurns;
-    public static long limitedTime;
+    public int limitedTurns;
+    public long limitedTime;
     
     /**
-     * Creates new form MainMenu
+     * Primary constructor
      */
     public MainMenu() {
         initComponents();
         monopolyImage();
         readHighScore();
-        mainBgm = new MainMusic();
-        mainBgmThread = new Thread(mainBgm);
-        mainBgmThread.start();
+        mainBgm = new MainMusic(); //background music
+        mainBgmThread = new Thread(mainBgm); //new thread for the background music
+        mainBgmThread.start(); //start the music
     }
     
+    /**
+     * this is a method that scans high scores from the file
+     */
     private void readHighScore()
     {
         InputStream inp = MainMenu.class.getResourceAsStream("saves/HighScores.txt");
