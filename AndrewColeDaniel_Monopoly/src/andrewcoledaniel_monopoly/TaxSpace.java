@@ -17,6 +17,7 @@ public class TaxSpace implements Space {
 
     /**
      * Primary constructor, create TaxSpace with specified values
+     *
      * @param name name of space
      * @param amount amount to tax
      */
@@ -28,6 +29,7 @@ public class TaxSpace implements Space {
 
     /**
      * Get name of space
+     *
      * @return name
      */
     public String getName() {
@@ -36,22 +38,25 @@ public class TaxSpace implements Space {
 
     /**
      * Get amount to tax
+     *
      * @return tax amount
      */
     public int getTaxAmount() {
         return taxAmount;
     }
-    
+
     /**
      * Get type of space
+     *
      * @return type of space
      */
     public SpaceType getType() {
         return type;
     }
-    
+
     /**
      * Return string representation of object
+     *
      * @return string representation of object
      */
     public String toString() {

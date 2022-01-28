@@ -5,22 +5,20 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
-import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import andrewcoledaniel_monopoly.Space.SpaceType;
 import java.io.InputStream;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
  * @author anfeh1812
  */
 public class Board {
+
     private final Space[] board;
-    
+
     /**
      * Primary constructor, fill board with spaces
      */
@@ -29,7 +27,7 @@ public class Board {
         // Load spaces into board
         loadSpaces();
     }
-    
+
     /**
      * Load spaces from resources into board array
      */
@@ -69,16 +67,17 @@ public class Board {
                 case 33:
                     board[i] = new CardSpace("Community Chest", CardType.CARD_COMMUNITY_CHEST);
                     break;
-                    // Create property
+                // Create property
                 default:
                     board[i] = loadProperty(s, i);
                     break;
             }
         }
-   }
-    
+    }
+
     /**
      * Load a property into the array
+     *
      * @param s Scanner object
      * @param i Property index
      * @return Property object
@@ -123,36 +122,38 @@ public class Board {
         }
         return p;
     }
-    
+
     /**
      * Get Space object at specified index
+     *
      * @param s index of Space
      * @return Space object
      */
     public Space getSpace(int s) {
         return board[s];
     }
-    
+
     /**
      * Find next property with specific type
+     *
      * @param x position to start search
      * @param t type of Space
      * @return index of Space
      */
     public int findNextProperty(int x, SpaceType t) {
-        // Start at player position and find next property with type 
+        // Start at player position and find next property with type
         for (int i = x; i < board.length; i++) {
             if (board[i].getType() == SpaceType.SPACE_PROPERTY) {
-                if (((Property)board[i]).getPropType() == t) {
+                if (((Property) board[i]).getPropType() == t) {
                     return i;
                 }
             }
         }
-        
+
         // If next property is not before go, start searching at index 0
         for (int i = 0; i < board.length; i++) {
             if (board[i].getType() == SpaceType.SPACE_PROPERTY) {
-                if (((Property)board[i]).getPropType() == t) {
+                if (((Property) board[i]).getPropType() == t) {
                     return i;
                 }
             }
@@ -160,9 +161,10 @@ public class Board {
         // Should never happen
         return 100;
     }
-    
+
     /**
      * Shuffle an array of Cards
+     *
      * @param c Card array
      */
     public void shuffleCards(Card[] c) {
@@ -181,7 +183,8 @@ public class Board {
 
     /**
      * Return string representation of Board
-     * @return 
+     *
+     * @return
      */
     public String toString() {
         String s = "Board:\n";
@@ -191,5 +194,5 @@ public class Board {
         }
         return s;
     }
-    
+
 }

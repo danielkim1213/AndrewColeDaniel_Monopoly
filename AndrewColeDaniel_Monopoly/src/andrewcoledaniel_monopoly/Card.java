@@ -10,13 +10,15 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public class Card {
+
     private final CardType type;
     private final CardAction action;
     private final int value;
     private final String info;
-    
+
     /**
      * Primary constructor, create Card with values
+     *
      * @param type type of card
      * @param action action for card to perform
      * @param value value that goes with action
@@ -28,13 +30,13 @@ public class Card {
         this.value = value;
         this.info = info;
     }
-    
+
     // Types of cards
     public enum CardType {
         CARD_CHANCE,
         CARD_COMMUNITY_CHEST
     }
-    
+
     // Actions of cards
     public enum CardAction {
         ACTION_GOTO,
@@ -49,44 +51,49 @@ public class Card {
         ACTION_GOTO_UTILITY,
         ACTION_PAY_HOUSES
     }
-    
+
     /**
      * Get card type
+     *
      * @return card type
      */
     public CardType getType() {
         return type;
     }
-    
+
     /**
      * Get card action
+     *
      * @return card action
      */
     public CardAction getAction() {
         return action;
     }
-    
+
     /**
      * Get card value
+     *
      * @return card value
      */
     public int getValue() {
         return value;
     }
-    
+
     /**
      * Get card info
+     *
      * @return card info
      */
     public String getInfo() {
         return info;
     }
-    
+
     /**
      * Return string representation of object
+     *
      * @return string representation of object
      */
     public String toString() {
         return "Card:\nType: " + type + "\nAction: " + action + "\nValue: " + value + "\nInfo: " + info + "\n";
-    }   
+    }
 }

@@ -5,7 +5,6 @@
  */
 package andrewcoledaniel_monopoly;
 
-
 import java.awt.Image;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -24,6 +23,7 @@ import javax.swing.JOptionPane;
  * @author dakim0069
  */
 public class MainMenu extends javax.swing.JFrame {
+
     //variables
     private TutorialMenu tutorial;
     private GameScreen gameScreen;
@@ -33,7 +33,7 @@ public class MainMenu extends javax.swing.JFrame {
     private final Thread mainBgmThread;
     public int limitedTurns;
     public long limitedTime;
-    
+
     /**
      * Primary constructor
      */
@@ -45,42 +45,40 @@ public class MainMenu extends javax.swing.JFrame {
         mainBgmThread = new Thread(mainBgm); //new thread for the background music
         mainBgmThread.start(); //start the music
     }
-    
+
     /**
      * this is a method that initialize the highscores
      */
-    private void readHighScore()
-    {
-        for(int i=0; i<5; i++)
-        {
+    private void readHighScore() {
+        for (int i = 0; i < 5; i++) {
             highscores[i] = 0; //set to 0
         }
     }
-    
+
     /**
-     * This is a void method that brings images from the files and set them as a button or label icons
+     * This is a void method that brings images from the files and set them as a
+     * button or label icons
      */
-    private void monopolyImage()
-    {
+    private void monopolyImage() {
         Image img;
-        
+
         //Title image
         URL urlMonopoly = GameScreen.class.getResource("saves/monopoly.png"); //load from file
         ImageIcon mply = new ImageIcon(urlMonopoly); //make an image icon
         img = mply.getImage(); //change to image
         mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_SMOOTH)); //modify image size to make it fit in the component
         lblTitle.setIcon(mply); //change the component icon
-        
+
         //highscore button image
         btnHighScores.setBorderPainted(false); //erase the border
         btnHighScores.setContentAreaFilled(false); //erase the content area filled
         //same process with title image
-        URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg"); 
+        URL urlHighScore = GameScreen.class.getResource("saves/highScores.jpg");
         ImageIcon scores = new ImageIcon(urlHighScore);
         img = scores.getImage();
         scores = new ImageIcon(img.getScaledInstance(btnHighScores.getWidth(), btnHighScores.getHeight(), Image.SCALE_SMOOTH));
         btnHighScores.setIcon(scores);
-        
+
         //new game button image
         //erase the border
         btnHighScores.setBorder(null);
@@ -90,7 +88,7 @@ public class MainMenu extends javax.swing.JFrame {
         img = newGame.getImage();
         newGame = new ImageIcon(img.getScaledInstance(btnNewGame.getWidth(), btnNewGame.getHeight(), Image.SCALE_SMOOTH));
         btnNewGame.setIcon(newGame);
-        
+
         //loadSave button image
         btnLoadSave.setBorder(null); //erase the border
         //same process with title image
@@ -99,7 +97,7 @@ public class MainMenu extends javax.swing.JFrame {
         img = loadSave.getImage();
         loadSave = new ImageIcon(img.getScaledInstance(btnLoadSave.getWidth(), btnLoadSave.getHeight(), Image.SCALE_SMOOTH));
         btnLoadSave.setIcon(loadSave);
-        
+
         //background image
         //same process with title image
         URL urlMoney = GameScreen.class.getResource("saves/street.jpg");
@@ -107,7 +105,7 @@ public class MainMenu extends javax.swing.JFrame {
         img = money.getImage();
         money = new ImageIcon(img.getScaledInstance(lblBackground.getWidth(), lblBackground.getHeight(), Image.SCALE_SMOOTH));
         lblBackground.setIcon(money);
-               
+
         //tutorial button image
         btnTutorial.setBorderPainted(false); //erase the border
         btnTutorial.setContentAreaFilled(false); //erase the painting
@@ -118,7 +116,6 @@ public class MainMenu extends javax.swing.JFrame {
         tutorialIcon = new ImageIcon(img.getScaledInstance(btnTutorial.getWidth(), btnTutorial.getHeight(), Image.SCALE_SMOOTH));
         btnTutorial.setIcon(tutorialIcon);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,16 +206,17 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * This button event is to load the previous game saved in the user's directory
+     * This button event is to load the previous game saved in the user's
+     * directory
+     *
      * @param evt - when the user clicks loadSave button
      */
     private void btnLoadSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSaveActionPerformed
         String saveFilePath = null; //initialilze file path
         JFileChooser fileChooser = new JFileChooser(); //instantiate JFileChooser
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //set the chooser mode  
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //set the chooser mode
         int result = fileChooser.showOpenDialog(this); //show a dialog that let the user to find a file and click "open" button.
-        if(result == JFileChooser.APPROVE_OPTION) 
-        {
+        if (result == JFileChooser.APPROVE_OPTION) {
             saveFilePath = fileChooser.getSelectedFile().getAbsolutePath(); //get the file path of the file the user choose
         }
         File saveFile = new File(saveFilePath + "/MonopolySave.txt"); //instantiate file by using the path
@@ -226,7 +224,7 @@ public class MainMenu extends javax.swing.JFrame {
         try {
             FileInputStream in = new FileInputStream(saveFile); //instantiate FileInputStream to the saveFile
             ObjectInputStream s = new ObjectInputStream(in); //instantiate ObjectInputStream in order to read the file in Object form directly instead of scanning it in text
-            int gameMode = s.readInt(); //read gameMode 
+            int gameMode = s.readInt(); //read gameMode
             int currentTurn = s.readInt(); //read current Turn
             int numPlayers = s.readInt(); //read the number of players
             Player[] playerArray = (Player[]) s.readObject(); //read the Player objects
@@ -241,10 +239,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     /**
      * This button opens the high score menu
+     *
      * @param evt - when the user clicks the trophy image at the left bottom
      */
     private void btnHighScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighScoresActionPerformed
-        if(highScoreMenu == null) //if there is no highscore menu existing
+        if (highScoreMenu == null) //if there is no highscore menu existing
         {
             highScoreMenu = new HighScoreMenu(this); //create a highscore menu
         }
@@ -254,49 +253,52 @@ public class MainMenu extends javax.swing.JFrame {
 
     /**
      * This button opens the tutorial menu
-     * @param evt - when the user clicks the question mark image at the right bottom
+     *
+     * @param evt - when the user clicks the question mark image at the right
+     * bottom
      */
     private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorialActionPerformed
-        if(tutorial == null) //if there is no tutorial menu existing
+        if (tutorial == null) //if there is no tutorial menu existing
         {
             tutorial = new TutorialMenu(this); //create new one
         }
         tutorial.setVisible(true); //set the tutorial menu visible
         this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnTutorialActionPerformed
-    
+
     /**
      * if the user click the new game button
+     *
      * @param evt - clicking new game button
      */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         String[] gameOptions = {"limited turn", "limited time", "infinite"};  //game options for a new game
         String[] computerChoice = {"1 Computer", "2 Computers", "3 Computers"}; //options for the number of Computer players
         //prompt user to choose the mode of the game
-        int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions , gameOptions[0]);
+        int gameMode = JOptionPane.showOptionDialog(null, "Which mode do you want to play?", "Mode Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameOptions, gameOptions[0]);
 
         String input = "";
         try {
             //if the user choose to play limited turn mode
-            if(gameMode == 0){
+            if (gameMode == 0) {
                 input = JOptionPane.showInputDialog("How many turns would you like to play?"); //prompt the user to choose the number of turns
                 limitedTurns = Integer.parseInt(input); //save the user input
-            } else if(gameMode == 1){ //if the user choose to play limited time mode
+            } else if (gameMode == 1) { //if the user choose to play limited time mode
                 input = JOptionPane.showInputDialog("How long would you like the game to be? (minute)"); //prompt the user to choose time limit
                 limitedTime = Long.parseLong(input);  //the user can set the time for the game
                 limitedTime *= 60; //convert min to sec
                 limitedTime *= 1000; //convert sec to ms
             }
-        }catch (NumberFormatException e) { //if the user did not enter an integer
-            input = null; 
+        } catch (NumberFormatException e) { //if the user did not enter an integer
+            input = null;
         }
 
-        if(gameMode != -1 && input != null) //if the user entered reasonable input
+        if (gameMode != -1 && input != null) //if the user entered reasonable input
         {
-            //prompt the user to select how many CPU players to play with 
+            //prompt the user to select how many CPU players to play with
             int numPlayers = JOptionPane.showOptionDialog(null, "How many opponents do you want to play against", "Computer Player Selection", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, computerChoice, computerChoice[0]);
-            numPlayers += 2; 
-            if(numPlayers != -1) //if the user did not choose to close the window
+            numPlayers += 2;
+            if (numPlayers != -1) //if the user did not choose to close the window
             {
                 mainBgm.musicOff(); //music off
                 gameScreen = new GameScreen(this, gameMode, numPlayers); //make a new game screen
@@ -316,10 +318,9 @@ public class MainMenu extends javax.swing.JFrame {
                 + "\nIn-Game music: Slow Burn by spinningmerkaba "
                 + "\n(c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. "
                 + "\nhttp://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob";
-        JOptionPane.showMessageDialog(null, credit, "credit" , JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, credit, "credit", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnCreditActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCredit;
@@ -334,18 +335,18 @@ public class MainMenu extends javax.swing.JFrame {
 }
 
 /**
- * This is a class for the background music. 
+ * This is a class for the background music.
  */
 class MainMusic implements Runnable {
+
     private Clip mainSong;
-    
+
     /**
-     * this runs when instantiated 
+     * this runs when instantiated
      */
     @Override
-    public void run() 
-    {
-        try{
+    public void run() {
+        try {
             mainSong = AudioSystem.getClip();
             InputStream bufferedIn = new BufferedInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));
             //Dubby Jinglefunk's Not So Silent Night by Speck (c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/speck/64503 Ft: Admiral Bob, Martijn de Boer, airtone, Carosone
@@ -358,19 +359,18 @@ class MainMusic implements Runnable {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
     /**
      * a behaviour method that turns off the music
      */
-    public void musicOff()
-    {
+    public void musicOff() {
         mainSong.stop();
     }
-    
+
     /**
      * a behaviour method that turns on the music
      */
-    public void musicOn()
-    {
+    public void musicOn() {
         mainSong.start();
     }
 }

@@ -19,6 +19,7 @@ public class CornerSpace implements Space {
 
     /**
      * Primary constructor, create CornerSpace with values
+     *
      * @param name name of space
      * @param type type of space
      * @param cornerType type of CornerSpace
@@ -31,14 +32,16 @@ public class CornerSpace implements Space {
 
     /**
      * Get name of space
-     * @return 
+     *
+     * @return
      */
     public String getName() {
         return name;
     }
-    
+
     /**
      * Perform space action
+     *
      * @param p Player object
      */
     public void performSpaceAction(Player p) {
@@ -60,25 +63,28 @@ public class CornerSpace implements Space {
                 break;
         }
     }
-    
+
     /**
      * Get type of space
+     *
      * @return type of space
      */
     public SpaceType getType() {
         return type;
     }
-    
+
     /**
      * Get type of CornerSpace
+     *
      * @return type of CornerSpace
      */
     public SpaceType getCornerType() {
         return cornerType;
     }
-    
+
     /**
      * Return string representation of object
+     *
      * @return string representation of object
      */
     public String toString() {

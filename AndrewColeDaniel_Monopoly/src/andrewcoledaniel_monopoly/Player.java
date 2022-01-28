@@ -6,9 +6,9 @@ and if they are in jail or not and if they are how long have they been in there 
  */
 package andrewcoledaniel_monopoly;
 
+import andrewcoledaniel_monopoly.Space.SpaceType;
 import java.io.Serializable;
 import java.util.ArrayList;
-import andrewcoledaniel_monopoly.Space.SpaceType;
 
 public class Player implements Serializable {
 
@@ -23,7 +23,8 @@ public class Player implements Serializable {
 
     /**
      * Default constructor
-     * @param playerNumber asks for the number of player 
+     *
+     * @param playerNumber asks for the number of player
      */
     public Player(int playerNumber) {
         this.playerNumber = playerNumber; // sets the player number to input
@@ -36,6 +37,7 @@ public class Player implements Serializable {
 
     /**
      * Constructor for starting the game
+     *
      * @param playerNumber // number of the player
      * @param money // the money they start with
      */
@@ -46,12 +48,13 @@ public class Player implements Serializable {
 
     /**
      * Method for loading the game
+     *
      * @param playerNumber inputs from the same file
      * @param money
      * @param properties
      * @param inJail
      * @param turnsInJail
-     * @param bankrupt 
+     * @param bankrupt
      */
     public Player(int playerNumber, int money, ArrayList<Property> properties, boolean inJail, int turnsInJail, boolean bankrupt) {
         this(playerNumber);
@@ -64,6 +67,7 @@ public class Player implements Serializable {
 
     /**
      * Accessor
+     *
      * @return player number
      */
     public int getPlayerNumber() {
@@ -72,6 +76,7 @@ public class Player implements Serializable {
 
     /**
      * Accessor
+     *
      * @return money
      */
     public int getMoney() {
@@ -80,7 +85,8 @@ public class Player implements Serializable {
 
     /**
      * Mutator
-     * @param money changes money 
+     *
+     * @param money changes money
      */
     public void setMoney(int money) {
         this.money = money;
@@ -88,47 +94,51 @@ public class Player implements Serializable {
 
     /**
      * Behaviour
-     * @param money adds money 
+     *
+     * @param money adds money
      */
     public void addMoney(int money) {
         this.money += money;
-        if(this.money > 0){ // if money is positive
+        if (this.money > 0) { // if money is positive
             this.bankrupt = false; // they are not bankrupt
         }
     }
 
     /**
      * Behaviour
-     * @param money  removes money
+     *
+     * @param money removes money
      */
     public void removeMoney(int money) {
         this.money -= money;
-        if(this.money < 0){ // if money is negative
+        if (this.money < 0) { // if money is negative
             this.bankrupt = true; // they are bankrupt
         }
     }
 
     /**
      * Acessor
-     * @return properties arraylist 
+     *
+     * @return properties arraylist
      */
     public ArrayList getProperties() {
         return properties;
     }
-    
+
     /**
      * Accessor for the names of the owned proerties
+     *
      * @return property names
      */
-    public String propertyNames(){
+    public String propertyNames() {
         String output = "";
-        for(int i =0; i < properties.size(); i ++){
+        for (int i = 0; i < properties.size(); i++) {
             if (properties.get(i).getPropType() != SpaceType.SPACE_DEED) { // checks to see if the proerty is a deed or not
                 output += (properties.get(i).getName() + "\n"); // gets the name
-            } else if (((Deed)properties.get(i)).getHotel()) { // if the property has a house
+            } else if (((Deed) properties.get(i)).getHotel()) { // if the property has a house
                 output += (properties.get(i).getName() + " - 1 hotel\n"); // adds the name and hotel
-            } else if (((Deed)properties.get(i)).getHouses() > 0) { // if the houses are greater than 0
-                output += (properties.get(i).getName() + " - " + ((Deed)properties.get(i)).getHouses() + " houses\n"); // adds the houses to the output
+            } else if (((Deed) properties.get(i)).getHouses() > 0) { // if the houses are greater than 0
+                output += (properties.get(i).getName() + " - " + ((Deed) properties.get(i)).getHouses() + " houses\n"); // adds the houses to the output
             } else {
                 output += (properties.get(i).getName() + "\n"); // else adds the property name itself
             }
@@ -138,6 +148,7 @@ public class Player implements Serializable {
 
     /**
      * Mutator
+     *
      * @param properties input of properties
      */
     public void setProperties(ArrayList<Property> properties) {
@@ -146,6 +157,7 @@ public class Player implements Serializable {
 
     /**
      * Behaviour
+     *
      * @param property to buy
      */
     public void buyProperty(Property property) {
@@ -153,30 +165,32 @@ public class Player implements Serializable {
         this.properties.add(property); // adds property
         property.setOwner(this); // sets the owner to this player
     }
-    
+
     public void buyPropertyAuction(Property p, int price) {
         removeMoney(price);
         properties.add(p);
         p.setOwner(this);
     }
 
-    /** Behaviour
-     * Method to mortage a property
-     * @param property to mortage 
+    /**
+     * Behaviour Method to mortage a property
+     *
+     * @param property to mortage
      */
     public void mortgageProperty(Property property) {
-        if(property.getMortgage() == false){ // if mortage is false
+        if (property.getMortgage() == false) { // if mortage is false
             this.addMoney(property.mortgageValue); // adds money
             property.setMortgage(true); // sets mortgage to true
-        } else{ // if it is already mortagaged
-            this.removeMoney(property.mortgageValue); //removes money 
+        } else { // if it is already mortagaged
+            this.removeMoney(property.mortgageValue); //removes money
             property.setMortgage(false); // sets it to false
         }
     }
 
     /**
      * Accessor
-     * @return jail 
+     *
+     * @return jail
      */
     public boolean getJail() {
         return inJail;
@@ -184,7 +198,8 @@ public class Player implements Serializable {
 
     /**
      * Mutator
-     * @param jail if they are in jail or not 
+     *
+     * @param jail if they are in jail or not
      */
     public void setJail(boolean jail) {
         this.inJail = jail;
@@ -192,7 +207,8 @@ public class Player implements Serializable {
 
     /**
      * Acessor
-     * @return turns in jail 
+     *
+     * @return turns in jail
      */
     public int getTurnsInJail() {
         return turnsInJail;
@@ -200,7 +216,8 @@ public class Player implements Serializable {
 
     /**
      * Mutator
-     * @param turnsInJail amount to set 
+     *
+     * @param turnsInJail amount to set
      */
     public void setTurnsInJail(int turnsInJail) {
         this.turnsInJail = turnsInJail;
@@ -208,7 +225,8 @@ public class Player implements Serializable {
 
     /**
      * Acessor
-     * @return position on the board 
+     *
+     * @return position on the board
      */
     public int getPosition() {
         return currentPosition;
@@ -216,7 +234,8 @@ public class Player implements Serializable {
 
     /**
      * Mutator
-     * @param pos position to set 
+     *
+     * @param pos position to set
      */
     public void setPosition(int pos) {
         currentPosition = pos;
@@ -224,7 +243,8 @@ public class Player implements Serializable {
 
     /**
      * Acessor
-     * @return gets number of get ouf out jail cards 
+     *
+     * @return gets number of get ouf out jail cards
      */
     public int getJailCards() {
         return jailCards;
@@ -232,21 +252,23 @@ public class Player implements Serializable {
 
     /**
      * Mutator
-     * @param n amount to set get out of jail cards to 
+     *
+     * @param n amount to set get out of jail cards to
      */
     public void setJailCards(int n) {
         jailCards = n;
     }
-    
+
     /**
      * Mutator removes all properties from this player
      */
-    public void removeProperties(){
+    public void removeProperties() {
         properties.removeAll(properties);
     }
-    
+
     /**
      * Acessor that gets the number of utilites
+     *
      * @return the amount of utilites this player owns
      */
     public int getUtilities() {
@@ -258,9 +280,10 @@ public class Player implements Serializable {
         }
         return num;
     }
-    
+
     /**
      * Accessor that gets the number of railroads this player owns
+     *
      * @return returns that number
      */
     public int getRailroads() {
@@ -272,9 +295,10 @@ public class Player implements Serializable {
         }
         return num;
     }
-    
+
     /**
      * Behaviour find a property
+     *
      * @param name name of the property
      * @return number in the array
      */
@@ -286,7 +310,7 @@ public class Player implements Serializable {
         }
         return -1; // else returns -1
     }
-    
+
     /**
      * Pay for houses and hotels on properties for specific card
      */
@@ -297,11 +321,11 @@ public class Player implements Serializable {
             // If property is a deed
             if (p.getType() == SpaceType.SPACE_DEED) {
                 // If has hotel, add $100 to sum
-                if (((Deed)p).getHotel()) {
+                if (((Deed) p).getHotel()) {
                     sum += 100;
                 } else {
                     // Add $25 for each house
-                    sum += ((Deed)p).getHouses() * 25;
+                    sum += ((Deed) p).getHouses() * 25;
                 }
             }
         }
@@ -310,6 +334,7 @@ public class Player implements Serializable {
 
     /**
      * Method that will print all the information about the player into a string
+     *
      * @return that string
      */
     public String toString() {

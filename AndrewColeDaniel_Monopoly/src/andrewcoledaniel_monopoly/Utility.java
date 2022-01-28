@@ -10,9 +10,10 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public class Utility extends Property {
-    
+
     /**
      * Default Constructor
+     *
      * @param name of the property
      * @param price $$
      * @param mortgageValue amount you gain from mortaging it
@@ -36,16 +37,18 @@ public class Utility extends Property {
 
     /**
      * To String Method
+     *
      * @return string representation of object
      */
     @Override
     public String toString() {
         return super.toString() + "Name: " + name + "\n";
     }
-    
+
     /**
      * Accessor
-     * @return space type 
+     *
+     * @return space type
      */
     public SpaceType getType() {
         return type;

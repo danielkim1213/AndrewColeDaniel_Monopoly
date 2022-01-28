@@ -18,6 +18,7 @@ public class Deed extends Property {
 
     /**
      * Default constructor
+     *
      * @param name of the deed
      * @param price of the deed
      * @param mortgageValue of the deed
@@ -34,7 +35,8 @@ public class Deed extends Property {
 
     /**
      * Acessor
-     * @return number of houses 
+     *
+     * @return number of houses
      */
     public int getHouses() {
         return houses;
@@ -42,7 +44,8 @@ public class Deed extends Property {
 
     /**
      * Acessor
-     * @return if there is a hotel or not 
+     *
+     * @return if there is a hotel or not
      */
     public boolean getHotel() {
         return hotel;
@@ -50,7 +53,8 @@ public class Deed extends Property {
 
     /**
      * Accessor
-     * @return the house cost 
+     *
+     * @return the house cost
      */
     public int getHouseCost() {
         return houseCost;
@@ -58,6 +62,7 @@ public class Deed extends Property {
 
     /**
      * Behaviour to buy a house
+     *
      * @param h how many to buy
      * @return true or false
      */
@@ -73,6 +78,7 @@ public class Deed extends Property {
 
     /**
      * Behaviour buys a hoel
+     *
      * @return true or false
      */
     public boolean buyHotel() {
@@ -86,6 +92,7 @@ public class Deed extends Property {
 
     /**
      * Behaviour to sell a house
+     *
      * @return true or false
      */
     public boolean sellHouse() {
@@ -100,47 +107,50 @@ public class Deed extends Property {
         updateRent(); // updates the rent
         return true;
     }
-    
+
     /**
      * Mutator that sets the houses
+     *
      * @param h input
      */
-    public void setHouses(int h){
+    public void setHouses(int h) {
         houses = h;
     }
-    
+
     /**
      * Method to set the deed to owned or unowned
+     *
      * @param b boolean input
      */
     @Override
-    public void setOwned(boolean b){
-        if(b == false){ // if false
+    public void setOwned(boolean b) {
+        if (b == false) { // if false
             houses = 0; // resets all the information
             hotel = false;
             isOwned = false;
             mortgage = false;
             updateRent();
-        } else{
+        } else {
             isOwned = true; // else just sets it to owned
         }
     }
-    
+
     /**
      * Behaviour uptdates rent
      */
     public void updateRent() {
         if (hotel == true) { // if theres a hotel
             rent = originalRent * houses * 50; // rent is original multiplied by houses multilipied by 50
-        } else if(houses >= 1){ // if there is a house
+        } else if (houses >= 1) { // if there is a house
             rent = originalRent * houses; // its rent multiplied by houses
-        } else{ // else
+        } else { // else
             rent = originalRent; // its original rent
         }
     }
-    
+
     /**
      * To String method
+     *
      * @return string representation of object
      */
     @Override
@@ -150,6 +160,7 @@ public class Deed extends Property {
 
     /**
      * Accessor
+     *
      * @return the space type
      */
     public SpaceType getType() {

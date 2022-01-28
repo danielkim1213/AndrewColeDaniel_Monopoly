@@ -10,18 +10,17 @@ import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-
 /**
  *
  * @author dakim0069
  */
 public class HighScoreMenu extends javax.swing.JFrame {
+
     private MainMenu mainMenu;
-    
-    
-    
+
     /**
      * Creates new form HighScoreMenu
+     *
      * @param m
      */
     public HighScoreMenu(MainMenu m) {
@@ -29,35 +28,34 @@ public class HighScoreMenu extends javax.swing.JFrame {
         image();
         mainMenu = m;
     }
-    
+
     /**
      * this method is to load and set all the images in this screen
      */
-    private void image()
-    {
-        
+    private void image() {
+
         Image img;
         URL urlStars = GameScreen.class.getResource("saves/stars.jpg");
         ImageIcon stars = new ImageIcon(urlStars);
         img = stars.getImage();
         stars = new ImageIcon(img.getScaledInstance(lblStars.getWidth(), lblStars.getHeight(), Image.SCALE_SMOOTH));
         lblStars.setIcon(stars);
-        
+
         URL urlWing = GameScreen.class.getResource("saves/wing.png");
         ImageIcon wing = new ImageIcon(urlWing);
         img = wing.getImage();
         wing = new ImageIcon(img.getScaledInstance(lblWing.getWidth(), lblWing.getHeight(), Image.SCALE_SMOOTH));
         lblWing.setIcon(wing);
-        
+
         URL urlTop5 = GameScreen.class.getResource("saves/Top5.png");
         ImageIcon top5 = new ImageIcon(urlTop5);
         img = top5.getImage();
         top5 = new ImageIcon(img.getScaledInstance(lblTop5.getWidth(), lblTop5.getHeight(), Image.SCALE_SMOOTH));
         lblTop5.setIcon(top5);
-        
+
         btnBack.setBorder(null);
         btnBack.setContentAreaFilled(false);
-        btnBack.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        btnBack.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         URL urlBack = GameScreen.class.getResource("saves/back.png");
         ImageIcon back = new ImageIcon(urlBack);
         img = back.getImage();
@@ -127,18 +125,18 @@ public class HighScoreMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * if this window is activated, update the highscores 
-     * @param evt 
+     * if this window is activated, update the highscores
+     *
+     * @param evt
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         txaHighScores.setText("");
-        for(int i=0; i<5; i++) //loop 5 times
+        for (int i = 0; i < 5; i++) //loop 5 times
         {
             //add text to the highscore text area
-            txaHighScores.append("Top " + (i+1) + ":\n");  
+            txaHighScores.append("Top " + (i + 1) + ":\n");
             txaHighScores.append("" + mainMenu.highscores[i]);
-            if(i<4)
-            {
+            if (i < 4) {
                 txaHighScores.append("\n\n");
             }
         }
@@ -146,6 +144,7 @@ public class HighScoreMenu extends javax.swing.JFrame {
 
     /**
      * the user clicking back button
+     *
      * @param evt - button click
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

@@ -9,26 +9,29 @@ package andrewcoledaniel_monopoly;
  * @author dakim0069
  */
 public class EndingScreen extends javax.swing.JFrame {
+
     MainMenu mainMenu;
+
     /**
      * Creates new form EndingScreen
+     *
      * @param numPlayer
      */
     public EndingScreen(MainMenu m, int numPlayer, Player[] players) {
         initComponents();
         mainMenu = m;
         lblResult.setText("Player " + numPlayer + " won!"); // text saying which player won
-        if(players.length == 2){ // if only two players were in the game
+        if (players.length == 2) { // if only two players were in the game
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney())); // sets the text for those two
             lblPlayer2.setText("Player 2: $" + players[1].getMoney());
             lblPlayer3.setVisible(false); // the rest are invisible
             lblPlayer4.setVisible(false);
-        } else if (players.length == 3){ // if three
+        } else if (players.length == 3) { // if three
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
             lblPlayer2.setText(("Player 2: $" + players[1].getMoney()));
             lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
             lblPlayer4.setVisible(false); // makes the fourth text invisible
-        } else{ // if all 4 are playing
+        } else { // if all 4 are playing
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
             lblPlayer2.setText(("Player 2: $" + players[1].getMoney())); // sets all the text
             lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
@@ -129,14 +132,14 @@ public class EndingScreen extends javax.swing.JFrame {
 
     /**
      * when the menu button is clicked
+     *
      * @param evt - clicking the button
      */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         mainMenu.setVisible(true); //set the main menu visible
         this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnMenuActionPerformed
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;

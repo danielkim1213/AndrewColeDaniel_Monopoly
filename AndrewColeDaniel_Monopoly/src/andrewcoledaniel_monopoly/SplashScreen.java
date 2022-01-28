@@ -9,38 +9,33 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
-
-
-
 /**
  *
  * @author dakim0069
  */
 public class SplashScreen extends javax.swing.JFrame {
 
-    public Timer timer; 
-    public MainMenu m; 
-            
+    public Timer timer;
+    public MainMenu m;
+
     /**
      * Creates new form SplashScreen
      */
     public SplashScreen() {
         initComponents();
-        m =  new MainMenu();
+        m = new MainMenu();
     }
-    
+
     /**
      * This method is to set a timer that executes a task every interval
      */
-    private void progressing()
-    {
+    private void progressing() {
         timer = new Timer(); //instantiate timer
         Progressing prg = new Progressing(this); //instantiate Progressing (extends TimerTask)
-        
+
         timer.scheduleAtFixedRate(prg, 10, 40); //every 0.05 sec, do prg - delay 0.1, period 0.4
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,7 +141,7 @@ public class SplashScreen extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -185,29 +180,29 @@ public class SplashScreen extends javax.swing.JFrame {
 }
 
 /**
- * This class is for the task that increases the value of progress bar 
+ * This class is for the task that increases the value of progress bar
  */
 class Progressing extends TimerTask {
+
     private SplashScreen ss;
-    
+
     /**
      * primary constructor
+     *
      * @param ss - the splash screen
      */
-    public Progressing(SplashScreen ss)
-    {
+    public Progressing(SplashScreen ss) {
         this.ss = ss;
     }
-    
+
     /**
      * this method contains the task for every interval
      */
     @Override
-    public void run() 
-    {
-        ss.prgOpening.setValue(ss.prgOpening.getValue()+1); //add 1 to the value of progress bar in the screen
+    public void run() {
+        ss.prgOpening.setValue(ss.prgOpening.getValue() + 1); //add 1 to the value of progress bar in the screen
         ss.lblPercentage.setText(ss.prgOpening.getValue() + "%"); //change the text of the label that shows the percentage
-        if(ss.prgOpening.getValue() >= 100) //if the progress finished
+        if (ss.prgOpening.getValue() >= 100) //if the progress finished
         {
             try {
                 Thread.sleep(300); //wait for 0.3 sec

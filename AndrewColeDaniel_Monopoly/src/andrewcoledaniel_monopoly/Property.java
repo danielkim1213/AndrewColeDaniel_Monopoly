@@ -4,6 +4,7 @@
  * Class that represents a property space on the board
  */
 package andrewcoledaniel_monopoly;
+
 import andrewcoledaniel_monopoly.Space.SpaceType;
 
 /**
@@ -25,10 +26,11 @@ abstract public class Property implements Space {
 
     /**
      * Basic constructor
+     *
      * @param name of the property
      * @param price of the property
      * @param mortgageValue of the property
-     * @param propertyNumber 
+     * @param propertyNumber
      */
     public Property(String name, int price, int mortgageValue, int propertyNumber) {
         this.name = name;
@@ -42,7 +44,8 @@ abstract public class Property implements Space {
 
     /**
      * Acessor
-     * @return name 
+     *
+     * @return name
      */
     @Override
     public String getName() {
@@ -51,6 +54,7 @@ abstract public class Property implements Space {
 
     /**
      * Accessor
+     *
      * @return price
      */
     public int getPrice() {
@@ -59,6 +63,7 @@ abstract public class Property implements Space {
 
     /**
      * Accessor
+     *
      * @return rent
      */
     public int getRent() {
@@ -67,22 +72,25 @@ abstract public class Property implements Space {
 
     /**
      * Accessor
+     *
      * @return property number
      */
     public int getPropertyNumber() {
         return propertyNumber;
     }
-    
+
     /**
      * Accessor
+     *
      * @return if owned or not
      */
     public boolean getOwned() {
         return isOwned;
     }
-    
+
     /**
      * Mutator
+     *
      * @param b sets owned
      */
     public void setOwned(boolean b) {
@@ -92,7 +100,8 @@ abstract public class Property implements Space {
 
     /**
      * Acessor
-     * @return owner 
+     *
+     * @return owner
      */
     public Player getOwner() {
         return owner;
@@ -100,6 +109,7 @@ abstract public class Property implements Space {
 
     /**
      * Mutator
+     *
      * @param p sets owner
      */
     public void setOwner(Player p) {
@@ -108,7 +118,8 @@ abstract public class Property implements Space {
 
     /**
      * Acessor
-     * @return mortage value 
+     *
+     * @return mortage value
      */
     public int getMortgageValue() {
         return mortgageValue;
@@ -116,7 +127,8 @@ abstract public class Property implements Space {
 
     /**
      * Acessor
-     * @return gets mortgage 
+     *
+     * @return gets mortgage
      */
     public boolean getMortgage() {
         return mortgage;
@@ -124,26 +136,28 @@ abstract public class Property implements Space {
 
     /**
      * Mutator
-     * @param m sets the mortage 
+     *
+     * @param m sets the mortage
      */
     public void setMortgage(boolean m) {
         mortgage = m;
     }
-    
+
     /**
      * Acessor
-     * @return space type 
+     *
+     * @return space type
      */
     public SpaceType getPropType() {
         return propType;
     }
 
-    
-     // Abstrat methods
+    // Abstrat methods
     public abstract void updateRent();
-    
+
     /**
      * Return string representation of object
+     *
      * @return string representation of object
      */
     public String toString() {

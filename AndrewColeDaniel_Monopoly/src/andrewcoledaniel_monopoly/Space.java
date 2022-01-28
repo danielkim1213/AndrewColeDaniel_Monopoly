@@ -10,7 +10,7 @@ package andrewcoledaniel_monopoly;
  * @author anfeh1812
  */
 public interface Space {
-    
+
     // enum for types of spaces
     public enum SpaceType {
         SPACE_CORNER,
@@ -25,21 +25,24 @@ public interface Space {
         SPACE_UTILITY,
         SPACE_CARD
     }
-    
+
     /**
      * Get type of space
+     *
      * @return type of space
      */
     public SpaceType getType();
-    
+
     /**
      * Get name of space
+     *
      * @return name of space
      */
     public String getName();
-    
+
     /**
      * Return string representation of Space
+     *
      * @return string representation of Space
      */
     public String toString();

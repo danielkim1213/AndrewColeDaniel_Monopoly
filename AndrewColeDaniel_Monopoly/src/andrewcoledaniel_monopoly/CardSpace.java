@@ -5,7 +5,8 @@
  */
 package andrewcoledaniel_monopoly;
 
-import andrewcoledaniel_monopoly.Card.*;
+import andrewcoledaniel_monopoly.Card.CardAction;
+import andrewcoledaniel_monopoly.Card.CardType;
 
 /**
  *
@@ -19,6 +20,7 @@ public class CardSpace implements Space {
 
     /**
      * Primary constructor, create CardSpace with name and type
+     *
      * @param name name of space
      * @param type type of card space
      */
@@ -30,6 +32,7 @@ public class CardSpace implements Space {
 
     /**
      * Get name of space
+     *
      * @return name of space
      */
     public String getName() {
@@ -38,6 +41,7 @@ public class CardSpace implements Space {
 
     /**
      * Get type of Card
+     *
      * @return card type
      */
     public CardType getCardType() {
@@ -46,6 +50,7 @@ public class CardSpace implements Space {
 
     /**
      * Search for specific card type in card array and return it
+     *
      * @param c Card array
      * @return Card with specific type
      */
@@ -59,9 +64,10 @@ public class CardSpace implements Space {
         // Couldn't find card
         return new Card(CardType.CARD_CHANCE, CardAction.ACTION_GOTO, 0, "Something messed up");
     }
-    
+
     /**
      * Perform action of card
+     *
      * @param c Card
      * @param p Player object
      * @param b Board Object
@@ -132,21 +138,23 @@ public class CardSpace implements Space {
         // Get card description
         return c.getInfo();
     }
-    
+
     /**
      * Get type of space
+     *
      * @return type of space
      */
     public SpaceType getType() {
         return type;
     }
-    
+
     /**
      * Return string representation of object
+     *
      * @return string representation of object
      */
     public String toString() {
-        return "Card Space:\nType: " + name + "\n";  
+        return "Card Space:\nType: " + name + "\n";
     }
 
 }

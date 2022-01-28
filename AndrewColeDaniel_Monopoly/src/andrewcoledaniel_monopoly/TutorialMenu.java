@@ -16,7 +16,9 @@ import javax.swing.ImageIcon;
  * @author dakim0069
  */
 public class TutorialMenu extends javax.swing.JFrame {
+
     private MainMenu mainMenu;
+
     /**
      * Creates new form TutorialMenu
      */
@@ -26,22 +28,21 @@ public class TutorialMenu extends javax.swing.JFrame {
         mainMenu = m;
         programDescription();
     }
-    
+
     /**
      * Load the background image for the window
      */
-    private void background()
-    {
+    private void background() {
         Image img;
-        
+
         // Load image
         URL urlMoney = GameScreen.class.getResource("saves/money.jpg");
         ImageIcon money = new ImageIcon(urlMoney);
         // Set image
         img = money.getImage();
-        money = new ImageIcon(img.getScaledInstance((int)Math.round(lblBackgroundImage.getWidth()*1.2), (int)Math.round(lblBackgroundImage.getHeight()*1.2), Image.SCALE_SMOOTH));
+        money = new ImageIcon(img.getScaledInstance((int) Math.round(lblBackgroundImage.getWidth() * 1.2), (int) Math.round(lblBackgroundImage.getHeight() * 1.2), Image.SCALE_SMOOTH));
         lblBackgroundImage.setIcon(money);
-        
+
         // Load image
         URL urlTutorial = GameScreen.class.getResource("saves/tutorialText.jpg");
         ImageIcon tutorialText = new ImageIcon(urlTutorial);
@@ -54,20 +55,19 @@ public class TutorialMenu extends javax.swing.JFrame {
     /**
      * Set program description
      */
-    private void programDescription()
-    {
+    private void programDescription() {
         txaDescription.setText("");
         InputStream textIn = TutorialMenu.class.getResourceAsStream("saves/Monopoly Description.txt");
         Scanner scan = new Scanner(textIn);
-        
+
         String str;
         // Add description to text area
-        while(scan.hasNextLine())
-        {
+        while (scan.hasNextLine()) {
             str = scan.nextLine();
             txaDescription.append(str + "\n");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,6 +112,7 @@ public class TutorialMenu extends javax.swing.JFrame {
 
     /**
      * if the user click the back button
+     *
      * @param evt button click
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -119,7 +120,6 @@ public class TutorialMenu extends javax.swing.JFrame {
         this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnBackActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

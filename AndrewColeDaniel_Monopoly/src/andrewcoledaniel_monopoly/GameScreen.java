@@ -5,24 +5,25 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.io.*;
-import java.util.*;
-import andrewcoledaniel_monopoly.Card.*;
+import andrewcoledaniel_monopoly.Card.CardAction;
+import andrewcoledaniel_monopoly.Card.CardType;
+import andrewcoledaniel_monopoly.Space.SpaceType;
 import java.awt.Image;
+import java.io.*;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.*;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import andrewcoledaniel_monopoly.Space.SpaceType;
-import andrewcoledaniel_monopoly.Card.CardType;
-import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author dakim0069
  */
 public class GameScreen extends javax.swing.JFrame {
+
     //variables
     MainMenu mainMenu;
     private EndingScreen endingScreen;
@@ -42,7 +43,7 @@ public class GameScreen extends javax.swing.JFrame {
     private Board board;
     private TimerTask tsk;
     DecimalFormat curr = new DecimalFormat("#,##0.00");
-    
+
     public static int[] roll = new int[2];
 
     /**
@@ -83,9 +84,8 @@ public class GameScreen extends javax.swing.JFrame {
      */
     private void diceImage() {
         Image img;
-        
+
         //Since these six image loading are almost same, only one documentation done
-        
         URL url0 = GameScreen.class.getResource("saves/dice1.jpg"); //load URL from the file
         Die[0] = new ImageIcon(url0); //change it to the image icon
         img = Die[0].getImage(); //convert to the image
@@ -116,7 +116,7 @@ public class GameScreen extends javax.swing.JFrame {
         Die[5] = new ImageIcon(url5);
         img = Die[5].getImage();
         Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-        
+
         //set labels icon as Die[0]
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
@@ -124,6 +124,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * getter for Die icon
+     *
      * @param index - die index
      * @return image icon of the die
      */
@@ -133,6 +134,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * Method to check the game mode
+     *
      * @return false or true depending if game is over or not
      */
     private boolean checkGameMode() {
@@ -150,14 +152,14 @@ public class GameScreen extends javax.swing.JFrame {
                     return false;
                 }
             }
-        } else{ // else if infinite turns
+        } else { // else if infinite turns
             int bankruptPlayers = 0;
-            for(int i = 0; i < playerArray.length; i ++){ // loops through player array
-                if(playerArray[i].bankrupt == true){ // if a player is bankrupt
-                    bankruptPlayers ++; // increases the variable
+            for (int i = 0; i < playerArray.length; i++) { // loops through player array
+                if (playerArray[i].bankrupt == true) { // if a player is bankrupt
+                    bankruptPlayers++; // increases the variable
                 }
             }
-            if(bankruptPlayers >= numPlayers - 1){ // if the bankrupt players is greater than or equal to the num players - 1
+            if (bankruptPlayers >= numPlayers - 1) { // if the bankrupt players is greater than or equal to the num players - 1
                 endGame(); // ends game
                 return false;
             }
@@ -172,11 +174,11 @@ public class GameScreen extends javax.swing.JFrame {
         Player winner = new Player(1); // variable for winner
         for (int i = 0; i < playerArray.length; i++) { // loops through the players
             if (playerArray[i].getMoney() > winner.getMoney()) { // gets the one with the highest money
-                winner = playerArray[i]; 
+                winner = playerArray[i];
             }
         }
-        
-        if(winner == playerArray[0]) //if the user is the winner
+
+        if (winner == playerArray[0]) //if the user is the winner
         {
             checkHighscore(winner.getMoney()); //check if it is the highscore
         }
@@ -186,60 +188,60 @@ public class GameScreen extends javax.swing.JFrame {
         this.setVisible(false); // sets this screen to invisble
         endingScreen.setVisible(true); // makes ending screen visible
     }
-    
+
     /**
      * this method check if the current score can be in top5
+     *
      * @param score - current score
      */
-    private void checkHighscore(int score)
-    {
-        if(score < mainMenu.highscores[4]) // if the current score cannot be in top 5
+    private void checkHighscore(int score) {
+        if (score < mainMenu.highscores[4]) // if the current score cannot be in top 5
         {
             return; //return the method
         }
-        int[] newHighScore = new int[6]; //array of 6 
-        for(int i=0; i< 5; i++)//assigning values to newHighScore (including the current score and previous top 5 scores)
+        int[] newHighScore = new int[6]; //array of 6
+        for (int i = 0; i < 5; i++)//assigning values to newHighScore (including the current score and previous top 5 scores)
         {
             newHighScore[i] = mainMenu.highscores[i];
         }
         newHighScore[5] = score; //add current score
         mainMenu.highscores = bubbleSortHighScore(newHighScore); //bubble sort and save the sorted highscores
     }
-    
+
     /**
-     * This sort the highscores by the bubble sort(descending order) and remove the last index.
+     * This sort the highscores by the bubble sort(descending order) and remove
+     * the last index.
+     *
      * @param newHighScore - integer array of length of 6
      * @return sorted array of length of 5
      */
-    private int[] bubbleSortHighScore(int[] newHighScore)
-    {
+    private int[] bubbleSortHighScore(int[] newHighScore) {
         int bottom = newHighScore.length - 1; //set bottom
         boolean sw = true;
         int temp;
-        while (sw) 
-        {
+        while (sw) {
             sw = false;
-            for(int j=0; j< bottom; j++) //compare two elements beside each other
+            for (int j = 0; j < bottom; j++) //compare two elements beside each other
             {
-                if(newHighScore[j] < newHighScore[j+1]) //placing the lowest value at the last -> descending order
+                if (newHighScore[j] < newHighScore[j + 1]) //placing the lowest value at the last -> descending order
                 {
                     //swap
                     temp = newHighScore[j];
-                    newHighScore[j] = newHighScore[j+1];
-                    newHighScore[j+1] = temp;
+                    newHighScore[j] = newHighScore[j + 1];
+                    newHighScore[j + 1] = temp;
                     sw = true;
                 }
             }
-            bottom = bottom -1; //reduce bottom because the lowest value is already sorted at the last
+            bottom = bottom - 1; //reduce bottom because the lowest value is already sorted at the last
         }
         int[] finalHighScore = new int[5]; //new array of length of 5
-        for(int i=0; i<5; i++) //loop 5 times
+        for (int i = 0; i < 5; i++) //loop 5 times
         {
             finalHighScore[i] = newHighScore[i]; //assign first 5 value
         }
         return finalHighScore; // return the sorted value
     }
-    
+
     /**
      * Load cards into array
      */
@@ -271,6 +273,7 @@ public class GameScreen extends javax.swing.JFrame {
         // Shuffle cards array
         board.shuffleCards(cards);
     }
+
     /**
      * Method to generate players
      */
@@ -282,9 +285,10 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * Method for the players turn
+     *
      * @param p player
      * @param turn the number of rolls they have done
-     * @return 
+     * @return
      */
     private boolean playerTurn(Player p, int turn) {
         int response;
@@ -312,7 +316,7 @@ public class GameScreen extends javax.swing.JFrame {
                     if (((Rolling) tsk).isDoubleDice()) { // checks to see if the dice are the same
                         JOptionPane.showMessageDialog(null, "You rolled doubles. Get out of jail.");
                         p.setJail(false); // if they are disables jail
-                        p.setPosition(10 + moves); // moves 
+                        p.setPosition(10 + moves); // moves
                         updateLocations(); // uptdates location
                     } else {
                         JOptionPane.showMessageDialog(null, "You didn't roll doubles. Stay in jail"); // outputs that you ddint roll doubles
@@ -353,8 +357,9 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * Method for the computer turn
+     *
      * @param p
-     * @param turn 
+     * @param turn
      */
     private void computerTurn(Player p, int turn) {
 
@@ -364,14 +369,14 @@ public class GameScreen extends javax.swing.JFrame {
         }
 
         new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        stopRolling();
-                    }
-                }, 
-                1500 
-            ); 
-        
+            @Override
+            public void run() {
+                stopRolling();
+            }
+        },
+                1500
+        );
+
         JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn"); // outputs that its this players turn
         if (p.getJail()) { // checks if they are in jail
             if (p.getJailCards() < 0) {
@@ -411,6 +416,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * Handle a player landing on a space
+     *
      * @param s Space object
      * @param p Player object
      */
@@ -426,30 +432,31 @@ public class GameScreen extends javax.swing.JFrame {
                 break;
             // If property space, perform property action
             case SPACE_PROPERTY:
-                handleProperty((Property)s, p);
+                handleProperty((Property) s, p);
                 break;
             // If card space
             case SPACE_CARD:
                 // Draw card
-                 Card c = ((CardSpace)s).getCard(cards);
-                 // Shuffle cards
-                 board.shuffleCards(cards);
-                 // Perform card action
-                 String out = ((CardSpace)s).performSpaceAction(c, p, board, playerArray);
-                 updateLocations();
-                 // Show card information
-                 JOptionPane.showMessageDialog(null, out);
-                 // Check new space and handle it accordingly
-                 if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
-                     handleProperty((Property)board.getSpace(p.getPosition()), p);
-                 } else if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_CORNER) {
-                     ((CornerSpace)board.getSpace(p.getPosition())).performSpaceAction(p);
-                 }
+                Card c = ((CardSpace) s).getCard(cards);
+                // Shuffle cards
+                board.shuffleCards(cards);
+                // Perform card action
+                String out = ((CardSpace) s).performSpaceAction(c, p, board, playerArray);
+                updateLocations();
+                // Show card information
+                JOptionPane.showMessageDialog(null, out);
+                // Check new space and handle it accordingly
+                if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
+                    handleProperty((Property) board.getSpace(p.getPosition()), p);
+                } else if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_CORNER) {
+                    ((CornerSpace) board.getSpace(p.getPosition())).performSpaceAction(p);
+                }
         }
     }
 
     /**
      * Handle when a player lands on a property space
+     *
      * @param prop Property space
      * @param p Player object
      */
@@ -464,21 +471,21 @@ public class GameScreen extends javax.swing.JFrame {
                 if (option == 0) {
                     p.buyProperty(prop);
                     prop.setOwned(true);
-                // If not, auction it off
+                    // If not, auction it off
                 } else {
                     auction(prop);
                 }
-            // If property is owned and not mortgaged
+                // If property is owned and not mortgaged
             } else {
-                if(!prop.mortgage){
+                if (!prop.mortgage) {
                     // Pay rent on property
-                JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
-                prop.updateRent();
-                p.removeMoney(prop.getRent());
-                prop.getOwner().addMoney(prop.getRent());
+                    JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
+                    prop.updateRent();
+                    p.removeMoney(prop.getRent());
+                    prop.getOwner().addMoney(prop.getRent());
                 }
             }
-        // If not a human player
+            // If not a human player
         } else {
             // if not owned
             if (!prop.getOwned()) {
@@ -494,13 +501,13 @@ public class GameScreen extends javax.swing.JFrame {
                     // Auction off property
                     auction(prop);
                 }
-            // if owned and not mortgaged
+                // if owned and not mortgaged
             } else {
-                if(!prop.mortgage){
+                if (!prop.mortgage) {
                     // Pay rent on property
-                JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
-                p.removeMoney(prop.getRent());
-                prop.getOwner().addMoney(prop.getRent());
+                    JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
+                    p.removeMoney(prop.getRent());
+                    prop.getOwner().addMoney(prop.getRent());
                 }
             }
         }
@@ -508,6 +515,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * Handle an auction on a Property
+     *
      * @param p Property object
      */
     private void auction(Property p) {
@@ -539,7 +547,7 @@ public class GameScreen extends javax.swing.JFrame {
                     bought = true;
                     break;
                 }
-                
+
                 response = -1;
                 // If human player
                 if (players.get(i).getPlayerNumber() == 1) {
@@ -552,11 +560,11 @@ public class GameScreen extends javax.swing.JFrame {
                             if (response == 0) {
                                 toRemove.add(players.get(i));
                                 JOptionPane.showMessageDialog(null, "Player 1 left the auction");
-                            // if their bid is less than the current bid
+                                // if their bid is less than the current bid
                             } else if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
                                 response = -1;
-                            // if their bid is greater than their current amount of money
+                                // if their bid is greater than their current amount of money
                             } else if (response > players.get(i).getMoney()) {
                                 JOptionPane.showMessageDialog(null, "Please bid an amount of money that you have.");
                                 response = -1;
@@ -569,22 +577,22 @@ public class GameScreen extends javax.swing.JFrame {
                     // Store their bid as the current one
                     currentBid = response;
                     lastBidder = players.get(i);
-                // If CPU player
+                    // If CPU player
                 } else {
                     // Calculate a random bid for the CPU
-                    response = currentBid + (int)(Math.random() * 20) + 10;
-                        
+                    response = currentBid + (int) (Math.random() * 20) + 10;
+
                     try { // sleep for a little bit
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         JOptionPane.showMessageDialog(null, "Thread.sleep method error");
                     }
-                        
+
                     // If their bid is within $50 of their money or it's above a bidding threshold, leave auction
                     if (response + 50 > players.get(i).getMoney() || response > p.getPrice() * 1.5) {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " left the auction");
                         toRemove.add(players.get(i));
-                    // Bid on property and set bid to the current bid
+                        // Bid on property and set bid to the current bid
                     } else {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(response));
                         currentBid = response;
@@ -597,7 +605,7 @@ public class GameScreen extends javax.swing.JFrame {
                 players.remove(x);
             }
         }
-        
+
         // Announce the winner
         JOptionPane.showMessageDialog(null, "Player " + lastBidder.getPlayerNumber() + " purchased the property for $" + curr.format(currentBid));
         // Player buys property for amount
@@ -611,7 +619,7 @@ public class GameScreen extends javax.swing.JFrame {
     private void rollDice() {
         tsk = new Rolling(this); //instantiate Rolling class object
         timerRoll = new Timer(); //new timer
-        timerRoll.scheduleAtFixedRate(tsk, 125, 145); // run tsk every inteval 
+        timerRoll.scheduleAtFixedRate(tsk, 125, 145); // run tsk every inteval
     }
 
     /**
@@ -630,7 +638,7 @@ public class GameScreen extends javax.swing.JFrame {
         lblDiceSum.setText("Moves: " + moves); //change the moves text
         stopRoll = false; //set stopRoll false again for the next dice roll
     }
-    
+
     /**
      * Method to update the proerties text area
      */
@@ -646,18 +654,18 @@ public class GameScreen extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * this method is to update the player's location
      */
     private void updateLocations() {
         lblPlayer1.setText("Player " + 1 + ": " + board.getSpace(playerArray[0].getPosition()).getName()); //player 1
         lblPlayer2.setText("Player " + 2 + ": " + board.getSpace(playerArray[1].getPosition()).getName()); //player 2
-        if(numPlayers >= 3){ //only when there are more or equal than three players
-        lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName()); //player3
+        if (numPlayers >= 3) { //only when there are more or equal than three players
+            lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName()); //player3
         }
-        if (numPlayers == 4){ //only when there are four players
-        lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName()); //player4
+        if (numPlayers == 4) { //only when there are four players
+            lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName()); //player4
         }
     }
 
@@ -1595,6 +1603,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the menu button
+     *
      * @param evt - click the button
      */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -1606,6 +1615,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the buy house button
+     *
      * @param evt - click the button
      */
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
@@ -1622,26 +1632,26 @@ public class GameScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You do not own " + prop); // output that you dont own it
             return;
         }
-        Property p = ((Property)playerArray[0].getProperties().get(propNum));
+        Property p = ((Property) playerArray[0].getProperties().get(propNum));
         if (p.getPropType() != SpaceType.SPACE_DEED) { // if the property is nto a deed
             JOptionPane.showMessageDialog(null, "You cannot purchase a house on this property."); // you cant build a house on this
             return;
         }
-        Deed d = (Deed)p; // variable to hold the deed
+        Deed d = (Deed) p; // variable to hold the deed
         if (d.getHouses() == 4) { // if there are 4 houses
-            if(d.getHotel() == false){ // and there is no hotel
-            if (JOptionPane.showConfirmDialog(null, "You already have 4 houses on this property. Would you like to buy a hotel instead?", "Buy Hotel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                if (playerArray[0].getMoney() < d.getHouseCost()) { // if the user doesnt have neough money
-                    JOptionPane.showMessageDialog(null, "You don't have enough money."); // output they dont have enough
-                } else {
-                    d.buyHotel(); // else buy the hotel
-                    playerArray[0].removeMoney(d.getHouseCost()); // remove the cost
-                }
-                return;
+            if (d.getHotel() == false) { // and there is no hotel
+                if (JOptionPane.showConfirmDialog(null, "You already have 4 houses on this property. Would you like to buy a hotel instead?", "Buy Hotel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (playerArray[0].getMoney() < d.getHouseCost()) { // if the user doesnt have neough money
+                        JOptionPane.showMessageDialog(null, "You don't have enough money."); // output they dont have enough
+                    } else {
+                        d.buyHotel(); // else buy the hotel
+                        playerArray[0].removeMoney(d.getHouseCost()); // remove the cost
+                    }
+                    return;
                 }
             }
         }
-        try{ // try a conversion from string to integer
+        try { // try a conversion from string to integer
             int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
             // input for number of houses purchased
             if (houses + d.getHouses() > 4) { //if there ar more than 4 houses
@@ -1650,10 +1660,10 @@ public class GameScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses."); // outputs error
             } else {
                 d.buyHouse(houses); // esle buys the houses
-                JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost())); 
+                JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
                 // outputs how much it costed
             }
-        }catch(NumberFormatException e) // if integer not inputted
+        } catch (NumberFormatException e) // if integer not inputted
         {
             JOptionPane.showMessageDialog(null, "Wrong format."); // outputs error
         }
@@ -1662,10 +1672,11 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the save button
+     *
      * @param evt - click the button
      */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String path = "";  
+        String path = "";
         JFileChooser fileChooser = new JFileChooser(); //instantiate the JFileChooser
         try {
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -1694,6 +1705,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the sell house button
+     *
      * @param evt - click the button
      */
     private void btnSellHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellHouseActionPerformed
@@ -1713,7 +1725,7 @@ public class GameScreen extends javax.swing.JFrame {
         Property p = ((Property) playerArray[0].getProperties().get(propNum)); // creates a variable to hold the property
         if (p.getPropType() != SpaceType.SPACE_DEED) { // checks to see if it is a deed or not
             JOptionPane.showMessageDialog(null, "This property cannot have houses property."); // if its not a deed it cant have a house
-            return; 
+            return;
         }
         Deed d = (Deed) p; // makes a deed varialbe to hold the property
         if (d.getHouses() == 0) { // if the property has no houses
@@ -1733,41 +1745,42 @@ public class GameScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "You don't have that many houses"); // outputs that you dont have that many houses
                 } else {
                     for (int i = 0; i < amountToSell; i++) { // loops the amount of times that was inputted
-                        d.sellHouse(); // sells house 
+                        d.sellHouse(); // sells house
                         playerArray[0].addMoney(d.getHouseCost() / 2); // adds money
-                     }
+                    }
                 }
             }
         }
-        if(playerArray[0].bankrupt == false){ // if player was bankrupt they no longer are
+        if (playerArray[0].bankrupt == false) { // if player was bankrupt they no longer are
             btnRollDice.setEnabled(true);
         }
         updateProperties(); // updates the properties text field
     }//GEN-LAST:event_btnSellHouseActionPerformed
 
-
     /**
      * Method to bankrupt a computer player
+     *
      * @param c computer player
      */
-    private void bankruptComputer(Player c){
+    private void bankruptComputer(Player c) {
         c.setMoney(0); //sets money to 0
-        ArrayList<Property> bankruptP = c.getProperties(); // 
-        for(int i = 0; i < bankruptP.size(); i ++){ // loops through the array
+        ArrayList<Property> bankruptP = c.getProperties(); //
+        for (int i = 0; i < bankruptP.size(); i++) { // loops through the array
             bankruptP.get(i).setOwned(false); // sets all the properties as unowned
             c.removeProperties(); // removes all the properties from the player
         }
     }
-    
+
     /**
      * Method to make a computer buy a house
+     *
      * @param c computer player
      */
     private void buyHouseComputer(Player c) {
         if (!c.getProperties().isEmpty()) { // checks to see if the player owns a property
             ArrayList<Property> buyHouse = c.getProperties(); // gets the properties
             int randomProp = (int) (Math.random() * buyHouse.size()); // makes random number between 0 and the array size
-            if (randomProp >= 1) { // if it is above 1 
+            if (randomProp >= 1) { // if it is above 1
                 randomProp -= 1; // removes 1
             }
             if (buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED) { // if the property is a deed
@@ -1776,9 +1789,10 @@ public class GameScreen extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * if the user click roll dice button
+     *
      * @param evt - clicking the button
      */
     private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
@@ -1795,6 +1809,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the end turn button
+     *
      * @param evt - clicking the button
      */
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
@@ -1804,7 +1819,7 @@ public class GameScreen extends javax.swing.JFrame {
                 computerTurn(playerArray[i], 0); //adds to the computer turn
                 updateProperties(); // updates the properties
                 int random = (int) (Math.random() * 10); // makes a random number
-                if(random < 5 && playerArray[i].getMoney() > 300){ // 50% chance for the computer to buy a house
+                if (random < 5 && playerArray[i].getMoney() > 300) { // 50% chance for the computer to buy a house
                     buyHouseComputer(playerArray[i]);
                 }
                 if (playerArray[i].bankrupt == true) { // if the computer is bankrupt
@@ -1825,6 +1840,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     /**
      * if the user click the mortgage button
+     *
      * @param evt - clicking the button
      */
     private void btnMortgageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgageActionPerformed
@@ -1840,20 +1856,20 @@ public class GameScreen extends javax.swing.JFrame {
         }
         Property p = ((Property) playerArray[0].getProperties().get(propNum)); // variable to change the property into a deed
         Deed d = (Deed) p; // deed varialbe to hold the property
-        if(d.getMortgage() == true){ // if the property is mortagaged already
+        if (d.getMortgage() == true) { // if the property is mortagaged already
             String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgageValue() + " Y or N");
-            if(input.equalsIgnoreCase("Y")){ // asks if they want to unmortgage it
+            if (input.equalsIgnoreCase("Y")) { // asks if they want to unmortgage it
                 d.setMortgage(false); // sets mortage to false
                 playerArray[0].removeMoney(d.getMortgageValue()); // takes away money
             }
-        } else{ // asks if they want to mortgage it
+        } else { // asks if they want to mortgage it
             String input = JOptionPane.showInputDialog("Would you like to mortgage this property worth $" + d.getMortgageValue() + " Y or N");
-            if(input.equalsIgnoreCase("Y")){ // if yes
+            if (input.equalsIgnoreCase("Y")) { // if yes
                 d.setMortgage(true); // sets mortgage to true
                 playerArray[0].addMoney(d.getMortgageValue()); // adds money
             }
         }
-        if(playerArray[0].bankrupt == false){ // if player is no longer bankrupt
+        if (playerArray[0].bankrupt == false) { // if player is no longer bankrupt
             btnRollDice.setEnabled(true); // enables the dice roll button
         }
         updateProperties(); // uptdates the properties text area
@@ -1988,11 +2004,11 @@ class GameMusic implements Runnable {
     @Override
     public void run() {
         try {
-            gameSong = AudioSystem.getClip(); 
+            gameSong = AudioSystem.getClip();
             InputStream bufferedIn = new BufferedInputStream(MainMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
             //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
             AudioInputStream inputBgm = AudioSystem.getAudioInputStream(bufferedIn); //get music from the file
-            gameSong.open(inputBgm); 
+            gameSong.open(inputBgm);
             gameSong.loop(Clip.LOOP_CONTINUOUSLY); //loop infinitely
             gameSong.start(); //start the music
 
@@ -2010,7 +2026,8 @@ class GameMusic implements Runnable {
 }
 
 /**
- * Rolling class which is a subclass of TimerTask class. This is for rolling the dice.
+ * Rolling class which is a subclass of TimerTask class. This is for rolling the
+ * dice.
  */
 class Rolling extends TimerTask {
 
@@ -2021,6 +2038,7 @@ class Rolling extends TimerTask {
 
     /**
      * primary constructor
+     *
      * @param gameScreen - Game Screen
      */
     public Rolling(GameScreen gameScreen) {
@@ -2040,17 +2058,17 @@ class Rolling extends TimerTask {
         }
         dice1 = (int) (Math.random() * 6); //choose the random number between 1-6
         dice2 = (int) (Math.random() * 6); //choose the random number between 1-6
-        
+
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
     }
 
     /**
      * check if the dice is double
+     *
      * @return - boolean value whether or not die1 and die2 have the same value
      */
-    public boolean isDoubleDice()
-    {
+    public boolean isDoubleDice() {
         return dice1 == dice2;
     }
 
