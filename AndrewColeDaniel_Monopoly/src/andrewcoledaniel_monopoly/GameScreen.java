@@ -28,7 +28,7 @@ import javax.swing.JFileChooser;
  * @author dakim0069
  */
 public class GameScreen extends javax.swing.JFrame {
-
+    //variables
     MainMenu mainMenu;
     private EndingScreen endingScreen;
     private static Card[] cards = new Card[32];
@@ -83,42 +83,55 @@ public class GameScreen extends javax.swing.JFrame {
         this.playerArray = playerArray;
     }
 
+    /**
+     * this method loads the dice images
+     */
     private void diceImage() {
         Image img;
-        URL url0 = GameScreen.class.getResource("saves/dice1.jpg");
-        Die[0] = new ImageIcon(url0);
-        img = Die[0].getImage();
-        Die[0] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
+        
+        //Since these six image loading are almost same, only one documentation done
+        
+        URL url0 = GameScreen.class.getResource("saves/dice1.jpg"); //load URL from the file
+        Die[0] = new ImageIcon(url0); //change it to the image icon
+        img = Die[0].getImage(); //convert to the image
+        Die[0] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_SMOOTH));  //adjust the dice icon size as the label
 
+        //same process with Die[0]
         URL url1 = GameScreen.class.getResource("saves/dice2.jpg");
         Die[1] = new ImageIcon(url1);
         img = Die[1].getImage();
-        Die[1] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-
+        Die[1] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_SMOOTH));
+        //same process with Die[0]
         URL url2 = GameScreen.class.getResource("saves/dice3.jpg");
         Die[2] = new ImageIcon(url2);
         img = Die[2].getImage();
-        Die[2] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-
+        Die[2] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_SMOOTH));
+        //same process with Die[0]
         URL url3 = GameScreen.class.getResource("saves/dice4.jpg");
         Die[3] = new ImageIcon(url3);
         img = Die[3].getImage();
-        Die[3] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-
+        Die[3] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_SMOOTH));
+        //same process with Die[0]
         URL url4 = GameScreen.class.getResource("saves/dice5.jpg");
         Die[4] = new ImageIcon(url4);
         img = Die[4].getImage();
         Die[4] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-
+        //same process with Die[0]
         URL url5 = GameScreen.class.getResource("saves/dice6.jpg");
         Die[5] = new ImageIcon(url5);
         img = Die[5].getImage();
         Die[5] = new ImageIcon(img.getScaledInstance(lblDie1.getWidth(), lblDie1.getHeight(), Image.SCALE_FAST));
-
+        
+        //set labels icon as Die[0]
         lblDie1.setIcon(Die[0]);
         lblDie2.setIcon(Die[0]);
     }
 
+    /**
+     * getter for Die icon
+     * @param index - die index
+     * @return image icon of the die
+     */
     public ImageIcon getDiceImage(int index) {
         return Die[index];
     }
