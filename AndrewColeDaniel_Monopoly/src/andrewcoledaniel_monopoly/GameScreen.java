@@ -469,8 +469,13 @@ public class GameScreen extends javax.swing.JFrame {
                 option = JOptionPane.showConfirmDialog(null, ((Space) prop).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
                 // If user wants to buy property
                 if (option == 0) {
+                    if(p.getMoney() > prop.price){
                     p.buyProperty(prop);
                     prop.setOwned(true);
+                    return;
+                    }
+                    JOptionPane.showMessageDialog(null, "You don't have enough money");
+                    auction(prop);
                     // If not, auction it off
                 } else {
                     auction(prop);
@@ -1857,18 +1862,17 @@ public class GameScreen extends javax.swing.JFrame {
             return;
         }
         Property p = ((Property) playerArray[0].getProperties().get(propNum)); // variable to change the property into a deed
-        Deed d = (Deed) p; // deed varialbe to hold the property
-        if (d.getMortgage() == true) { // if the property is mortagaged already
-            String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgageValue() + " Y or N");
+        if (p.getMortgage() == true) { // if the property is mortagaged already
+            String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + p.getMortgageValue() + " Y or N");
             if (input.equalsIgnoreCase("Y")) { // asks if they want to unmortgage it
-                d.setMortgage(false); // sets mortage to false
-                playerArray[0].removeMoney(d.getMortgageValue()); // takes away money
+                p.setMortgage(false); // sets mortage to false
+                playerArray[0].removeMoney(p.getMortgageValue()); // takes away money
             }
         } else { // asks if they want to mortgage it
-            String input = JOptionPane.showInputDialog("Would you like to mortgage this property worth $" + d.getMortgageValue() + " Y or N");
+            String input = JOptionPane.showInputDialog("Would you like to mortgage this property worth $" + p.getMortgageValue() + " Y or N");
             if (input.equalsIgnoreCase("Y")) { // if yes
-                d.setMortgage(true); // sets mortgage to true
-                playerArray[0].addMoney(d.getMortgageValue()); // adds money
+                p.setMortgage(true); // sets mortgage to true
+                playerArray[0].addMoney(p.getMortgageValue()); // adds money
             }
         }
         if (playerArray[0].bankrupt == false) { // if player is no longer bankrupt
