@@ -409,25 +409,41 @@ public class GameScreen extends javax.swing.JFrame {
         updateProperties(); // updates properties
     }
 
+    /**
+     * Handle a player landing on a space
+     * @param s Space object
+     * @param p Player object
+     */
     private void handleSpace(Space s, Player p) {
+        // Get type of space
         SpaceType st = s.getType();
         JOptionPane.showMessageDialog(null, "You landed on: " + s.getName());
         switch (st) {
+            // If corner space, perform corner action
             case SPACE_CORNER:
                 ((CornerSpace) s).performSpaceAction(p);
                 updateLocations();
                 break;
+            // If property space, perform property action
             case SPACE_PROPERTY:
                 handleProperty((Property)s, p);
                 break;
+            // If card space
             case SPACE_CARD:
+                // Draw card
                  Card c = ((CardSpace)s).getCard(cards);
+                 // Shuffle cards
                  board.shuffleCards(cards);
+                 // Perform card action
                  String out = ((CardSpace)s).performSpaceAction(c, p, board, playerArray);
                  updateLocations();
+                 // Show card information
                  JOptionPane.showMessageDialog(null, out);
+                 // Check new space and handle it accordingly
                  if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_PROPERTY) {
                      handleProperty((Property)board.getSpace(p.getPosition()), p);
+                 } else if (board.getSpace(p.getPosition()).getType() == SpaceType.SPACE_CORNER) {
+                     ((CornerSpace)board.getSpace(p.getPosition())).performSpaceAction(p);
                  }
         }
     }
@@ -1973,8 +1989,9 @@ class GameMusic implements Runnable {
     public void run() {
         try {
             gameSong = AudioSystem.getClip(); 
+            InputStream bufferedIn = new BufferedInputStream(MainMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
             //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
-            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav")); //get music from the file
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(bufferedIn); //get music from the file
             gameSong.open(inputBgm); 
             gameSong.loop(Clip.LOOP_CONTINUOUSLY); //loop infinitely
             gameSong.start(); //start the music

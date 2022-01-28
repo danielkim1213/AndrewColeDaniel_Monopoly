@@ -7,9 +7,11 @@ package andrewcoledaniel_monopoly;
 
 
 import java.awt.Image;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import javax.sound.sampled.*;
@@ -63,7 +65,7 @@ public class MainMenu extends javax.swing.JFrame {
         Image img;
         
         //Title image
-        URL urlMonopoly = GameScreen.class.getResource("saves/MonoPoly.png"); //load from file
+        URL urlMonopoly = GameScreen.class.getResource("saves/monopoly.png"); //load from file
         ImageIcon mply = new ImageIcon(urlMonopoly); //make an image icon
         img = mply.getImage(); //change to image
         mply = new ImageIcon(img.getScaledInstance(lblTitle.getWidth(), lblTitle.getHeight(), Image.SCALE_SMOOTH)); //modify image size to make it fit in the component
@@ -345,8 +347,9 @@ class MainMusic implements Runnable {
     {
         try{
             mainSong = AudioSystem.getClip();
+            InputStream bufferedIn = new BufferedInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));
             //Dubby Jinglefunk's Not So Silent Night by Speck (c) copyright 2021 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/speck/64503 Ft: Admiral Bob, Martijn de Boer, airtone, Carosone
-            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(MainMusic.class.getResourceAsStream("saves/Dubby_Jinglefunk.wav"));   //get music from the file
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(bufferedIn);   //get music from the file
             mainSong.open(inputBgm);  //set mainSong as the music saved in the file
             mainSong.loop(Clip.LOOP_CONTINUOUSLY); //loop the music infinitely
             this.musicOn(); //turn on the music
