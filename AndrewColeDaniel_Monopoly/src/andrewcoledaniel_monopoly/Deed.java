@@ -88,8 +88,10 @@ public class Deed extends Property {
     public void updateRent() {
         if (hotel == true) {
             rent = originalRent * houses * 50;
-        } else {
+        } else if(houses >= 1){
             rent = originalRent * houses;
+        } else{
+            rent = originalRent;
         }
     }
 

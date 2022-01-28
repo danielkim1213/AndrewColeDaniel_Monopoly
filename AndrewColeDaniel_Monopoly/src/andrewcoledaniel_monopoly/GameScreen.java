@@ -43,7 +43,7 @@ public class GameScreen extends javax.swing.JFrame {
     private ArrayList propertyArray = new ArrayList();
     private Player[] playerArray;
     public Timer timerRoll;
-    public int moves;
+    public static int moves;
     private Board board;
     private TimerTask tsk;
     DecimalFormat curr = new DecimalFormat("#,##0.00");
@@ -142,7 +142,7 @@ public class GameScreen extends javax.swing.JFrame {
         } else{
             int bankruptPlayers = 0;
             for(int i = 0; i < playerArray.length; i ++){
-                if(playerArray[i].bankrupt == false){
+                if(playerArray[i].bankrupt == true){
                     bankruptPlayers ++;
                 }
             }
@@ -323,6 +323,7 @@ public class GameScreen extends javax.swing.JFrame {
             int newPos;
             int diceRoll = (int) (Math.random() * 6) + 1;
             int diceRoll2 = (int) (Math.random() * 6) + 1;
+            moves = diceRoll + diceRoll2;
             newPos = p.getPosition() + diceRoll + diceRoll2;
             if (newPos >= 40) {
                 p.addMoney(200);
@@ -1619,15 +1620,17 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
     
-    private void buyHouseComputer(Player c){
-        ArrayList<Property> buyHouse = c.getProperties();
-        int randomProp = (int) (Math.random() * buyHouse.size());
-        if(randomProp > 1){
-            randomProp -= 1;
-        }
-        if(buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED){
-            Deed d = (Deed)buyHouse.get(randomProp);
-            d.buyHouse(1);
+    private void buyHouseComputer(Player c) {
+        if (!c.getProperties().isEmpty()) {
+            ArrayList<Property> buyHouse = c.getProperties();
+            int randomProp = (int) (Math.random() * buyHouse.size());
+            if (randomProp >= 1) {
+                randomProp -= 1;
+            }
+            if (buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED) {
+                Deed d = (Deed) buyHouse.get(randomProp);
+                d.buyHouse(1);
+            }
         }
     }
     

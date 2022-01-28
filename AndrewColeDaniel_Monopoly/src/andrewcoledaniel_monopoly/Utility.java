@@ -18,9 +18,9 @@ public class Utility extends Property {
 
     public void updateRent() {
         if (this.getOwner().getUtilities() == 1) {
-            //rent = diceRoll * 4;
+            rent = GameScreen.moves * 4;
         } else if (this.getOwner().getUtilities() == 2) {
-            //rent = diceRoll * 10;
+            rent = GameScreen.moves * 10;
         }
     }
 
