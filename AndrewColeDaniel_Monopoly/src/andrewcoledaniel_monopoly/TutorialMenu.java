@@ -5,7 +5,6 @@
  */
 package andrewcoledaniel_monopoly;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.io.InputStream;
 import java.net.URL;
@@ -111,9 +110,13 @@ public class TutorialMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * if the user click the back button
+     * @param evt button click
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        mainMenu.setVisible(true);
-        this.setVisible(false);
+        mainMenu.setVisible(true); //set the main menu visible
+        this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnBackActionPerformed
 
     
