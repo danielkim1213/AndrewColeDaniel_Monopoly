@@ -1852,10 +1852,16 @@ public class GameScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * This class is to turn the background music of the game screen
+ */
 class GameMusic implements Runnable {
 
     private Clip gameSong;
 
+    /**
+     * run this method in a thread
+     */
     @Override
     public void run() {
         try {
@@ -1871,11 +1877,17 @@ class GameMusic implements Runnable {
         }
     }
 
+    /**
+     * turn the music off
+     */
     public void musicOff() {
         gameSong.stop();
     }
 }
 
+/**
+ * Rolling class which is a subclass of TimerTask class. This is for rolling the dice.
+ */
 class Rolling extends TimerTask {
 
     private int sum = 0;
@@ -1883,26 +1895,36 @@ class Rolling extends TimerTask {
     int dice1;
     int dice2;
 
+    /**
+     * primary constructor
+     * @param gameScreen - Game Screen
+     */
     public Rolling(GameScreen gameScreen) {
         gs = gameScreen;
     }
 
+    /**
+     * process for every interval of the timer
+     */
     @Override
     public void run() {
-        if (gs.stopRoll) {
-            sum = dice1 + dice2 + 2;
+        if (gs.stopRoll) { //it stops rolling when the user stopRoll boolean variable becomes true
+            sum = dice1 + dice2 + 2; //calculate the sum
             gs.moves = sum;
-            gs.timerRoll.cancel();
+            gs.timerRoll.cancel(); //stop the timer
             return;
         }
-        dice1 = (int) (Math.random() * 6);
-        dice2 = (int) (Math.random() * 6);
+        dice1 = (int) (Math.random() * 6); //choose the random number between 1-6
+        dice2 = (int) (Math.random() * 6); //choose the random number between 1-6
         
         gs.lblDie1.setIcon(gs.getDiceImage(dice1));
         gs.lblDie2.setIcon(gs.getDiceImage(dice2));
     }
 
-    
+    /**
+     * check if the dice is double
+     * @return - boolean value whether or not die1 and die2 have the same value
+     */
     public boolean isDoubleDice()
     {
         return dice1 == dice2;
