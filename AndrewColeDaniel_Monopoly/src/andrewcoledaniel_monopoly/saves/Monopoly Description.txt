@@ -9,3 +9,23 @@ This monopoly program supports three modes: limited turn, limited time and infin
 If you completed setting the mode, you can determine how many CPU player do you want to play with.
 After selecting it, you are all ready to play a monopoly game!
 
+Moving in Monopoly is easy. 
+You just have to roll the two dice and it will automatically move as much as the sum of the dice. 
+If it is your turn, click “Roll dice” to move. Then, you can stop it whenever you want. 
+
+After you move to a tile, you will be asked to buy or open an auction for the tile. 
+You also can participate in the auction!
+
+You can manage your properties only when it is your turn. 
+There are three options to manage your properties: buy house, sell house, and mortgage.
+
+Mortgage function allows you to mortgage the property. 
+It gives you money (half the price of the tile) when you mortgage it, 
+but the tile will be deactivated which means other players do not have to pay for landing the tile. 
+You can unmortgage the mortgaged tile when you have enough money to unmortgage.
+
+If you or the other player lands on the tile where no one owns it, the person one the tile can choose to open an auction. 
+The bid starts with $0, and players can increase the bid. If you want to leave the auction, enter 0.
+If you win the auction, the property is yours!
+
+When the game ends, it will show the result of the game!
