@@ -834,6 +834,11 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
@@ -1880,6 +1885,10 @@ public class GameScreen extends javax.swing.JFrame {
         }
         updateProperties(); // uptdates the properties text area
     }//GEN-LAST:event_btnMortgageActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        updateProperties();
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Tile1;

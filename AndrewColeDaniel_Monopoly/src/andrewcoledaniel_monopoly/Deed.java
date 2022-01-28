@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author anfeh1812
  */
-public class Deed extends Property implements Serializable{
+public class Deed extends Property implements Serializable {
 
     private int houses;
     private int houseCost;
@@ -19,7 +19,18 @@ public class Deed extends Property implements Serializable{
     private int originalRent;
 
     /**
-     * Default constructor
+     * primary constructor
+     * @param name of the deed
+     * @param price of the deed
+     * @param mortgageValue of the deed
+     * @param propertyNumber number of the property
+     */
+    public Deed(String name, int price, int mortgageValue, int propertyNumber)
+    {
+        super(name, price, mortgageValue, propertyNumber);
+    }
+    /**
+     * secondary constructor
      *
      * @param name of the deed
      * @param price of the deed
@@ -79,7 +90,7 @@ public class Deed extends Property implements Serializable{
     }
 
     /**
-     * Behaviour buys a hoel
+     * Behaviour buys a hotel
      *
      * @return true or false
      */

@@ -227,7 +227,7 @@ public class MainMenu extends javax.swing.JFrame {
             int gameMode = s.readInt(); //read gameMode
             int currentTurn = s.readInt(); //read current Turn
             int numPlayers = s.readInt(); //read the number of players
-            Player[] playerArray = (Player[]) s.readObject(); //read the Player objects
+            Player[] playerArray = (Player[])(s.readObject()); //read the Player objects
             mainBgm.musicOff(); //turn off the music
             gameScreen = new GameScreen(this, gameMode, currentTurn, numPlayers, playerArray); //instantiate GameScreen with the values read
             gameScreen.setVisible(true); //make the game screen visible

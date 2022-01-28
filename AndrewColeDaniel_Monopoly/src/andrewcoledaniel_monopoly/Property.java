@@ -6,12 +6,13 @@
 package andrewcoledaniel_monopoly;
 
 import andrewcoledaniel_monopoly.Space.SpaceType;
+import java.io.Serializable;
 
 /**
  *
  * @author anfeh1812
  */
-abstract public class Property implements Space {
+abstract public class Property implements Space, Serializable{
 
     protected String name;
     protected int price;
