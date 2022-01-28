@@ -358,7 +358,7 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void handleSpace(Space s, Player p) {
         SpaceType st = s.getType();
-        JOptionPane.showMessageDialog(null, s.getName());
+        JOptionPane.showMessageDialog(null, "You landed on: " + s.getName());
         switch (st) {
             case SPACE_CORNER:
                 ((CornerSpace) s).performSpaceAction(p);
@@ -422,9 +422,9 @@ public class GameScreen extends javax.swing.JFrame {
         boolean bought = false;
         int currentBid = 0;
         int response;
-        int lastBidder = -1;
-        double leavePer = 1;
+        Player lastBidder = playerArray[numPlayers - 1];
         ArrayList<Player> players = new ArrayList();
+        ArrayList<Player> toRemove = new ArrayList();
 
         for (int i = 0; i < numPlayers; i++) {
             players.add(playerArray[i]);
@@ -433,7 +433,8 @@ public class GameScreen extends javax.swing.JFrame {
         while (!bought) {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getMoney() <= currentBid) {
-                    players.remove(i);
+                    toRemove.add(players.get(i));
+                    continue;
                 }
 
                 if (players.size() == 1) {
@@ -446,7 +447,7 @@ public class GameScreen extends javax.swing.JFrame {
                         try {
                             response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid? (Type 0 to cancel)"));
                             if (response == 0) {
-                                players.remove(i);
+                                toRemove.add(players.get(i));
                                 JOptionPane.showMessageDialog(null, "Player 1 left the auction");
                             } else if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
@@ -460,46 +461,33 @@ public class GameScreen extends javax.swing.JFrame {
                         }
                     }
                     currentBid = response;
-                    lastBidder = players.get(i).getPlayerNumber();
+                    lastBidder = players.get(i);
                 } else {
-                    while (response < 0) {
-                        if (currentBid - p.getPrice() > 100) {
-                            leavePer = 0.5;
-                            response = (int) ((Math.random() * 9) + 1);
-                        } else if (currentBid >= p.getPrice()) {
-                            leavePer = 0.1;
-                            response = (int) ((Math.random() * 50) + 1);
-                        } else if (p.getPrice() - currentBid <= 50) {
-                            response = (int) ((Math.random() * 70) + 1);
-                        } else {
-                            response = (int) ((Math.random() * 100) + 1);
-                        }
-
-                        if (currentBid + response > players.get(i).getMoney()) {
-                            response = -1;
-                        }
-                    }
-
+                    response = currentBid + (int)(Math.random() * 20) + 10;
+                        
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         JOptionPane.showMessageDialog(null, "Thread.sleep method error");
                     }
-
-                    if (Math.random() > leavePer) {
+                        
+                    if (response + 50 > players.get(i).getMoney() || response > p.getPrice() * 1.5) {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " left the auction");
-                        players.remove(i);
+                        toRemove.add(players.get(i));
                     } else {
-                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(currentBid + response));
-                        currentBid += response;
-                        lastBidder = players.get(i).getPlayerNumber();
+                        JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(response));
+                        currentBid = response;
+                        lastBidder = players.get(i);
                     }
                 }
             }
+            for (Player x : toRemove) {
+                players.remove(x);
+            }
         }
         
-        JOptionPane.showMessageDialog(null, "Player " + lastBidder + " purchased the property for $" + curr.format(currentBid));
-        playerArray[lastBidder].buyProperty(p);
+        JOptionPane.showMessageDialog(null, "Player " + lastBidder.getPlayerNumber() + " purchased the property for $" + curr.format(currentBid));
+        lastBidder.buyPropertyAuction(p, currentBid);
         p.setOwned(true);
     }
 

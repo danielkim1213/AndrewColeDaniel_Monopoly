@@ -8,6 +8,7 @@ package andrewcoledaniel_monopoly;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import andrewcoledaniel_monopoly.Space.SpaceType;
 
 public class Player implements Serializable {
 
@@ -57,9 +58,6 @@ public class Player implements Serializable {
 
     public void addMoney(int money) {
         this.money += money;
-        if(this.money > 0){
-            this.bankrupt = true;
-        }
     }
 
     public void removeMoney(int money) {
@@ -76,7 +74,15 @@ public class Player implements Serializable {
     public String propertyNames(){
         String output = "";
         for(int i =0; i < properties.size(); i ++){
-            output += (properties.get(i).getName() + "\n");
+            if (properties.get(i).getPropType() != SpaceType.SPACE_DEED) {
+                output += (properties.get(i).getName() + "\n");
+            } else if (((Deed)properties.get(i)).getHotel()) {
+                output += (properties.get(i).getName() + " - 1 hotel\n");
+            } else if (((Deed)properties.get(i)).getHouses() > 0) {
+                output += (properties.get(i).getName() + " - " + ((Deed)properties.get(i)).getHouses() + " houses\n");
+            } else {
+                output += (properties.get(i).getName() + "\n");
+            }
         }
         return output;
     }
@@ -89,6 +95,12 @@ public class Player implements Serializable {
         this.removeMoney(property.getPrice());
         this.properties.add(property);
         property.setOwner(this);
+    }
+    
+    public void buyPropertyAuction(Property p, int price) {
+        removeMoney(price);
+        properties.add(p);
+        p.setOwner(this);
     }
 
     public void mortgageProperty(Property property) {

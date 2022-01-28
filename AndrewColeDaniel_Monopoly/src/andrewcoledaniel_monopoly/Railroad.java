@@ -17,6 +17,9 @@ public class Railroad extends Property {
     }
     
     public void updateRent() {
+        if (getOwner() == null) {
+            return;
+        }
         switch (this.getOwner().getRailroads()) {
             case 1:
                 this.rent = 25;
