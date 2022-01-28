@@ -11,16 +11,26 @@ package andrewcoledaniel_monopoly;
  */
 public class Railroad extends Property {
     
+    /**
+     * Default Constructor
+     * @param name of the railroad
+     * @param price of the railroad
+     * @param mortgageValue how much you get from mortaging
+     * @param propertyNumber number of the proeprty
+     */
     public Railroad(String name, int price, int mortgageValue, int propertyNumber) {
         super(name, price, mortgageValue, propertyNumber);
         propType = SpaceType.SPACE_RAILROAD;
     }
     
+    /**
+     * Behaviour that updates the rent
+     */
     public void updateRent() {
-        if (getOwner() == null) {
-            return;
+        if (getOwner() == null) { // if no owner 
+            return; // does nothing
         }
-        switch (this.getOwner().getRailroads()) {
+        switch (this.getOwner().getRailroads()) { // checks to see how many railroads the owner owns
             case 1:
                 this.rent = 25;
                 break;
@@ -31,16 +41,23 @@ public class Railroad extends Property {
                 this.rent = 100;
                 break;
             case 4:
-                this.rent = 200;
+                this.rent = 200; // doubles with each railroad
                 break;
         }
     }
-    
+    /**
+     * To string method
+     * @return nothing
+     */
     @Override
     public String toString() {
         return "";
     }
     
+    /**
+     * Accessor
+     * @return space type 
+     */
     public SpaceType getType() {
         return type;
     }
