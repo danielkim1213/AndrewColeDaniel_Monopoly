@@ -117,7 +117,7 @@ Receive $25 consultancy fee
 CARD_COMMUNITY_CHEST
 ACTION_PAY_HOUSES
 0
-You are assessed for street repair. $40 per house. $115 per hotel
+Make general repairs on all your property. For each house pay $25. For each hotel pay $100
 CARD_COMMUNITY_CHEST
 ACTION_GET_MONEY
 10
