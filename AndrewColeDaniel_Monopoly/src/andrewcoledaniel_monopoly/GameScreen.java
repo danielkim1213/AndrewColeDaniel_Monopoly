@@ -173,7 +173,7 @@ public class GameScreen extends javax.swing.JFrame {
             checkHighscore(winner.getMoney()); //check if it is the highscore
         }
         if (endingScreen == null) { // creates ending screen
-            endingScreen = new EndingScreen(winner.getPlayerNumber(), playerArray);
+            endingScreen = new EndingScreen(mainMenu, winner.getPlayerNumber(), playerArray);
         }
         this.setVisible(false); // sets this screen to invisble
         endingScreen.setVisible(true); // makes ending screen visible

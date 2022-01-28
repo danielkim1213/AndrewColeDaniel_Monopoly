@@ -9,13 +9,14 @@ package andrewcoledaniel_monopoly;
  * @author dakim0069
  */
 public class EndingScreen extends javax.swing.JFrame {
-
+    MainMenu mainMenu;
     /**
      * Creates new form EndingScreen
      * @param numPlayer
      */
-    public EndingScreen(int numPlayer, Player[] players) {
+    public EndingScreen(MainMenu m, int numPlayer, Player[] players) {
         initComponents();
+        mainMenu = m;
         lblResult.setText("Player " + numPlayer + " won!"); // text saying which player won
         if(players.length == 2){ // if only two players were in the game
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney())); // sets the text for those two
@@ -50,6 +51,7 @@ public class EndingScreen extends javax.swing.JFrame {
         lblPlayer2 = new javax.swing.JLabel();
         lblPlayer3 = new javax.swing.JLabel();
         lblPlayer4 = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +74,13 @@ public class EndingScreen extends javax.swing.JFrame {
         lblPlayer4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPlayer4.setText("Player 4 - $");
 
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,6 +98,10 @@ public class EndingScreen extends javax.swing.JFrame {
                     .addComponent(lblPlayer1)
                     .addComponent(lblTotalScore))
                 .addContainerGap(276, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenu)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,16 +118,24 @@ public class EndingScreen extends javax.swing.JFrame {
                 .addComponent(lblPlayer3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPlayer4)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnMenu)
+                .addGap(22, 22, 22))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        mainMenu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMenuActionPerformed
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;
     private javax.swing.JLabel lblPlayer3;
