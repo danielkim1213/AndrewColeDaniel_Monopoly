@@ -50,7 +50,6 @@ public class Deed extends Property {
             return false;
         }
         hotel = true;
-        owner.removeMoney(houseCost);
         updateRent();
         return true;
     }

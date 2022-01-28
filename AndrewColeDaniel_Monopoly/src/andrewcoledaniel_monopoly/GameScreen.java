@@ -123,42 +123,48 @@ public class GameScreen extends javax.swing.JFrame {
         return Die[index];
     }
 
+    /**
+     * Method to check the game mode
+     * @return false or true depending if game is over or not
+     */
     private boolean checkGameMode() {
-        if (gameMode != 2) {
-            if (gameMode == 0) {
-                if (currentTurn > mainMenu.limitedTurns) {
-                    endGame();
+        if (gameMode != 2) { // if gamemode is not infinite
+            if (gameMode == 0) { // if it is limited turns
+                if (currentTurn > mainMenu.limitedTurns) { // checks to see if the current turn is greater
+                    endGame(); // ends game
                     return false;
                 }
-            } else {
-                long currentTime = System.currentTimeMillis();
-                currentTime -= startTime;
-                System.out.println(currentTime);
-                if (currentTime > mainMenu.limitedTime) {
-                    endGame();
+            } else { // else if it is limited time
+                long currentTime = System.currentTimeMillis(); // gets current time
+                currentTime -= startTime; //removes start time
+                if (currentTime > mainMenu.limitedTime) { // if the current time is greater than limited time
+                    endGame(); // ends game
                     return false;
                 }
             }
-        } else{
+        } else{ // else if infinite turns
             int bankruptPlayers = 0;
-            for(int i = 0; i < playerArray.length; i ++){
-                if(playerArray[i].bankrupt == true){
-                    bankruptPlayers ++;
+            for(int i = 0; i < playerArray.length; i ++){ // loops through player array
+                if(playerArray[i].bankrupt == true){ // if a player is bankrupt
+                    bankruptPlayers ++; // increases the variable
                 }
             }
-            if(bankruptPlayers >= 3){
-                endGame();
+            if(bankruptPlayers >= numPlayers - 1){ // if the bankrupt players is greater than or equal to the num players - 1
+                endGame(); // ends game
                 return false;
             }
         }
         return true;
     }
 
+    /**
+     * Method to end the game
+     */
     private void endGame() {
-        Player winner = new Player(1);
-        for (int i = 0; i < playerArray.length; i++) {
-            if (playerArray[i].getMoney() > winner.getMoney()) {
-                winner = playerArray[i];
+        Player winner = new Player(1); // variable for winner
+        for (int i = 0; i < playerArray.length; i++) { // loops through the players
+            if (playerArray[i].getMoney() > winner.getMoney()) { // gets the one with the highest money
+                winner = playerArray[i]; 
             }
         }
         
@@ -166,11 +172,11 @@ public class GameScreen extends javax.swing.JFrame {
         {
             boolean isHighScore = checkHighscore(winner.getMoney()); //check if it is the highscore
         }
-        if (endingScreen == null) {
+        if (endingScreen == null) { // creates ending screen
             endingScreen = new EndingScreen(winner.getPlayerNumber(), playerArray);
         }
-        this.setVisible(false);
-        endingScreen.setVisible(true);
+        this.setVisible(false); // sets this screen to invisble
+        endingScreen.setVisible(true); // makes ending screen visible
     }
     
     private boolean checkHighscore(int score)
@@ -218,9 +224,12 @@ public class GameScreen extends javax.swing.JFrame {
         }
         board.shuffleCards(cards);
     }
+    /**
+     * Method to generate players
+     */
     private void generatePlayers() {
-        for (int i = 0; i < playerArray.length; i++) {
-            playerArray[i] = new Player(i + 1, 1500);
+        for (int i = 0; i < playerArray.length; i++) { // loops by the length of hte player array
+            playerArray[i] = new Player(i + 1, 1500); // creates a new player at each index with 1500 starting cash
         }
     }
 
@@ -289,10 +298,15 @@ public class GameScreen extends javax.swing.JFrame {
         return ((Rolling) tsk).isDoubleDice();
     }
 
+    /**
+     * Method for the computer turn
+     * @param p
+     * @param turn 
+     */
     private void computerTurn(Player p, int turn) {
 
-        if (turn >= 3) {
-            p.setJail(true);
+        if (turn >= 3) { // checks if the player has been in jail for three turns
+            p.setJail(true); // gets them out of jail
             return;
         }
 
@@ -304,41 +318,42 @@ public class GameScreen extends javax.swing.JFrame {
                 }, 
                 1500 
             ); 
-        JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn");
-        if (p.getJail()) {
+        
+        JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + "'s turn"); // outputs that its this players turn
+        if (p.getJail()) { // checks if they are in jail
             if (p.getJailCards() < 0) {
-                int randomNumber = (int) (Math.random() * 10);
-                if (randomNumber > 5 && p.getMoney() > 50) {
+                int randomNumber = (int) (Math.random() * 10); // creates a random number
+                if (randomNumber > 5 && p.getMoney() > 50) { // 50% chance to buy its way out of jail
                     p.removeMoney(50);
-                    p.setJail(false);
+                    p.setJail(false);// gets out of jail
                 } else {
-                    int roll1 = (int) (Math.random() * 6) + 1;
+                    int roll1 = (int) (Math.random() * 6) + 1; // else makes 2 numbers
                     int roll2 = (int) (Math.random() * 6) + 1;
-                    if (roll1 == roll2) {
-                        p.setJail(false);
+                    if (roll1 == roll2) { // if they are the same
+                        p.setJail(false); // out of jail
                     }
                 }
             }
-        } else {
+        } else { // if not in jail
             int newPos;
             int diceRoll = (int) (Math.random() * 6) + 1;
-            int diceRoll2 = (int) (Math.random() * 6) + 1;
-            moves = diceRoll + diceRoll2;
-            newPos = p.getPosition() + diceRoll + diceRoll2;
-            if (newPos >= 40) {
-                p.addMoney(200);
-                newPos -= 40;
+            int diceRoll2 = (int) (Math.random() * 6) + 1; // makes two numbers
+            moves = diceRoll + diceRoll2; // variable used to calculate the utility rent
+            newPos = p.getPosition() + diceRoll + diceRoll2; // moves by the numer rolled
+            if (newPos >= 40) { // if the computer passes go
+                p.addMoney(200); // gains 100
+                newPos -= 40; // removes 40 from their position
             }
-            p.setPosition(newPos);
-            updateLocations();
-            handleSpace(board.getSpace(newPos), p);
-            if (diceRoll == diceRoll2) {
+            p.setPosition(newPos); // sets new position
+            updateLocations(); // updates the location chart
+            handleSpace(board.getSpace(newPos), p); // calls the method to do the space
+            if (diceRoll == diceRoll2) { // if the numbers were the same
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has rolled a double");
-                turn++;
+                turn++; // the computer gets to go again
                 computerTurn(p, turn);
             }
         }
-        updateProperties();
+        updateProperties(); // updates properties
     }
 
     private void handleSpace(Space s, Player p) {
@@ -386,8 +401,8 @@ public class GameScreen extends javax.swing.JFrame {
             if (!prop.getOwned()) {
                 int randomNumber = (int) (Math.random() * 10);
                 if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
-                    prop.updateRent();
                     p.buyProperty(prop);
+                    prop.updateRent();
                     prop.setOwned(true);
                     updateProperties();
                 } else {
@@ -508,15 +523,18 @@ public class GameScreen extends javax.swing.JFrame {
         stopRoll = false;
     }
     
+    /**
+     * Method to update the proerties text area
+     */
     private void updateProperties() {
-        txaProperties.setText("");
-        for (int i = 0; i < playerArray.length; i++) {
-            txaProperties.append("Player " + (i + 1) + ":\n");
-            txaProperties.append("Money: " + playerArray[i].getMoney() + "\nProperties:\n");
+        txaProperties.setText(""); // sets it black
+        for (int i = 0; i < playerArray.length; i++) { // loops by the amount of players
+            txaProperties.append("Player " + (i + 1) + ":\n"); // adds the players to the text field
+            txaProperties.append("Money: " + playerArray[i].getMoney() + "\nProperties:\n"); // adds their money
             try {
-                txaProperties.append(playerArray[i].propertyNames() + "\n");
-            } catch (NullPointerException e) {
-                txaProperties.append("No Properties owned.\n");
+                txaProperties.append(playerArray[i].propertyNames() + "\n"); // adds the name of their properties
+            } catch (NullPointerException e) { // if null
+                txaProperties.append("No Properties owned.\n"); // adds no properties owned
             }
         }
     }
@@ -1519,7 +1537,7 @@ public class GameScreen extends javax.swing.JFrame {
                 if (playerArray[0].getMoney() < d.getHouseCost()) {
                     JOptionPane.showMessageDialog(null, "You don't have enough money.");
                 } else {
-                    d.getHotel();
+                    d.buyHotel();
                     playerArray[0].removeMoney(d.getHouseCost());
                 }
                 return;
@@ -1567,143 +1585,151 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSellHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellHouseActionPerformed
-        if (playerArray[0].getProperties().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "You do not own any properties.");
+        if (playerArray[0].getProperties().isEmpty()) { // checks if the player owns any properties
+            JOptionPane.showMessageDialog(null, "You do not own any properties."); // outputs that they dont own any
+            return; // stops the method
+        }
+        String prop = JOptionPane.showInputDialog("Which property would you like to sell a house from?"); // if the player owns asks which property to sell a house from
+        int propNum = playerArray[0].findProperty(prop); // finds that property
+        if (propNum == -1) { // if the property cant be found
+            JOptionPane.showMessageDialog(null, "You do not own " + prop); // says you don't own it
             return;
         }
-        String prop = JOptionPane.showInputDialog("Which property would you like to sell a house from?");
-        int propNum = playerArray[0].findProperty(prop);
-        if (propNum == -1) {
-            JOptionPane.showMessageDialog(null, "You do not own " + prop);
-            return;
+        Property p = ((Property) playerArray[0].getProperties().get(propNum)); // creates a variable to hold the property
+        if (p.getPropType() != SpaceType.SPACE_DEED) { // checks to see if it is a deed or not
+            JOptionPane.showMessageDialog(null, "This property cannot have houses property."); // if its not a deed it cant have a house
+            return; 
         }
-        Property p = ((Property) playerArray[0].getProperties().get(propNum));
-        if (p.getPropType() != SpaceType.SPACE_DEED) {
-            JOptionPane.showMessageDialog(null, "This property cannot have houses property.");
-            return;
-        }
-        Deed d = (Deed) p;
-        if (d.getHouses() == 0) {
-            JOptionPane.showMessageDialog(null, "This property has no houses.");
+        Deed d = (Deed) p; // makes a deed varialbe to hold the property
+        if (d.getHouses() == 0) { // if the property has no houses
+            JOptionPane.showMessageDialog(null, "This property has no houses."); // says the property has no houses
             return;
         } else {
-            if (d.getHotel() == true) {
-                String input = JOptionPane.showInputDialog("This property has a hotel would you like to sell it? Y or N");
+            if (d.getHotel() == true) { // checks to see if the property has a hotel
+                String input = JOptionPane.showInputDialog("This property has a hotel would you like to sell it? Y or N"); // asks if they want to sell it
                 if (input.equalsIgnoreCase("Y")) {
-                    d.sellHouse();
-                    playerArray[0].addMoney(d.getHouseCost() / 2);
+                    d.sellHouse(); // sells the hotel
+                    playerArray[0].addMoney(d.getHouseCost() / 2); // adds half the cost to the players money
                 }
             } else {
-                String input = JOptionPane.showInputDialog("How many houses would you like to sell. This property has " + d.getHouses() + " houses");
+                String input = JOptionPane.showInputDialog("How many houses would you like to sell. This property has " + d.getHouses() + " houses"); // says the amount of houses the property has
                 int amountToSell = Integer.parseInt(input);
-                if (amountToSell > d.getHouseCost()) {
-                    JOptionPane.showMessageDialog(null, "You don't have that many houses");
+                if (amountToSell > d.getHouseCost()) { // checks to see if the input is greater than the amount it has
+                    JOptionPane.showMessageDialog(null, "You don't have that many houses"); // outputs that you dont have that many houses
                 } else {
-                    for (int i = 0; i < amountToSell; i++) {
-                        d.sellHouse();
-                        playerArray[0].addMoney(d.getHouseCost() / 2);
-                    }
+                    for (int i = 0; i < amountToSell; i++) { // loops the amount of times that was inputted
+                        d.sellHouse(); // sells house 
+                        playerArray[0].addMoney(d.getHouseCost() / 2); // adds money
+                     }
                 }
             }
         }
-        if(playerArray[0].bankrupt == false){
+        if(playerArray[0].bankrupt == false){ // if player was bankrupt they no longer are
             btnRollDice.setEnabled(true);
         }
-        updateProperties();
+        updateProperties(); // updates the properties text field
     }//GEN-LAST:event_btnSellHouseActionPerformed
 
 
+    /**
+     * Method to bankrupt a computer player
+     * @param c computer player
+     */
     private void bankruptComputer(Player c){
-        c.setMoney(0);
-        ArrayList<Property> bankruptP = c.getProperties();
-        for(int i = 0; i < bankruptP.size(); i ++){
-            bankruptP.get(i).setOwned(false);
-            c.removeProperties();
+        c.setMoney(0); //sets money to 0
+        ArrayList<Property> bankruptP = c.getProperties(); // 
+        for(int i = 0; i < bankruptP.size(); i ++){ // loops through the array
+            bankruptP.get(i).setOwned(false); // sets all the properties as unowned
+            c.removeProperties(); // removes all the properties from the player
         }
     }
     
+    /**
+     * Method to make a computer buy a house
+     * @param c computer player
+     */
     private void buyHouseComputer(Player c) {
-        if (!c.getProperties().isEmpty()) {
-            ArrayList<Property> buyHouse = c.getProperties();
-            int randomProp = (int) (Math.random() * buyHouse.size());
-            if (randomProp >= 1) {
-                randomProp -= 1;
+        if (!c.getProperties().isEmpty()) { // checks to see if the player owns a property
+            ArrayList<Property> buyHouse = c.getProperties(); // gets the properties
+            int randomProp = (int) (Math.random() * buyHouse.size()); // makes random number between 0 and the array size
+            if (randomProp >= 1) { // if it is above 1 
+                randomProp -= 1; // removes 1
             }
-            if (buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED) {
-                Deed d = (Deed) buyHouse.get(randomProp);
-                d.buyHouse(1);
+            if (buyHouse.get(randomProp).propType == Space.SpaceType.SPACE_DEED) { // if the property is a deed
+                Deed d = (Deed) buyHouse.get(randomProp); // makes a deed variable
+                d.buyHouse(1); // buys 1 house
             }
         }
     }
     
     private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
-        btnRollDice.setEnabled(false);
-        btnEndTurn.setEnabled(true);
-        boolean rollAgain = true;
-        int i = 0;
-        while (rollAgain == true) {
-            rollAgain = playerTurn(playerArray[0], i);
-            i++;
-            updateProperties();
+        btnRollDice.setEnabled(false); // disables this button
+        btnEndTurn.setEnabled(true); // enables end turn
+        boolean rollAgain = true; // sets this boolean to true
+        int i = 0; // moves the user has done
+        while (rollAgain == true) { // while roll again is true
+            rollAgain = playerTurn(playerArray[0], i); // roll again is equal to the player turn
+            i++; // increases i
+            updateProperties(); // updates the proerties text area
         }
     }//GEN-LAST:event_btnRollDiceActionPerformed
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
-        btnEndTurn.setEnabled(false);
-        for (int i = 1; i < numPlayers; i++) {
-            if (playerArray[i].bankrupt == false) {
-                computerTurn(playerArray[i], 0);
-                updateProperties();
-                int random = (int) (Math.random() * 10);
-                if(random < 5 && playerArray[i].getMoney() > 300){
+        btnEndTurn.setEnabled(false); // sets end turn to false
+        for (int i = 1; i < numPlayers; i++) { // loops the amount of computer players there are
+            if (playerArray[i].bankrupt == false) { // if the player is not bankrupt
+                computerTurn(playerArray[i], 0); //adds to the computer turn
+                updateProperties(); // updates the properties
+                int random = (int) (Math.random() * 10); // makes a random number
+                if(random < 5 && playerArray[i].getMoney() > 300){ // 50% chance for the computer to buy a house
                     buyHouseComputer(playerArray[i]);
                 }
-                if (playerArray[i].bankrupt == true) {
-                    bankruptComputer(playerArray[i]);
+                if (playerArray[i].bankrupt == true) { // if the computer is bankrupt
+                    bankruptComputer(playerArray[i]); // calls the method
                 }
             }
         }
-        JOptionPane.showMessageDialog(null, "All players have played starting next turn");
-        btnRollDice.setEnabled(true);
-        currentTurn++;
-        checkGameMode();
-        lblTurn.setText("Turn " + currentTurn);
-        if (playerArray[0].bankrupt == true) {
-            btnRollDice.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "You are bankrupt sell your houses or mortage your properties to continue playing");
+        JOptionPane.showMessageDialog(null, "All players have played starting next turn"); // outputs that all the players have playerd
+        btnRollDice.setEnabled(true); // enables the roll dice button
+        currentTurn++; // increases current turn
+        checkGameMode(); // checks if the game is over
+        lblTurn.setText("Turn " + currentTurn); // changes the turn text
+        if (playerArray[0].bankrupt == true) { // if the user is bankrupt
+            btnRollDice.setEnabled(false); // disables the dice
+            JOptionPane.showMessageDialog(null, "You are bankrupt sell your houses or mortage your properties to continue playing"); // tells them to sell something
         }
     }//GEN-LAST:event_btnEndTurnActionPerformed
 
     private void btnMortgageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgageActionPerformed
-        if (playerArray[0].getProperties().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "You do not own any properties.");
+        if (playerArray[0].getProperties().isEmpty()) { // if the player does not own a property
+            JOptionPane.showMessageDialog(null, "You do not own any properties."); // says that they dont own any properties
             return;
         }
-        String prop = JOptionPane.showInputDialog("Which property would you like to mortage?");
-        int propNum = playerArray[0].findProperty(prop);
-        if (propNum == -1) {
-            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+        String prop = JOptionPane.showInputDialog("Which property would you like to mortage?"); // akss which property the user would like to mortgage
+        int propNum = playerArray[0].findProperty(prop); // checks if the user owns the property
+        if (propNum == -1) { // if the property cant be found
+            JOptionPane.showMessageDialog(null, "You do not own " + prop); // outputs that they dont own it
             return;
         }
-        Property p = ((Property) playerArray[0].getProperties().get(propNum));
-        Deed d = (Deed) p;
-        if(d.getMortgage() == true){
+        Property p = ((Property) playerArray[0].getProperties().get(propNum)); // variable to change the property into a deed
+        Deed d = (Deed) p; // deed varialbe to hold the property
+        if(d.getMortgage() == true){ // if the property is mortagaged already
             String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgage() + " Y or N");
-            if(input.equalsIgnoreCase("Y")){
-                d.setMortgage(false);
-                playerArray[0].removeMoney(d.getMortgageValue());
+            if(input.equalsIgnoreCase("Y")){ // asks if they want to unmortgage it
+                d.setMortgage(false); // sets mortage to false
+                playerArray[0].removeMoney(d.getMortgageValue()); // takes away money
             }
-        } else{
+        } else{ // asks if they want to mortgage it
             String input = JOptionPane.showInputDialog("Would you like to mortgage this property worth $" + d.getMortgageValue() + " Y or N");
-            if(input.equalsIgnoreCase("Y")){
-                d.setMortgage(true);
-                playerArray[0].addMoney(d.getMortgageValue());
+            if(input.equalsIgnoreCase("Y")){ // if yes
+                d.setMortgage(true); // sets mortgage to true
+                playerArray[0].addMoney(d.getMortgageValue()); // adds money
             }
         }
-        if(playerArray[0].bankrupt == false){
-            btnRollDice.setEnabled(true);
+        if(playerArray[0].bankrupt == false){ // if player is no longer bankrupt
+            btnRollDice.setEnabled(true); // enables the dice roll button
         }
-        updateProperties();
+        updateProperties(); // uptdates the properties text area
     }//GEN-LAST:event_btnMortgageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
