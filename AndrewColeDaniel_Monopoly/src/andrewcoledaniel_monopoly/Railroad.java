@@ -47,11 +47,11 @@ public class Railroad extends Property {
     }
     /**
      * To string method
-     * @return nothing
+     * @return string representation of object
      */
     @Override
     public String toString() {
-        return "";
+        return super.toString() + "Name: " + name + "\n";
     }
     
     /**

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Andrew, Cole, Daniel
+ * 2022-01-27
+ * Class for the splash screen of the program
  */
 package andrewcoledaniel_monopoly;
 

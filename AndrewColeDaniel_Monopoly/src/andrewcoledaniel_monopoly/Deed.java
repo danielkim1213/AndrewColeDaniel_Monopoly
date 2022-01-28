@@ -141,11 +141,11 @@ public class Deed extends Property {
     
     /**
      * To String method
-     * @return 
+     * @return string representation of object
      */
     @Override
     public String toString() {
-        return "";
+        return super.toString() + "Deed:\nHouses: " + houses + "\nHotel: " + hotel + "\n";
     }
 
     /**

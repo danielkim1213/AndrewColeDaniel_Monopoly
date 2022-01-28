@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Andrew, Cole, Daniel
+ * 2022-01-27
+ * Class for the tutorial menu for monopoly
  */
 package andrewcoledaniel_monopoly;
 
@@ -28,23 +28,33 @@ public class TutorialMenu extends javax.swing.JFrame {
         programDescription();
     }
     
+    /**
+     * Load the background image for the window
+     */
     private void background()
     {
         Image img;
         
+        // Load image
         URL urlMoney = GameScreen.class.getResource("saves/money.jpg");
         ImageIcon money = new ImageIcon(urlMoney);
+        // Set image
         img = money.getImage();
         money = new ImageIcon(img.getScaledInstance((int)Math.round(lblBackgroundImage.getWidth()*1.2), (int)Math.round(lblBackgroundImage.getHeight()*1.2), Image.SCALE_SMOOTH));
         lblBackgroundImage.setIcon(money);
         
+        // Load image
         URL urlTutorial = GameScreen.class.getResource("saves/tutorialText.jpg");
         ImageIcon tutorialText = new ImageIcon(urlTutorial);
+        // Set image
         img = tutorialText.getImage();
         tutorialText = new ImageIcon(img.getScaledInstance(lblTutorial.getWidth(), lblTutorial.getHeight(), Image.SCALE_SMOOTH));
         lblTutorial.setIcon(tutorialText);
     }
 
+    /**
+     * Set program description
+     */
     private void programDescription()
     {
         txaDescription.setText("");
@@ -52,6 +62,7 @@ public class TutorialMenu extends javax.swing.JFrame {
         Scanner scan = new Scanner(textIn);
         
         String str;
+        // Add description to text area
         while(scan.hasNextLine())
         {
             str = scan.nextLine();

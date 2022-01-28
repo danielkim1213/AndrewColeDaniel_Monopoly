@@ -36,11 +36,11 @@ public class Utility extends Property {
 
     /**
      * To String Method
-     * @return nothing
+     * @return string representation of object
      */
     @Override
     public String toString() {
-        return "";
+        return super.toString() + "Name: " + name + "\n";
     }
     
     /**

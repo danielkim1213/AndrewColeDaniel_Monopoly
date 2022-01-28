@@ -141,6 +141,12 @@ abstract public class Property implements Space {
     
      // Abstrat methods
     public abstract void updateRent();
-        
-    public abstract String toString();
+    
+    /**
+     * Return string representation of object
+     * @return string representation of object
+     */
+    public String toString() {
+        return "Property:\nName: " + name + "\nPrice: " + price + "\nRent: " + rent + "\nOwner: " + owner + "\n";
+    }
 }

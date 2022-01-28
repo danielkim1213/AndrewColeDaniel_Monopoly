@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Andrew, Cole, Daniel
+ * 2022-01-27
+ * Class for the menu that shows high scores
  */
 package andrewcoledaniel_monopoly;
 
@@ -34,7 +34,7 @@ public class HighScoreMenu extends javax.swing.JFrame {
     {
         
         Image img;
-        
+        // Load and set all images
         URL urlStars = GameScreen.class.getResource("saves/stars.jpg");
         ImageIcon stars = new ImageIcon(urlStars);
         img = stars.getImage();
