@@ -855,15 +855,15 @@ public class GameScreen extends javax.swing.JFrame {
 
         lblDie2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie2.setText("lblDie2");
-        getContentPane().add(lblDie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 222, 80, 80));
+        getContentPane().add(lblDie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 80, 80));
 
         lblDie1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDie1.setText("lblDie1");
-        getContentPane().add(lblDie1, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 222, 80, 80));
+        getContentPane().add(lblDie1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 80, 80));
 
         lblDiceSum.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDiceSum.setText("Moves: ");
-        getContentPane().add(lblDiceSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 66, -1));
+        getContentPane().add(lblDiceSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 80, -1));
 
         Tile1.setBackground(new java.awt.Color(220, 255, 196));
         Tile1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
