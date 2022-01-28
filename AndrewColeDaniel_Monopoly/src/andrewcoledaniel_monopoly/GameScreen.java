@@ -170,7 +170,7 @@ public class GameScreen extends javax.swing.JFrame {
         
         if(winner == playerArray[0]) //if the user is the winner
         {
-            boolean isHighScore = checkHighscore(winner.getMoney()); //check if it is the highscore
+            checkHighscore(winner.getMoney()); //check if it is the highscore
         }
         if (endingScreen == null) { // creates ending screen
             endingScreen = new EndingScreen(winner.getPlayerNumber(), playerArray);
@@ -179,28 +179,58 @@ public class GameScreen extends javax.swing.JFrame {
         endingScreen.setVisible(true); // makes ending screen visible
     }
     
-    private boolean checkHighscore(int score)
+    /**
+     * this method check if the current score can be in top5
+     * @param score - current score
+     */
+    private void checkHighscore(int score)
     {
-        if(score < mainMenu.highscores[4])
+        if(score < mainMenu.highscores[4]) // if the current score cannot be in top 5
         {
-            return false;
+            return; //return the method
         }
-        int index = 0;
-        for(int i=4; i>=0; i--)
+        int[] newHighScore = new int[6]; //array of 6 
+        for(int i=0; i< 5; i++)//assing values to newHighScore (including the current score and previous top 5 scores)
         {
-            if(score > mainMenu.highscores[i])
-            {
-                index = i;
-            }
+            newHighScore[i] = mainMenu.highscores[i];
         }
-        for(int k=4; k>index; k--)
-        {
-            mainMenu.highscores[k] = mainMenu.highscores[k-1];
-        }
-        mainMenu.highscores[index] = score;
-        return true;
+        newHighScore[5] = score;
+        mainMenu.highscores = bubbleSortHighScore(newHighScore);
     }
-
+    
+    /**
+     * This sort the highscores by the bubble sort and remove the last index.
+     * @param newHighScore - integer array of length of 6
+     * @return sorted array of length of 5
+     */
+    private int[] bubbleSortHighScore(int[] newHighScore)
+    {
+        int bottom = newHighScore.length - 1;
+        boolean sw = true;
+        int temp;
+        while (sw)
+        {
+            sw = false;
+            for(int j=0; j<= bottom; j++)
+            {
+                if(newHighScore[j] > newHighScore[j+1])
+                {
+                    temp = newHighScore[j];
+                    newHighScore[j] = newHighScore[j+1];
+                    newHighScore[j+1] = temp;
+                    sw = true;
+                }
+            }
+            bottom = bottom -1;
+        }
+        int[] finalHighScore = new int[5];
+        for(int i=0; i<5; i++)
+        {
+            finalHighScore[i] = newHighScore[i];
+        }
+        return finalHighScore;
+    }
+    
     private void loadCards() {
         int index = 0;
         CardType type;

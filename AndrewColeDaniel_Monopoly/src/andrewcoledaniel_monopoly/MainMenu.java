@@ -29,7 +29,6 @@ public class MainMenu extends javax.swing.JFrame {
     private GameScreen gameScreen;
     private HighScoreMenu highScoreMenu;
     public int[] highscores = new int[5];
-    public String[] date = new String[5];
     public final MainMusic mainBgm;
     private final Thread mainBgmThread;
     public int limitedTurns;
@@ -48,17 +47,13 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     /**
-     * this is a method that scans high scores from the file
+     * this is a method that initialize the highscores
      */
     private void readHighScore()
     {
-        InputStream inp = MainMenu.class.getResourceAsStream("saves/HighScores.txt");
-        Scanner scan = new Scanner(inp);
-        
         for(int i=0; i<5; i++)
         {
-            highscores[i] = scan.nextInt();
-            date[i] = scan.nextLine();
+            highscores[i] = 0; //set to 0
         }
     }
     
@@ -87,8 +82,9 @@ public class MainMenu extends javax.swing.JFrame {
         btnHighScores.setIcon(scores);
         
         //new game button image
-        //same process with title image
+        //erase the border
         btnHighScores.setBorder(null);
+        //same process with title image
         URL urlNewGame = GameScreen.class.getResource("saves/newGame.png");
         ImageIcon newGame = new ImageIcon(urlNewGame);
         img = newGame.getImage();

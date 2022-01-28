@@ -129,7 +129,7 @@ public class HighScoreMenu extends javax.swing.JFrame {
         for(int i=0; i<5; i++)
         {
             txaHighScores.append("Top " + (i+1) + ":\n");
-            txaHighScores.append(mainMenu.date[i] + " - " + mainMenu.highscores[i]);
+            txaHighScores.append("" + mainMenu.highscores[i]);
             if(i<4)
             {
                 txaHighScores.append("\n\n");
