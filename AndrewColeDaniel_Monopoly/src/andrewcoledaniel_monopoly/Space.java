@@ -11,6 +11,7 @@ package andrewcoledaniel_monopoly;
  */
 public interface Space {
     
+    // enum for types of spaces
     public enum SpaceType {
         SPACE_CORNER,
         SPACE_GO,

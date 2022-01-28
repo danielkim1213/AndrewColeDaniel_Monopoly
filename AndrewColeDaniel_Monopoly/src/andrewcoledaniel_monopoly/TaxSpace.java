@@ -15,21 +15,46 @@ public class TaxSpace implements Space {
     private int taxAmount;
     private String name;
 
+    /**
+     * Primary constructor, create TaxSpace with specified values
+     * @param name name of space
+     * @param amount amount to tax
+     */
     public TaxSpace(String name, int amount) {
         this.name = name;
         taxAmount = amount;
         type = SpaceType.SPACE_TAX;
     }
 
+    /**
+     * Get name of space
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get amount to tax
+     * @return tax amount
+     */
     public int getTaxAmount() {
         return taxAmount;
     }
     
+    /**
+     * Get type of space
+     * @return type of space
+     */
     public SpaceType getType() {
         return type;
+    }
+    
+    /**
+     * Return string representation of object
+     * @return string representation of object
+     */
+    public String toString() {
+        return "TaxSpace:\nName: " + name + "\nTax amount: " + taxAmount + "\n";
     }
 }
