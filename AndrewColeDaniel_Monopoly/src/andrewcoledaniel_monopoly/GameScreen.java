@@ -1538,14 +1538,20 @@ public class GameScreen extends javax.swing.JFrame {
                 }
             }
         }
-        int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
-        if (houses + d.getHouses() > 4) {
-            JOptionPane.showMessageDialog(null, "You can not have more than four houses on a property.");
-        } else if (houses * d.getHouseCost() > playerArray[0].getMoney()) {
-            JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses.");
-        } else {
-            d.buyHouse(houses);
-            JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
+        try{
+            int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
+
+            if (houses + d.getHouses() > 4) {
+                JOptionPane.showMessageDialog(null, "You can not have more than four houses on a property.");
+            } else if (houses * d.getHouseCost() > playerArray[0].getMoney()) {
+                JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses.");
+            } else {
+                d.buyHouse(houses);
+                JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
+            }
+        }catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong format.");
         }
         updateProperties();
     }//GEN-LAST:event_btnBuyHouseActionPerformed
