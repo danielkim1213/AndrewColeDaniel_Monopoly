@@ -211,6 +211,7 @@ public class GameScreen extends javax.swing.JFrame {
                 value = Integer.parseInt(s.nextLine());
                 info = s.nextLine();
                 cards[index] = new Card(type, action, value, info);
+                index++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
@@ -429,8 +430,7 @@ public class GameScreen extends javax.swing.JFrame {
                             if (response == 0) {
                                 players.remove(i);
                                 JOptionPane.showMessageDialog(null, "Player 1 left the auction");
-                            }
-                            if (response <= currentBid) {
+                            } else if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
                                 response = -1;
                             } else if (response > players.get(i).getMoney()) {
