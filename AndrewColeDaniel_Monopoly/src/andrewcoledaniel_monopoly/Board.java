@@ -11,6 +11,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import andrewcoledaniel_monopoly.Space.SpaceType;
 import andrewcoledaniel_monopoly.Card.CardType;
+import java.io.InputStream;
 import java.util.Random;
 
 /**
@@ -33,52 +34,47 @@ public class Board {
      * Load spaces from resources into board array
      */
     private void loadSpaces() {
-        try {
-            // Open properties file and create Scanner object
-            File propertiesFile = new File("src//andrewcoledaniel_monopoly//saves//properties.txt");
-            Scanner s = new Scanner(propertiesFile);
-            // Iterate over each space
-            for (int i = 0; i < 40; i++) {
-                // Check for special spaces and create space accordingly
-                switch (i) {
-                    case 0:
-                        board[i] = new CornerSpace("Go", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO);
-                        break;
-                    case 10:
-                        board[i] = new CornerSpace("Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_JAIL);
-                        break;
-                    case 20:
-                        board[i] = new CornerSpace("Free Parking", SpaceType.SPACE_CORNER, SpaceType.SPACE_PARKING);
-                        break;
-                    case 30:
-                        board[i] = new CornerSpace("Go To Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO_JAIL);
-                        break;
-                    case 4:
-                        board[i] = new TaxSpace("Income Tax", 200);
-                        break;
-                    case 38:
-                        board[i] = new TaxSpace("Luxury Tax", 100);
-                        break;
-                    case 7:
-                    case 22:
-                    case 36:
-                        board[i] = new CardSpace("Chance", CardType.CARD_CHANCE);
-                        break;
-                    case 2:
-                    case 17:
-                    case 33:
-                        board[i] = new CardSpace("Community Chest", CardType.CARD_COMMUNITY_CHEST);
-                        break;
+        // Open properties file and create Scanner object
+        InputStream propertiesFile = GameScreen.class.getResourceAsStream("saves/properties.txt");
+        Scanner s = new Scanner(propertiesFile);
+        // Iterate over each space
+        for (int i = 0; i < 40; i++) {
+            // Check for special spaces and create space accordingly
+            switch (i) {
+                case 0:
+                    board[i] = new CornerSpace("Go", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO);
+                    break;
+                case 10:
+                    board[i] = new CornerSpace("Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_JAIL);
+                    break;
+                case 20:
+                    board[i] = new CornerSpace("Free Parking", SpaceType.SPACE_CORNER, SpaceType.SPACE_PARKING);
+                    break;
+                case 30:
+                    board[i] = new CornerSpace("Go To Jail", SpaceType.SPACE_CORNER, SpaceType.SPACE_GO_JAIL);
+                    break;
+                case 4:
+                    board[i] = new TaxSpace("Income Tax", 200);
+                    break;
+                case 38:
+                    board[i] = new TaxSpace("Luxury Tax", 100);
+                    break;
+                case 7:
+                case 22:
+                case 36:
+                    board[i] = new CardSpace("Chance", CardType.CARD_CHANCE);
+                    break;
+                case 2:
+                case 17:
+                case 33:
+                    board[i] = new CardSpace("Community Chest", CardType.CARD_COMMUNITY_CHEST);
+                    break;
                     // Create property
-                    default:
-                        board[i] = loadProperty(s, i);
-                        break;
-                }
+                default:
+                    board[i] = loadProperty(s, i);
+                    break;
             }
-            // File not found
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Properties file not found");
-        } 
+        }
    }
     
     /**

@@ -624,11 +624,8 @@ public class GameScreen extends javax.swing.JFrame {
         btnMortgage = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
-        lblBank = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaProperties = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txaBankProperties = new javax.swing.JTextArea();
         btnRollDice = new javax.swing.JButton();
         btnEndTurn = new javax.swing.JButton();
         lblDie2 = new javax.swing.JLabel();
@@ -788,19 +785,10 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
-        lblBank.setBackground(new java.awt.Color(255, 255, 255));
-        lblBank.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblBank.setText("Bank Properties");
-
         txaProperties.setEditable(false);
         txaProperties.setColumns(20);
         txaProperties.setRows(5);
         jScrollPane2.setViewportView(txaProperties);
-
-        txaBankProperties.setEditable(false);
-        txaBankProperties.setColumns(20);
-        txaBankProperties.setRows(5);
-        jScrollPane3.setViewportView(txaBankProperties);
 
         btnRollDice.setText("Roll Dice");
         btnRollDice.addActionListener(new java.awt.event.ActionListener() {
@@ -809,7 +797,7 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
-        btnEndTurn.setText("EndTurn");
+        btnEndTurn.setText("End Turn");
         btnEndTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndTurnActionPerformed(evt);
@@ -827,24 +815,21 @@ public class GameScreen extends javax.swing.JFrame {
             .addGroup(pnlStatusLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPlayerStatistics)
-                        .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStatusLayout.createSequentialGroup()
-                            .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSellHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lblBank))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlayerStatistics)
+                    .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlStatusLayout.createSequentialGroup()
+                        .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSellHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlStatusLayout.createSequentialGroup()
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlStatusLayout.createSequentialGroup()
                         .addComponent(btnRollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlStatusLayout.setVerticalGroup(
@@ -855,22 +840,18 @@ public class GameScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPlayerStatistics)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuyHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSellHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMortgage, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEndTurn, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnRollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1514,16 +1495,16 @@ public class GameScreen extends javax.swing.JFrame {
         getContentPane().add(lblPlayerLocations, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 140, -1));
 
         lblPlayer1.setText(".");
-        getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 120, -1));
+        getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 200, -1));
 
         lblPlayer2.setText(".");
-        getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 120, -1));
+        getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 200, -1));
 
         lblPlayer3.setText(".");
-        getContentPane().add(lblPlayer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 120, -1));
+        getContentPane().add(lblPlayer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 200, -1));
 
         lblPlayer4.setText(".");
-        getContentPane().add(lblPlayer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 130, -1));
+        getContentPane().add(lblPlayer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 200, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -1546,9 +1527,12 @@ public class GameScreen extends javax.swing.JFrame {
             return;
         }
         String prop = JOptionPane.showInputDialog("Which property would you like to buy a house on?");
-        int propNum = playerArray[0].findProperty(prop); // asks which property to buy the house on
-        if (propNum == -1) { // if proerty does not exist
-            JOptionPane.showMessageDialog(null, "You do not own " + prop); // output that you dont own it
+        if (prop == null) {
+            return;
+        }
+        int propNum = playerArray[0].findProperty(prop);
+        if (propNum == -1) {
+            JOptionPane.showMessageDialog(null, "You do not own " + prop);
             return;
         }
         Property p = ((Property)playerArray[0].getProperties().get(propNum));
@@ -1623,6 +1607,9 @@ public class GameScreen extends javax.swing.JFrame {
             return; // stops the method
         }
         String prop = JOptionPane.showInputDialog("Which property would you like to sell a house from?"); // if the player owns asks which property to sell a house from
+        if (prop == null) {
+            return;
+        }
         int propNum = playerArray[0].findProperty(prop); // finds that property
         if (propNum == -1) { // if the property cant be found
             JOptionPane.showMessageDialog(null, "You do not own " + prop); // says you don't own it
@@ -1814,8 +1801,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSellHouse;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBank;
     private javax.swing.JLabel lblDiceSum;
     public javax.swing.JLabel lblDie1;
     public javax.swing.JLabel lblDie2;
@@ -1827,7 +1812,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblPlayerStatistics;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlStatus;
-    private javax.swing.JTextArea txaBankProperties;
     private javax.swing.JTextArea txaProperties;
     private javax.swing.JTextField txfJail;
     private javax.swing.JTextField txfProperty1;
