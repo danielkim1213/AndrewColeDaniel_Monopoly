@@ -127,9 +127,13 @@ public class EndingScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * when the menu button is clicked
+     * @param evt - clicking the button
+     */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        mainMenu.setVisible(true);
-        this.setVisible(false);
+        mainMenu.setVisible(true); //set the main menu visible
+        this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnMenuActionPerformed
     
     
