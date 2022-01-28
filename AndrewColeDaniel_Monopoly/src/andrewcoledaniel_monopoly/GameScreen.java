@@ -1481,16 +1481,16 @@ public class GameScreen extends javax.swing.JFrame {
         lblPlayerLocations.setText("Player Locations:");
         getContentPane().add(lblPlayerLocations, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 140, -1));
 
-        lblPlayer1.setText("jLabel1");
+        lblPlayer1.setText(".");
         getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 120, -1));
 
-        lblPlayer2.setText("jLabel1");
+        lblPlayer2.setText(".");
         getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 120, -1));
 
-        lblPlayer3.setText("jLabel1");
+        lblPlayer3.setText(".");
         getContentPane().add(lblPlayer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 120, -1));
 
-        lblPlayer4.setText("jLabel1");
+        lblPlayer4.setText(".");
         getContentPane().add(lblPlayer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 130, -1));
 
         pack();
@@ -1714,7 +1714,7 @@ public class GameScreen extends javax.swing.JFrame {
         Property p = ((Property) playerArray[0].getProperties().get(propNum)); // variable to change the property into a deed
         Deed d = (Deed) p; // deed varialbe to hold the property
         if(d.getMortgage() == true){ // if the property is mortagaged already
-            String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgage() + " Y or N");
+            String input = JOptionPane.showInputDialog("This property has already been mortgaged would you like to unmortage it for $" + d.getMortgageValue() + " Y or N");
             if(input.equalsIgnoreCase("Y")){ // asks if they want to unmortgage it
                 d.setMortgage(false); // sets mortage to false
                 playerArray[0].removeMoney(d.getMortgageValue()); // takes away money
