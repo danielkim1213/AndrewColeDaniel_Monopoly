@@ -375,6 +375,7 @@ public class GameScreen extends javax.swing.JFrame {
                 break;
             case SPACE_CARD:
                  Card c = ((CardSpace)s).getCard(cards);
+                 board.shuffleCards(cards);
                  String out = ((CardSpace)s).performSpaceAction(c, p, board, playerArray);
                  updateLocations();
                  JOptionPane.showMessageDialog(null, out);
@@ -448,7 +449,7 @@ public class GameScreen extends javax.swing.JFrame {
                     break;
                 }
                 response = -1;
-                if (i == 0) {
+                if (players.get(i).getPlayerNumber() == 1) {
                     while (response < 0) {
                         try {
                             response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid? (Type 0 to cancel)"));

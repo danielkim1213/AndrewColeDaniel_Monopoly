@@ -286,6 +286,27 @@ public class Player implements Serializable {
         }
         return -1; // else returns -1
     }
+    
+    /**
+     * Pay for houses and hotels on properties for specific card
+     */
+    public void payProperties() {
+        int sum = 0;
+        // For each property
+        for (Property p : properties) {
+            // If property is a deed
+            if (p.getType() == SpaceType.SPACE_DEED) {
+                // If has hotel, add $100 to sum
+                if (((Deed)p).getHotel()) {
+                    sum += 100;
+                } else {
+                    // Add $25 for each house
+                    sum += ((Deed)p).getHouses() * 25;
+                }
+            }
+        }
+        removeMoney(sum);
+    }
 
     /**
      * Method that will print all the information about the player into a string
