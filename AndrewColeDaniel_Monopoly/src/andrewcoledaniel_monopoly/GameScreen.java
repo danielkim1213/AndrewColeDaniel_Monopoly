@@ -377,6 +377,7 @@ public class GameScreen extends javax.swing.JFrame {
             } else {
                 if(!prop.mortgage){
                 JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
+                prop.updateRent();
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
                 }
@@ -385,6 +386,7 @@ public class GameScreen extends javax.swing.JFrame {
             if (!prop.getOwned()) {
                 int randomNumber = (int) (Math.random() * 10);
                 if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
+                    prop.updateRent();
                     p.buyProperty(prop);
                     prop.setOwned(true);
                     updateProperties();
