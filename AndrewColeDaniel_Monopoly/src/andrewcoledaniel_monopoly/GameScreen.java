@@ -1527,12 +1527,12 @@ public class GameScreen extends javax.swing.JFrame {
             return;
         }
         String prop = JOptionPane.showInputDialog("Which property would you like to buy a house on?");
-        if (prop == null) {
+        if (prop == null) { // if user doesn't input anything
             return;
         }
-        int propNum = playerArray[0].findProperty(prop);
-        if (propNum == -1) {
-            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+        int propNum = playerArray[0].findProperty(prop); // asks which property to buy the house on
+        if (propNum == -1) { // if proerty does not exist
+            JOptionPane.showMessageDialog(null, "You do not own " + prop); // output that you dont own it
             return;
         }
         Property p = ((Property)playerArray[0].getProperties().get(propNum));
