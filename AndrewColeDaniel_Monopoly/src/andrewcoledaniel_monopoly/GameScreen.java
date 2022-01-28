@@ -190,45 +190,46 @@ public class GameScreen extends javax.swing.JFrame {
             return; //return the method
         }
         int[] newHighScore = new int[6]; //array of 6 
-        for(int i=0; i< 5; i++)//assing values to newHighScore (including the current score and previous top 5 scores)
+        for(int i=0; i< 5; i++)//assigning values to newHighScore (including the current score and previous top 5 scores)
         {
             newHighScore[i] = mainMenu.highscores[i];
         }
-        newHighScore[5] = score;
-        mainMenu.highscores = bubbleSortHighScore(newHighScore);
+        newHighScore[5] = score; //add current score
+        mainMenu.highscores = bubbleSortHighScore(newHighScore); //bubble sort and save the sorted highscores
     }
     
     /**
-     * This sort the highscores by the bubble sort and remove the last index.
+     * This sort the highscores by the bubble sort(descending order) and remove the last index.
      * @param newHighScore - integer array of length of 6
      * @return sorted array of length of 5
      */
     private int[] bubbleSortHighScore(int[] newHighScore)
     {
-        int bottom = newHighScore.length - 1;
+        int bottom = newHighScore.length - 1; //set bottom
         boolean sw = true;
         int temp;
-        while (sw)
+        while (sw) 
         {
             sw = false;
-            for(int j=0; j< bottom; j++)
+            for(int j=0; j< bottom; j++) //compare two elements beside each other
             {
-                if(newHighScore[j] < newHighScore[j+1])
+                if(newHighScore[j] < newHighScore[j+1]) //placing the lowest value at the last -> descending order
                 {
+                    //swap
                     temp = newHighScore[j];
                     newHighScore[j] = newHighScore[j+1];
                     newHighScore[j+1] = temp;
                     sw = true;
                 }
             }
-            bottom = bottom -1;
+            bottom = bottom -1; //reduce bottom because the lowest value is already sorted at the last
         }
-        int[] finalHighScore = new int[5];
-        for(int i=0; i<5; i++)
+        int[] finalHighScore = new int[5]; //new array of length of 5
+        for(int i=0; i<5; i++) //loop 5 times
         {
-            finalHighScore[i] = newHighScore[i];
+            finalHighScore[i] = newHighScore[i]; //assign first 5 value
         }
-        return finalHighScore;
+        return finalHighScore; // return the sorted value
     }
     
     private void loadCards() {
