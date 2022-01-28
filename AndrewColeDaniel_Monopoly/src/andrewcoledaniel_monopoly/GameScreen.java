@@ -1540,51 +1540,52 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
-        if (playerArray[0].getProperties().isEmpty()) {
+        if (playerArray[0].getProperties().isEmpty()) { // checks if the player has properties
             JOptionPane.showMessageDialog(null, "You do not own any properties.");
             return;
         }
         String prop = JOptionPane.showInputDialog("Which property would you like to buy a house on?");
-        int propNum = playerArray[0].findProperty(prop);
-        if (propNum == -1) {
-            JOptionPane.showMessageDialog(null, "You do not own " + prop);
+        int propNum = playerArray[0].findProperty(prop); // asks which property to buy the house on
+        if (propNum == -1) { // if proerty does not exist
+            JOptionPane.showMessageDialog(null, "You do not own " + prop); // output that you dont own it
             return;
         }
         Property p = ((Property)playerArray[0].getProperties().get(propNum));
-        if (p.getPropType() != SpaceType.SPACE_DEED) {
-            JOptionPane.showMessageDialog(null, "You cannot purchase a house on this property.");
+        if (p.getPropType() != SpaceType.SPACE_DEED) { // if the property is nto a deed
+            JOptionPane.showMessageDialog(null, "You cannot purchase a house on this property."); // you cant build a house on this
             return;
         }
-        Deed d = (Deed)p;
-        if (d.getHouses() == 4) {
-            if(d.getHotel() == false){
+        Deed d = (Deed)p; // variable to hold the deed
+        if (d.getHouses() == 4) { // if there are 4 houses
+            if(d.getHotel() == false){ // and there is no hotel
             if (JOptionPane.showConfirmDialog(null, "You already have 4 houses on this property. Would you like to buy a hotel instead?", "Buy Hotel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                if (playerArray[0].getMoney() < d.getHouseCost()) {
-                    JOptionPane.showMessageDialog(null, "You don't have enough money.");
+                if (playerArray[0].getMoney() < d.getHouseCost()) { // if the user doesnt have neough money
+                    JOptionPane.showMessageDialog(null, "You don't have enough money."); // output they dont have enough
                 } else {
-                    d.buyHotel();
-                    playerArray[0].removeMoney(d.getHouseCost());
+                    d.buyHotel(); // else buy the hotel
+                    playerArray[0].removeMoney(d.getHouseCost()); // remove the cost
                 }
                 return;
                 }
             }
         }
-        try{
+        try{ // try a conversion from string to integer
             int houses = Integer.parseInt(JOptionPane.showInputDialog("How many houses would you like to buy? (Maximum of four per property. This one currently has: " + d.getHouses()));
-
-            if (houses + d.getHouses() > 4) {
-                JOptionPane.showMessageDialog(null, "You can not have more than four houses on a property.");
-            } else if (houses * d.getHouseCost() > playerArray[0].getMoney()) {
-                JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses.");
+            // input for number of houses purchased
+            if (houses + d.getHouses() > 4) { //if there ar more than 4 houses
+                JOptionPane.showMessageDialog(null, "You can not have more than four houses on a property.");//outputs error
+            } else if (houses * d.getHouseCost() > playerArray[0].getMoney()) { // else if the user doesnt have enough money
+                JOptionPane.showMessageDialog(null, "You don't have enough money to buy " + houses + " houses."); // outputs error
             } else {
-                d.buyHouse(houses);
-                JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost()));
+                d.buyHouse(houses); // esle buys the houses
+                JOptionPane.showMessageDialog(null, "Purchased " + houses + " houses for " + curr.format(houses * d.getHouseCost())); 
+                // outputs how much it costed
             }
-        }catch(NumberFormatException e)
+        }catch(NumberFormatException e) // if integer not inputted
         {
-            JOptionPane.showMessageDialog(null, "Wrong format.");
+            JOptionPane.showMessageDialog(null, "Wrong format."); // outputs error
         }
-        updateProperties();
+        updateProperties(); // updates Properties
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
