@@ -529,24 +529,30 @@ public class GameScreen extends javax.swing.JFrame {
         p.setOwned(true);
     }
 
+    /**
+     * this method rolls two dice
+     */
     private void rollDice() {
-        tsk = new Rolling(this);
-        timerRoll = new Timer();
-        timerRoll.scheduleAtFixedRate(tsk, 125, 145);
+        tsk = new Rolling(this); //instantiate Rolling class object
+        timerRoll = new Timer(); //new timer
+        timerRoll.scheduleAtFixedRate(tsk, 125, 145); // run tsk every inteval 
     }
 
+    /**
+     * this method is to stop rolling the dice
+     */
     public void stopRolling() {
 
         stopRoll = true;
 
         try {
-            Thread.sleep(200);
+            Thread.sleep(200); //stop for 0.2sec
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Thread.sleep method error");
         }
 
-        lblDiceSum.setText("Moves: " + moves);
-        stopRoll = false;
+        lblDiceSum.setText("Moves: " + moves); //change the moves text
+        stopRoll = false; //set stopRoll false again for the next dice roll
     }
     
     /**
@@ -565,17 +571,23 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * this method is to update the player's location
+     */
     private void updateLocations() {
-        lblPlayer1.setText("Player " + 1 + ": " + board.getSpace(playerArray[0].getPosition()).getName());
-        lblPlayer2.setText("Player " + 2 + ": " + board.getSpace(playerArray[1].getPosition()).getName());
-        if(numPlayers >= 3){
-        lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName());
+        lblPlayer1.setText("Player " + 1 + ": " + board.getSpace(playerArray[0].getPosition()).getName()); //player 1
+        lblPlayer2.setText("Player " + 2 + ": " + board.getSpace(playerArray[1].getPosition()).getName()); //player 2
+        if(numPlayers >= 3){ //only when there are more or equal than three players
+        lblPlayer3.setText("Player " + 3 + ": " + board.getSpace(playerArray[2].getPosition()).getName()); //player3
         }
-        if (numPlayers == 4){
-        lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName());
+        if (numPlayers == 4){ //only when there are four players
+        lblPlayer4.setText("Player " + 4 + ": " + board.getSpace(playerArray[3].getPosition()).getName()); //player4
         }
     }
 
+    /**
+     * this method is to set text for all tiles
+     */
     private void generateProperties() {
         txfProperty1.setText(board.getSpace(1).getName());
         txfProperty2.setText(board.getSpace(3).getName());
@@ -731,11 +743,6 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlStatus.setBackground(new java.awt.Color(204, 255, 204));
@@ -1510,17 +1517,21 @@ public class GameScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * if the user click the menu button
+     * @param evt - click the button
+     */
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        bgm.musicOff();
-        mainMenu.setVisible(true);
-        mainMenu.mainBgm.musicOn();
-        this.setVisible(false);
+        bgm.musicOff(); //game music off
+        mainMenu.setVisible(true); //set the main menu visible
+        mainMenu.mainBgm.musicOn(); //turn the main menu bgm on
+        this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-
-    }//GEN-LAST:event_formComponentShown
-
+    /**
+     * if the user click the buy house button
+     * @param evt - click the button
+     */
     private void btnBuyHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyHouseActionPerformed
         if (playerArray[0].getProperties().isEmpty()) { // checks if the player has properties
             JOptionPane.showMessageDialog(null, "You do not own any properties.");
@@ -1573,34 +1584,42 @@ public class GameScreen extends javax.swing.JFrame {
         updateProperties(); // updates Properties
     }//GEN-LAST:event_btnBuyHouseActionPerformed
 
+    /**
+     * if the user click the save button
+     * @param evt - click the button
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String path = "";
-        JFileChooser fileChooser = new JFileChooser();
+        String path = "";  
+        JFileChooser fileChooser = new JFileChooser(); //instantiate the JFileChooser
         try {
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int result = fileChooser.showSaveDialog(this);
+            int result = fileChooser.showSaveDialog(this); //show the dialog to save current program
             if (result == JFileChooser.APPROVE_OPTION) {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
             }
-            File file = new File(path + "/MonopolySave.txt");
+            File file = new File(path + "/MonopolySave.txt"); //set the file path
             System.out.println(file.getAbsolutePath());
-            if (!file.exists()) {
-                if (file.createNewFile()) {
+            if (!file.exists()) { //if the file doesnt not exist,
+                if (file.createNewFile()) { //create a new file
                     JOptionPane.showMessageDialog(null, "File created and saved");
                 }
             }
 
-            FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath()));
-            ObjectOutput s = new ObjectOutputStream(saving);
+            FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath())); //instantiate FileOutputStream object
+            ObjectOutput s = new ObjectOutputStream(saving); //instantiate ObjectOutput object in order to write the settings in object form
             s.writeInt(gameMode);
             s.writeInt(currentTurn);
             s.writeInt(numPlayers);
-            s.writeObject(playerArray);
+            s.writeObject(playerArray); //write all values in the file
         } catch (Exception e) {
             System.out.print(e);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * if the user click the sell house button
+     * @param evt - click the button
+     */
     private void btnSellHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellHouseActionPerformed
         if (playerArray[0].getProperties().isEmpty()) { // checks if the player owns any properties
             JOptionPane.showMessageDialog(null, "You do not own any properties."); // outputs that they dont own any
@@ -1682,6 +1701,10 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * if the user click roll dice button
+     * @param evt - clicking the button
+     */
     private void btnRollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRollDiceActionPerformed
         btnRollDice.setEnabled(false); // disables this button
         btnEndTurn.setEnabled(true); // enables end turn
@@ -1694,6 +1717,10 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRollDiceActionPerformed
 
+    /**
+     * if the user click the end turn button
+     * @param evt - clicking the button
+     */
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
         btnEndTurn.setEnabled(false); // sets end turn to false
         for (int i = 1; i < numPlayers; i++) { // loops the amount of computer players there are
@@ -1720,6 +1747,10 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEndTurnActionPerformed
 
+    /**
+     * if the user click the mortgage button
+     * @param evt - clicking the button
+     */
     private void btnMortgageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMortgageActionPerformed
         if (playerArray[0].getProperties().isEmpty()) { // if the player does not own a property
             JOptionPane.showMessageDialog(null, "You do not own any properties."); // says that they dont own any properties
@@ -1881,12 +1912,12 @@ class GameMusic implements Runnable {
     @Override
     public void run() {
         try {
-            gameSong = AudioSystem.getClip();
+            gameSong = AudioSystem.getClip(); 
             //Slow Burn by spinningmerkaba (c) copyright 2021 Licensed under a Creative Commons Attribution (3.0) license. http://dig.ccmixter.org/files/jlbrock44/64461 Ft: Admiral Bob
-            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav"));
-            gameSong.open(inputBgm);
-            gameSong.loop(Clip.LOOP_CONTINUOUSLY);
-            gameSong.start();
+            AudioInputStream inputBgm = AudioSystem.getAudioInputStream(GameMusic.class.getResourceAsStream("saves/Slow_Burn.wav")); //get music from the file
+            gameSong.open(inputBgm); 
+            gameSong.loop(Clip.LOOP_CONTINUOUSLY); //loop infinitely
+            gameSong.start(); //start the music
 
         } catch (Exception e) {
             System.out.println(e);
