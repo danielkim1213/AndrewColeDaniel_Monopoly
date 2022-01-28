@@ -211,9 +211,9 @@ public class GameScreen extends javax.swing.JFrame {
         while (sw)
         {
             sw = false;
-            for(int j=0; j<= bottom; j++)
+            for(int j=0; j< bottom; j++)
             {
-                if(newHighScore[j] > newHighScore[j+1])
+                if(newHighScore[j] < newHighScore[j+1])
                 {
                     temp = newHighScore[j];
                     newHighScore[j] = newHighScore[j+1];
