@@ -30,11 +30,13 @@ public class HighScoreMenu extends javax.swing.JFrame {
         mainMenu = m;
     }
     
+    /**
+     * this method is to load and set all the images in this screen
+     */
     private void image()
     {
         
         Image img;
-        // Load and set all images
         URL urlStars = GameScreen.class.getResource("saves/stars.jpg");
         ImageIcon stars = new ImageIcon(urlStars);
         img = stars.getImage();
@@ -124,11 +126,16 @@ public class HighScoreMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * if this window is activated, update the highscores 
+     * @param evt 
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         txaHighScores.setText("");
-        for(int i=0; i<5; i++)
+        for(int i=0; i<5; i++) //loop 5 times
         {
-            txaHighScores.append("Top " + (i+1) + ":\n");
+            //add text to the highscore text area
+            txaHighScores.append("Top " + (i+1) + ":\n");  
             txaHighScores.append("" + mainMenu.highscores[i]);
             if(i<4)
             {
@@ -137,9 +144,13 @@ public class HighScoreMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    /**
+     * the user clicking back button
+     * @param evt - button click
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        mainMenu.setVisible(true);
-        this.setVisible(false);
+        mainMenu.setVisible(true); //set the main menu visible
+        this.setVisible(false); //set this window invisible
     }//GEN-LAST:event_btnBackActionPerformed
 
 
