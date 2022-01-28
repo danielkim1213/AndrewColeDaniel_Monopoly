@@ -233,69 +233,75 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Method for the players turn
+     * @param p player
+     * @param turn the number of rolls they have done
+     * @return 
+     */
     private boolean playerTurn(Player p, int turn) {
         int response;
         int newPos;
 
-        if (turn > 3) {
-            p.setPosition(10);
-            updateLocations();
-            p.setJail(true);
-            return false;
+        if (turn > 3) { // if have rolled more than 3 times in a row
+            p.setPosition(10); // sets their position to 10
+            updateLocations(); // uptdates the locations
+            p.setJail(true); // puts them in jail
+            return false; // returns false
         }
-        if (p.getJail()) {
-            if (p.getJailCards() > 0) {
-                Object[] options = {"Roll for doubles", "Pay $50", "Use get out of jail free card"};
+        if (p.getJail()) { // if they are in jail
+            if (p.getJailCards() > 0) { // and they have get out of jail cards
+                Object[] options = {"Roll for doubles", "Pay $50", "Use get out of jail free card"}; // asks what they want to do
                 response = JOptionPane.showOptionDialog(null, "You are in Jail. What would you like to do?", "In Jail", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
             } else {
-                Object[] options = {"Roll for doubles", "Pay $50"};
+                Object[] options = {"Roll for doubles", "Pay $50"}; // if there are no get out of jail free cards
                 response = JOptionPane.showOptionDialog(null, "You are in Jail. What would you like to do?", "In Jail", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             }
             switch (response) {
-                case 0:
-                    rollDice();
-                    JOptionPane.showMessageDialog(null, "Click to stop");
-                    stopRolling();
-                    if (((Rolling) tsk).isDoubleDice()) {
+                case 0: // if user chose roll for doubles
+                    rollDice(); // rolls the dice
+                    JOptionPane.showMessageDialog(null, "Click to stop"); // outputs message to click to stop
+                    stopRolling(); // stops rolling
+                    if (((Rolling) tsk).isDoubleDice()) { // checks to see if the dice are the same
                         JOptionPane.showMessageDialog(null, "You rolled doubles. Get out of jail.");
-                        p.setJail(false);
-                        p.setPosition(10 + moves);
-                        updateLocations();
+                        p.setJail(false); // if they are disables jail
+                        p.setPosition(10 + moves); // moves 
+                        updateLocations(); // uptdates location
                     } else {
-                        JOptionPane.showMessageDialog(null, "You didn't roll doubles. Stay in jail");
+                        JOptionPane.showMessageDialog(null, "You didn't roll doubles. Stay in jail"); // outputs that you ddint roll doubles
                     }
                     break;
-                case 1:
-                    p.removeMoney(50);
-                    p.setJail(false);
+                case 1: // if the user choose to pay 50
+                    p.removeMoney(50); // takes away 50
+                    p.setJail(false); // gets them out of jail
                     break;
-                case 2:
-                    p.setJailCards(p.getJailCards() - 1);
-                    p.setJail(false);
+                case 2: // if the user has a get ouf of jail free card
+                    p.setJailCards(p.getJailCards() - 1); // takes away 1
+                    p.setJail(false); // gets them out of jail
                     break;
             }
 
-            if (p.getJail()) {
-                p.setTurnsInJail(p.getTurnsInJail() + 1);
+            if (p.getJail()) { // if they are still in jail
+                p.setTurnsInJail(p.getTurnsInJail() + 1); // increases turns in jail
                 return false;
             }
-            p.setTurnsInJail(0);
+            p.setTurnsInJail(0); // sets turns to 0 if not
 
-        }
-        rollDice();
+        } // if not in jail
+        rollDice(); // rolls a dice
         JOptionPane.showMessageDialog(null, "Click to stop");
-        stopRolling();
+        stopRolling(); // stops the dice
 
-        newPos = p.getPosition() + moves;
-        if (newPos >= 40) {
-            p.addMoney(200);
-            newPos -= 40;
+        newPos = p.getPosition() + moves; // moves that amount
+        if (newPos >= 40) { // if they pass go
+            p.addMoney(200); // adds money
+            newPos -= 40; // removes 40 from their position
         }
-        p.setPosition(newPos);
-        updateLocations();
-        handleSpace(board.getSpace(newPos), p);
-        updateProperties();
-        return ((Rolling) tsk).isDoubleDice();
+        p.setPosition(newPos); // sets the position
+        updateLocations(); // uptdates location
+        handleSpace(board.getSpace(newPos), p); // calls the handle space method
+        updateProperties(); // uptdates the properties
+        return ((Rolling) tsk).isDoubleDice(); // returns true or false depending on if doubles were rolled
     }
 
     /**

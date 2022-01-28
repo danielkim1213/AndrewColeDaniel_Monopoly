@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+January 21 2022 Andrew Daniel Cole
+Ending screen GUI to show the winner
  */
 package andrewcoledaniel_monopoly;
 
@@ -17,20 +16,20 @@ public class EndingScreen extends javax.swing.JFrame {
      */
     public EndingScreen(int numPlayer, Player[] players) {
         initComponents();
-        lblResult.setText("Player " + numPlayer + " won!");
-        if(players.length == 2){
-            lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
+        lblResult.setText("Player " + numPlayer + " won!"); // text saying which player won
+        if(players.length == 2){ // if only two players were in the game
+            lblPlayer1.setText(("Player 1: $" + players[0].getMoney())); // sets the text for those two
             lblPlayer2.setText("Player 2: $" + players[1].getMoney());
-            lblPlayer3.setVisible(false);
+            lblPlayer3.setVisible(false); // the rest are invisible
             lblPlayer4.setVisible(false);
-        } else if (players.length == 3){
+        } else if (players.length == 3){ // if three
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
             lblPlayer2.setText(("Player 2: $" + players[1].getMoney()));
             lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
-            lblPlayer4.setVisible(false);
-        } else{
+            lblPlayer4.setVisible(false); // makes the fourth text invisible
+        } else{ // if all 4 are playing
             lblPlayer1.setText(("Player 1: $" + players[0].getMoney()));
-            lblPlayer2.setText(("Player 2: $" + players[1].getMoney()));
+            lblPlayer2.setText(("Player 2: $" + players[1].getMoney())); // sets all the text
             lblPlayer3.setText(("Player 3: $" + players[2].getMoney()));
             lblPlayer4.setText(("Player 4: $" + players[3].getMoney()));
         }
