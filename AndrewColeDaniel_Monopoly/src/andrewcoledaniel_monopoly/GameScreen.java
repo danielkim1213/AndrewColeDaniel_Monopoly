@@ -240,6 +240,9 @@ public class GameScreen extends javax.swing.JFrame {
         return finalHighScore; // return the sorted value
     }
     
+    /**
+     * Load cards into array
+     */
     private void loadCards() {
         int index = 0;
         CardType type;
@@ -247,20 +250,25 @@ public class GameScreen extends javax.swing.JFrame {
         int value;
         String info;
 
+        // Open cards file
         InputStream in = GameScreen.class.getResourceAsStream("saves/cards.txt");
         try {
+            // Scanner to file
             Scanner s = new Scanner(in);
             while (s.hasNextLine()) {
+                // Create Card object with attributes read from file
                 type = Card.CardType.valueOf(s.nextLine());
                 action = Card.CardAction.valueOf(s.nextLine());
                 value = Integer.parseInt(s.nextLine());
                 info = s.nextLine();
+                // add to array and increment index
                 cards[index] = new Card(type, action, value, info);
                 index++;
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Could not load cards from file");
         }
+        // Shuffle cards array
         board.shuffleCards(cards);
     }
     /**
@@ -424,38 +432,56 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Handle when a player lands on a property space
+     * @param prop Property space
+     * @param p Player object
+     */
     private void handleProperty(Property prop, Player p) {
         int option;
+        // Check if player is human
         if (p.getPlayerNumber() == 1) {
+            // If property isn't owned
             if (!prop.getOwned()) {
                 option = JOptionPane.showConfirmDialog(null, ((Space) prop).getName() + " is not owned. Would you like to purchase it?", "Choice", JOptionPane.YES_NO_OPTION);
+                // If user wants to buy property
                 if (option == 0) {
                     p.buyProperty(prop);
                     prop.setOwned(true);
+                // If not, auction it off
                 } else {
                     auction(prop);
                 }
+            // If property is owned and not mortgaged
             } else {
                 if(!prop.mortgage){
+                    // Pay rent on property
                 JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
                 prop.updateRent();
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
                 }
             }
+        // If not a human player
         } else {
+            // if not owned
             if (!prop.getOwned()) {
                 int randomNumber = (int) (Math.random() * 10);
+                // CPU has a random chance to buy if they have enough money
                 if (randomNumber < 7 && p.getMoney() > prop.getPrice()) {
+                    // Buy property and update information
                     p.buyProperty(prop);
                     prop.updateRent();
                     prop.setOwned(true);
                     updateProperties();
                 } else {
+                    // Auction off property
                     auction(prop);
                 }
+            // if owned and not mortgaged
             } else {
                 if(!prop.mortgage){
+                    // Pay rent on property
                 JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
                 p.removeMoney(prop.getRent());
                 prop.getOwner().addMoney(prop.getRent());
@@ -464,62 +490,85 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Handle an auction on a Property
+     * @param p Property object
+     */
     private void auction(Property p) {
         boolean bought = false;
         int currentBid = 0;
         int response;
+        // Set last bidder to last player
         Player lastBidder = playerArray[numPlayers - 1];
         ArrayList<Player> players = new ArrayList();
         ArrayList<Player> toRemove = new ArrayList();
 
+        // Add each player to players arraylist
         for (int i = 0; i < numPlayers; i++) {
             players.add(playerArray[i]);
         }
 
+        // while property hasn't been purchased
         while (!bought) {
+            // Allow each player to bid
             for (int i = 0; i < players.size(); i++) {
+                // If bid is over player's money, remove them from the auction
                 if (players.get(i).getMoney() <= currentBid) {
                     toRemove.add(players.get(i));
                     continue;
                 }
 
+                // if one player is left, end auction
                 if (players.size() == 1) {
                     bought = true;
                     break;
                 }
+                
                 response = -1;
+                // If human player
                 if (players.get(i).getPlayerNumber() == 1) {
+                    // while not a valid response
                     while (response < 0) {
                         try {
+                            // Prompt user for their bid
                             response = Integer.parseInt(JOptionPane.showInputDialog("The current bid is $" + curr.format(currentBid) + ". How much more would you like to bid? (Type 0 to cancel)"));
+                            // If user wants to exit the auction, remove them
                             if (response == 0) {
                                 toRemove.add(players.get(i));
                                 JOptionPane.showMessageDialog(null, "Player 1 left the auction");
+                            // if their bid is less than the current bid
                             } else if (response <= currentBid) {
                                 JOptionPane.showMessageDialog(null, "Please input a bid that is greater than the current bid.");
                                 response = -1;
+                            // if their bid is greater than their current amount of money
                             } else if (response > players.get(i).getMoney()) {
                                 JOptionPane.showMessageDialog(null, "Please bid an amount of money that you have.");
                                 response = -1;
                             }
+                            // Catch any exceptions from input
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "Please enter a valid amount");
                         }
                     }
+                    // Store their bid as the current one
                     currentBid = response;
                     lastBidder = players.get(i);
+                // If CPU player
                 } else {
+                    // Calculate a random bid for the CPU
                     response = currentBid + (int)(Math.random() * 20) + 10;
                         
-                    try {
+                    try { // sleep for a little bit
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         JOptionPane.showMessageDialog(null, "Thread.sleep method error");
                     }
                         
+                    // If their bid is within $50 of their money or it's above a bidding threshold, leave auction
                     if (response + 50 > players.get(i).getMoney() || response > p.getPrice() * 1.5) {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " left the auction");
                         toRemove.add(players.get(i));
+                    // Bid on property and set bid to the current bid
                     } else {
                         JOptionPane.showMessageDialog(null, "Player " + players.get(i).getPlayerNumber() + " bid $" + curr.format(response));
                         currentBid = response;
@@ -527,12 +576,15 @@ public class GameScreen extends javax.swing.JFrame {
                     }
                 }
             }
+            // Remove all marked players from the auction
             for (Player x : toRemove) {
                 players.remove(x);
             }
         }
         
+        // Announce the winner
         JOptionPane.showMessageDialog(null, "Player " + lastBidder.getPlayerNumber() + " purchased the property for $" + curr.format(currentBid));
+        // Player buys property for amount
         lastBidder.buyPropertyAuction(p, currentBid);
         p.setOwned(true);
     }
