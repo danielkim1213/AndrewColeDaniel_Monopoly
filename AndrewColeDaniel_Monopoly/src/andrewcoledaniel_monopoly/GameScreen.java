@@ -42,6 +42,7 @@ public class GameScreen extends javax.swing.JFrame {
     public static int moves;
     private Board board;
     private TimerTask tsk;
+    private boolean userBankrupt = false;
     DecimalFormat curr = new DecimalFormat("#,##0.00");
 
     public static int[] roll = new int[2];
@@ -1775,7 +1776,7 @@ public class GameScreen extends javax.swing.JFrame {
      * @param c computer player
      */
     private void bankruptComputer(Player c) {
-        c.setMoney(0); //sets money to 0
+        c.setMoney(-1000); //sets money to -1000
         ArrayList<Property> bankruptP = c.getProperties(); //
         for (int i = 0; i < bankruptP.size(); i++) { // loops through the array
             bankruptP.get(i).setOwned(false); // sets all the properties as unowned
@@ -1825,6 +1826,9 @@ public class GameScreen extends javax.swing.JFrame {
      * @param evt - clicking the button
      */
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTurnActionPerformed
+        if(userBankrupt == true){
+            bankruptComputer(playerArray[0]);
+        }
         btnEndTurn.setEnabled(false); // sets end turn to false
         for (int i = 1; i < numPlayers; i++) { // loops the amount of computer players there are
             if (playerArray[i].bankrupt == false) { // if the player is not bankrupt
@@ -1846,7 +1850,9 @@ public class GameScreen extends javax.swing.JFrame {
         lblTurn.setText("Turn " + currentTurn); // changes the turn text
         if (playerArray[0].bankrupt == true) { // if the user is bankrupt
             btnRollDice.setEnabled(false); // disables the dice
-            JOptionPane.showMessageDialog(null, "You are bankrupt sell your houses or mortage your properties to continue playing"); // tells them to sell something
+            JOptionPane.showMessageDialog(null, "You are bankrupt sell your houses or mortage your properties to continue playing or press end turn to forfeit"); // tells them to sell something
+            btnEndTurn.setEnabled(true);
+            userBankrupt = true;
         }
     }//GEN-LAST:event_btnEndTurnActionPerformed
 
