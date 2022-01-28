@@ -479,8 +479,8 @@ public class GameScreen extends javax.swing.JFrame {
             } else {
                 if (!prop.mortgage) {
                     // Pay rent on property
-                    JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner() + ". You must pay them $" + prop.getRent() + ".");
                     prop.updateRent();
+                    JOptionPane.showMessageDialog(null, "This property is owned by player " + prop.getOwner().getPlayerNumber() + ". You must pay them $" + prop.getRent() + ".");
                     p.removeMoney(prop.getRent());
                     prop.getOwner().addMoney(prop.getRent());
                 }
@@ -505,6 +505,7 @@ public class GameScreen extends javax.swing.JFrame {
             } else {
                 if (!prop.mortgage) {
                     // Pay rent on property
+                    prop.updateRent();
                     JOptionPane.showMessageDialog(null, "Player " + p.getPlayerNumber() + " has landed on " + prop.getName() + " and has paid player" + prop.getOwner().getPlayerNumber() + " $" + prop.getRent());
                     p.removeMoney(prop.getRent());
                     prop.getOwner().addMoney(prop.getRent());
@@ -536,16 +537,16 @@ public class GameScreen extends javax.swing.JFrame {
         while (!bought) {
             // Allow each player to bid
             for (int i = 0; i < players.size(); i++) {
+                // if one player is left, end auction
+                if (players.size() == 1 || players.size() - toRemove.size() == 1) {
+                    bought = true;
+                    break;
+                }
+                
                 // If bid is over player's money, remove them from the auction
                 if (players.get(i).getMoney() <= currentBid) {
                     toRemove.add(players.get(i));
                     continue;
-                }
-
-                // if one player is left, end auction
-                if (players.size() == 1) {
-                    bought = true;
-                    break;
                 }
 
                 response = -1;
@@ -604,6 +605,7 @@ public class GameScreen extends javax.swing.JFrame {
             for (Player x : toRemove) {
                 players.remove(x);
             }
+            toRemove.clear();
         }
 
         // Announce the winner
