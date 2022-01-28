@@ -47,7 +47,7 @@ public class HighScoreMenu extends javax.swing.JFrame {
         wing = new ImageIcon(img.getScaledInstance(lblWing.getWidth(), lblWing.getHeight(), Image.SCALE_SMOOTH));
         lblWing.setIcon(wing);
 
-        URL urlTop5 = GameScreen.class.getResource("saves/Top5.png");
+        URL urlTop5 = GameScreen.class.getResource("saves/top5.png");
         ImageIcon top5 = new ImageIcon(urlTop5);
         img = top5.getImage();
         top5 = new ImageIcon(img.getScaledInstance(lblTop5.getWidth(), lblTop5.getHeight(), Image.SCALE_SMOOTH));

@@ -233,7 +233,7 @@ public class MainMenu extends javax.swing.JFrame {
             gameScreen.setVisible(true); //make the game screen visible
             this.setVisible(false); //make this screen invisible
         } catch (NullPointerException | IOException | ClassNotFoundException ex) { //error reporter
-            JOptionPane.showMessageDialog(null, "Couldn't find the file.", "File selection error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Couldn't find the file." + ex, "File selection error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadSaveActionPerformed
 

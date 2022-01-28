@@ -5,11 +5,13 @@
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.Serializable;
+
 /**
  *
  * @author anfeh1812
  */
-public class Deed extends Property {
+public class Deed extends Property implements Serializable{
 
     private int houses;
     private int houseCost;

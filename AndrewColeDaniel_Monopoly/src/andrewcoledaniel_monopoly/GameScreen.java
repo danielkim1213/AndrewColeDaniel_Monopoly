@@ -1685,14 +1685,14 @@ public class GameScreen extends javax.swing.JFrame {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
             }
             File file = new File(path + "/MonopolySave.txt"); //set the file path
-            System.out.println(file.getAbsolutePath());
+            path = file.getAbsolutePath();
             if (!file.exists()) { //if the file doesnt not exist,
                 if (file.createNewFile()) { //create a new file
                     JOptionPane.showMessageDialog(null, "File created and saved");
                 }
             }
 
-            FileOutputStream saving = new FileOutputStream(System.getProperty(file.getAbsolutePath())); //instantiate FileOutputStream object
+            FileOutputStream saving = new FileOutputStream(path); //instantiate FileOutputStream object
             ObjectOutput s = new ObjectOutputStream(saving); //instantiate ObjectOutput object in order to write the settings in object form
             s.writeInt(gameMode);
             s.writeInt(currentTurn);

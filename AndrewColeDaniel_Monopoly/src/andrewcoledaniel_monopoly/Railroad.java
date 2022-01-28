@@ -5,11 +5,13 @@
  */
 package andrewcoledaniel_monopoly;
 
+import java.io.Serializable;
+
 /**
  *
  * @author anfeh1812
  */
-public class Railroad extends Property {
+public class Railroad extends Property implements Serializable{
 
     /**
      * Default Constructor
